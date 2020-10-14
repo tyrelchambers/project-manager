@@ -1,0 +1,18 @@
+.nav-item i {
+  opacity: 50%;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover i {
+  color: var(--pink-500);
+  opacity: 1;
+}
+
+.nav-item:hover {
+  background-color: var(--gray-800);
+}
+
+.nav-item {
+  border-radius: var(--border-radius-md);
+  transition: all 0.2s ease;
+}

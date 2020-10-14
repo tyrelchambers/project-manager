@@ -5,6 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { BASE } from "./routes/routes";
 import Home from "./pages/Home/Home";
+import "./assets/main.css";
 
 ReactDOM.render(
   <React.StrictMode>

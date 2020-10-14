@@ -1,13 +1,94 @@
+:root {
+  --black: #000;
+  --white: #fff;
+  --gray-100: #f7fafc;
+  --gray-200: #edf2f7;
+  --gray-300: #e2e8f0;
+  --gray-400: #cbd5e0;
+  --gray-500: #a0aec0;
+  --gray-600: #718096;
+  --gray-700: #4a5568;
+  --gray-800: #2d3748;
+  --gray-900: #1a202c;
+
+  --red-500: #f56565;
+
+  --orange-500: #ed8936;
+
+  --yellow-400: #f6e05e;
+  --yellow-500: #ecc94b;
+
+  --green-500: #48bb78;
+  --pink-100: #fff5f7;
+  --pink-200: #fed7e2;
+  --pink-300: #fbb6ce;
+  --pink-400: #f687b3;
+  --pink-500: #ed64a6;
+  --pink-600: #d53f8c;
+  --pink-700: #b83280;
+  --pink-800: #97266d;
+  --pink-900: #702459;
+  --darkPurple: rgb(47, 42, 86);
+
+  --cool-grey-800: #323f4b;
+
+  --paragraph: var(--gray-800);
+
+  --blueGradient: linear-gradient(
+    214deg,
+    rgba(63, 146, 240, 1) 0%,
+    rgba(10, 104, 210, 1) 100%
+  );
+  --greenGradient: linear-gradient(
+    31deg,
+    rgba(62, 189, 147, 1) 0%,
+    rgba(31, 214, 154, 1) 100%
+  );
+  --redGradient: linear-gradient(
+    to right top,
+    #de3a11,
+    #e6491c,
+    #ef5727,
+    #f76431,
+    #ff703b
+  );
+  --darkGradient: linear-gradient(
+    to right,
+    #051937,
+    #0c2b56,
+    #143d77,
+    #1d519a,
+    #2666bf
+  );
+
+  --orangeGradient: linear-gradient(
+    to right top,
+    #ff3535,
+    #ff6034,
+    #ff7f39,
+    #ff9a46,
+    #ffb359
+  );
+
+  --border-radius-sm: 5px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 20px;
+  --hr: rgb(85%, 85%, 85%);
+}
+
+.box-shadow {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Nunito", sans-serif;
+  background-color: #1f2933;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
