@@ -1,5 +1,5 @@
 .nav-item i {
-  opacity: 50%;
+  opacity: 0.5;
   transition: all 0.2s ease;
 }
 
