@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
@@ -20,7 +20,7 @@ const App = () => {
     window.sessionStorage.getItem("token") ||
     false;
 
-  return token ? <Authenticated /> : <Unauthenticated />;
+  return !token ? <Authenticated /> : <Unauthenticated />;
 };
 ReactDOM.render(
   <React.StrictMode>

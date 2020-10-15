@@ -1,5 +1,13 @@
 import React from "react";
+import "./buttons.css";
 
-export const MainButton = () => {
-  return <button></button>;
+export const MainButton = (props) => {
+  return (
+    <button
+      className={`btn primary shadow-lg ${props?.className}`}
+      onClick={props.onClick}
+    >
+      {props.children}
+    </button>
+  );
 };

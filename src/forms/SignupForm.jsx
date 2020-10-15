@@ -1,4 +1,5 @@
 import React from "react";
+import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import "./forms.css";
 const SignupForm = () => {
@@ -33,6 +34,8 @@ const SignupForm = () => {
           name="confirmPassword"
         />
       </div>
+
+      <MainButton>Register</MainButton>
     </form>
   );
 };

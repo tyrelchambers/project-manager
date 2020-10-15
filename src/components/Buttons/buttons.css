@@ -1,0 +1,20 @@
+.btn {
+  padding: 1em;
+  width: 100%;
+  font-weight: bold;
+  border-radius: var(--border-radius-sm);
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(0.99);
+}
+.btn.primary {
+  background-color: var(--pink-500);
+}
+
+.btn.small {
+  width: 100%;
+  max-width: 150px;
+  font-size: 0.8rem;
+}
