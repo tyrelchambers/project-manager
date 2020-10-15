@@ -15,4 +15,10 @@
 .nav-item {
   border-radius: var(--border-radius-md);
   transition: all 0.2s ease;
+  width: 100%;
+}
+
+.navbar {
+  width: 100%;
+  max-width: 200px;
 }

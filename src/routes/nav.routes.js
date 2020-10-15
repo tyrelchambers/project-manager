@@ -3,7 +3,7 @@ import React from "react";
 export const navRoutes = [
   {
     label: "Home",
-    url: "/home",
+    url: "/",
     icon: <i className="fas fa-home"></i>,
   },
   {

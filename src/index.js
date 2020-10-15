@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { BASE } from "./routes/routes";
+import { BASE, UNAUTHENTICATED_BASE } from "./routes/routes";
 import Home from "./pages/Home/Home";
 import "./assets/main.css";
+import Signup from "./pages/Signup/Signup";
 
+const Unauthenticated = () => (
+  <Route exact path={UNAUTHENTICATED_BASE} component={Signup} />
+);
+
+const Authenticated = () => <Route exact path={BASE} component={Home} />;
+
+const App = () => {
+  const token =
+    window.localStorage.getItem("token") ||
+    window.sessionStorage.getItem("token") ||
+    false;
+
+  return token ? <Authenticated /> : <Unauthenticated />;
+};
 ReactDOM.render(
   <React.StrictMode>
     <Router basename="/">
       <Switch>
-        <Route exact path={BASE} component={Home} />
+        <App />
       </Switch>
     </Router>
   </React.StrictMode>,

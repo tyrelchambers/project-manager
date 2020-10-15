@@ -1,0 +1,5 @@
+.form-label {
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  color: var(--pink-100);
+}

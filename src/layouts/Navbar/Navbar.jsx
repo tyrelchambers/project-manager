@@ -4,7 +4,7 @@ import "./Navbar.css";
 import { navRoutes } from "../../routes/nav.routes";
 const Navbar = () => {
   return (
-    <nav className="m-2">
+    <nav className="m-2 navbar">
       {navRoutes.map((x, id) => (
         <NavLink
           to={x.url}
