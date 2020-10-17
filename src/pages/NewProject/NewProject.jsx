@@ -6,8 +6,6 @@ import Spinner from "../../components/Spinner/Spinner";
 import ProjectForm from "../../forms/ProjectForm";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
-const str = `npx create-react-app project-name`;
-
 const NewProject = () => {
   const [downloading, setDownloading] = useState(false);
   const [state, setState] = useState({
@@ -15,6 +13,8 @@ const NewProject = () => {
     folderName: "",
     framework: {},
   });
+
+  const str = `npx create-react-app ${state.folderName}`;
 
   const submitHandler = () => {
     console.log(state);
