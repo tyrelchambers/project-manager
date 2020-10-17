@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import isEmpty from "../../helpers/isEmpty";
 import "./SelectField.css";
 
-const SelectField = ({ data }) => {
+const SelectField = ({ data, stateHandler, state }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedData, setSelectedData] = useState({});
 
   const dropdownHandler = (fw) => {
     setSelectedData(fw);
+    stateHandler({ ...state, framework: fw });
     setIsOpen(false);
   };
 

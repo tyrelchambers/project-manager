@@ -10,6 +10,15 @@ const str = `npx create-react-app project-name`;
 
 const NewProject = () => {
   const [downloading, setDownloading] = useState(false);
+  const [state, setState] = useState({
+    projectTitle: "",
+    folderName: "",
+    framework: {},
+  });
+
+  const submitHandler = () => {
+    console.log(state);
+  };
 
   const FinalScreen = () => (
     <div className="flex flex-col overflow-hidden">
@@ -52,7 +61,12 @@ const NewProject = () => {
   return (
     <DisplayWrapper>
       <H2>New Project</H2>
-      <ProjectForm Component={FinalScreen} />
+      <ProjectForm
+        Component={FinalScreen}
+        state={state}
+        setState={setState}
+        submitHandler={submitHandler}
+      />
     </DisplayWrapper>
   );
 };

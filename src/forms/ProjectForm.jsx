@@ -6,8 +6,17 @@ import FormLabel from "../components/FormLabel/FormLabel";
 import SelectField from "../components/SelectField/SelectField";
 import { frameworks } from "../constants/frameworks";
 
-const ProjectForm = ({ ModalStore, Component }) => {
-  const [state, setState] = useState({});
+const ProjectForm = ({
+  ModalStore,
+  Component,
+  state,
+  setState,
+  submitHandler,
+}) => {
+  const inputHandler = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
+
   return (
     <form className="form mt-8">
       <div className="field-group">
@@ -17,6 +26,8 @@ const ProjectForm = ({ ModalStore, Component }) => {
           className="form-input"
           name="projectTitle"
           placeholder="An Awesome Project"
+          value={state.projectTitle}
+          onChange={(e) => inputHandler(e)}
         />
       </div>
 
@@ -27,17 +38,20 @@ const ProjectForm = ({ ModalStore, Component }) => {
           className="form-input"
           name="folderName"
           placeholder="an-awesome-project"
+          value={state.folderName}
+          onChange={(e) => inputHandler(e)}
         />
       </div>
 
       <div className="mt-8">
-        <SelectField data={frameworks} />
+        <SelectField data={frameworks} stateHandler={setState} state={state} />
       </div>
 
       <MainButton
         className="mt-8"
         onClick={(e) => {
           e.preventDefault();
+          submitHandler();
           ModalStore.setRender(<Component />);
           ModalStore.setIsOpen(true);
         }}
