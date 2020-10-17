@@ -13,4 +13,9 @@
   background-color: var(--gray-700);
   padding: 1em;
   border-radius: var(--border-radius-sm);
+  color: var(--white);
+}
+
+.form-input::placeholder {
+  font-style: italic;
 }

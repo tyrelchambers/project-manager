@@ -1,0 +1,13 @@
+.select-item {
+  transition: all 0.2s ease;
+}
+
+.select-item:hover {
+  cursor: pointer;
+  background-color: var(--gray-800);
+}
+
+.select-item.delete:hover {
+  background-color: var(--red-500);
+  color: var(--gray-800);
+}

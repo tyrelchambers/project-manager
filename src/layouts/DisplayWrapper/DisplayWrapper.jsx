@@ -8,7 +8,7 @@ const DisplayWrapper = (props) => {
       <Header />
       <div className="flex">
         <Navbar />
-        {props.children}
+        <div className="m-4 w-full">{props.children}</div>
       </div>
     </div>
   );
