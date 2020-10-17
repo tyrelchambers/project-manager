@@ -14,8 +14,6 @@ const NewProject = () => {
     framework: {},
   });
 
-  const str = `npx create-react-app ${state.folderName}`;
-
   const submitHandler = () => {
     console.log(state);
   };
@@ -51,7 +49,7 @@ const NewProject = () => {
             >
               ${" "}
             </span>
-            {str}
+            {state.framework.command({ folderName: state.folderName })}
           </p>
         </div>
       </div>

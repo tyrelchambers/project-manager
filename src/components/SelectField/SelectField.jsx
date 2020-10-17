@@ -33,12 +33,14 @@ const SelectField = ({ data, stateHandler, state }) => {
 
       {!isEmpty(selectedData) && (
         <div
-          className="w-full p-4 bg-green-800 text-white rounded-md items-center flex select-item delete mt-4"
+          className="w-full p-4  text-white rounded-md items-center flex select-item delete mt-4"
           data-framework={selectedData.framework}
           onClick={removeHandler}
         >
           {selectedData.icon}
-          <div value={selectedData.framework}>{selectedData.text}</div>
+          <p value={selectedData.framework} className="text-white">
+            {selectedData.framework}
+          </p>
         </div>
       )}
 
@@ -52,7 +54,7 @@ const SelectField = ({ data, stateHandler, state }) => {
             >
               {x.icon}
               <div key={id} value={x.framework}>
-                {x.text}
+                <p className="font-bold">{x.framework}</p>
               </div>
             </div>
           ))}
