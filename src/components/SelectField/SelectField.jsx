@@ -14,6 +14,7 @@ const SelectField = ({ data, stateHandler, state }) => {
 
   const removeHandler = () => {
     setSelectedData({});
+    stateHandler({ ...state, framework: {} });
   };
 
   return (
