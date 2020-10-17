@@ -1,8 +1,13 @@
+import { inject, observer } from "mobx-react";
 import React from "react";
+import { useState } from "react";
+import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import SelectField from "../components/SelectField/SelectField";
+import { frameworks } from "../constants/frameworks";
 
-const ProjectForm = () => {
+const ProjectForm = ({ ModalStore, Component }) => {
+  const [state, setState] = useState({});
   return (
     <form className="form mt-8">
       <div className="field-group">
@@ -26,10 +31,21 @@ const ProjectForm = () => {
       </div>
 
       <div className="mt-8">
-        <SelectField />
+        <SelectField data={frameworks} />
       </div>
+
+      <MainButton
+        className="mt-8"
+        onClick={(e) => {
+          e.preventDefault();
+          ModalStore.setRender(<Component />);
+          ModalStore.setIsOpen(true);
+        }}
+      >
+        Prepare
+      </MainButton>
     </form>
   );
 };
 
-export default ProjectForm;
+export default inject("ModalStore")(observer(ProjectForm));

@@ -8,6 +8,9 @@ import Home from "./pages/Home/Home";
 import "./assets/main.css";
 import Signup from "./pages/Signup/Signup";
 import NewProject from "./pages/NewProject/NewProject";
+import { Provider } from "mobx-react";
+import stores from "./stores/index";
+import ModalContainer from "./layouts/ModalContainer/ModalContainer";
 
 const Unauthenticated = () => (
   <Route exact path={UNAUTHENTICATED_BASE} component={Signup} />
@@ -30,11 +33,14 @@ const App = () => {
 };
 ReactDOM.render(
   <React.StrictMode>
-    <Router basename="/">
-      <Switch>
-        <App />
-      </Switch>
-    </Router>
+    <Provider {...stores}>
+      <Router basename="/">
+        <ModalContainer />
+        <Switch>
+          <App />
+        </Switch>
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
