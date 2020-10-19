@@ -22,3 +22,14 @@
   width: 100%;
   max-width: 270px;
 }
+
+.nav-item-subnav {
+  color: var(--white);
+  font-weight: bold;
+  opacity: 0.3;
+}
+
+.nav-item-subnav.active {
+  color: var(--pink-500);
+  opacity: 1;
+}

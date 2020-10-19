@@ -2,7 +2,7 @@ import React from "react";
 
 const iconStyle = `mr-4 text-xl`;
 
-function Fw({ framework, icon, install }) {
+export function Fw({ framework, icon, install }) {
   this.framework = framework;
   this.icon = icon;
   this.install = install;

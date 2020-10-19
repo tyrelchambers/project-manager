@@ -41,7 +41,7 @@ const NewProject = () => {
           Use the command terminal
         </p>
 
-        <div className="p-4 bg-gray-800 w-full rounded-md flex justify-center">
+        <div className="p-4 bg-gray-800 w-full rounded-lg flex justify-center">
           <p className="text-white flex items-center">
             <span
               className="text-sm text-pink-500 mr-2"

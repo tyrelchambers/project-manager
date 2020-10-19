@@ -3,7 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { BASE, NEW_PROJECT, UNAUTHENTICATED_BASE } from "./routes/routes";
+import {
+  BASE,
+  DEFAULTS,
+  NEW_PROJECT,
+  UNAUTHENTICATED_BASE,
+} from "./routes/routes";
 import Home from "./pages/Home/Home";
 import "./assets/main.css";
 import Signup from "./pages/Signup/Signup";
@@ -11,6 +16,7 @@ import NewProject from "./pages/NewProject/NewProject";
 import { Provider } from "mobx-react";
 import stores from "./stores/index";
 import ModalContainer from "./layouts/ModalContainer/ModalContainer";
+import DefaultsPage from "./pages/DefaultsPage/DefaultsPage";
 
 const Unauthenticated = () => (
   <Route exact path={UNAUTHENTICATED_BASE} component={Signup} />
@@ -20,6 +26,7 @@ const Authenticated = () => (
   <>
     <Route exact path={BASE} component={Home} />
     <Route exact path={NEW_PROJECT} component={NewProject} />
+    <Route path={DEFAULTS} component={DefaultsPage} />
   </>
 );
 
