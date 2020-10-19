@@ -23,6 +23,11 @@
   max-width: 270px;
 }
 
+.nav-item.active i {
+  color: var(--pink-500);
+  opacity: 1;
+}
+
 .nav-item-subnav {
   color: var(--white);
   font-weight: bold;

@@ -32,11 +32,11 @@ export const H3 = (props) => (
 );
 
 export const H1Subtitle = (props) => (
-  <p className="text-2xl font-thin mt-2">{props.children}</p>
+  <p className="text-2xl font-thin mt-2 text-gray-300">{props.children}</p>
 );
 export const H2Subtitle = (props) => (
-  <p className="text-lg font-thin mt-2">{props.children}</p>
+  <p className="text-lg font-thin mt-2 text-gray-300">{props.children}</p>
 );
 export const H3Subtitle = (props) => (
-  <p className="text-md font-thin mt-2">{props.children}</p>
+  <p className="text-md font-thin mt-2 text-gray-300">{props.children}</p>
 );

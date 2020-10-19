@@ -4,18 +4,18 @@ import "./Navbar.css";
 import { navRoutes } from "../../routes/nav.routes";
 import UserWidget from "../../components/UserWidget/UserWidget";
 const Navbar = () => {
-  const path = window.location.pathname + window.location.search;
+  const pathWithSearch = window.location.pathname + window.location.search;
   return (
     <nav className="m-2 navbar">
       <div className="mb-4">
         <UserWidget />
       </div>
       {navRoutes.map((x, id) => (
-        <div className="flex flex-col">
+        <div className="flex flex-col" key={id}>
           <NavLink
+            exact
             to={x.url}
             className="no-underline font-bold text-white nav-item flex items-center p-4"
-            key={id}
           >
             {x.icon}
             <p className="ml-6">{x.label}</p>
@@ -27,7 +27,7 @@ const Navbar = () => {
                   key={lid}
                   to={link.url}
                   className={`flex m-4 items-center nav-item-subnav ${
-                    link.url === path ? "active" : ""
+                    link.url === pathWithSearch ? "active" : ""
                   }`}
                 >
                   {link.icon}
