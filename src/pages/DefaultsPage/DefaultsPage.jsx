@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { H2, H2Subtitle, H3 } from "../../components/Headings/Headings";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./DefaultsPage.css";
+import { MainButton } from "../../components/Buttons/Buttons";
 const DefaultsPage = () => {
   const params = new URLSearchParams(window.location.search);
 
@@ -52,7 +53,7 @@ const DefaultsPage = () => {
               key={id}
               className="flex items-center mr-2 p-2 bg-gray-800 rounded-sm"
             >
-              <i className="fab fa-node-js text-green-500 mr-2"></i>
+              <i className="fab fa-yarn  text-green-500 mr-2"></i>
               <p className="text-gray-300">{pkg.name}</p>
             </div>
           ))}
@@ -61,11 +62,22 @@ const DefaultsPage = () => {
   );
   return (
     <DisplayWrapper>
-      <H2>Defaults</H2>
-      <H2Subtitle>
-        Create default package.json files that you can import into other
-        projects to make setup a breeze.
-      </H2Subtitle>
+      <div className="flex justify-between">
+        <div className="flex flex-col">
+          <H2>Defaults</H2>
+          <H2Subtitle>
+            Create default package.json files that you can import into other
+            projects to make setup a breeze.
+          </H2Subtitle>
+        </div>
+
+        <div className="flex">
+          <MainButton className="mr-4">
+            <i className="fas fa-file-import mr-4"></i> Import from GitHub
+          </MainButton>
+          <MainButton>New Package.json</MainButton>
+        </div>
+      </div>
 
       {!params.get("f") && (
         <>

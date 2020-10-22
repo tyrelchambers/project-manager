@@ -6,10 +6,9 @@ import UserWidget from "../../components/UserWidget/UserWidget";
 const Navbar = () => {
   const pathWithSearch = window.location.pathname + window.location.search;
   const checkPath = (link = "") => {
-    if (!link || link === "/") return false;
+    if (!link || window.location.pathname === "/") return false;
 
-    const newRegex = new RegExp(link, "i");
-    return newRegex.test(link);
+    return link === window.location.pathname;
   };
   return (
     <nav className="m-2 navbar">
@@ -26,7 +25,7 @@ const Navbar = () => {
             {x.icon}
             <p className="ml-6">{x.label}</p>
           </NavLink>
-          {x.subnav && checkPath(window.location.pathname) && (
+          {x.subnav && checkPath(x.url) && (
             <div className="nav-subnav bg-gray-800  rounded-md">
               {x.subnav.map((link, lid) => (
                 <Link

@@ -12,19 +12,31 @@ export const navRoutes = [
     icon: <i className="fas fa-folder"></i>,
   },
   {
-    label: "Defaults",
-    url: "/defaults",
+    label: "Packages",
+    url: "/packages",
     icon: <i className="fab fa-buffer"></i>,
     subnav: [
       {
         label: "NPM",
         icon: <i className="fab fa-npm"></i>,
-        url: "/defaults?f=npm",
+        url: "/packages?f=npm",
       },
       {
         label: "Yarn",
         icon: <i className="fab fa-yarn"></i>,
-        url: "/defaults?f=yarn",
+        url: "/packages?f=yarn",
+      },
+    ],
+  },
+  {
+    label: "Settings",
+    url: "/settings",
+    icon: <i className="fas fa-cog"></i>,
+    subnav: [
+      {
+        label: "Profile",
+        icon: <i className="fas fa-user"></i>,
+        url: "/settings/profile",
       },
     ],
   },

@@ -1,5 +1,5 @@
 .btn {
-  padding: 1em;
+  padding: 0.8em 1em;
   width: 100%;
   font-weight: bold;
   border-radius: var(--border-radius-sm);
@@ -7,6 +7,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: fit-content;
+  white-space: nowrap;
 }
 
 .btn:hover {

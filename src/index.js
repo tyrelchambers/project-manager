@@ -5,7 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
   BASE,
-  DEFAULTS,
+  PACKAGES,
   NEW_PROJECT,
   UNAUTHENTICATED_BASE,
 } from "./routes/routes";
@@ -26,7 +26,7 @@ const Authenticated = () => (
   <>
     <Route exact path={BASE} component={Home} />
     <Route exact path={NEW_PROJECT} component={NewProject} />
-    <Route path={DEFAULTS} component={DefaultsPage} />
+    <Route path={PACKAGES} component={DefaultsPage} />
   </>
 );
 

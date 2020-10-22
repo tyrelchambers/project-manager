@@ -47,6 +47,15 @@ const ProjectForm = ({
         <SelectField data={frameworks} stateHandler={setState} state={state} />
       </div>
 
+      <div className="field-group">
+        <FormLabel name="packageSearch" text="Import a Saved Package" />
+        <input
+          type="text"
+          className="form-input"
+          placeholder="begin typing..."
+        />
+      </div>
+
       <MainButton
         className="mt-8"
         onClick={(e) => {

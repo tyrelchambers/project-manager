@@ -51,9 +51,10 @@ const SelectField = ({ data, stateHandler, state }) => {
               className="w-full p-4 bg-gray-900 text-white rounded-md items-center flex select-item mt-4"
               onClick={() => dropdownHandler(x)}
               data-framework={x.framework}
+              key={id}
             >
               {x.icon}
-              <div key={id} value={x.framework}>
+              <div value={x.framework}>
                 <p className="font-bold">{x.framework}</p>
               </div>
             </div>
