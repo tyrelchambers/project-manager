@@ -93,7 +93,7 @@ const NewPackageForm = () => {
         <hr />
 
         <div className="mt-4">
-          <p className="font-bold text-white text-xl">
+          <p className="font-bold text-white text-xl mb-4">
             Packages to be installed
           </p>
           {state.packagesToInstall.map((q, id) => (
