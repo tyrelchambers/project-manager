@@ -8,6 +8,7 @@ import {
   PACKAGES,
   NEW_PROJECT,
   UNAUTHENTICATED_BASE,
+  NEW_PACKAGE,
 } from "./routes/routes";
 import Home from "./pages/Home/Home";
 import "./assets/main.css";
@@ -17,6 +18,7 @@ import { Provider } from "mobx-react";
 import stores from "./stores/index";
 import ModalContainer from "./layouts/ModalContainer/ModalContainer";
 import DefaultsPage from "./pages/DefaultsPage/DefaultsPage";
+import NewPackage from "./pages/NewPackage/NewPackage";
 
 const Unauthenticated = () => (
   <Route exact path={UNAUTHENTICATED_BASE} component={Signup} />
@@ -26,7 +28,8 @@ const Authenticated = () => (
   <>
     <Route exact path={BASE} component={Home} />
     <Route exact path={NEW_PROJECT} component={NewProject} />
-    <Route path={PACKAGES} component={DefaultsPage} />
+    <Route exact path={PACKAGES} component={DefaultsPage} />
+    <Route exact path={NEW_PACKAGE} component={NewPackage} />
   </>
 );
 

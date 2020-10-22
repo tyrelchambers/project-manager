@@ -92,3 +92,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.query-result:hover {
+  background-color: var(--gray-800);
+  cursor: pointer;
+}
+
+hr {
+  border: none;
+  height: 1px !important;
+  background-color: var(--gray-700);
+}

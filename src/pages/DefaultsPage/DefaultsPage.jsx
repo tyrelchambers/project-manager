@@ -3,6 +3,7 @@ import { H2, H2Subtitle, H3 } from "../../components/Headings/Headings";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./DefaultsPage.css";
 import { MainButton } from "../../components/Buttons/Buttons";
+import { Link } from "react-router-dom";
 const DefaultsPage = () => {
   const params = new URLSearchParams(window.location.search);
 
@@ -72,10 +73,12 @@ const DefaultsPage = () => {
         </div>
 
         <div className="flex">
-          <MainButton className="mr-4">
+          <Link className="mr-4 btn primary">
             <i className="fas fa-file-import mr-4"></i> Import from GitHub
-          </MainButton>
-          <MainButton>New Package.json</MainButton>
+          </Link>
+          <Link className=" btn primary" to="/packages/new">
+            New Package.json
+          </Link>
         </div>
       </div>
 

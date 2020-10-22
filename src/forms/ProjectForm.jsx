@@ -1,6 +1,5 @@
 import { inject, observer } from "mobx-react";
 import React from "react";
-import { useState } from "react";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import SelectField from "../components/SelectField/SelectField";
