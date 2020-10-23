@@ -19,7 +19,7 @@ import stores from "./stores/index";
 import ModalContainer from "./layouts/ModalContainer/ModalContainer";
 import DefaultsPage from "./pages/DefaultsPage/DefaultsPage";
 import NewPackage from "./pages/NewPackage/NewPackage";
-
+import "./assets/prism.css";
 const Unauthenticated = () => (
   <Route exact path={UNAUTHENTICATED_BASE} component={Signup} />
 );
