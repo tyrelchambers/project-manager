@@ -129,14 +129,6 @@ const NewPackageForm = ({ ModalStore }) => {
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "enzyme": "^3.10.0",
-    "fake-indexeddb": "^2.1.1",
-    "react-hooks-testing-library": "^0.5.1",
-    "react-testing-library": "^7.0.1",
-    "sinon": "^7.5.0"
-  }
-
 }
               `}
             </code>
@@ -218,11 +210,14 @@ const NewPackageForm = ({ ModalStore }) => {
           </p>
           {state.packagesToInstall.map((q, id) => (
             <div
-              className="flex justify-between items-center p-2"
+              className="flex justify-between items-center p-2 cursor-pointer"
               key={id}
               onClick={() => removePackageHandler(q)}
             >
-              <p className="font-bold text-white">{q.name}</p>
+              <div className="flex items-center">
+                <i class="fas fa-times mr-4 text-red-500"></i>
+                <p className="font-bold text-white">{q.name}</p>
+              </div>
               <p className="text-pink-500 italic">
                 <i className="fas fa-at"></i> {q.version}
               </p>
