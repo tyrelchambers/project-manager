@@ -7,6 +7,7 @@ import SelectField from "../components/SelectField/SelectField";
 import { packageManagers } from "../constants/packageManagers";
 import Spinner from "../components/Spinner/Spinner";
 import { inject, observer } from "mobx-react";
+import { getAxios } from "../api";
 
 const NewPackageForm = ({ ModalStore }) => {
   const [state, setState] = useState({
@@ -22,7 +23,7 @@ const NewPackageForm = ({ ModalStore }) => {
   const [searching, setSearching] = useState(false);
 
   const searchNpm = async (q) => {
-    return await Axios.get("http://localhost:4000/api/v1/npm", {
+    return await Axios.get("http://localhost:4000/api/v1/packages/search", {
       params: {
         q,
       },
@@ -63,41 +64,9 @@ const NewPackageForm = ({ ModalStore }) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    ModalStore.setRender(<PackageWindow />);
-    ModalStore.setIsOpen(true);
-  };
-
-  const PackageWindow = () => (
-    <div className="flex flex-col">
-      <div className="flex flex-col items-center p-4 pt-8 pb-8">
-        <p className="font-bold text-lg mb-4">Download your package.json</p>
-
-        {downloading && (
-          <div className="flex items-center mt-4">
-            <Spinner />
-            <p className="text-pink-500 font-bold ml-4">Preparing files...</p>
-          </div>
-        )}
-
-        {!downloading && (
-          <MainButton>
-            <i className="fas fa-cloud-download-alt mr-4 "></i>Download
-          </MainButton>
-        )}
-      </div>
-      <div className="flex flex-col items-center p-4 pt-8 pb-8 bg-gray-900 ">
-        <p className="font-bold text-white text-lg mb-4 ">
-          Copy to your own package.json
-        </p>
-
-        <div className="p-4 bg-gray-800 w-full rounded-lg flex">
-          <pre>
-            <code className="text-gray-300">
-              {`
+  const packageTemp = `
 {
-  "name": ${state.packageName},
+  "name": "${state.packageName}",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -130,10 +99,54 @@ const NewPackageForm = ({ ModalStore }) => {
     ]
   },
 }
-              `}
-            </code>
+`;
+
+  const openModal = (e) => {
+    e.preventDefault();
+    ModalStore.setRender(<PackageWindow />);
+    ModalStore.setIsOpen(true);
+    submitHandler();
+  };
+
+  const submitHandler = (e) => {
+    getAxios({
+      method: "post",
+      url: "/packages/upload",
+      data: {
+        packageJson: JSON.stringify(packageTemp),
+      },
+    });
+  };
+
+  const PackageWindow = () => (
+    <div className="flex flex-col">
+      <div className="flex flex-col items-center p-4 pt-8 pb-8">
+        <p className="font-bold text-lg mb-4">Download your package.json</p>
+
+        {downloading && (
+          <div className="flex items-center mt-4">
+            <Spinner />
+            <p className="text-pink-500 font-bold ml-4">Preparing files...</p>
+          </div>
+        )}
+
+        {!downloading && (
+          <MainButton>
+            <i className="fas fa-cloud-download-alt mr-4 "></i>Download
+          </MainButton>
+        )}
+      </div>
+      <div className="flex flex-col items-center p-4 pt-8 pb-8 bg-gray-900 ">
+        <p className="font-bold text-white text-lg mb-4 ">
+          Copy to your own package.json
+        </p>
+
+        <div className="p-4 bg-gray-800 w-full rounded-lg flex mb-4">
+          <pre>
+            <code className="text-gray-300">{packageTemp}</code>
           </pre>
         </div>
+        <MainButton>Copy to Clipboard</MainButton>
       </div>
     </div>
   );
@@ -226,7 +239,7 @@ const NewPackageForm = ({ ModalStore }) => {
         </div>
       </div>
 
-      <MainButton onClick={(e) => submitHandler(e)}>Save</MainButton>
+      <MainButton onClick={(e) => openModal(e)}>Preview</MainButton>
     </form>
   );
 };
