@@ -114,6 +114,7 @@ const NewPackageForm = ({ ModalStore }) => {
       url: "/packages/upload",
       data: {
         packageJson: JSON.stringify(packageTemp),
+        folderName: state.defaultName,
       },
     });
   };
@@ -159,7 +160,7 @@ const NewPackageForm = ({ ModalStore }) => {
           type="text"
           className="form-input"
           name="defaultName"
-          placeholder="Name to save as, as a default"
+          placeholder="my-new-package"
           value={state.defaultName}
           onChange={(v) => inputHandler(v)}
         />
@@ -171,7 +172,7 @@ const NewPackageForm = ({ ModalStore }) => {
           type="text"
           className="form-input"
           name="packageName"
-          placeholder="The name of the package.json"
+          placeholder="The name of the package.json: {name: 'my-app'}"
           value={state.packageName}
           onChange={(v) => inputHandler(v)}
         />
@@ -239,7 +240,7 @@ const NewPackageForm = ({ ModalStore }) => {
         </div>
       </div>
 
-      <MainButton onClick={(e) => openModal(e)}>Preview</MainButton>
+      <MainButton onClick={(e) => openModal(e)}>Preview &amp; Save</MainButton>
     </form>
   );
 };
