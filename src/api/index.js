@@ -8,21 +8,18 @@ export const getAxios = async ({
   data = {},
   params = {},
   options = {
-    withToken: false,
+    withToken: true,
   },
   url = "",
 } = {}) => {
   const token = await window.localStorage.getItem("token");
 
-  if (options.withToken && !token) {
-    return;
-  }
   return await Axios({
     method,
     url: `${BACKEND}/api/v1${url}`,
     data,
     headers: {
-      ...(options.withToken && { token }),
+      token,
     },
     params: {
       ...params,

@@ -1,3 +1,4 @@
 import ModalStore from "./ModalStore";
+import UserStore from "./UserStore";
 
-export default { ModalStore };
+export default { ModalStore, UserStore };

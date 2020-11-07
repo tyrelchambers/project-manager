@@ -9,7 +9,7 @@ import Spinner from "../components/Spinner/Spinner";
 import { inject, observer } from "mobx-react";
 import { getAxios } from "../api";
 
-const NewPackageForm = ({ ModalStore }) => {
+const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [state, setState] = useState({
     framework: {},
     packagesToInstall: [],
@@ -108,13 +108,29 @@ const NewPackageForm = ({ ModalStore }) => {
     submitHandler();
   };
 
-  const submitHandler = (e) => {
-    getAxios({
+  const submitHandler = async (e) => {
+    let linkToPackage;
+
+    await getAxios({
       method: "post",
       url: "/packages/upload",
       data: {
         packageJson: JSON.stringify(packageTemp),
         folderName: state.defaultName,
+      },
+    }).then((res) => {
+      linkToPackage = res.endpoint;
+    });
+
+    await getAxios({
+      method: "post",
+      url: "/packages/save",
+      data: {
+        url: linkToPackage,
+        userId: UserStore.user.uuid,
+        packageName: state.packageName,
+        folderName: state.defaultName,
+        bundler: state.framework.framework,
       },
     });
   };
@@ -245,4 +261,4 @@ const NewPackageForm = ({ ModalStore }) => {
   );
 };
 
-export default inject("ModalStore")(observer(NewPackageForm));
+export default inject("ModalStore", "UserStore")(observer(NewPackageForm));
