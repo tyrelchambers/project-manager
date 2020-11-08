@@ -12,6 +12,7 @@ const NewProject = () => {
     projectTitle: "",
     folderName: "",
     framework: {},
+    package: {},
   });
 
   const submitHandler = () => {

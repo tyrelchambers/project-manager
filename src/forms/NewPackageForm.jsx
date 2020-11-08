@@ -8,6 +8,7 @@ import { packageManagers } from "../constants/packageManagers";
 import Spinner from "../components/Spinner/Spinner";
 import { inject, observer } from "mobx-react";
 import { getAxios } from "../api";
+import List from "../components/List/List";
 
 const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [state, setState] = useState({
@@ -23,7 +24,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [searching, setSearching] = useState(false);
 
   const searchNpm = async (q) => {
-    return await Axios.get("http://localhost:4000/api/v1/packages/search", {
+    return await Axios.get("http://localhost:4000/api/v1/packages/search/npm", {
       params: {
         q,
       },
@@ -239,19 +240,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
             Packages to be installed
           </p>
           {state.packagesToInstall.map((q, id) => (
-            <div
-              className="flex justify-between items-center p-2 cursor-pointer"
-              key={id}
-              onClick={() => removePackageHandler(q)}
-            >
-              <div className="flex items-center">
-                <i class="fas fa-times mr-4 text-red-500"></i>
-                <p className="font-bold text-white">{q.name}</p>
-              </div>
-              <p className="text-pink-500 italic">
-                <i className="fas fa-at"></i> {q.version}
-              </p>
-            </div>
+            <List key={id} data={q} onClick={removePackageHandler} />
           ))}
         </div>
       </div>

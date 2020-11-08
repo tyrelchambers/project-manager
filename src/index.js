@@ -10,6 +10,7 @@ import {
   UNAUTHENTICATED_BASE,
   NEW_PACKAGE,
   PROJECTS,
+  PACKAGE_SHOW,
 } from "./routes/routes";
 import Home from "./pages/Home/Home";
 import "./assets/main.css";
@@ -23,6 +24,7 @@ import NewPackage from "./pages/NewPackage/NewPackage";
 import Projects from "./pages/Projects/Projects";
 import "./assets/prism.css";
 import { getAxios } from "./api";
+import PackageShow from "./pages/PackageShow/PackageShow";
 const Unauthenticated = () => (
   <Route exact path={UNAUTHENTICATED_BASE} component={Signup} />
 );
@@ -34,6 +36,7 @@ const Authenticated = () => (
     <Route exact path={PACKAGES} component={DefaultsPage} />
     <Route exact path={NEW_PACKAGE} component={NewPackage} />
     <Route exact path={PROJECTS} component={Projects} />
+    <Route exact path={PACKAGE_SHOW} component={PackageShow} />
   </>
 );
 

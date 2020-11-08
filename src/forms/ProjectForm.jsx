@@ -1,9 +1,12 @@
 import { inject, observer } from "mobx-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
+import List from "../components/List/List";
 import SelectField from "../components/SelectField/SelectField";
 import { frameworks } from "../constants/frameworks";
+import isEmpty from "../helpers/isEmpty";
 
 const ProjectForm = ({
   ModalStore,
@@ -12,8 +15,25 @@ const ProjectForm = ({
   setState,
   submitHandler,
 }) => {
+  const [q, setQ] = useState("");
+  const [qResults, setQResults] = useState([]);
+
   const inputHandler = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
+  };
+
+  useEffect(() => {
+    if (q.length > 0) {
+      getAxios({
+        url: `/packages/search?q=${q}`,
+      }).then((res) => setQResults(res.packages));
+    } else {
+      setQResults([]);
+    }
+  }, [q]);
+
+  const addPackageHandler = (pkg) => {
+    setState({ ...state, package: pkg });
   };
 
   return (
@@ -52,8 +72,38 @@ const ProjectForm = ({
           type="text"
           className="form-input"
           placeholder="begin typing..."
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
         />
       </div>
+
+      {qResults.length > 0 &&
+        qResults.map((item, id) => (
+          <div
+            className="flex justify-between items-center p-2 query-result rouned-md"
+            key={id}
+            onClick={() => addPackageHandler(item)}
+          >
+            <p className="font-bold text-white">{item.name}</p>
+            {item?.version && (
+              <p className="text-pink-500 italic">
+                <i className="fas fa-at"></i> {item.version}
+              </p>
+            )}
+          </div>
+        ))}
+
+      <hr className="mt-4 mb-4" />
+
+      {!isEmpty(state.package) && (
+        <div className="flex items-center">
+          <i
+            className="fas fa-times mr-4 text-red-500"
+            onClick={() => setState({ ...state, package: {} })}
+          ></i>
+          <p className="font-bold text-white">{state.package.name}</p>
+        </div>
+      )}
 
       <MainButton
         className="mt-8"
