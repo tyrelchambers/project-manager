@@ -18,21 +18,17 @@ const NewProject = () => {
     package: {},
   });
 
-  console.log(token);
-
   const submitHandler = async () => {
-    const create = await getAxios({
+    await getAxios({
       url: "/projects/create",
       method: "post",
       data: {
         ...state,
       },
-    }).then((res) => res);
+    });
 
-    const downloadWindow = window.open(
-      `http://localhost:4000/api/v1/projects/download?appName=${state.appName}&token=${token}`,
-      "_blank"
-    );
+    const downloadWindow = window.open(``, "_blank");
+    downloadWindow.window.location = `http://localhost:4000/api/v1/projects/download?appName=${state.appName}&token=${token}`;
 
     setTimeout(() => {
       downloadWindow.close();
