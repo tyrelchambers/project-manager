@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
-import List from "../components/List/List";
 import SelectField from "../components/SelectField/SelectField";
 import { frameworks } from "../constants/frameworks";
 import isEmpty from "../helpers/isEmpty";
@@ -51,13 +50,13 @@ const ProjectForm = ({
       </div>
 
       <div className="field-group">
-        <FormLabel name="folderName" text="Folder Name" />
+        <FormLabel name="appName" text="App Name" />
         <input
           type="text"
           className="form-input"
-          name="folderName"
+          name="appName"
           placeholder="an-awesome-project"
-          value={state.folderName}
+          value={state.appName}
           onChange={(e) => inputHandler(e)}
         />
       </div>
@@ -109,7 +108,6 @@ const ProjectForm = ({
         className="mt-8"
         onClick={(e) => {
           e.preventDefault();
-          submitHandler();
           ModalStore.setRender(<Component />);
           ModalStore.setIsOpen(true);
         }}

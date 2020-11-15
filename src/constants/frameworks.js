@@ -7,8 +7,8 @@ export function Fw({ framework, icon, install }) {
   this.icon = icon;
   this.install = install;
 
-  this.command = function ({ folderName, flags = "" }) {
-    return `${install} ${folderName} ${flags}`;
+  this.command = function ({ appName, flags = "" }) {
+    return `${install} ${appName} ${flags}`;
   };
 }
 

@@ -1,22 +1,42 @@
 import React from "react";
 import { useState } from "react";
+import { getAxios } from "../../api";
 import { MainButton } from "../../components/Buttons/Buttons";
 import { H2 } from "../../components/Headings/Headings";
 import Spinner from "../../components/Spinner/Spinner";
 import ProjectForm from "../../forms/ProjectForm";
+import useStorage from "../../hooks/useStorage";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
 const NewProject = () => {
   const [downloading, setDownloading] = useState(false);
+  const [token, setToken] = useStorage("token");
   const [state, setState] = useState({
     projectTitle: "",
-    folderName: "",
+    appName: "",
     framework: {},
     package: {},
   });
 
-  const submitHandler = () => {
-    console.log(state);
+  console.log(token);
+
+  const submitHandler = async () => {
+    const create = await getAxios({
+      url: "/projects/create",
+      method: "post",
+      data: {
+        ...state,
+      },
+    }).then((res) => res);
+
+    const downloadWindow = window.open(
+      `http://localhost:4000/api/v1/projects/download?appName=${state.appName}&token=${token}`,
+      "_blank"
+    );
+
+    setTimeout(() => {
+      downloadWindow.close();
+    }, 2000);
   };
 
   const FinalScreen = () => (
@@ -32,8 +52,8 @@ const NewProject = () => {
         )}
 
         {!downloading && (
-          <MainButton>
-            <i className="fas fa-cloud-download-alt mr-4 "></i>Download
+          <MainButton onClick={submitHandler}>
+            <i className="fas fa-cloud-download-alt mr-4 "></i>Generate files
           </MainButton>
         )}
       </div>
@@ -50,7 +70,7 @@ const NewProject = () => {
             >
               ${" "}
             </span>
-            {state.framework.command({ folderName: state.folderName })}
+            {state.framework.command({ appName: state.appName })}
           </p>
         </div>
       </div>
@@ -60,12 +80,7 @@ const NewProject = () => {
   return (
     <DisplayWrapper>
       <H2>New Project</H2>
-      <ProjectForm
-        Component={FinalScreen}
-        state={state}
-        setState={setState}
-        submitHandler={submitHandler}
-      />
+      <ProjectForm Component={FinalScreen} state={state} setState={setState} />
     </DisplayWrapper>
   );
 };

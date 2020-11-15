@@ -36,7 +36,7 @@ const DefaultsPage = ({ UserStore }) => {
                 to={`/package/${pkg.uuid}`}
               >
                 <i className="fab fa-node-js text-green-500 mr-2"></i>
-                <p className="text-gray-300">{pkg.name}</p>
+                <p className="text-gray-300">{pkg.folderName}</p>
               </Link>
             ))}
       </div>
@@ -57,7 +57,7 @@ const DefaultsPage = ({ UserStore }) => {
                 className="flex items-center mr-2 p-2 bg-gray-800 rounded-sm"
               >
                 <i className="fab fa-yarn  text-green-500 mr-2"></i>
-                <p className="text-gray-300">{pkg.name}</p>
+                <p className="text-gray-300">{pkg.folderName}</p>
               </div>
             ))}
       </div>
