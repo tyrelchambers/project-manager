@@ -24,13 +24,17 @@ const NewProject = () => {
   });
 
   useEffect(() => {
-    socket.on("project message", (data) => {
+    socket.emit("project message", (data) => {
       console.log(data);
       setResponse(data);
     });
   }, []);
 
   const submitHandler = async () => {
+    socket.emit("project message", (data) => {
+      console.log(data);
+      setResponse(data);
+    });
     // await getAxios({
     //   url: "/projects/create",
     //   method: "post",
