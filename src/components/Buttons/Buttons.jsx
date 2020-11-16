@@ -8,6 +8,7 @@ export const MainButton = (props) => {
         props.className ? props.className : ""
       }`}
       onClick={props.onClick}
+      disabled={props.disabled}
     >
       {props.children}
     </button>

@@ -3,20 +3,20 @@ import React, { useEffect, useState } from "react";
 import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
+import ProjectConfirm from "../components/ProjectConfirm/ProjectConfirm";
 import SelectField from "../components/SelectField/SelectField";
 import { frameworks } from "../constants/frameworks";
 import isEmpty from "../helpers/isEmpty";
 
-const ProjectForm = ({
-  ModalStore,
-  Component,
-  state,
-  setState,
-  submitHandler,
-}) => {
+const ProjectForm = ({ ModalStore }) => {
   const [q, setQ] = useState("");
   const [qResults, setQResults] = useState([]);
-
+  const [state, setState] = useState({
+    projectTitle: "",
+    appName: "",
+    framework: {},
+    package: {},
+  });
   const inputHandler = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
@@ -108,7 +108,7 @@ const ProjectForm = ({
         className="mt-8"
         onClick={(e) => {
           e.preventDefault();
-          ModalStore.setRender(<Component />);
+          ModalStore.setRender(<ProjectConfirm state={state} />);
           ModalStore.setIsOpen(true);
         }}
       >
