@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { getAxios } from "../../api";
 import { MainButton } from "../../components/Buttons/Buttons";
@@ -7,10 +8,14 @@ import Spinner from "../../components/Spinner/Spinner";
 import ProjectForm from "../../forms/ProjectForm";
 import useStorage from "../../hooks/useStorage";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
+import socketIOClient from "socket.io-client";
 
 const NewProject = () => {
+  const socket = socketIOClient(process.env.REACT_APP_BACKEND);
+
   const [downloading, setDownloading] = useState(false);
   const [token, setToken] = useStorage("token");
+  const [response, setResponse] = useState("");
   const [state, setState] = useState({
     projectTitle: "",
     appName: "",
@@ -18,25 +23,31 @@ const NewProject = () => {
     package: {},
   });
 
-  const submitHandler = async () => {
-    await getAxios({
-      url: "/projects/create",
-      method: "post",
-      data: {
-        ...state,
-      },
+  useEffect(() => {
+    socket.on("project message", (data) => {
+      console.log(data);
+      setResponse(data);
     });
+  }, []);
 
-    const downloadWindow = window.open(``, "_blank");
-    downloadWindow.window.location = `http://localhost:4000/api/v1/projects/download?appName=${state.appName}&token=${token}`;
-
-    setTimeout(() => {
-      downloadWindow.close();
-    }, 2000);
+  const submitHandler = async () => {
+    // await getAxios({
+    //   url: "/projects/create",
+    //   method: "post",
+    //   data: {
+    //     ...state,
+    //   },
+    // });
+    // const downloadWindow = window.open(``, "_blank");
+    // downloadWindow.window.location = `http://localhost:4000/api/v1/projects/download?appName=${state.appName}&token=${token}`;
+    // setTimeout(() => {
+    //   downloadWindow.close();
+    // }, 2000);
   };
 
   const FinalScreen = () => (
     <div className="flex flex-col overflow-hidden">
+      {console.log(response)}
       <div className="flex flex-col items-center p-4 pt-8 pb-8">
         <p className="font-bold text-lg mb-4">Download your project files</p>
 
