@@ -19,7 +19,7 @@ import NewProject from "./pages/NewProject/NewProject";
 import { Provider } from "mobx-react";
 import stores from "./stores/index";
 import ModalContainer from "./layouts/ModalContainer/ModalContainer";
-import DefaultsPage from "./pages/DefaultsPage/DefaultsPage";
+import PackagesPage from "./pages/PackagesPage/PackagesPage";
 import NewPackage from "./pages/NewPackage/NewPackage";
 import Projects from "./pages/Projects/Projects";
 import "./assets/prism.css";
@@ -33,7 +33,7 @@ const Authenticated = () => (
   <>
     <Route exact path={BASE} component={Home} />
     <Route exact path={NEW_PROJECT} component={NewProject} />
-    <Route exact path={PACKAGES} component={DefaultsPage} />
+    <Route exact path={PACKAGES} component={PackagesPage} />
     <Route exact path={NEW_PACKAGE} component={NewPackage} />
     <Route exact path={PROJECTS} component={Projects} />
     <Route exact path={PACKAGE_SHOW} component={PackageShow} />

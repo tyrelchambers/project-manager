@@ -14,9 +14,6 @@
 .btn:hover {
   transform: scale(0.99);
 }
-.btn.primary {
-  background-color: var(--pink-500);
-}
 
 .btn.small {
   width: 100%;

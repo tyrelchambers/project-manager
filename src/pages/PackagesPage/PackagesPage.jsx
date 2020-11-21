@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { H2, H2Subtitle, H3 } from "../../components/Headings/Headings";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
-import "./DefaultsPage.css";
+import "./PackagesPage.css";
 import { Link } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { getAxios } from "../../api";
 
-const DefaultsPage = ({ UserStore }) => {
+const PackagesPage = ({ UserStore }) => {
   const params = new URLSearchParams(window.location.search);
 
   const [defaultPackages, setDefaultPackage] = useState([]);
@@ -75,10 +75,10 @@ const DefaultsPage = ({ UserStore }) => {
         </div>
 
         <div className="flex">
-          <Link className="mr-4 btn primary">
+          <Link className="mr-4 btn primary bg-pink-500">
             <i className="fas fa-file-import mr-4"></i> Import from GitHub
           </Link>
-          <Link className=" btn primary" to="/packages/new">
+          <Link className=" btn primary bg-pink-500" to="/packages/new">
             New Package.json
           </Link>
         </div>
@@ -98,4 +98,4 @@ const DefaultsPage = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(DefaultsPage));
+export default inject("UserStore")(observer(PackagesPage));

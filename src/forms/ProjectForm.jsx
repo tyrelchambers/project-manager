@@ -12,7 +12,6 @@ const ProjectForm = ({ ModalStore }) => {
   const [q, setQ] = useState("");
   const [qResults, setQResults] = useState([]);
   const [state, setState] = useState({
-    projectTitle: "",
     appName: "",
     framework: {},
     package: {},
@@ -37,18 +36,6 @@ const ProjectForm = ({ ModalStore }) => {
 
   return (
     <form className="form mt-8">
-      <div className="field-group">
-        <FormLabel name="projectTitle" text="Project Title" />
-        <input
-          type="text"
-          className="form-input"
-          name="projectTitle"
-          placeholder="An Awesome Project"
-          value={state.projectTitle}
-          onChange={(e) => inputHandler(e)}
-        />
-      </div>
-
       <div className="field-group">
         <FormLabel name="appName" text="App Name" />
         <input

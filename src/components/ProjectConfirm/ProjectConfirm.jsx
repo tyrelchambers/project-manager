@@ -54,7 +54,7 @@ const ProjectConfirm = ({ state }) => {
         )}
 
         {generated && (
-          <MainButton disabled>
+          <MainButton className="bg-green-500" disabled>
             <i className="fas fa-check mr-4"></i>Complete
           </MainButton>
         )}

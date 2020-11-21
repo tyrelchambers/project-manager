@@ -7,9 +7,6 @@ export const getAxios = async ({
   method = "get",
   data = {},
   params = {},
-  options = {
-    withToken: true,
-  },
   url = "",
 } = {}) => {
   const token = await window.localStorage.getItem("token");
