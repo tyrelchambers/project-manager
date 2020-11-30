@@ -1,0 +1,8 @@
+.selected-project {
+  background: var(--redGradient);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.selected-project i {
+  color: var(--gray-800);
+}

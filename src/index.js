@@ -25,6 +25,9 @@ import Projects from "./pages/Projects/Projects";
 import "./assets/prism.css";
 import { getAxios } from "./api";
 import PackageShow from "./pages/PackageShow/PackageShow";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Unauthenticated = () => (
   <Route exact path={UNAUTHENTICATED_BASE} component={Signup} />
 );
@@ -67,6 +70,7 @@ ReactDOM.render(
     <Provider {...stores}>
       <Router basename="/">
         <ModalContainer />
+        <ToastContainer />
         <Switch>
           <App />
         </Switch>

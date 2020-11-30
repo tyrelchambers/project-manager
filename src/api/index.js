@@ -22,7 +22,12 @@ export const getAxios = async ({
       ...params,
     },
   })
-    .then((res) => res.data)
+    .then((res) => {
+      if (res.message) {
+        toast.success(res.message);
+      }
+      return res.data;
+    })
     .catch((err) => {
       if (err.response) {
         toast.error(err.response.data);

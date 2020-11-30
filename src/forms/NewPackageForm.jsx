@@ -9,6 +9,7 @@ import Spinner from "../components/Spinner/Spinner";
 import { inject, observer } from "mobx-react";
 import { getAxios } from "../api";
 import List from "../components/List/List";
+import { toast } from "react-toastify";
 
 const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [state, setState] = useState({
@@ -133,7 +134,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
         folderName: state.defaultName,
         bundler: state.framework.framework,
       },
-    });
+    }).then((res) => toast.success(res.message));
   };
 
   const PackageWindow = () => (
@@ -245,7 +246,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
         </div>
       </div>
 
-      <MainButton onClick={(e) => openModal(e)}>Preview &amp; Save</MainButton>
+      <MainButton onClick={(e) => openModal(e)}>Create</MainButton>
     </form>
   );
 };

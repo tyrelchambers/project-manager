@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { getAxios } from "../../api";
 import { MainButton } from "../../components/Buttons/Buttons";
-import { H1, H2, H3 } from "../../components/Headings/Headings";
+import { H1 } from "../../components/Headings/Headings";
 import isEmpty from "../../helpers/isEmpty";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
@@ -24,17 +25,34 @@ const PackageShow = ({ match }) => {
     fn();
   }, [package_id]);
 
+  const deleteHandler = () => {
+    getAxios({
+      url: `/packages/${package_id}/delete`,
+      method: "delete",
+      data: {
+        package_id,
+        keyName: pkg.package.folderName,
+      },
+    }).then((res) => {
+      window.history.back();
+      toast.success(res.message);
+    });
+  };
   return (
     <DisplayWrapper>
-      {!isEmpty(pkg) && (
+      {!isEmpty(pkg.package) && (
         <>
-          <H1>{pkg.package.folderName}</H1>
-          <H3>{pkg.package.name}</H3>
+          <div className="flex items-center w-fit">
+            <H1 className="mr-4 whitespace-no-wrap">{pkg.package.name}</H1>
+            <MainButton delete onClick={deleteHandler}>
+              Delete
+            </MainButton>
+          </div>
           <div className="p-4 bg-gray-800 w-3/5 rounded-lg flex flex-col mb-4 mt-4">
             <pre>
               <code className="text-gray-300">{JSON.parse(pkg.body)}</code>
             </pre>
-            <MainButton className="mt-4">Copy to Clipboard</MainButton>
+            <MainButton classes="mt-8">Copy to Clipboard</MainButton>
           </div>
         </>
       )}

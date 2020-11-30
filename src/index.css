@@ -103,3 +103,35 @@ hr {
   height: 1px !important;
   background-color: var(--gray-700);
 }
+
+p {
+  color: var(--gray-200);
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+.Toastify__toast {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 5px !important;
+  background: var(--bgLight) !important;
+  padding-left: 1em !important;
+  padding-right: 1em !important;
+}
+
+.Toastify__toast--success {
+  color: var(--white);
+  background: var(--greenGradient) !important;
+}
+
+.Toastify__toast-container {
+  width: 100% !important;
+  max-width: 500px;
+}
+
+.Toastify__toast--error {
+  color: var(--white);
+  background: var(--redGradient) !important;
+}

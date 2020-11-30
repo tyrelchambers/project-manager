@@ -39,7 +39,9 @@ const ProjectConfirm = ({ state }) => {
   return (
     <div className="flex flex-col overflow-hidden">
       <div className="flex flex-col items-center p-4 pt-8 pb-8">
-        <p className="font-bold text-lg mb-4">Download your project files</p>
+        <p className="font-bold text-lg mb-4 text-gray-800">
+          Download your project files
+        </p>
         {downloading && (
           <div className="flex items-center mt-4">
             <Spinner />

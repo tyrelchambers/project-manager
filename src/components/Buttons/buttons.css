@@ -9,6 +9,7 @@
   align-items: center;
   height: fit-content;
   white-space: nowrap;
+  transition: all 0.2s ease;
 }
 
 .btn:hover {
@@ -26,4 +27,13 @@
   height: 50px;
   font-weight: bold;
   border-radius: 50%;
+}
+
+.btn.delete {
+  color: var(--red-500);
+}
+
+.btn.delete:hover {
+  background-color: var(--red-500);
+  color: var(--gray-900);
 }

@@ -29,6 +29,11 @@ export const navRoutes = [
     ],
   },
   {
+    label: "Code Snippets",
+    url: "/snippets",
+    icon: <i className="fas fa-code"></i>,
+  },
+  {
     label: "Settings",
     url: "/settings",
     icon: <i className="fas fa-cog"></i>,
