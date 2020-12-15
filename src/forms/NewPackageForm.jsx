@@ -10,6 +10,7 @@ import { inject, observer } from "mobx-react";
 import { getAxios } from "../api";
 import List from "../components/List/List";
 import { toast } from "react-toastify";
+import useStorage from "../hooks/useStorage";
 
 const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [state, setState] = useState({
@@ -23,6 +24,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [query, setQuery] = useState("");
   const [queryResults, setQueryResults] = useState([]);
   const [searching, setSearching] = useState(false);
+  const [token, _] = useStorage("token");
 
   const searchNpm = async (q) => {
     return await Axios.get("http://localhost:4000/api/v1/packages/search/npm", {
@@ -107,7 +109,6 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
     e.preventDefault();
     ModalStore.setRender(<PackageWindow />);
     ModalStore.setIsOpen(true);
-    submitHandler();
   };
 
   const submitHandler = async (e) => {
@@ -134,13 +135,22 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
         folderName: state.defaultName,
         bundler: state.framework.framework,
       },
-    }).then((res) => toast.success(res.message));
+    }).then((res) => {
+      const downloadWindow = window.open(``, "_blank");
+      downloadWindow.window.location = `http://localhost:4000/api/v1/packages/download?defaultName=${state.defaultName}&token=${token}`;
+      setTimeout(() => {
+        downloadWindow.close();
+      }, 500);
+      toast.success(res.message);
+    });
   };
 
   const PackageWindow = () => (
     <div className="flex flex-col">
       <div className="flex flex-col items-center p-4 pt-8 pb-8">
-        <p className="font-bold text-lg mb-4">Download your package.json</p>
+        <p className="font-bold text-lg mb-4 text-gray-800">
+          Download your package.json
+        </p>
 
         {downloading && (
           <div className="flex items-center mt-4">
@@ -150,8 +160,9 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
         )}
 
         {!downloading && (
-          <MainButton>
-            <i className="fas fa-cloud-download-alt mr-4 "></i>Download
+          <MainButton onClick={submitHandler}>
+            <i className="fas fa-cloud-download-alt mr-4 "></i>Create and
+            download
           </MainButton>
         )}
       </div>

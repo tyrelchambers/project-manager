@@ -22,7 +22,7 @@ const Navbar = () => {
             to={x.url}
             className="no-underline font-bold text-white nav-item flex items-center p-4"
           >
-            {x.icon}
+            <div style={{ width: "25px" }}>{x.icon}</div>
             <p className="ml-6">{x.label}</p>
           </NavLink>
           {x.subnav && checkPath(x.url) && (

@@ -1,0 +1,8 @@
+.snippet-item {
+  transition: all 0.2s ease;
+}
+
+.snippet-item:hover {
+  background-color: var(--gray-800);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}

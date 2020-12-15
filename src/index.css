@@ -112,6 +112,10 @@ p {
   width: fit-content;
 }
 
+.cool-grey-800 {
+  color: var(--cool-grey-800);
+}
+
 .Toastify__toast {
   width: 100%;
   max-width: 500px;

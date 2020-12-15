@@ -3,45 +3,24 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {
-  BASE,
-  PACKAGES,
-  NEW_PROJECT,
-  UNAUTHENTICATED_BASE,
-  NEW_PACKAGE,
-  PROJECTS,
-  PACKAGE_SHOW,
-} from "./routes/routes";
-import Home from "./pages/Home/Home";
+import activeRoutes from "./routes/routes";
 import "./assets/main.css";
 import Signup from "./pages/Signup/Signup";
-import NewProject from "./pages/NewProject/NewProject";
 import { Provider } from "mobx-react";
 import stores from "./stores/index";
 import ModalContainer from "./layouts/ModalContainer/ModalContainer";
-import PackagesPage from "./pages/PackagesPage/PackagesPage";
-import NewPackage from "./pages/NewPackage/NewPackage";
-import Projects from "./pages/Projects/Projects";
 import "./assets/prism.css";
 import { getAxios } from "./api";
-import PackageShow from "./pages/PackageShow/PackageShow";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { UNAUTHENTICATED_BASE } from "./routes/routes";
 const Unauthenticated = () => (
   <Route exact path={UNAUTHENTICATED_BASE} component={Signup} />
 );
-
-const Authenticated = () => (
-  <>
-    <Route exact path={BASE} component={Home} />
-    <Route exact path={NEW_PROJECT} component={NewProject} />
-    <Route exact path={PACKAGES} component={PackagesPage} />
-    <Route exact path={NEW_PACKAGE} component={NewPackage} />
-    <Route exact path={PROJECTS} component={Projects} />
-    <Route exact path={PACKAGE_SHOW} component={PackageShow} />
-  </>
-);
+const Authenticated = () =>
+  activeRoutes.map((route, id) => (
+    <Route key={id} exact path={route.slug} component={route.component} />
+  ));
 
 const App = () => {
   const token =

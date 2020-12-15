@@ -1,17 +1,53 @@
-const BASE = "/";
-const UNAUTHENTICATED_BASE = "/";
-const NEW_PROJECT = "/project/new";
-const PACKAGES = "/packages";
-const NEW_PACKAGE = "/packages/new";
-const PROJECTS = "/projects";
-const PACKAGE_SHOW = "/package/:package_id";
+import Home from "../pages/Home/Home";
+import NewPackage from "../pages/NewPackage/NewPackage";
+import NewProject from "../pages/NewProject/NewProject";
+import PackageShow from "../pages/PackageShow/PackageShow";
+import PackagesPage from "../pages/PackagesPage/PackagesPage";
+import Projects from "../pages/Projects/Projects";
+import Signup from "../pages/Signup/Signup";
+import Snippets from "../pages/Snippets/Snippets";
+import SnippetShow from "../pages/SnippetShow/SnippetShow";
 
-export {
-  BASE,
-  UNAUTHENTICATED_BASE,
-  NEW_PROJECT,
-  PACKAGES,
-  NEW_PACKAGE,
-  PROJECTS,
-  PACKAGE_SHOW,
+export const UNAUTHENTICATED_BASE = {
+  slug: "/",
+  component: Signup,
 };
+
+export default [
+  {
+    slug: "/",
+    component: Home,
+  },
+  {
+    slug: "/",
+    component: Signup,
+  },
+  {
+    slug: "/project/new",
+    component: NewProject,
+  },
+  {
+    slug: "/packages",
+    component: PackagesPage,
+  },
+  {
+    slug: "/packages/new",
+    component: NewPackage,
+  },
+  {
+    slug: "/projects",
+    component: Projects,
+  },
+  {
+    slug: "/package/:package_id",
+    component: PackageShow,
+  },
+  {
+    slug: "/snippets",
+    component: Snippets,
+  },
+  {
+    slug: "/snippets/:snippet_id",
+    component: SnippetShow,
+  },
+];

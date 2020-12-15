@@ -34,6 +34,11 @@ export const navRoutes = [
     icon: <i className="fas fa-code"></i>,
   },
   {
+    label: "Environment Variables",
+    url: "/environment",
+    icon: <i className="fas fa-lock"></i>,
+  },
+  {
     label: "Settings",
     url: "/settings",
     icon: <i className="fas fa-cog"></i>,
