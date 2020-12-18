@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getAxios } from "../../api";
 import { H2 } from "../../components/Headings/Headings";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
@@ -11,7 +11,7 @@ const SnippetEdit = () => {
   const { snippet_id } = useParams();
   const [snippet, setSnippet] = useState({});
   const [updated, setUpdated] = useState({});
-
+  const history = useHistory();
   useEffect(() => {
     const fn = async () => {
       await getAxios({
@@ -33,6 +33,8 @@ const SnippetEdit = () => {
       method: "patch",
       data: updated,
     });
+
+    history.push(`/snippets/${snippet.uuid}`);
   };
 
   return (
