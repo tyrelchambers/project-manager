@@ -50,7 +50,7 @@ const SnippetForm = () => {
           type="text"
           name="snippet"
           className="form-input"
-          placeholder="Pasta code snippet..."
+          placeholder="Paste code snippet..."
           onChange={(e) => inputHandler(e)}
           value={snippet.snippet}
         />

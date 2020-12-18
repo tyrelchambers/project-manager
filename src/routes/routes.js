@@ -5,6 +5,7 @@ import PackageShow from "../pages/PackageShow/PackageShow";
 import PackagesPage from "../pages/PackagesPage/PackagesPage";
 import Projects from "../pages/Projects/Projects";
 import Signup from "../pages/Signup/Signup";
+import SnippetEdit from "../pages/SnippetEdit/SnippetEdit";
 import Snippets from "../pages/Snippets/Snippets";
 import SnippetShow from "../pages/SnippetShow/SnippetShow";
 
@@ -49,5 +50,9 @@ export default [
   {
     slug: "/snippets/:snippet_id",
     component: SnippetShow,
+  },
+  {
+    slug: "/snippets/:snippet_id/edit",
+    component: SnippetEdit,
   },
 ];

@@ -115,7 +115,11 @@ const SnippetShow = ({ UserStore }) => {
             </MainButton>
           </div>
 
-          <MainButton default classes="mt-2">
+          <MainButton
+            default
+            classes="mt-2"
+            onClick={() => history.push(`/snippets/${snippet.uuid}/edit`)}
+          >
             Edit
           </MainButton>
         </div>
