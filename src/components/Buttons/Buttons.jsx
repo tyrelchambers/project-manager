@@ -9,7 +9,13 @@ export const MainButton = (props) => {
   if (props.delete) {
     variant = "delete";
     base += "shadow-lg";
-  } else {
+  }
+
+  if (props.muted) {
+    variant = "muted";
+  }
+
+  if (props.default) {
     variant = "bg-pink-500";
   }
 

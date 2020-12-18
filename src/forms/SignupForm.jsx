@@ -70,7 +70,9 @@ const SignupForm = () => {
         />
       </div>
 
-      <MainButton onClick={(e) => submitHandle(e)}>Register</MainButton>
+      <MainButton default onClick={(e) => submitHandle(e)}>
+        Register
+      </MainButton>
     </form>
   );
 };

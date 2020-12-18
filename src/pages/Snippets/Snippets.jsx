@@ -32,7 +32,9 @@ const Snippets = ({ ModalStore }) => {
         <H2 className="mr-4">Code Snippets</H2>
 
         <div className="w-fit">
-          <MainButton onClick={addSnippetModelHandler}>Add Snippet</MainButton>
+          <MainButton default onClick={addSnippetModelHandler}>
+            Add Snippet
+          </MainButton>
         </div>
       </div>
 

@@ -93,6 +93,7 @@ const ProjectForm = ({ ModalStore }) => {
 
       <MainButton
         className="mt-8"
+        default
         onClick={(e) => {
           e.preventDefault();
           ModalStore.setRender(<ProjectConfirm state={state} />);

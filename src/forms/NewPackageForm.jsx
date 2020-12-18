@@ -160,7 +160,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
         )}
 
         {!downloading && (
-          <MainButton onClick={submitHandler}>
+          <MainButton default onClick={submitHandler}>
             <i className="fas fa-cloud-download-alt mr-4 "></i>Create and
             download
           </MainButton>
@@ -176,7 +176,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
             <code className="text-gray-300">{packageTemp}</code>
           </pre>
         </div>
-        <MainButton>Copy to Clipboard</MainButton>
+        <MainButton default>Copy to Clipboard</MainButton>
       </div>
     </div>
   );
@@ -257,7 +257,9 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
         </div>
       </div>
 
-      <MainButton onClick={(e) => openModal(e)}>Create</MainButton>
+      <MainButton default onClick={(e) => openModal(e)}>
+        Create
+      </MainButton>
     </form>
   );
 };

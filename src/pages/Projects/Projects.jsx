@@ -56,7 +56,7 @@ const Projects = () => {
       <div className=" flex items-center mt-4 w-fit">
         <div className="mr-4">
           {selected.length > 0 ? (
-            <MainButton onClick={() => setSelected([])}>
+            <MainButton default onClick={() => setSelected([])}>
               Deselect All
             </MainButton>
           ) : (

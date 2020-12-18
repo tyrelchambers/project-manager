@@ -37,3 +37,8 @@
   background-color: var(--red-500);
   color: var(--gray-900);
 }
+
+.btn.primary.muted {
+  background-color: var(--gray-800);
+  color: var(--gray-100);
+}

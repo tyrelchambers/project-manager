@@ -56,7 +56,9 @@ const SnippetForm = () => {
         />
       </div>
 
-      <MainButton onClick={(e) => submitHandler(e)}>Save Snippet</MainButton>
+      <MainButton default onClick={(e) => submitHandler(e)}>
+        Save Snippet
+      </MainButton>
     </form>
   );
 };

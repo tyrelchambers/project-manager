@@ -52,7 +52,9 @@ const PackageShow = ({ match }) => {
             <pre>
               <code className="text-gray-300">{JSON.parse(pkg.body)}</code>
             </pre>
-            <MainButton classes="mt-8">Copy to Clipboard</MainButton>
+            <MainButton default classes="mt-8">
+              Copy to Clipboard
+            </MainButton>
           </div>
         </>
       )}

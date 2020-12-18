@@ -50,7 +50,7 @@ const ProjectConfirm = ({ state }) => {
         )}
 
         {!downloading && !generated && (
-          <MainButton onClick={submitHandler}>
+          <MainButton default onClick={submitHandler}>
             <i className="fas fa-cloud-download-alt mr-4 "></i>Generate files
           </MainButton>
         )}
