@@ -20,10 +20,6 @@ export default [
     component: Home,
   },
   {
-    slug: "/",
-    component: Signup,
-  },
-  {
     slug: "/project/new",
     component: NewProject,
   },

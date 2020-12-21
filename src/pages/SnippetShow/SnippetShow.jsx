@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import { getAxios } from "../../api";
 import { MainButton } from "../../components/Buttons/Buttons";
 import { H2, H3 } from "../../components/Headings/Headings";
@@ -9,8 +8,9 @@ import isEmpty from "../../helpers/isEmpty";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import SnippetStats from "../../components/SnippetStats/SnippetStats";
 import { inject, observer } from "mobx-react";
+import ShareSnippetModal from "../../modals/ShareSnippetModal/ShareSnippetModal";
 
-const SnippetShow = ({ UserStore }) => {
+const SnippetShow = ({ UserStore, ModalStore }) => {
   const { snippet_id } = useParams();
   const [snippet, setSnippet] = useState({});
   const history = useHistory();
@@ -104,13 +104,23 @@ const SnippetShow = ({ UserStore }) => {
               muted
               onClick={() => {
                 copyToClipboard(snippet.snippet);
-                toast.success("Snippet copied to clipboard");
               }}
             >
               Copy to Clipboard
             </MainButton>
 
-            <MainButton muted classes="m-2" onClick={() => {}}>
+            <MainButton
+              muted
+              classes="m-2"
+              onClick={() => {
+                ModalStore.setRender(
+                  <ShareSnippetModal
+                    shareLink={`${process.env.REACT_APP_CLIENT}/snippets/${snippet_id}`}
+                  />
+                );
+                ModalStore.setIsOpen(true);
+              }}
+            >
               Share
             </MainButton>
           </div>
@@ -128,4 +138,4 @@ const SnippetShow = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(SnippetShow));
+export default inject("UserStore", "ModalStore")(observer(SnippetShow));

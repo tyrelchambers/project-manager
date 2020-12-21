@@ -1,0 +1,13 @@
+.social-icon-wrapper i:not(:last-child) {
+  margin-right: 1em;
+}
+
+.social-icon-wrapper i {
+  font-size: 1.5rem;
+  color: var(--pink-500);
+}
+
+.social-icon-wrapper {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
