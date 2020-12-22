@@ -9,7 +9,7 @@ import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import SnippetStats from "../../components/SnippetStats/SnippetStats";
 import { inject, observer } from "mobx-react";
 import ShareSnippetModal from "../../modals/ShareSnippetModal/ShareSnippetModal";
-
+import Prism from "prismjs";
 const SnippetShow = ({ UserStore, ModalStore }) => {
   const { snippet_id } = useParams();
   const [snippet, setSnippet] = useState({});
@@ -27,6 +27,10 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
 
     fn();
   }, []);
+
+  useEffect(() => {
+    Prism.highlightAll();
+  });
 
   useEffect(() => {
     if (!isEmpty(snippet)) {
@@ -88,8 +92,8 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
           className="p-4 bg-gray-800 w-3/5 rounded-lg flex flex-col mr-4"
           style={{ height: "fit-content" }}
         >
-          <pre>
-            <code className="text-gray-300">{snippet.snippet}</code>
+          <pre className="line-numbers">
+            <code className="text-gray-300 language-js">{snippet.snippet}</code>
           </pre>
         </div>
         <div className="w-2/5">
