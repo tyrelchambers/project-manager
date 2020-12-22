@@ -116,6 +116,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
                 ModalStore.setRender(
                   <ShareSnippetModal
                     shareLink={`${process.env.REACT_APP_CLIENT}/snippets/${snippet_id}`}
+                    snippet={snippet}
                   />
                 );
                 ModalStore.setIsOpen(true);
