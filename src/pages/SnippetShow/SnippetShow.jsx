@@ -9,6 +9,7 @@ import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import SnippetStats from "../../components/SnippetStats/SnippetStats";
 import { inject, observer } from "mobx-react";
 import ShareSnippetModal from "../../modals/ShareSnippetModal/ShareSnippetModal";
+import Code from "../../components/Code/Code";
 
 const SnippetShow = ({ UserStore, ModalStore }) => {
   const { snippet_id } = useParams();
@@ -85,12 +86,10 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
       <SnippetStats stats={snippet} />
       <div className="flex  mb-4 mt-4">
         <div
-          className="p-4 bg-gray-800 w-3/5 rounded-lg flex flex-col mr-4"
+          className="w-3/5 rounded-lg flex flex-col mr-4"
           style={{ height: "fit-content" }}
         >
-          <pre className="line-numbers">
-            <code className="text-gray-300 language-js">{snippet.snippet}</code>
-          </pre>
+          <Code language="javascript" code={snippet.snippet} />
         </div>
         <div className="w-2/5">
           <H3>Options</H3>
