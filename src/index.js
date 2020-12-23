@@ -9,7 +9,6 @@ import Signup from "./pages/Signup/Signup";
 import { Provider } from "mobx-react";
 import stores from "./stores/index";
 import ModalContainer from "./layouts/ModalContainer/ModalContainer";
-import "./assets/prism.css";
 import { getAxios } from "./api";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

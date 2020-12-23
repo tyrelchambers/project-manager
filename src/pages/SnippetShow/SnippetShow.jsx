@@ -9,7 +9,7 @@ import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import SnippetStats from "../../components/SnippetStats/SnippetStats";
 import { inject, observer } from "mobx-react";
 import ShareSnippetModal from "../../modals/ShareSnippetModal/ShareSnippetModal";
-import Prism from "prismjs";
+
 const SnippetShow = ({ UserStore, ModalStore }) => {
   const { snippet_id } = useParams();
   const [snippet, setSnippet] = useState({});
@@ -27,10 +27,6 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
 
     fn();
   }, []);
-
-  useEffect(() => {
-    Prism.highlightAll();
-  });
 
   useEffect(() => {
     if (!isEmpty(snippet)) {
