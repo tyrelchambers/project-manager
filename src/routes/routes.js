@@ -44,11 +44,11 @@ export default [
     component: Snippets,
   },
   {
-    slug: "/snippets/:snippet_id",
+    slug: "/snippets/:snippet_name",
     component: SnippetShow,
   },
   {
-    slug: "/snippets/:snippet_id/edit",
+    slug: "/snippets/:snippet_name/edit",
     component: SnippetEdit,
   },
 ];

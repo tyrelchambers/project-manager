@@ -12,7 +12,7 @@ import ShareSnippetModal from "../../modals/ShareSnippetModal/ShareSnippetModal"
 import Code from "../../components/Code/Code";
 
 const SnippetShow = ({ UserStore, ModalStore }) => {
-  const { snippet_id } = useParams();
+  const { snippet_name } = useParams();
   const [snippet, setSnippet] = useState({});
   const history = useHistory();
   const [liked, setLiked] = useState(false);
@@ -20,7 +20,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
   useEffect(() => {
     const fn = async () => {
       await getAxios({
-        url: `/snippets/${snippet_id}`,
+        url: `/snippets/${snippet_name}`,
       }).then((res) => {
         setSnippet(res.snippet);
       });
@@ -43,7 +43,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
 
   const deleteHandler = async () => {
     await getAxios({
-      url: `/snippets/${snippet_id}/delete`,
+      url: `/snippets/${snippet_name}/delete`,
       method: "delete",
     }).then((res) => {
       history.goBack();
@@ -52,7 +52,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
 
   const likeHandler = async () => {
     await getAxios({
-      url: `/snippets/${snippet_id}/like`,
+      url: `/snippets/${snippet_name}/like`,
       method: "post",
     });
 
@@ -61,7 +61,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
 
   const dislikeHandler = async () => {
     await getAxios({
-      url: `/snippets/${snippet_id}/dislike`,
+      url: `/snippets/${snippet_name}/dislike`,
       method: "post",
     });
     setLiked(false);
@@ -83,7 +83,6 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
         <H2 className="mr-4">{snippet.name}</H2>
         <i className="fas fa-trash text-red-500" onClick={deleteHandler}></i>
       </div>
-      <SnippetStats stats={snippet} />
       <div className="flex  mb-4 mt-4">
         <div
           className="w-3/5 rounded-lg flex flex-col mr-4"
@@ -114,7 +113,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
               onClick={() => {
                 ModalStore.setRender(
                   <ShareSnippetModal
-                    shareLink={`${process.env.REACT_APP_CLIENT}/snippets/${snippet_id}`}
+                    shareLink={`${process.env.REACT_APP_CLIENT}/snippets/${snippet_name}`}
                     snippet={snippet}
                   />
                 );
@@ -132,6 +131,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
           >
             Edit
           </MainButton>
+          <SnippetStats stats={snippet} />
         </div>
       </div>
     </DisplayWrapper>

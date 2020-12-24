@@ -48,7 +48,7 @@ const ProjectForm = ({ ModalStore }) => {
         />
       </div>
 
-      <div className="mt-8">
+      <div className="mt-8 field-group">
         <SelectField data={frameworks} stateHandler={setState} state={state} />
       </div>
 

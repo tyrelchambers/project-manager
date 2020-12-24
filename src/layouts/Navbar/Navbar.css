@@ -3,13 +3,16 @@
   transition: all 0.2s ease;
 }
 
-.nav-item:hover i {
+.nav-item:hover i,
+.nav-item-subnav:hover i {
   color: var(--pink-500);
-  opacity: 1;
+  opacity: 1 !important;
 }
 
-.nav-item:hover {
+.nav-item:hover,
+.nav-item-subnav:hover {
   background-color: var(--gray-800);
+  opacity: 1;
 }
 
 .nav-item {

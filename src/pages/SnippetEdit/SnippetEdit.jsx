@@ -8,14 +8,14 @@ import FormLabel from "../../components/FormLabel/FormLabel";
 import { MainButton } from "../../components/Buttons/Buttons";
 
 const SnippetEdit = () => {
-  const { snippet_id } = useParams();
+  const { snippet_name } = useParams();
   const [snippet, setSnippet] = useState({});
   const [updated, setUpdated] = useState({});
   const history = useHistory();
   useEffect(() => {
     const fn = async () => {
       await getAxios({
-        url: `/snippets/${snippet_id}`,
+        url: `/snippets/${snippet_name}`,
       }).then((res) => {
         setSnippet(res.snippet);
         setUpdated(res.snippet);

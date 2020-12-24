@@ -24,7 +24,9 @@ const SnippetForm = () => {
         ...snippet,
       },
     }).then((res) => {
-      window.location.reload();
+      if (res) {
+        window.location.reload();
+      }
     });
   };
 

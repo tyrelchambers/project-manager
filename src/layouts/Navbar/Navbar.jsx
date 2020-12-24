@@ -26,7 +26,7 @@ const Navbar = () => {
             <p className="ml-6">{x.label}</p>
           </NavLink>
           {x.subnav && checkPath(x.url) && (
-            <div className="nav-subnav bg-gray-800  rounded-md">
+            <div className="nav-subnav bg-gray-800 mt-2 mb-2 rounded-md">
               {x.subnav.map((link, lid) => (
                 <Link
                   key={lid}

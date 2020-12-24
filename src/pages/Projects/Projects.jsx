@@ -7,6 +7,7 @@ import { H2, H3 } from "../../components/Headings/Headings";
 import "./Projects.css";
 import useStorage from "../../hooks/useStorage";
 import { MainButton } from "../../components/Buttons/Buttons";
+import { Link } from "react-router-dom";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -52,7 +53,14 @@ const Projects = () => {
 
   return (
     <DisplayWrapper>
-      <H2>Projects</H2>
+      <div className="flex justify-between">
+        <H2>Projects</H2>
+        <div className="w-fit">
+          <Link className="btn primary bg-pink-500 " to="/project/new">
+            New Project
+          </Link>
+        </div>
+      </div>
       <div className=" flex items-center mt-4 w-fit">
         <div className="mr-4">
           {selected.length > 0 ? (

@@ -7,6 +7,7 @@ import { inject, observer } from "mobx-react";
 import SnippetForm from "../../forms/SnippetForm";
 import { getAxios } from "../../api";
 import { Link } from "react-router-dom";
+import { formatUrl } from "../../helpers/formatUrl";
 const Snippets = ({ ModalStore }) => {
   const [snippets, setSnippets] = useState([]);
 
@@ -44,7 +45,7 @@ const Snippets = ({ ModalStore }) => {
             <Link
               className="flex items-center bg-gray-900 p-4 rounded-md snippet-item"
               key={id}
-              to={`/snippets/${snippet.uuid}`}
+              to={`/snippets/${formatUrl(snippet.name)}`}
             >
               <i className="fas fa-code mr-4 text-pink-500"></i>
               <p>{snippet.name}</p>
