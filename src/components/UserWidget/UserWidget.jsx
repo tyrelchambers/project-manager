@@ -1,6 +1,7 @@
+import { inject, observer } from "mobx-react";
 import React from "react";
 import "./UserWidget.css";
-const UserWidget = () => {
+const UserWidget = ({ UserStore }) => {
   return (
     <div className="flex items-center user-widget-wrapper p-4">
       <img
@@ -8,9 +9,9 @@ const UserWidget = () => {
         alt=""
         className="avatar"
       />
-      <p className="text-white font-bold ml-4">Tyrel Chambers</p>
+      <p className="text-white font-bold ml-4">{UserStore.user.name}</p>
     </div>
   );
 };
 
-export default UserWidget;
+export default inject("UserStore")(observer(UserWidget));

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
-import isEmpty from "../helpers/isEmpty";
 
-const AccountPasswordForm = ({ user }) => {
+const AccountPasswordForm = () => {
   const [state, setState] = useState({
     currentPassword: "",
     newPassword: "",
@@ -11,7 +11,36 @@ const AccountPasswordForm = ({ user }) => {
   });
 
   const inputHandler = (e) => {
-    setState({ ...state, [e.target.name]: e.target.name });
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    await getAxios({
+      url: "/account/save",
+      method: "post",
+      data: state,
+    });
+  };
+
+  const buttonState = () => {
+    if (
+      state.currentPassword &&
+      state.newPassword &&
+      state.confirmNewPassword
+    ) {
+      return (
+        <MainButton default onClick={(e) => submitHandler(e)}>
+          Save password
+        </MainButton>
+      );
+    } else {
+      return (
+        <MainButton muted disabled>
+          Save password
+        </MainButton>
+      );
+    }
   };
 
   return (
@@ -52,7 +81,7 @@ const AccountPasswordForm = ({ user }) => {
         />
       </div>
 
-      <MainButton muted>Save password</MainButton>
+      {buttonState()}
     </form>
   );
 };
