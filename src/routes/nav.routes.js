@@ -48,6 +48,11 @@ export const navRoutes = [
         icon: <i className="fas fa-user"></i>,
         url: "/settings/profile",
       },
+      {
+        label: "Account",
+        icon: <i className="fas fa-user-lock"></i>,
+        url: "/settings/account",
+      },
     ],
   },
 ];

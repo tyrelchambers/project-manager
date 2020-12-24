@@ -102,6 +102,8 @@ hr {
   border: none;
   height: 1px !important;
   background-color: var(--gray-700);
+  margin-top: 1em !important;
+  margin-bottom: 1em !important;
 }
 
 p {

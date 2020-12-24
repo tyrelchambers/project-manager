@@ -1,3 +1,4 @@
+import Account from "../pages/Account/Account";
 import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";
 import EnvVars from "../pages/EnvVars/EnvVars";
 import EnvVarShow from "../pages/EnvVarShow/EnvVarShow";
@@ -71,5 +72,9 @@ export default [
   {
     slug: "/env/:env_name/edit",
     component: EditEnvVar,
+  },
+  {
+    slug: "/settings/account",
+    component: Account,
   },
 ];

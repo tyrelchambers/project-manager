@@ -15,7 +15,6 @@ const Navbar = () => {
 
   return (
     <nav className="m-2 navbar">
-      {console.log(openSubnav)}
       <div className="mb-4">
         <UserWidget />
       </div>
