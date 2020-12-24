@@ -10,6 +10,7 @@ import SnippetStats from "../../components/SnippetStats/SnippetStats";
 import { inject, observer } from "mobx-react";
 import ShareSnippetModal from "../../modals/ShareSnippetModal/ShareSnippetModal";
 import Code from "../../components/Code/Code";
+import { formatUrl } from "../../helpers/formatUrl";
 
 const SnippetShow = ({ UserStore, ModalStore }) => {
   const { snippet_name } = useParams();
@@ -127,7 +128,9 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
           <MainButton
             default
             classes="mt-2"
-            onClick={() => history.push(`/snippets/${snippet.uuid}/edit`)}
+            onClick={() =>
+              history.push(`/snippets/${formatUrl(snippet.name)}/edit`)
+            }
           >
             Edit
           </MainButton>
