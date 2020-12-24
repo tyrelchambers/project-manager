@@ -75,21 +75,14 @@ const PackagesPage = ({ UserStore }) => {
         </div>
 
         <div className="flex">
-          <Link className="mr-4 btn primary bg-pink-500">
+          <a href="#" className="mr-4 btn primary bg-pink-500">
             <i className="fas fa-file-import mr-4"></i> Import from GitHub
-          </Link>
+          </a>
           <Link className=" btn primary bg-pink-500" to="/packages/new">
             New Package.json
           </Link>
         </div>
       </div>
-
-      {!params.get("f") && (
-        <>
-          <NpmPkgs />
-          <YarnPkgs />
-        </>
-      )}
 
       {params.get("f") === "npm" && <NpmPkgs />}
 

@@ -8,6 +8,7 @@ import NewProject from "../pages/NewProject/NewProject";
 import PackageShow from "../pages/PackageShow/PackageShow";
 import PackagesPage from "../pages/PackagesPage/PackagesPage";
 import Projects from "../pages/Projects/Projects";
+import Settings from "../pages/Settings/Settings";
 import Signup from "../pages/Signup/Signup";
 import SnippetEdit from "../pages/SnippetEdit/SnippetEdit";
 import Snippets from "../pages/Snippets/Snippets";

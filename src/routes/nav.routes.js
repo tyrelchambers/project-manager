@@ -13,7 +13,7 @@ export const navRoutes = [
   },
   {
     label: "Packages",
-    url: "/packages",
+    url: "/#",
     icon: <i className="fab fa-buffer"></i>,
     subnav: [
       {
@@ -40,7 +40,7 @@ export const navRoutes = [
   },
   {
     label: "Settings",
-    url: "/settings",
+    url: "/#",
     icon: <i className="fas fa-cog"></i>,
     subnav: [
       {
