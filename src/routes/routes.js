@@ -1,4 +1,8 @@
+import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";
+import EnvVars from "../pages/EnvVars/EnvVars";
+import EnvVarShow from "../pages/EnvVarShow/EnvVarShow";
 import Home from "../pages/Home/Home";
+import NewEnvVar from "../pages/NewEnvVar/NewEnvVar";
 import NewPackage from "../pages/NewPackage/NewPackage";
 import NewProject from "../pages/NewProject/NewProject";
 import PackageShow from "../pages/PackageShow/PackageShow";
@@ -50,5 +54,21 @@ export default [
   {
     slug: "/snippets/:snippet_name/edit",
     component: SnippetEdit,
+  },
+  {
+    slug: "/env",
+    component: EnvVars,
+  },
+  {
+    slug: "/env/new",
+    component: NewEnvVar,
+  },
+  {
+    slug: "/env/:env_name",
+    component: EnvVarShow,
+  },
+  {
+    slug: "/env/:env_name/edit",
+    component: EditEnvVar,
   },
 ];
