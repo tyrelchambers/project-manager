@@ -15,9 +15,9 @@ const Navbar = () => {
 
   return (
     <nav className="m-2 navbar">
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <UserWidget />
-      </div>
+      </div> */}
       {navRoutes.map((x, id) => (
         <div className="flex flex-col" key={id}>
           {!x.subnav ? (

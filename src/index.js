@@ -18,7 +18,13 @@ const Unauthenticated = () => (
 );
 const Authenticated = () =>
   activeRoutes.map((route, id) => (
-    <Route key={id} exact path={route.slug} component={route.component} />
+    <Route
+      key={id}
+      exact
+      path={route.slug}
+      component={route.component}
+      render={route.render}
+    />
   ));
 
 const App = () => {

@@ -53,6 +53,11 @@ export const navRoutes = [
         icon: <i className="fas fa-user-lock"></i>,
         url: "/settings/account",
       },
+      {
+        label: "Sign Out",
+        icon: <i className="fas fa-sign-out-alt"></i>,
+        url: "/signout",
+      },
     ],
   },
 ];

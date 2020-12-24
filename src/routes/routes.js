@@ -9,6 +9,7 @@ import NewProject from "../pages/NewProject/NewProject";
 import PackageShow from "../pages/PackageShow/PackageShow";
 import PackagesPage from "../pages/PackagesPage/PackagesPage";
 import Profile from "../pages/Profile/Profile";
+import ProfileSetup from "../pages/ProfileSetup/ProfileSetup";
 import Projects from "../pages/Projects/Projects";
 import Settings from "../pages/Settings/Settings";
 import Signup from "../pages/Signup/Signup";
@@ -81,5 +82,17 @@ export default [
   {
     slug: "/settings/profile",
     component: Profile,
+  },
+  {
+    slug: "/profile/setup",
+    component: ProfileSetup,
+  },
+  {
+    slug: "/signout",
+    render: () => {
+      window.localStorage.removeItem("token");
+      window.sessionStorage.removeItem("token");
+      window.location.pathname = "/";
+    },
   },
 ];

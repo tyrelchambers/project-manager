@@ -4,6 +4,7 @@ import FormLabel from "../components/FormLabel/FormLabel";
 import "./forms.css";
 import { getAxios } from "../api/index";
 import useStorage from "../hooks/useStorage";
+import { useHistory } from "react-router-dom";
 
 const SignupForm = () => {
   const [credentials, setCredentials] = useState({
@@ -12,7 +13,7 @@ const SignupForm = () => {
     confirmPassword: "",
   });
   const [_, setToken] = useStorage("token");
-
+  const history = useHistory();
   const submitHandle = (e) => {
     e.preventDefault();
 
@@ -25,7 +26,7 @@ const SignupForm = () => {
       },
     }).then((res) => {
       setToken({ value: res.token });
-      window.location.pathname = "/";
+      history.push("/profile/setup");
     });
   };
 
