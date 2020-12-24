@@ -51,8 +51,8 @@ const EditEnvVar = () => {
             type="text"
             className="form-input"
             placeholder="Variable name"
-            value={envVar.name}
-            onChange={(e) => setEnvVar({ ...envVar, name: e.target.value })}
+            value={updated.name}
+            onChange={(e) => setUpdated({ ...updated, name: e.target.value })}
           />
         </div>
 
@@ -64,9 +64,9 @@ const EditEnvVar = () => {
             rows="10"
             className="form-input"
             placeholder="Copy variables here..."
-            value={envVar.variables}
+            value={updated.variables}
             onChange={(e) =>
-              setEnvVar({ ...envVar, variables: e.target.value })
+              setUpdated({ ...updated, variables: e.target.value })
             }
           />
         </div>
