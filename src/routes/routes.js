@@ -8,6 +8,7 @@ import NewPackage from "../pages/NewPackage/NewPackage";
 import NewProject from "../pages/NewProject/NewProject";
 import PackageShow from "../pages/PackageShow/PackageShow";
 import PackagesPage from "../pages/PackagesPage/PackagesPage";
+import Profile from "../pages/Profile/Profile";
 import Projects from "../pages/Projects/Projects";
 import Settings from "../pages/Settings/Settings";
 import Signup from "../pages/Signup/Signup";
@@ -76,5 +77,9 @@ export default [
   {
     slug: "/settings/account",
     component: Account,
+  },
+  {
+    slug: "/settings/profile",
+    component: Profile,
   },
 ];

@@ -1,7 +1,6 @@
 import React from "react";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
-import { H2 } from "../../components/Headings/Headings";
-import AccountForm from "../../forms/AccountForm";
+import { H2, H2Subtitle } from "../../components/Headings/Headings";
 import AccountPasswordForm from "../../forms/AccountPasswordForm";
 import { inject, observer } from "mobx-react";
 
@@ -9,12 +8,9 @@ const Account = ({ UserStore }) => {
   return (
     <DisplayWrapper>
       <H2>Account</H2>
+      <H2Subtitle>Edit your private information</H2Subtitle>
 
       <div className="mt-6 form">
-        <AccountForm user={UserStore.user} />
-
-        <hr />
-
         <AccountPasswordForm user={UserStore.user} />
       </div>
     </DisplayWrapper>

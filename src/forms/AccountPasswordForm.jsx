@@ -31,13 +31,13 @@ const AccountPasswordForm = () => {
     ) {
       return (
         <MainButton default onClick={(e) => submitHandler(e)}>
-          Save password
+          Save password &amp; refresh
         </MainButton>
       );
     } else {
       return (
         <MainButton muted disabled>
-          Save password
+          Save password &amp; refresh
         </MainButton>
       );
     }

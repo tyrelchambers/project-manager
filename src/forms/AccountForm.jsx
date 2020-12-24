@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
-import isEmpty from "../helpers/isEmpty";
 
 const AccountForm = ({ user }) => {
   const [state, setState] = useState({
@@ -21,13 +20,13 @@ const AccountForm = ({ user }) => {
     if (state.email || state.name) {
       return (
         <MainButton default onClick={(e) => submitHandler(e)}>
-          Save account info
+          Save info &amp; refresh
         </MainButton>
       );
     } else {
       return (
         <MainButton muted disabled>
-          Save account info
+          Save info &amp; refresh
         </MainButton>
       );
     }
