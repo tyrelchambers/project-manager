@@ -30,7 +30,7 @@ const ProjectConfirm = ({ state }) => {
     setDownloading(false);
     setGenerate(true);
     const downloadWindow = window.open(``, "_blank");
-    downloadWindow.window.location = `http://localhost:4000/api/v1/projects/download?appName=${state.appName}&token=${token}`;
+    downloadWindow.window.location = `${process.env.REACT_APP_BACKEND}/api/v1/projects/download?appName=${state.appName}&token=${token}`;
     setTimeout(() => {
       downloadWindow.close();
     }, 500);
