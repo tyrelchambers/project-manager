@@ -141,3 +141,8 @@ p {
   color: var(--white);
   background: var(--redGradient) !important;
 }
+
+.Toastify__toast--warning {
+  color: var(--white);
+  background: var(--orangeGradient) !important;
+}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
@@ -45,7 +45,7 @@ const App = () => {
 
       fn();
     }
-  }, [token]);
+  }, []);
 
   return token ? <Authenticated /> : <Unauthenticated />;
 };

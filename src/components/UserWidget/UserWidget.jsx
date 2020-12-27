@@ -10,7 +10,9 @@ const UserWidget = ({ UserStore }) => {
         className="avatar"
       /> */}
       <p>Signed in as</p>
-      <p className="text-white font-bold text-2xl">{UserStore.user.name}</p>
+      <p className="text-white font-bold text-2xl break-words">
+        {UserStore.user.name ? UserStore.user.name : UserStore.user.email}
+      </p>
     </div>
   );
 };
