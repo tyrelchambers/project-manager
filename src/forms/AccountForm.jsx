@@ -11,8 +11,7 @@ const AccountForm = ({ user }) => {
 
   useEffect(() => {
     setState({
-      ...state,
-      name: user.name,
+      ...user,
     });
   }, [user]);
 
