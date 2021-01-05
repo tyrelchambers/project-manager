@@ -27,7 +27,7 @@ const Projects = () => {
 
   const downloadHandler = ({ appName }) => {
     const downloadWindow = window.open(``, "_blank");
-    downloadWindow.window.location = `http://localhost:4000/api/v1/projects/download?appName=${appName}&token=${token}&s3=true`;
+    downloadWindow.window.location = `${process.env.REACT_APP_BACKEND}/api/v1/projects/download?appName=${appName}&token=${token}&s3=true`;
     setTimeout(() => {
       downloadWindow.close();
     }, 500);

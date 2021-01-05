@@ -27,11 +27,14 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [token, _] = useStorage("token");
 
   const searchNpm = async (q) => {
-    return await Axios.get("http://localhost:4000/api/v1/packages/search/npm", {
-      params: {
-        q,
-      },
-    }).then((res) => res.data);
+    return await Axios.get(
+      `${process.env.REACT_APP_BACKEND}/api/v1/packages/search/npm`,
+      {
+        params: {
+          q,
+        },
+      }
+    ).then((res) => res.data);
   };
 
   useEffect(() => {
@@ -137,7 +140,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
       },
     }).then((res) => {
       const downloadWindow = window.open(``, "_blank");
-      downloadWindow.window.location = `http://localhost:4000/api/v1/packages/download?defaultName=${state.defaultName}&token=${token}`;
+      downloadWindow.window.location = `${process.env.REACT_APP_BACKEND}/api/v1/packages/download?defaultName=${state.defaultName}&token=${token}`;
       setTimeout(() => {
         downloadWindow.close();
       }, 500);
