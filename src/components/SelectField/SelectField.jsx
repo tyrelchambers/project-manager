@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import isEmpty from "../../helpers/isEmpty";
 import "./SelectField.css";
 
-const SelectField = ({ data, stateHandler, state }) => {
+const SelectField = ({ data, stateHandler, state, label, stateKey }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedData, setSelectedData] = useState({});
 
   const dropdownHandler = (fw) => {
     setSelectedData(fw);
-    stateHandler({ ...state, framework: fw });
+    stateHandler({ ...state, [stateKey]: fw });
     setIsOpen(false);
   };
 
   const removeHandler = () => {
     setSelectedData({});
-    stateHandler({ ...state, framework: {} });
+    stateHandler({ ...state, [stateKey]: {} });
   };
 
   return (
@@ -23,7 +23,7 @@ const SelectField = ({ data, stateHandler, state }) => {
         className="w-full p-4 bg-gray-700 text-white rounded-md items-center flex justify-between"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <p> Select a framework</p>
+        <p>{label}</p>
         {!isOpen ? (
           <i className="fas fa-chevron-down"></i>
         ) : (
@@ -34,12 +34,12 @@ const SelectField = ({ data, stateHandler, state }) => {
       {!isEmpty(selectedData) && (
         <div
           className="w-full p-4  text-white rounded-md items-center flex select-item delete mt-4"
-          data-framework={selectedData.framework}
+          data-framework={selectedData.label}
           onClick={removeHandler}
         >
           {selectedData.icon}
-          <p value={selectedData.framework} className="text-white">
-            {selectedData.framework}
+          <p value={selectedData.label} className="text-white">
+            {selectedData.label}
           </p>
         </div>
       )}
@@ -55,7 +55,7 @@ const SelectField = ({ data, stateHandler, state }) => {
             >
               {x.icon}
               <div value={x.framework}>
-                <p className="font-bold">{x.framework}</p>
+                <p className="font-bold">{x.label}</p>
               </div>
             </div>
           ))}

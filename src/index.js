@@ -5,17 +5,23 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import activeRoutes from "./routes/routes";
 import "./assets/main.css";
-import Signup from "./pages/Signup/Signup";
 import { Provider } from "mobx-react";
 import stores from "./stores/index";
 import ModalContainer from "./layouts/ModalContainer/ModalContainer";
 import { getAxios } from "./api";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { UNAUTHENTICATED_BASE } from "./routes/routes";
-const Unauthenticated = () => (
-  <Route exact path={UNAUTHENTICATED_BASE} component={Signup} />
-);
+import { UNAUTHENTICATED } from "./routes/routes";
+const Unauthenticated = () =>
+  UNAUTHENTICATED.map((route, id) => (
+    <Route
+      key={id}
+      exact
+      path={route.slug}
+      component={route.component}
+      render={route.render}
+    />
+  ));
 const Authenticated = () =>
   activeRoutes.map((route, id) => (
     <Route

@@ -5,7 +5,7 @@ import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import ProjectConfirm from "../components/ProjectConfirm/ProjectConfirm";
 import SelectField from "../components/SelectField/SelectField";
-import { frameworks } from "../constants/frameworks";
+import { frameworks, packagePrefs } from "../constants/frameworks";
 import isEmpty from "../helpers/isEmpty";
 
 const ProjectForm = ({ ModalStore }) => {
@@ -15,6 +15,7 @@ const ProjectForm = ({ ModalStore }) => {
     appName: "",
     framework: {},
     package: {},
+    bundler: {},
   });
   const inputHandler = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -49,7 +50,23 @@ const ProjectForm = ({ ModalStore }) => {
       </div>
 
       <div className="mt-8 field-group">
-        <SelectField data={frameworks} stateHandler={setState} state={state} />
+        <SelectField
+          data={frameworks}
+          stateHandler={setState}
+          state={state}
+          label="Select a framework"
+          stateKey="framework"
+        />
+      </div>
+
+      <div className="mt-8 field-group">
+        <SelectField
+          data={packagePrefs}
+          stateHandler={setState}
+          state={state}
+          label="Select a bundler"
+          stateKey="bundler"
+        />
       </div>
 
       <div className="field-group">

@@ -18,7 +18,7 @@ const Projects = () => {
       await getAxios({
         url: "/projects/me",
       }).then((res) => {
-        setProjects([...res.projects]);
+        setProjects(res.projects);
       });
     };
 
@@ -30,7 +30,7 @@ const Projects = () => {
     downloadWindow.window.location = `${process.env.REACT_APP_BACKEND}/api/v1/projects/download?appName=${appName}&token=${token}&s3=true`;
     setTimeout(() => {
       downloadWindow.close();
-    }, 500);
+    }, 2000);
   };
 
   const selectHandler = (id) => {

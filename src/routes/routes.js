@@ -3,6 +3,7 @@ import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";
 import EnvVars from "../pages/EnvVars/EnvVars";
 import EnvVarShow from "../pages/EnvVarShow/EnvVarShow";
 import Home from "../pages/Home/Home";
+import Login from "../pages/Login/Login";
 import NewEnvVar from "../pages/NewEnvVar/NewEnvVar";
 import NewPackage from "../pages/NewPackage/NewPackage";
 import NewProject from "../pages/NewProject/NewProject";
@@ -11,16 +12,21 @@ import PackagesPage from "../pages/PackagesPage/PackagesPage";
 import Profile from "../pages/Profile/Profile";
 import ProfileSetup from "../pages/ProfileSetup/ProfileSetup";
 import Projects from "../pages/Projects/Projects";
-import Settings from "../pages/Settings/Settings";
 import Signup from "../pages/Signup/Signup";
 import SnippetEdit from "../pages/SnippetEdit/SnippetEdit";
 import Snippets from "../pages/Snippets/Snippets";
 import SnippetShow from "../pages/SnippetShow/SnippetShow";
 
-export const UNAUTHENTICATED_BASE = {
-  slug: "/",
-  component: Signup,
-};
+export const UNAUTHENTICATED = [
+  {
+    slug: "/",
+    component: Signup,
+  },
+  {
+    slug: "/login",
+    component: Login,
+  },
+];
 
 export default [
   {

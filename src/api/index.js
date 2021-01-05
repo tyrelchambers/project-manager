@@ -26,7 +26,9 @@ export const getAxios = async ({
       if (res.data.message) {
         toast.success(res.data.message);
       }
-      return res.data;
+      if (res) {
+        return res.data;
+      }
     })
     .catch((err) => {
       if (err.response) {

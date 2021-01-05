@@ -1,32 +1,31 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
-import "./forms.css";
-import { getAxios } from "../api/index";
 import useStorage from "../hooks/useStorage";
-import { Link, useHistory } from "react-router-dom";
 
-const SignupForm = () => {
+const LoginForm = () => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
   });
   const [_, setToken] = useStorage("token");
-  const history = useHistory();
   const submitHandle = (e) => {
     e.preventDefault();
 
     getAxios({
-      url: "/auth/signup",
+      url: "/auth/login",
       method: "post",
       data: {
         email: credentials.email,
         password: credentials.password,
       },
     }).then((res) => {
-      setToken({ value: res.token });
-      history.push("/profile/setup");
+      if (res) {
+        setToken({ value: res.token });
+        window.location.pathname = "/";
+      }
     });
   };
 
@@ -59,29 +58,18 @@ const SignupForm = () => {
         />
       </div>
 
-      <div className="field-group">
-        <FormLabel name="confirmPassword" text="Confirm Password" />
-        <input
-          type="password"
-          placeholder="confirm password"
-          className="form-input"
-          name="confirmPassword"
-          value={credentials.confirmPassword}
-          onChange={(e) => inputHandler(e)}
-        />
-      </div>
-
       <MainButton default onClick={(e) => submitHandle(e)}>
-        Register
+        Login
       </MainButton>
+
       <p className="mt-6 text-gray-400">
         Or{" "}
-        <Link to="/login" className="font-bold underline">
-          Login
+        <Link to="/signup" className="font-bold underline">
+          Sign up
         </Link>
       </p>
     </form>
   );
 };
 
-export default SignupForm;
+export default LoginForm;
