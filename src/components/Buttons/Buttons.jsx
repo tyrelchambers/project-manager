@@ -24,6 +24,7 @@ export const MainButton = (props) => {
       className={` ${base} ${variant} ${props.classes ? props.classes : ""}`}
       onClick={props.onClick}
       disabled={props.disabled}
+      type={props.type}
     >
       {props.delete && deleteIcon}
       {props.children}

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import SelectField from "../components/SelectField/SelectField";
-import { packageManagers } from "../constants/packageManagers";
 import Spinner from "../components/Spinner/Spinner";
 import { inject, observer } from "mobx-react";
 import { getAxios } from "../api";

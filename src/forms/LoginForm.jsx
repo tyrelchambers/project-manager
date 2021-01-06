@@ -4,6 +4,8 @@ import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import useStorage from "../hooks/useStorage";
+import { useForm } from "react-hook-form";
+import FormErrors from "../components/FormErrors/FormErrors";
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({
@@ -11,9 +13,9 @@ const LoginForm = () => {
     password: "",
   });
   const [_, setToken] = useStorage("token");
-  const submitHandle = (e) => {
-    e.preventDefault();
+  const { register, handleSubmit, errors } = useForm();
 
+  const submitHandler = () => {
     getAxios({
       url: "/auth/login",
       method: "post",
@@ -33,7 +35,7 @@ const LoginForm = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit(submitHandler)}>
       <div className="field-group">
         <FormLabel name="email" text="Email" />
         <input
@@ -43,7 +45,23 @@ const LoginForm = () => {
           name="email"
           value={credentials.email}
           onChange={(e) => inputHandler(e)}
+          ref={register({
+            required: {
+              value: true,
+              message: "Email is required",
+            },
+            pattern: {
+              value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
+              message: "Your email doesn't seem to be a real email?",
+            },
+            maxLength: {
+              value: 50,
+              message: "Your email can't be more than 50 characters, sorry!",
+            },
+          })}
         />
+
+        <FormErrors error={errors.email} />
       </div>
 
       <div className="field-group">
@@ -55,10 +73,24 @@ const LoginForm = () => {
           name="password"
           value={credentials.password}
           onChange={(e) => inputHandler(e)}
+          ref={register({
+            required: {
+              value: true,
+              message: "Password is required",
+            },
+            maxLength: {
+              value: 50,
+              message: "Password can't be more than 50 characters",
+            },
+            minLength: {
+              value: 6,
+              message: "Password can't be less than 6 characters",
+            },
+          })}
         />
       </div>
 
-      <MainButton default onClick={(e) => submitHandle(e)}>
+      <MainButton default type="submit">
         Login
       </MainButton>
 
