@@ -10,10 +10,9 @@ import SnippetStats from "../../components/SnippetStats/SnippetStats";
 import { inject, observer } from "mobx-react";
 import ShareSnippetModal from "../../modals/ShareSnippetModal/ShareSnippetModal";
 import Code from "../../components/Code/Code";
-import { formatUrl } from "../../helpers/formatUrl";
 
 const SnippetShow = ({ UserStore, ModalStore }) => {
-  const { snippet_name } = useParams();
+  const { snippet_uuid } = useParams();
   const [snippet, setSnippet] = useState({});
   const history = useHistory();
   const [liked, setLiked] = useState(false);
@@ -21,7 +20,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
   useEffect(() => {
     const fn = async () => {
       await getAxios({
-        url: `/snippets/${snippet_name}`,
+        url: `/snippets/${snippet_uuid}`,
       }).then((res) => {
         setSnippet(res.snippet);
       });
@@ -44,7 +43,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
 
   const deleteHandler = async () => {
     await getAxios({
-      url: `/snippets/${snippet_name}/delete`,
+      url: `/snippets/${snippet_uuid}/delete`,
       method: "delete",
     }).then((res) => {
       history.goBack();
@@ -53,7 +52,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
 
   const likeHandler = async () => {
     await getAxios({
-      url: `/snippets/${snippet_name}/like`,
+      url: `/snippets/${snippet_uuid}/like`,
       method: "post",
     });
 
@@ -62,7 +61,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
 
   const dislikeHandler = async () => {
     await getAxios({
-      url: `/snippets/${snippet_name}/dislike`,
+      url: `/snippets/${snippet_uuid}/dislike`,
       method: "post",
     });
     setLiked(false);
@@ -82,7 +81,9 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
           )}
         </div>
         <H2 className="mr-4">{snippet.name}</H2>
-        <i className="fas fa-trash text-red-500" onClick={deleteHandler}></i>
+        {UserStore.user.uuid === snippet.userId && (
+          <i className="fas fa-trash text-red-500" onClick={deleteHandler}></i>
+        )}
       </div>
       <div className="flex  mb-4 mt-4">
         <div
@@ -114,7 +115,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
               onClick={() => {
                 ModalStore.setRender(
                   <ShareSnippetModal
-                    shareLink={`${process.env.REACT_APP_CLIENT}/snippets/${snippet_name}`}
+                    shareLink={`${process.env.REACT_APP_CLIENT}/snippets/${snippet_uuid}`}
                     snippet={snippet}
                   />
                 );
@@ -125,15 +126,16 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
             </MainButton>
           </div>
 
-          <MainButton
-            default
-            classes="mt-2"
-            onClick={() =>
-              history.push(`/snippets/${formatUrl(snippet.name)}/edit`)
-            }
-          >
-            Edit
-          </MainButton>
+          {UserStore.user.uuid === snippet.userId && (
+            <MainButton
+              default
+              classes="mt-2"
+              onClick={() => history.push(`/snippets/${snippet.uuid}/edit`)}
+            >
+              Edit
+            </MainButton>
+          )}
+
           <SnippetStats stats={snippet} />
         </div>
       </div>

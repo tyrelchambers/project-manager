@@ -45,7 +45,7 @@ const Snippets = ({ ModalStore }) => {
             <Link
               className="flex items-center bg-gray-900 p-4 rounded-md snippet-item"
               key={id}
-              to={`/snippets/${formatUrl(snippet.name)}`}
+              to={`/snippets/${snippet.uuid}`}
             >
               <i className="fas fa-code mr-4 text-pink-500"></i>
               <p>{snippet.name}</p>
