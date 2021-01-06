@@ -9,14 +9,14 @@ import { MainButton } from "../../components/Buttons/Buttons";
 import { formatUrl } from "../../helpers/formatUrl";
 
 const SnippetEdit = () => {
-  const { snippet_name } = useParams();
+  const { snippet_uuid } = useParams();
   const [snippet, setSnippet] = useState({});
   const [updated, setUpdated] = useState({});
   const history = useHistory();
   useEffect(() => {
     const fn = async () => {
       await getAxios({
-        url: `/snippets/${snippet_name}`,
+        url: `/snippets/${snippet_uuid}`,
       }).then((res) => {
         setSnippet(res.snippet);
         setUpdated(res.snippet);
@@ -30,12 +30,12 @@ const SnippetEdit = () => {
     e.preventDefault();
 
     await getAxios({
-      url: `/snippets/${snippet.name}/edit`,
+      url: `/snippets/${snippet.uuid}/edit`,
       method: "patch",
       data: updated,
     });
 
-    history.push(`/snippets/${formatUrl(updated.name)}`);
+    history.push(`/snippets/${snippet.uuid}`);
   };
 
   return (
@@ -67,6 +67,30 @@ const SnippetEdit = () => {
             value={updated.snippet}
             rows={10}
           />
+        </div>
+
+        <div className="flex flex-col mt-4 mb-4">
+          <FormLabel name="visibility" text="Visibility" />
+          <div className="flex items-center">
+            <input
+              type="radio"
+              name="visibility"
+              value="Public"
+              onChange={(e) => setUpdated({ ...updated, visibility: true })}
+              checked={updated.visibility}
+            />
+            <p className="ml-4 ">Public</p>
+          </div>
+          <div className="flex items-center">
+            <input
+              type="radio"
+              name="visibility"
+              value="Private"
+              onChange={(e) => setUpdated({ ...updated, visibility: false })}
+              checked={!updated.visibility}
+            />
+            <p className="ml-4 ">Private</p>
+          </div>
         </div>
         <MainButton default onClick={(e) => submitHandler(e)}>
           Save changes

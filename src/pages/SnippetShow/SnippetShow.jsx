@@ -96,7 +96,8 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
           <H3>Options</H3>
 
           <p className="mt-4 mb-4">
-            <span className="font-bold">Visibility:</span> Private
+            <span className="font-bold">Visibility:</span>{" "}
+            {!snippet.visibility ? "Private" : "Public"}
           </p>
           <div className="flex items-center">
             <MainButton
