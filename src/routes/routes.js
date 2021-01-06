@@ -17,7 +17,15 @@ import SnippetEdit from "../pages/SnippetEdit/SnippetEdit";
 import Snippets from "../pages/Snippets/Snippets";
 import SnippetShow from "../pages/SnippetShow/SnippetShow";
 
+const sharedRoutes = [
+  {
+    slug: "/snippets/:snippet_uuid",
+    component: SnippetShow,
+  },
+];
+
 export const UNAUTHENTICATED = [
+  ...sharedRoutes,
   {
     slug: "/",
     component: Signup,
@@ -29,6 +37,7 @@ export const UNAUTHENTICATED = [
 ];
 
 export default [
+  ...sharedRoutes,
   {
     slug: "/",
     component: Home,
@@ -57,12 +66,9 @@ export default [
     slug: "/snippets",
     component: Snippets,
   },
+
   {
-    slug: "/snippets/:snippet_name",
-    component: SnippetShow,
-  },
-  {
-    slug: "/snippets/:snippet_name/edit",
+    slug: "/snippets/:snippet_uuid/edit",
     component: SnippetEdit,
   },
   {
