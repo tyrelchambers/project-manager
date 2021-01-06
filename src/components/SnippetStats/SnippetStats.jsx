@@ -12,11 +12,6 @@ const SnippetStats = ({ stats }) => {
         <i className="far fa-grin-hearts text-white mr-2"></i>
         <p className="text-gray-500">{stats.likers.length}</p>
       </div>
-
-      <div className="flex items-center mr-4">
-        <i className="fas fa-share text-white mr-2"></i>
-        <p className="text-gray-500">{stats.shares}</p>
-      </div>
     </div>
   );
 };
