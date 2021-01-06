@@ -35,7 +35,7 @@ const Navbar = ({ UserStore }) => {
           </NavLink>
         ) : (
           <div
-            className="no-underline font-bold text-white nav-item flex items-center p-4"
+            className="no-underline font-bold text-white nav-item flex items-center p-4 cursor-pointer"
             onClick={() => subnavHandler(x)}
           >
             <div style={{ width: "25px" }}>{x.icon}</div>

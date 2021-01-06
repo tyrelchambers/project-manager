@@ -11,6 +11,7 @@ import { getAxios } from "../api";
 import List from "../components/List/List";
 import { toast } from "react-toastify";
 import useStorage from "../hooks/useStorage";
+import { packagePrefs } from "../constants/frameworks";
 
 const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [state, setState] = useState({
@@ -18,6 +19,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
     packagesToInstall: [],
     defaultName: "",
     packageName: "",
+    bundler: {},
   });
 
   const [downloading, setDownloading] = useState(false);
@@ -213,9 +215,11 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
       <div className="field-group">
         <FormLabel name="manager" text="NPM or Yarn?" />
         <SelectField
-          data={packageManagers}
+          data={packagePrefs}
           state={state}
           stateHandler={setState}
+          stateKey="bundler"
+          label="Choose a bundler"
         />
       </div>
 
