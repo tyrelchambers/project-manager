@@ -1,5 +1,18 @@
 import React from "react";
 
+export const unauthenticatedRoutes = [
+  {
+    label: "Sign up",
+    url: "/signup",
+    icon: <i className="fas fa-user-tie"></i>,
+  },
+  {
+    label: "Login",
+    url: "/login",
+    icon: <i className="fas fa-sign-in-alt"></i>,
+  },
+];
+
 export const navRoutes = [
   {
     label: "Home",
