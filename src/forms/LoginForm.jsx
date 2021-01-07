@@ -13,7 +13,9 @@ const LoginForm = () => {
     password: "",
   });
   const [_, setToken] = useStorage("token");
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm({
+    reValidateMode: "onSubmit",
+  });
 
   const submitHandler = () => {
     getAxios({

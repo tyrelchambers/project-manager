@@ -10,7 +10,9 @@ const EnvVarForm = () => {
     name: "",
     variables: "",
   });
-  const { handleSubmit, errors, register, setError } = useForm();
+  const { handleSubmit, errors, register, setError } = useForm({
+    reValidateMode: "onSubmit",
+  });
 
   const submitHandler = async () => {
     if (!state.name.trim()) {

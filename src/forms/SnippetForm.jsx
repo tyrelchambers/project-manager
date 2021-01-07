@@ -12,7 +12,9 @@ const SnippetForm = () => {
     snippet: "",
   });
 
-  const { handleSubmit, errors, register, setError } = useForm();
+  const { handleSubmit, errors, register, setError } = useForm({
+    reValidateMode: "onSubmit",
+  });
 
   const inputHandler = (e) => {
     setSnippet({ ...snippet, [e.target.name]: e.target.value });

@@ -16,7 +16,9 @@ const SignupForm = () => {
   });
   const [_, setToken] = useStorage("token");
   const history = useHistory();
-  const { register, handleSubmit, errors, setError, getValues } = useForm();
+  const { register, handleSubmit, errors, setError, getValues } = useForm({
+    reValidateMode: "onSubmit",
+  });
 
   const submitHandler = () => {
     const { email, password, confirmPassword } = credentials;

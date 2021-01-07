@@ -19,7 +19,9 @@ const ProjectForm = ({ ModalStore }) => {
     package: {},
     bundler: {},
   });
-  const { errors, register, handleSubmit } = useForm();
+  const { errors, register, handleSubmit } = useForm({
+    reValidateMode: "onSubmit",
+  });
 
   const inputHandler = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
