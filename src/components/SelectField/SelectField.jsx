@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import isEmpty from "../../helpers/isEmpty";
 import "./SelectField.css";
 
-const SelectField = ({ data, stateHandler, state, label, stateKey }) => {
+const SelectField = forwardRef((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedData, setSelectedData] = useState({});
-
+  const { data, stateHandler, state, label, stateKey, customRef } = props;
   const dropdownHandler = (fw) => {
     setSelectedData(fw);
     stateHandler({ ...state, [stateKey]: fw });
@@ -61,8 +61,16 @@ const SelectField = ({ data, stateHandler, state, label, stateKey }) => {
           ))}
         </div>
       )}
+      <input
+        type="text"
+        style={{ display: "none" }}
+        name={stateKey}
+        ref={ref}
+        value={state.bundler.framework}
+        onChange={(e) => console.log(e)}
+      />
     </div>
   );
-};
+});
 
 export default SelectField;

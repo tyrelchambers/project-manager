@@ -28,7 +28,7 @@ const PackagesPage = ({ UserStore }) => {
       <div className="flex mt-4">
         {defaultPackages.length > 0 &&
           defaultPackages
-            .filter((x) => x.bundler === "NPM")
+            .filter((x) => x.bundler === "npm")
             .map((pkg, id) => (
               <Link
                 key={id}
@@ -50,15 +50,16 @@ const PackagesPage = ({ UserStore }) => {
       <div className="flex mt-4">
         {defaultPackages.length > 0 &&
           defaultPackages
-            .filter((x) => x.bundler === "Yarn")
+            .filter((x) => x.bundler === "yarn")
             .map((pkg, id) => (
-              <div
+              <Link
                 key={id}
                 className="flex items-center mr-2 p-2 bg-gray-800 rounded-sm"
+                to={`/package/${pkg.uuid}`}
               >
                 <i className="fab fa-yarn  text-green-500 mr-2"></i>
                 <p className="text-gray-300">{pkg.folderName}</p>
-              </div>
+              </Link>
             ))}
       </div>
     </section>

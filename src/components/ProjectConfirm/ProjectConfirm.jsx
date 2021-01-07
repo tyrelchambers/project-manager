@@ -4,6 +4,7 @@ import Spinner from "../Spinner/Spinner";
 import socketIOClient from "socket.io-client";
 import { getAxios } from "../../api";
 import useStorage from "../../hooks/useStorage";
+import { formatUrl } from "../../helpers/formatUrl";
 const ProjectConfirm = ({ state }) => {
   const socket = socketIOClient(process.env.REACT_APP_BACKEND);
   const [downloading, setDownloading] = useState(false);
@@ -74,7 +75,7 @@ const ProjectConfirm = ({ state }) => {
             >
               ${" "}
             </span>
-            {state.framework.command({ appName: state.appName })}
+            {state.framework.command({ appName: formatUrl(state.appName) })}
           </p>
         </div>
       </div>

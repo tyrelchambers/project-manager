@@ -4,7 +4,6 @@ import { useState } from "react";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import SelectField from "../components/SelectField/SelectField";
-import { packageManagers } from "../constants/packageManagers";
 import Spinner from "../components/Spinner/Spinner";
 import { inject, observer } from "mobx-react";
 import { getAxios } from "../api";
@@ -12,10 +11,13 @@ import List from "../components/List/List";
 import { toast } from "react-toastify";
 import useStorage from "../hooks/useStorage";
 import { packagePrefs } from "../constants/frameworks";
+import { useForm } from "react-hook-form";
+import FormErrors from "../components/FormErrors/FormErrors";
+import isEmpty from "../helpers/isEmpty";
+import { useHistory } from "react-router-dom";
 
 const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [state, setState] = useState({
-    framework: {},
     packagesToInstall: [],
     defaultName: "",
     packageName: "",
@@ -27,6 +29,8 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [queryResults, setQueryResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const [token, _] = useStorage("token");
+  const { errors, register, handleSubmit, setError } = useForm();
+  const history = useHistory();
 
   const searchNpm = async (q) => {
     return await Axios.get(
@@ -110,8 +114,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
 }
 `;
 
-  const openModal = (e) => {
-    e.preventDefault();
+  const openModal = () => {
     ModalStore.setRender(<PackageWindow />);
     ModalStore.setIsOpen(true);
   };
@@ -138,16 +141,15 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
         userId: UserStore.user.uuid,
         packageName: state.packageName,
         folderName: state.defaultName,
-        bundler: state.framework.framework,
+        bundler: state.bundler.framework,
       },
-    }).then((res) => {
-      const downloadWindow = window.open(``, "_blank");
-      downloadWindow.window.location = `${process.env.REACT_APP_BACKEND}/api/v1/packages/download?defaultName=${state.defaultName}&token=${token}`;
-      setTimeout(() => {
-        downloadWindow.close();
-      }, 500);
-      toast.success(res.message);
     });
+    const downloadWindow = window.open(``, "_blank");
+    downloadWindow.window.location = `${process.env.REACT_APP_BACKEND}/api/v1/packages/download?defaultName=${state.defaultName}&token=${token}`;
+    setTimeout(() => {
+      downloadWindow.close();
+    }, 1500);
+    history.push("/");
   };
 
   const PackageWindow = () => (
@@ -187,7 +189,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
   );
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit(openModal)}>
       <div className="field-group">
         <FormLabel name="defaultName" text="Name to Save as" />
         <input
@@ -197,7 +199,14 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
           placeholder="my-new-package"
           value={state.defaultName}
           onChange={(v) => inputHandler(v)}
+          ref={register({
+            required: {
+              value: true,
+              message: "Need a name to save as",
+            },
+          })}
         />
+        <FormErrors error={errors.defaultName} />
       </div>
 
       <div className="field-group">
@@ -209,7 +218,14 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
           placeholder="The name of the package.json: {name: 'my-app'}"
           value={state.packageName}
           onChange={(v) => inputHandler(v)}
+          ref={register({
+            required: {
+              value: true,
+              message: "Please give your package a name",
+            },
+          })}
         />
+        <FormErrors error={errors.packageName} />
       </div>
 
       <div className="field-group">
@@ -220,7 +236,14 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
           stateHandler={setState}
           stateKey="bundler"
           label="Choose a bundler"
+          ref={register({
+            required: {
+              value: true,
+              message: "Please choose a bundler",
+            },
+          })}
         />
+        <FormErrors error={errors.bundler} />
       </div>
 
       <div className="field-group">
@@ -264,7 +287,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
         </div>
       </div>
 
-      <MainButton default onClick={(e) => openModal(e)}>
+      <MainButton default type="submit">
         Create
       </MainButton>
     </form>

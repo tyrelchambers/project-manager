@@ -1,3 +1,3 @@
 export const formatUrl = (string) => {
-  return encodeURIComponent(string.replace(/ /g, "-").toLowerCase());
+  return string.replace(/ /g, "-");
 };
