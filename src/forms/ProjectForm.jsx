@@ -73,6 +73,12 @@ const ProjectForm = ({ ModalStore }) => {
           state={state}
           label="Select a framework"
           stateKey="framework"
+          ref={register({
+            required: {
+              value: true,
+              message: "Please choose a framework",
+            },
+          })}
         />
         <FormErrors error={errors.framework} />
       </div>
@@ -86,6 +92,12 @@ const ProjectForm = ({ ModalStore }) => {
           state={state}
           label="Select a bundler"
           stateKey="bundler"
+          ref={register({
+            required: {
+              value: true,
+              message: "Please choose a bundler",
+            },
+          })}
         />
         <FormErrors error={errors.bundler} />
       </div>
