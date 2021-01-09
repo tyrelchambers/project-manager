@@ -1,83 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { MainButton } from "../Buttons/Buttons";
-import Spinner from "../Spinner/Spinner";
-import socketIOClient from "socket.io-client";
-import { getAxios } from "../../api";
-import useStorage from "../../hooks/useStorage";
+import React from "react";
 import { formatUrl } from "../../helpers/formatUrl";
-import { Redirect } from "react-router-dom";
 const ProjectConfirm = ({ state }) => {
-  const socket = socketIOClient(process.env.REACT_APP_BACKEND);
-  const [downloading, setDownloading] = useState(false);
-  const [generated, setGenerate] = useState(false);
-
-  const [response, setResponse] = useState("");
-  const [token, setToken] = useStorage("token");
-
-  useEffect(() => {
-    socket.on("project message", (data) => {
-      console.log(data);
-      setResponse(data);
-    });
-  }, []);
-
-  const submitHandler = async () => {
-    setDownloading(true);
-    await getAxios({
-      url: "/projects/create",
-      method: "post",
-      data: {
-        ...state,
-      },
-    });
-    setDownloading(false);
-    setGenerate(true);
-    // const downloadWindow = window.open(``, "_blank");
-    // downloadWindow.window.location = `${process.env.REACT_APP_BACKEND}/api/v1/projects/download?appName=${state.appName}&token=${token}`;
-    // setTimeout(() => {
-    //   downloadWindow.close();
-    // }, 500);
-  };
-
-  if (generated) {
-    return (
-      <Redirect
-        to={{
-          pathname: "/project/download",
-          state: {
-            token,
-            appName: state.appName,
-          },
-        }}
-      />
-    );
-  }
-
   return (
     <div className="flex flex-col overflow-hidden">
-      <div className="flex flex-col items-center p-4 pt-8 pb-8">
-        <p className="font-bold text-lg mb-4 text-gray-800">
-          Download your project files
-        </p>
-        {downloading && (
-          <div className="flex items-center mt-4">
-            <Spinner />
-            <p className="text-pink-500 font-bold ml-8">{response}</p>
-          </div>
-        )}
-
-        {!downloading && !generated && (
-          <MainButton default onClick={submitHandler}>
-            <i className="fas fa-cloud-download-alt mr-4 "></i>Generate files
-          </MainButton>
-        )}
-
-        {generated && (
-          <MainButton classes="bg-green-500" disabled>
-            <i className="fas fa-check mr-4"></i>Complete
-          </MainButton>
-        )}
-      </div>
       <div className="flex flex-col items-center p-4 pt-8 pb-8 bg-gray-900 ">
         <p className="font-bold text-white text-lg mb-4">
           Use the command terminal

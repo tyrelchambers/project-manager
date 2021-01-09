@@ -9,7 +9,6 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import NewEnvVar from "../pages/NewEnvVar/NewEnvVar";
 import NewPackage from "../pages/NewPackage/NewPackage";
-import NewProject from "../pages/NewProject/NewProject";
 import PackageShow from "../pages/PackageShow/PackageShow";
 import PackagesPage from "../pages/PackagesPage/PackagesPage";
 import Profile from "../pages/Profile/Profile";
@@ -44,10 +43,6 @@ export default [
   {
     slug: "/",
     component: Home,
-  },
-  {
-    slug: "/project/new",
-    component: NewProject,
   },
   {
     slug: "/packages",
@@ -109,9 +104,5 @@ export default [
       window.sessionStorage.removeItem("token");
       window.location.pathname = "/";
     },
-  },
-  {
-    slug: "/project/download",
-    render: (props) => <DownloadFile {...props} />,
   },
 ];
