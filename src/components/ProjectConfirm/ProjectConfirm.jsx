@@ -5,6 +5,7 @@ import socketIOClient from "socket.io-client";
 import { getAxios } from "../../api";
 import useStorage from "../../hooks/useStorage";
 import { formatUrl } from "../../helpers/formatUrl";
+import { Redirect } from "react-router-dom";
 const ProjectConfirm = ({ state }) => {
   const socket = socketIOClient(process.env.REACT_APP_BACKEND);
   const [downloading, setDownloading] = useState(false);
@@ -15,6 +16,7 @@ const ProjectConfirm = ({ state }) => {
 
   useEffect(() => {
     socket.on("project message", (data) => {
+      console.log(data);
       setResponse(data);
     });
   }, []);
@@ -30,12 +32,26 @@ const ProjectConfirm = ({ state }) => {
     });
     setDownloading(false);
     setGenerate(true);
-    const downloadWindow = window.open(``, "_blank");
-    downloadWindow.window.location = `${process.env.REACT_APP_BACKEND}/api/v1/projects/download?appName=${state.appName}&token=${token}`;
-    setTimeout(() => {
-      downloadWindow.close();
-    }, 500);
+    // const downloadWindow = window.open(``, "_blank");
+    // downloadWindow.window.location = `${process.env.REACT_APP_BACKEND}/api/v1/projects/download?appName=${state.appName}&token=${token}`;
+    // setTimeout(() => {
+    //   downloadWindow.close();
+    // }, 500);
   };
+
+  if (generated) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/project/download",
+          state: {
+            token,
+            appName: state.appName,
+          },
+        }}
+      />
+    );
+  }
 
   return (
     <div className="flex flex-col overflow-hidden">

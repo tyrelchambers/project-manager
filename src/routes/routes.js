@@ -1,4 +1,7 @@
+import React from "react";
+
 import Account from "../pages/Account/Account";
+import DownloadFile from "../pages/DownloadFile/DownloadFile";
 import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";
 import EnvVars from "../pages/EnvVars/EnvVars";
 import EnvVarShow from "../pages/EnvVarShow/EnvVarShow";
@@ -27,7 +30,7 @@ const sharedRoutes = [
 export const UNAUTHENTICATED = [
   ...sharedRoutes,
   {
-    slug: "/",
+    slug: "/signup",
     component: Signup,
   },
   {
@@ -106,5 +109,9 @@ export default [
       window.sessionStorage.removeItem("token");
       window.location.pathname = "/";
     },
+  },
+  {
+    slug: "/project/download",
+    render: (props) => <DownloadFile {...props} />,
   },
 ];

@@ -42,8 +42,10 @@ const SignupForm = () => {
         password: credentials.password,
       },
     }).then((res) => {
-      setToken({ value: res.token });
-      history.push("/profile/setup");
+      if (res) {
+        setToken({ value: res.token });
+        history.push("/profile/setup");
+      }
     });
   };
 
