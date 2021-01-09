@@ -29,7 +29,7 @@ const EnvVarForm = () => {
     });
   };
   return (
-    <form className="form mt-8" onSubmit={handleSubmit(submitHandler)}>
+    <form className="container mt-8" onSubmit={handleSubmit(submitHandler)}>
       <div className="field-group">
         <FormLabel text="Name" name="envName" />
         <input

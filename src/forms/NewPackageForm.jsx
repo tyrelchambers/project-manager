@@ -191,7 +191,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
   );
 
   return (
-    <form className="form" onSubmit={handleSubmit(openModal)}>
+    <form className="container" onSubmit={handleSubmit(openModal)}>
       <div className="field-group">
         <FormLabel name="defaultName" text="Name to Save as" />
         <input

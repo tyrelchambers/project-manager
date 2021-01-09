@@ -53,7 +53,7 @@ const SignupForm = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
-    <form className="form" onSubmit={handleSubmit(submitHandler)}>
+    <form className="container" onSubmit={handleSubmit(submitHandler)}>
       <div className="field-group">
         <FormLabel name="email" text="Email" />
         <input

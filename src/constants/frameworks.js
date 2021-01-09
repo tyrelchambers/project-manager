@@ -8,8 +8,8 @@ export function Select({ label, icon, install, framework }) {
   this.install = install;
   this.framework = framework;
 
-  this.command = function ({ appName, flags = "" }) {
-    return `${install} ${appName} ${flags}`;
+  this.command = function ({ appName }) {
+    return `${install} ${appName}`;
   };
 }
 
