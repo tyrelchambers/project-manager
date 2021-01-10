@@ -66,8 +66,7 @@ const SelectField = forwardRef((props, ref) => {
         style={{ display: "none" }}
         name={stateKey}
         ref={ref}
-        value={state.bundler.framework}
-        onChange={(e) => console.log(e)}
+        value={state.framework.framework}
       />
     </div>
   );

@@ -44,7 +44,7 @@ const AccountPasswordForm = () => {
   };
 
   return (
-    <form className="form">
+    <form className="container">
       <div className="field-group">
         <FormLabel text="Current password" name="currentPassword" />
         <input

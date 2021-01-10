@@ -42,7 +42,7 @@ const AccountForm = ({ user }) => {
   };
 
   return (
-    <form className="form">
+    <form className="container">
       <div className="field-group">
         <FormLabel text="Name" name="name" />
         <input

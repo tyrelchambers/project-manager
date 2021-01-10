@@ -42,7 +42,7 @@ const SnippetForm = () => {
 
   return (
     <form
-      className="bg-gray-800 flex flex-col p-4 w-full"
+      className="bg-gray-800 flex flex-col p-4 w-full container"
       onSubmit={handleSubmit(submitHandler)}
     >
       <div className="field-group">
