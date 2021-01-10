@@ -1,14 +1,20 @@
-function Flag({ flag, label }) {
+function Flag({ flag, label, showInputs, value }) {
   this.label = label;
   this.flag = flag;
-  this.flagWithValue = function (value) {
-    return `${flag} ${value ? value : ""}`;
+  this.showInputs = showInputs;
+  this.value = value;
+  this.flagWithValue = function () {
+    return `${this.flag} ${this.value ? this.value : ""}`;
   };
 }
 
 const createReactAppFlags = {
   useNpm: new Flag({ flag: "--use-npm", label: "Use NPM" }),
-  useNpm1: new Flag({ flag: "--use-npm1", label: "Use NPM2" }),
+  template: new Flag({
+    flag: "--template",
+    label: "Use template",
+    showInputs: true,
+  }),
 };
 
 export default {

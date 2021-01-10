@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import { H2 } from "../../components/Headings/Headings";
 import "./Projects.css";
@@ -6,6 +6,7 @@ import ProjectForm from "../../forms/ProjectForm";
 import { formatUrl } from "../../helpers/formatUrl";
 import ProjectFlags from "../../components/ProjectFlags/ProjectFlags";
 import { copyToClipboard } from "../../helpers/copyToClipboard";
+import flagReducer from "../../reducers/flagReducer";
 
 const Projects = () => {
   const [state, setState] = useState({
@@ -13,22 +14,29 @@ const Projects = () => {
     framework: {},
     package: {},
   });
-  const [flags, setFlags] = useState([]);
+  const [flags, dispatch] = useReducer(flagReducer, []);
 
   const handleCheck = (obj) => {
-    const clone = [...flags];
-    const dupe = clone.find((x, id) => {
-      return x.flag === obj.flag ? clone.splice(id, 1) : false;
+    return dispatch({
+      type: "add-flag",
+      payload: {
+        obj,
+      },
     });
-
-    if (!dupe) {
-      clone.push(obj);
-    }
-
-    return setFlags(clone);
   };
 
-  const flagElems = flags.map((x) => `${x.flagWithValue()}`);
+  const flagElems = flags.map((x) => `${x.flagWithValue()} `);
+
+  const inputHandler = (e, obj) => {
+    dispatch({
+      type: "add-value",
+      payload: {
+        ...obj,
+        flag: e.target.dataset.flag,
+        value: e.target.value,
+      },
+    });
+  };
 
   return (
     <DisplayWrapper>
@@ -68,6 +76,7 @@ const Projects = () => {
         <ProjectFlags
           flagSet={state.framework.framework}
           checkHandler={handleCheck}
+          inputHandler={inputHandler}
         />
       </div>
     </DisplayWrapper>
