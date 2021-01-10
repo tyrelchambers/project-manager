@@ -5,6 +5,7 @@ import "./Projects.css";
 import ProjectForm from "../../forms/ProjectForm";
 import { formatUrl } from "../../helpers/formatUrl";
 import ProjectFlags from "../../components/ProjectFlags/ProjectFlags";
+import { copyToClipboard } from "../../helpers/copyToClipboard";
 
 const Projects = () => {
   const [state, setState] = useState({
@@ -32,27 +33,37 @@ const Projects = () => {
   return (
     <DisplayWrapper>
       <H2>Project Command Line</H2>
-      {state.framework.label && (
-        <div className="flex flex-col items-center container p-4 pt-8 pb-8 bg-gray-900 ">
-          <p className="font-bold text-white text-lg mb-4">
-            Use the command terminal
-          </p>
-
-          <div className="p-4 bg-gray-800 w-full rounded-lg flex justify-center">
-            <p className="text-white flex items-center">
-              <span
-                className="text-sm text-pink-500 mr-2"
-                style={{ userSelect: "none" }}
-              >
-                ${" "}
+      <div className="container mt-8 ">
+        <div className="bg-gray-900 w-full rounded-lg flex justify-between">
+          <p className="text-white flex items-center p-4 ">
+            <span
+              className="text-sm text-pink-500 mr-2"
+              style={{ userSelect: "none" }}
+            >
+              ${" "}
+            </span>
+            {state.framework.label && (
+              <span id="command">
+                {state.framework.command({
+                  appName: formatUrl(state.appName),
+                })}{" "}
+                {flagElems}{" "}
               </span>
-              {state.framework.command({ appName: formatUrl(state.appName) })}{" "}
-              {flagElems}
-            </p>
-          </div>
+            )}
+          </p>
+          {state.framework.label && (
+            <div
+              className="bg-pink-500 p-4 rounded-r-md"
+              onClick={() =>
+                copyToClipboard(document.querySelector("#command").innerHTML)
+              }
+            >
+              <i className="fas fa-clipboard text-white"></i>
+            </div>
+          )}
         </div>
-      )}
-      <div className="flex w-full">
+      </div>
+      <div className="flex container">
         <ProjectForm state={state} setState={setState} />
         <ProjectFlags
           flagSet={state.framework.framework}

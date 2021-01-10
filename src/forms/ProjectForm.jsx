@@ -27,15 +27,7 @@ const ProjectForm = ({ state, setState }) => {
           placeholder="an-awesome-project"
           value={state.appName}
           onChange={(e) => inputHandler(e)}
-          ref={register({
-            required: {
-              value: true,
-              message: "Need a name for your awesome app",
-            },
-          })}
         />
-
-        <FormErrors error={errors.appName} />
       </div>
 
       <div className="mt-4 field-group">
@@ -46,19 +38,8 @@ const ProjectForm = ({ state, setState }) => {
           state={state}
           label="Select a framework"
           stateKey="framework"
-          ref={register({
-            required: {
-              value: true,
-              message: "Please choose a framework",
-            },
-          })}
         />
-        <FormErrors error={errors.framework} />
       </div>
-
-      <MainButton className="mt-8" default type="submit">
-        Get command
-      </MainButton>
     </form>
   );
 };
