@@ -45,7 +45,7 @@ const ProjectFlags = ({ flagSet, checkHandler, inputHandler }) => {
     return arr;
   };
   return (
-    <div className=" ml-6 mt-4 w-full">
+    <div className=" ml-6 w-full">
       <H3>Command line flags</H3>
       <form className="form mt-4 bg-gray-900 p-4 rounded-md">{el()}</form>
     </div>

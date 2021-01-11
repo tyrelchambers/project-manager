@@ -42,7 +42,7 @@ const AccountForm = ({ user }) => {
   };
 
   return (
-    <form className="container">
+    <form className="container max-w-screen-sm">
       <div className="field-group">
         <FormLabel text="Name" name="name" />
         <input

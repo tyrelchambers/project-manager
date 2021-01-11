@@ -37,7 +37,10 @@ const LoginForm = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
-    <form className="container" onSubmit={handleSubmit(submitHandler)}>
+    <form
+      className="container max-w-screen-sm"
+      onSubmit={handleSubmit(submitHandler)}
+    >
       <div className="field-group">
         <FormLabel name="email" text="Email" />
         <input

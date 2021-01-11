@@ -17,7 +17,7 @@ const ProjectForm = ({ state, setState }) => {
   };
 
   return (
-    <form className="container mt-6" onSubmit={handleSubmit()}>
+    <form className="container" onSubmit={handleSubmit()}>
       <div className="field-group">
         <FormLabel name="appName" text="App Name" />
         <input

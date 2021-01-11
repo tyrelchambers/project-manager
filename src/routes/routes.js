@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 
 import Account from "../pages/Account/Account";
 import DownloadFile from "../pages/DownloadFile/DownloadFile";
@@ -35,6 +36,10 @@ export const UNAUTHENTICATED = [
   {
     slug: "/login",
     component: Login,
+  },
+  {
+    slug: "/",
+    render: () => <Redirect to="/signup" />,
   },
 ];
 

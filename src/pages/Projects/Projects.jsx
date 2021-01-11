@@ -71,7 +71,7 @@ const Projects = () => {
           )}
         </div>
       </div>
-      <div className="flex container">
+      <div className="flex container mt-8">
         <ProjectForm state={state} setState={setState} />
         <ProjectFlags
           flagSet={state.framework.framework}
