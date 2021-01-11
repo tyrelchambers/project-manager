@@ -17,7 +17,7 @@ const ProjectForm = ({ state, setState }) => {
   };
 
   return (
-    <form className="container" onSubmit={handleSubmit()}>
+    <form className="container max-w-screen-sm" onSubmit={handleSubmit()}>
       <div className="field-group">
         <FormLabel name="appName" text="App Name" />
         <input

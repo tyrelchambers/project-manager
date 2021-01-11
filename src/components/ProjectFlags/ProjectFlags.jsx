@@ -5,11 +5,13 @@ import FLAGS from "../../constants/flags";
 const ProjectFlags = ({ flagSet, checkHandler, inputHandler }) => {
   const sets = FLAGS[flagSet];
 
+  if (!sets) return null;
+
   const el = () => {
     const arr = [];
-    for (const key in sets) {
-      if (Object.hasOwnProperty.call(sets, key)) {
-        const element = sets[key];
+    for (const key in sets.flags) {
+      if (Object.hasOwnProperty.call(sets.flags, key)) {
+        const element = sets.flags[key];
         const newEl = (
           <div className="flex flex-col">
             <div className="flex items-center">
@@ -45,7 +47,7 @@ const ProjectFlags = ({ flagSet, checkHandler, inputHandler }) => {
     return arr;
   };
   return (
-    <div className=" ml-6 w-full">
+    <div className=" ml-6 w-full ">
       <H3>Command line flags</H3>
       <form className="form mt-4 bg-gray-900 p-4 rounded-md">{el()}</form>
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useReducer, useState } from "react";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import { H2 } from "../../components/Headings/Headings";
 import "./Projects.css";
@@ -7,6 +7,7 @@ import { formatUrl } from "../../helpers/formatUrl";
 import ProjectFlags from "../../components/ProjectFlags/ProjectFlags";
 import { copyToClipboard } from "../../helpers/copyToClipboard";
 import flagReducer from "../../reducers/flagReducer";
+import FLAGS from "../../constants/flags";
 
 const Projects = () => {
   const [state, setState] = useState({
@@ -52,10 +53,13 @@ const Projects = () => {
             </span>
             {state.framework.label && (
               <span id="command">
-                {state.framework.command({
-                  appName: formatUrl(state.appName),
-                })}{" "}
-                {flagElems}{" "}
+                {
+                  <Command
+                    state={state}
+                    flagElems={flagElems}
+                    parentFlagSet={FLAGS[state.framework.framework]}
+                  />
+                }
               </span>
             )}
           </p>
@@ -81,6 +85,19 @@ const Projects = () => {
       </div>
     </DisplayWrapper>
   );
+};
+
+const Command = ({ state, flagElems, parentFlagSet }) => {
+  const { optionsBeforeName } = parentFlagSet;
+
+  let str = `${state.framework.install}`;
+
+  if (optionsBeforeName) {
+    str += ` ${flagElems} ${state.appName}`;
+  } else {
+    str += ` ${state.appName} ${flagElems}`;
+  }
+  return <p>{str.replace(/,/gi, "")}</p>;
 };
 
 export default Projects;
