@@ -8,12 +8,10 @@ import Spinner from "../components/Spinner/Spinner";
 import { inject, observer } from "mobx-react";
 import { getAxios } from "../api";
 import List from "../components/List/List";
-import { toast } from "react-toastify";
 import useStorage from "../hooks/useStorage";
 import { packagePrefs } from "../constants/frameworks";
 import { useForm } from "react-hook-form";
 import FormErrors from "../components/FormErrors/FormErrors";
-import isEmpty from "../helpers/isEmpty";
 import { useHistory } from "react-router-dom";
 
 const NewPackageForm = ({ ModalStore, UserStore }) => {
@@ -29,7 +27,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [queryResults, setQueryResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const [token, _] = useStorage("token");
-  const { errors, register, handleSubmit, setError } = useForm({
+  const { errors, register, handleSubmit } = useForm({
     reValidateMode: "onSubmit",
   });
   const history = useHistory();

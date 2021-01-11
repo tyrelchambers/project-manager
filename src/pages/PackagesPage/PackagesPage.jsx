@@ -76,9 +76,6 @@ const PackagesPage = ({ UserStore }) => {
         </div>
 
         <div className="flex">
-          <a href="#" className="mr-4 btn primary bg-pink-500">
-            <i className="fas fa-file-import mr-4"></i> Import from GitHub
-          </a>
           <Link className=" btn primary bg-pink-500" to="/packages/new">
             New Package.json
           </Link>

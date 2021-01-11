@@ -7,10 +7,6 @@ export function Select({ label, icon, install, framework }) {
   this.icon = icon;
   this.install = install;
   this.framework = framework;
-
-  this.command = function ({ appName }) {
-    return `${install} ${appName}`;
-  };
 }
 
 export const frameworks = [

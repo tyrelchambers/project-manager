@@ -7,7 +7,7 @@ import { inject, observer } from "mobx-react";
 import SnippetForm from "../../forms/SnippetForm";
 import { getAxios } from "../../api";
 import { Link } from "react-router-dom";
-import { formatUrl } from "../../helpers/formatUrl";
+
 const Snippets = ({ ModalStore }) => {
   const [snippets, setSnippets] = useState([]);
 

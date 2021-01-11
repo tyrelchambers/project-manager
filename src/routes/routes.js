@@ -2,7 +2,6 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 
 import Account from "../pages/Account/Account";
-import DownloadFile from "../pages/DownloadFile/DownloadFile";
 import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";
 import EnvVars from "../pages/EnvVars/EnvVars";
 import EnvVarShow from "../pages/EnvVarShow/EnvVarShow";
