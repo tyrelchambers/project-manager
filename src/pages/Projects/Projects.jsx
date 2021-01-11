@@ -3,7 +3,6 @@ import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import { H2 } from "../../components/Headings/Headings";
 import "./Projects.css";
 import ProjectForm from "../../forms/ProjectForm";
-import { formatUrl } from "../../helpers/formatUrl";
 import ProjectFlags from "../../components/ProjectFlags/ProjectFlags";
 import { copyToClipboard } from "../../helpers/copyToClipboard";
 import flagReducer from "../../reducers/flagReducer";

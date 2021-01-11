@@ -6,7 +6,6 @@ import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./SnippetEdit.css";
 import FormLabel from "../../components/FormLabel/FormLabel";
 import { MainButton } from "../../components/Buttons/Buttons";
-import { formatUrl } from "../../helpers/formatUrl";
 
 const SnippetEdit = () => {
   const { snippet_uuid } = useParams();

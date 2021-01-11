@@ -27,7 +27,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [queryResults, setQueryResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const [token, _] = useStorage("token");
-  const { errors, register, handleSubmit, setError } = useForm({
+  const { errors, register, handleSubmit } = useForm({
     reValidateMode: "onSubmit",
   });
   const history = useHistory();

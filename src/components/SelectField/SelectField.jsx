@@ -5,7 +5,7 @@ import "./SelectField.css";
 const SelectField = forwardRef((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedData, setSelectedData] = useState({});
-  const { data, stateHandler, state, label, stateKey, customRef } = props;
+  const { data, stateHandler, state, label, stateKey } = props;
   const dropdownHandler = (fw) => {
     setSelectedData(fw);
     stateHandler({ ...state, [stateKey]: fw });

@@ -1,23 +1,15 @@
-import { inject, observer } from "mobx-react";
 import React from "react";
-import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import SelectField from "../components/SelectField/SelectField";
 import { frameworks } from "../constants/frameworks";
-import { useForm } from "react-hook-form";
-import FormErrors from "../components/FormErrors/FormErrors";
 
 const ProjectForm = ({ state, setState }) => {
-  const { errors, register, handleSubmit } = useForm({
-    reValidateMode: "onSubmit",
-  });
-
   const inputHandler = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
   return (
-    <form className="container max-w-screen-sm" onSubmit={handleSubmit()}>
+    <form className="container max-w-screen-sm">
       <div className="field-group">
         <FormLabel name="appName" text="App Name" />
         <input

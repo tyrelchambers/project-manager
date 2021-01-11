@@ -1,9 +1,8 @@
 import React from "react";
 import { H2 } from "../../components/Headings/Headings";
 import { copyToClipboard } from "../../helpers/copyToClipboard";
-import { MainButton } from "../../components/Buttons/Buttons";
 import Social from "../../components/Social/Social";
-import { getAxios } from "../../api";
+
 const ShareSnippetModal = ({ shareLink, snippet }) => {
   return (
     <div>

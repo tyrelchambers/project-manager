@@ -1,4 +1,4 @@
-import React, { version } from "react";
+import React from "react";
 
 const List = ({ onClick, data }) => {
   return (
