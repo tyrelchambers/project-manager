@@ -83,16 +83,9 @@ const LoginForm = () => {
               value: true,
               message: "Password is required",
             },
-            maxLength: {
-              value: 50,
-              message: "Password can't be more than 50 characters",
-            },
-            minLength: {
-              value: 6,
-              message: "Password can't be less than 6 characters",
-            },
           })}
         />
+        <FormErrors error={errors.password} />
       </div>
 
       <MainButton default type="submit">
