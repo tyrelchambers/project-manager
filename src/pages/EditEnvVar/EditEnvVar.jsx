@@ -44,7 +44,7 @@ const EditEnvVar = () => {
   return (
     <DisplayWrapper>
       <H2>Editing {envVar.name}</H2>
-      <form className="form mt-8">
+      <form className="form mt-8 container max-w-screen-md">
         <div className="field-group">
           <FormLabel text="Name" name="envName" />
           <input

@@ -4,6 +4,7 @@ import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import { useForm } from "react-hook-form";
 import FormError from "../components/FormErrors/FormErrors";
+import { useHistory } from "react-router-dom";
 
 const EnvVarForm = () => {
   const [state, setState] = useState({
@@ -13,6 +14,7 @@ const EnvVarForm = () => {
   const { handleSubmit, errors, register, setError } = useForm({
     reValidateMode: "onSubmit",
   });
+  const history = useHistory();
 
   const submitHandler = async () => {
     if (!state.name.trim()) {
@@ -27,9 +29,14 @@ const EnvVarForm = () => {
       method: "post",
       data: state,
     });
+
+    history.push("/env");
   };
   return (
-    <form className="container mt-8" onSubmit={handleSubmit(submitHandler)}>
+    <form
+      className="container mt-8 max-w-screen-md"
+      onSubmit={handleSubmit(submitHandler)}
+    >
       <div className="field-group">
         <FormLabel text="Name" name="envName" />
         <input

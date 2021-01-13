@@ -34,13 +34,13 @@ const SnippetEdit = () => {
       data: updated,
     });
 
-    history.push(`/snippets/${snippet.uuid}`);
+    window.location.pathname = `/snippets/${snippet.uuid}`;
   };
 
   return (
     <DisplayWrapper>
       <H2>Editing {snippet.name}</H2>
-      <form action="" className="form">
+      <form className="form container max-w-screen-md">
         <div className="field-group mt-6">
           <FormLabel name="name" text="Snippet Name" />
 

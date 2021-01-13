@@ -30,7 +30,7 @@ const EnvVarShow = () => {
     <DisplayWrapper>
       <H2>{envVar.name}</H2>
       <div className="w-2/5">
-        <pre className="mt-6 p-4 rounded-md bg-gray-800 text-gray-200">
+        <pre className="mt-6 p-4 rounded-md bg-gray-800 text-gray-200 whitespace-pre-wrap">
           <code>{envVar.variables}</code>
         </pre>
         <div className="flex mt-6">
