@@ -61,6 +61,7 @@ const SelectField = forwardRef((props, ref) => {
           ))}
         </div>
       )}
+      {console.log(state)}
       <input
         type="text"
         style={{ display: "none" }}

@@ -19,7 +19,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
     packagesToInstall: [],
     defaultName: "",
     packageName: "",
-    bundler: {},
+    framework: {},
   });
 
   const [downloading, setDownloading] = useState(false);
@@ -141,7 +141,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
         userId: UserStore.user.uuid,
         packageName: state.packageName,
         folderName: state.defaultName,
-        bundler: state.bundler.framework,
+        bundler: state.framework.framework,
       },
     });
     const downloadWindow = window.open(``, "_blank");
@@ -189,7 +189,10 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
   );
 
   return (
-    <form className="container" onSubmit={handleSubmit(openModal)}>
+    <form
+      className="container max-w-screen-md"
+      onSubmit={handleSubmit(openModal)}
+    >
       <div className="field-group">
         <FormLabel name="defaultName" text="Name to Save as" />
         <input
@@ -234,7 +237,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
           data={packagePrefs}
           state={state}
           stateHandler={setState}
-          stateKey="bundler"
+          stateKey="framework"
           label="Choose a bundler"
           ref={register({
             required: {
@@ -243,7 +246,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
             },
           })}
         />
-        <FormErrors error={errors.bundler} />
+        <FormErrors error={errors.framework} />
       </div>
 
       <div className="field-group">
