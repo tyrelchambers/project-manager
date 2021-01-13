@@ -51,7 +51,7 @@ const Projects = () => {
               ${" "}
             </span>
             {state.framework.label && (
-              <span id="command">
+              <span>
                 {
                   <Command
                     state={state}
@@ -96,7 +96,7 @@ const Command = ({ state, flagElems, parentFlagSet }) => {
   } else {
     str += ` ${state.appName} ${flagElems}`;
   }
-  return <p>{str.replace(/,/gi, "")}</p>;
+  return <p id="command">{str.replace(/,/gi, "")}</p>;
 };
 
 export default Projects;
