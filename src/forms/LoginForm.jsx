@@ -92,12 +92,20 @@ const LoginForm = () => {
         Login
       </MainButton>
 
-      <p className="mt-6 text-gray-400">
-        Or{" "}
-        <Link to="/signup" className="font-bold underline">
-          Sign up
-        </Link>
-      </p>
+      <div className="flex mt-6">
+        <p className="text-gray-400 mr-6">
+          Or{" "}
+          <Link to="/signup" className="font-bold underline">
+            Sign up
+          </Link>
+        </p>
+
+        <p className="text-gray-400">
+          <Link to="/forgot_password" className="font-bold underline">
+            Forgot your password?
+          </Link>
+        </p>
+      </div>
     </form>
   );
 };
