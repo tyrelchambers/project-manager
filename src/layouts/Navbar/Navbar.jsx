@@ -64,6 +64,7 @@ const Navbar = ({ UserStore }) => {
   const UnauthenticatedRoutes = () => {
     return unauthenticatedRoutes.map((x, id) => (
       <NavLink
+        key={id}
         exact
         to={x.url}
         className="no-underline font-bold text-white nav-item flex items-center p-4"
