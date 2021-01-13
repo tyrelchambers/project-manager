@@ -5,6 +5,7 @@ import Account from "../pages/Account/Account";
 import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";
 import EnvVars from "../pages/EnvVars/EnvVars";
 import EnvVarShow from "../pages/EnvVarShow/EnvVarShow";
+import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import NewEnvVar from "../pages/NewEnvVar/NewEnvVar";
@@ -14,6 +15,7 @@ import PackagesPage from "../pages/PackagesPage/PackagesPage";
 import Profile from "../pages/Profile/Profile";
 import ProfileSetup from "../pages/ProfileSetup/ProfileSetup";
 import Projects from "../pages/Projects/Projects";
+import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import Signup from "../pages/Signup/Signup";
 import SnippetEdit from "../pages/SnippetEdit/SnippetEdit";
 import Snippets from "../pages/Snippets/Snippets";
@@ -39,6 +41,14 @@ export const UNAUTHENTICATED = [
   {
     slug: "/",
     render: () => <Redirect to="/signup" />,
+  },
+  {
+    slug: "/forgot_password",
+    component: ForgotPassword,
+  },
+  {
+    slug: "/reset",
+    component: ResetPassword,
   },
 ];
 
