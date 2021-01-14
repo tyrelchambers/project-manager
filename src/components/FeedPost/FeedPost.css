@@ -1,0 +1,7 @@
+.feed-post-body p {
+  color: var(--gray-400);
+}
+
+.feed-post:not(:last-child) {
+  margin-bottom: 3em;
+}
