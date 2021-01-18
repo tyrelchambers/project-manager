@@ -3,7 +3,7 @@ import NewFeedPostForm from "../../forms/NewFeedPostForm";
 
 const NewFeedPost = () => {
   return (
-    <div className="new-feed-post rounded-lg bg-gray-900 p-4 container max-w-screen-lg mb-16">
+    <div className="new-feed-post rounded-lg  container max-w-screen-lg mb-16">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <img

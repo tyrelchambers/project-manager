@@ -2,7 +2,7 @@ import React from "react";
 import "./buttons.css";
 
 export const MainButton = (props) => {
-  let base = "btn primary";
+  let base = "btn ";
   const deleteIcon = <i className="fas fa-trash mr-4"></i>;
   let variant;
 
@@ -16,7 +16,7 @@ export const MainButton = (props) => {
   }
 
   if (props.default) {
-    variant = "bg-pink-500";
+    base += "primary";
   }
 
   return (
