@@ -1,0 +1,19 @@
+.avatar {
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar.lg {
+  height: 130px;
+  width: 130px;
+}
+
+.avatar.sm {
+  width: 60px;
+  height: 60px;
+}
+
+.avatar.no-image {
+  background-color: var(--gray-600);
+}

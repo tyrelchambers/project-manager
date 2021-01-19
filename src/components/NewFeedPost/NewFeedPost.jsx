@@ -1,15 +1,14 @@
+import { inject, observer } from "mobx-react";
 import React from "react";
 import NewFeedPostForm from "../../forms/NewFeedPostForm";
+import Avatar from "../Avatar/Avatar";
 
-const NewFeedPost = () => {
+const NewFeedPost = ({ UserStore }) => {
   return (
     <div className="new-feed-post rounded-lg  container max-w-screen-lg mb-16">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <img
-            src="https://scontent.fybz2-2.fna.fbcdn.net/v/t1.0-9/125394534_10164624445495486_9014677313772615318_n.jpg?_nc_cat=102&ccb=2&_nc_sid=09cbfe&_nc_ohc=BH-SdNauY9MAX_ieJJk&_nc_ht=scontent.fybz2-2.fna&oh=14582655172fc06d157f750b171535a4&oe=6023D6C2"
-            className="avatar-small mr-4"
-          />
+          <Avatar url={UserStore.user.avatar} size="small" className="mr-4" />
           <div className="flex flex-col">
             <p className="text-sm">Posting as:</p>
             <p className="font-bold text-lg">Tyrel Chambers</p>
@@ -25,4 +24,4 @@ const NewFeedPost = () => {
   );
 };
 
-export default NewFeedPost;
+export default inject("UserStore")(observer(NewFeedPost));

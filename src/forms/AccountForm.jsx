@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
+import Upload from "../components/Upload/Upload";
+import UserStore from "../stores/UserStore";
 
 const AccountForm = ({ user }) => {
   const [state, setState] = useState({
     email: "",
     name: "",
+    avatar: "",
   });
+  const [files, setFiles] = useState([]);
+  const pond = React.createRef(null);
 
   useEffect(() => {
     setState({
@@ -33,16 +38,29 @@ const AccountForm = ({ user }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
+    let fileEndpoint = UserStore.user.avatar || "";
+    if (pond.current && pond.current.getFiles().length > 0) {
+      const files = await pond.current.processFiles().then((res) => res[0]);
+      fileEndpoint = files.serverId;
+    }
     await getAxios({
       url: "/account/update",
       method: "patch",
-      data: state,
+      data: {
+        state: {
+          ...state,
+          avatar: fileEndpoint,
+        },
+      },
     });
   };
 
   return (
     <form className="container max-w-screen-sm">
+      <div className="field-group">
+        <FormLabel text="Display Picture" name="avatar" />
+        <Upload files={files} setFiles={setFiles} ref={pond} />
+      </div>
       <div className="field-group">
         <FormLabel text="Name" name="name" />
         <input
