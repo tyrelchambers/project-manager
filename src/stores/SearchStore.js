@@ -1,15 +1,18 @@
-import { makeObservable, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 
 class SearchStore {
   constructor() {
     makeObservable(this, {
       results: observable,
+      setResults: action,
     });
   }
 
   results = [];
 
-  search(query) {}
+  setResults(results) {
+    this.results = results;
+  }
 }
 
 export default new SearchStore();

@@ -5,13 +5,13 @@
 }
 
 .avatar.lg {
-  height: 130px;
-  width: 130px;
+  min-height: 130px;
+  min-width: 130px;
 }
 
 .avatar.sm {
-  width: 60px;
-  height: 60px;
+  min-width: 60px;
+  min-height: 60px;
 }
 
 .avatar.no-image {

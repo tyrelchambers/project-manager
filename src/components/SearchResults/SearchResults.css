@@ -1,0 +1,8 @@
+.results-wrapper {
+  background-color: var(--white);
+  width: 100%;
+}
+
+.results-wrapper > div:not(:last-child) {
+  margin-bottom: 0.5em;
+}

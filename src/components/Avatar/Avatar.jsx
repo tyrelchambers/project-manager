@@ -2,7 +2,7 @@ import React from "react";
 import "./Avatar.css";
 
 const Avatar = ({ url, size, className }) => {
-  let avatarSize;
+  let avatarSize = "xs";
 
   if (size === "small") {
     avatarSize = "sm";
@@ -13,7 +13,9 @@ const Avatar = ({ url, size, className }) => {
   }
 
   const noImage = (
-    <div className={`avatar ${avatarSize} no-image`}>
+    <div
+      className={`avatar ${avatarSize} no-image ${className ? className : ""}`}
+    >
       <i
         className={`fas fa-user-astronaut ${
           avatarSize === "lg" ? "text-5xl" : "text-sm"
