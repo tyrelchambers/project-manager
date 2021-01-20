@@ -34,6 +34,6 @@ export const getAxios = async ({
       if (err.response) {
         toast.error(err.response.data);
       }
-      return false;
+      return err;
     });
 };

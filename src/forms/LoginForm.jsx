@@ -26,8 +26,11 @@ const LoginForm = () => {
         password: credentials.password,
       },
     }).then((res) => {
-      if (res) {
+      if (res.token) {
         setToken({ value: res.token });
+      }
+
+      if (res.user) {
         window.location.pathname = "/";
       }
     });

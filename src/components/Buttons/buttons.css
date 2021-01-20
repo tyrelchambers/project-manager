@@ -12,6 +12,10 @@
   transition: all 0.2s ease;
 }
 
+.btn.primary {
+  background: linear-gradient(to right, var(--pink-400), var(--pink-600));
+}
+
 .btn:hover {
   transform: scale(0.99);
 }
@@ -38,7 +42,7 @@
   color: var(--gray-900);
 }
 
-.btn.primary.muted {
+.btn.muted {
   background-color: var(--gray-800);
   color: var(--gray-100);
 }

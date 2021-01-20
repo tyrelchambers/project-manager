@@ -1,8 +1,8 @@
 import React from "react";
 import "./FormLabel.css";
-const FormLabel = ({ name, text }) => {
+const FormLabel = ({ name, text, forAttr }) => {
   return (
-    <label htmlFor={name} className="form-label">
+    <label htmlFor={name} className="form-label" for={forAttr}>
       {text}
     </label>
   );
