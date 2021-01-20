@@ -1,9 +1,12 @@
 import { inject, observer } from "mobx-react";
-import React from "react";
+import React, { useState } from "react";
 import NewFeedPostForm from "../../forms/NewFeedPostForm";
 import Avatar from "../Avatar/Avatar";
+import FeedSnippetSearch from "../FeedSnippetSearch/FeedSnippetSearch";
 
-const NewFeedPost = ({ UserStore }) => {
+const NewFeedPost = ({ UserStore, SearchStore }) => {
+  const [toggleCode, setToggleSearch] = useState(false);
+
   return (
     <div className="new-feed-post rounded-lg  container max-w-screen-lg mb-16">
       <div className="flex items-center justify-between">
@@ -15,8 +18,12 @@ const NewFeedPost = ({ UserStore }) => {
           </div>
         </div>
 
-        <div className="feed-post-actions">
-          <i className="fas fa-code text-gray-600" title="Add snippet"></i>
+        <div className="feed-post-actions flex justify-end flex-1 items-center">
+          <i
+            className="fas fa-code text-gray-400 mr-4"
+            onClick={() => setToggleSearch(!toggleCode)}
+          ></i>
+          {toggleCode && <FeedSnippetSearch />}
         </div>
       </div>
       <NewFeedPostForm />
@@ -24,4 +31,4 @@ const NewFeedPost = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(NewFeedPost));
+export default inject("UserStore", "SearchStore")(observer(NewFeedPost));

@@ -2,16 +2,15 @@ import { inject, observer } from "mobx-react";
 import React, { useState } from "react";
 import { getAxios } from "../../api";
 import SearchResults from "../../layouts/SearchResults/SearchResults";
-import Avatar from "../Avatar/Avatar";
 import Search from "../Search/Search";
 
-const UserSearch = () => {
+const FeedSnippetSearch = ({ SearchStore }) => {
   const [results, setResults] = useState([]);
 
   const queryHandler = (e) => {
     if (e.target.value.length > 3) {
       getAxios({
-        url: "/search/users",
+        url: "/search/snippets",
         params: {
           q: e.target.value,
         },
@@ -21,13 +20,17 @@ const UserSearch = () => {
     }
   };
   return (
-    <Search onChange={queryHandler} placeholder="Search users...">
+    <Search onChange={queryHandler} placeholder="Search for a snippet">
       {results.length > 0 && (
         <SearchResults>
           {results.map((result) => (
             <div className="flex items-center">
-              <Avatar url={result.avatar} className="mr-4" />
-              <p className="text-gray-800 font-bold text-lg">{result.name}</p>
+              <p
+                className="text-gray-800 font-bold text-lg"
+                onClick={() => SearchStore.setPostSnippet(result)}
+              >
+                {result.name}
+              </p>
             </div>
           ))}
         </SearchResults>
@@ -36,4 +39,4 @@ const UserSearch = () => {
   );
 };
 
-export default UserSearch;
+export default inject("SearchStore")(observer(FeedSnippetSearch));
