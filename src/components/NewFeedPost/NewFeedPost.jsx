@@ -8,8 +8,8 @@ const NewFeedPost = ({ UserStore }) => {
     <div className="new-feed-post rounded-lg  container max-w-screen-lg mb-16">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <Avatar url={UserStore.user.avatar} size="small" className="mr-4" />
-          <div className="flex flex-col">
+          <Avatar url={UserStore.user.avatar} size="small" />
+          <div className="flex flex-col ml-4">
             <p className="text-sm">Posting as:</p>
             <p className="font-bold text-lg">Tyrel Chambers</p>
           </div>

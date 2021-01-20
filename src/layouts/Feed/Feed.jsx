@@ -22,9 +22,11 @@ const Feed = () => {
       {feed.length === 0 && (
         <p className="font-bold text-center">Nothing to show!</p>
       )}
-      {feed.map((post) => (
-        <FeedPost post={post} />
-      ))}
+      {feed
+        .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
+        .map((post) => (
+          <FeedPost post={post} />
+        ))}
     </div>
   );
 };

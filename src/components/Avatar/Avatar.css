@@ -15,5 +15,9 @@
 }
 
 .avatar.no-image {
-  background-color: var(--gray-600);
+  background: var(--pinkGradient);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
 }
