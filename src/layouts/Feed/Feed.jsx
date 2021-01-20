@@ -19,12 +19,12 @@ const Feed = () => {
   }, []);
   return (
     <div className="container max-w-screen-lg">
-      {/* {feed.length === 0 && (
+      {feed.length === 0 && (
         <p className="font-bold text-center">Nothing to show!</p>
       )}
       {feed.map((post) => (
         <FeedPost post={post} />
-      ))} */}
+      ))}
     </div>
   );
 };
