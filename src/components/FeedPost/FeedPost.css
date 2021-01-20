@@ -1,3 +1,7 @@
 .feed-post:not(:last-child) {
   margin-bottom: 2em;
 }
+
+.post-snippet-wrapper {
+  border: 2px solid var(--pink-500);
+}

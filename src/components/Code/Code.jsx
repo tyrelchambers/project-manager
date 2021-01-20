@@ -4,7 +4,11 @@ import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const Code = ({ language, code }) => {
   return (
-    <SyntaxHighlighter language={language} style={nord}>
+    <SyntaxHighlighter
+      language={language}
+      style={nord}
+      customStyle={{ marginTop: 0, maginBotton: 0 }}
+    >
       {code}
     </SyntaxHighlighter>
   );

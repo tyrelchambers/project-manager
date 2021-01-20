@@ -22,6 +22,9 @@ const NewFeedPostForm = ({ UserStore, SearchStore }) => {
       data: {
         post: state.post,
         user: UserStore.user,
+        attached: {
+          snippet: SearchStore.postSnippet.uuid,
+        },
       },
     });
   };
