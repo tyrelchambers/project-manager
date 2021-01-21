@@ -7,7 +7,8 @@ const Code = ({ language, code }) => {
     <SyntaxHighlighter
       language={language}
       style={nord}
-      customStyle={{ marginTop: 0, maginBotton: 0 }}
+      customStyle={{ marginTop: 0, marginBottom: 0 }}
+      wrapLongLines
     >
       {code}
     </SyntaxHighlighter>
