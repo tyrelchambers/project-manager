@@ -3,6 +3,10 @@
   width: 100%;
 }
 
-.results-wrapper > div:not(:last-child) {
+.results-wrapper > a:not(:last-child) {
   margin-bottom: 0.5em;
+}
+
+.item-wrapper:hover p {
+  color: var(--pink-500);
 }
