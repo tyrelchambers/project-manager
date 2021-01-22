@@ -17,7 +17,7 @@
 }
 
 .post-snippet-wrapper {
-  border: 2px solid var(--pink-500);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .raised-icon {
