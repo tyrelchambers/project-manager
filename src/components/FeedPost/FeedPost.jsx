@@ -48,7 +48,7 @@ const FeedPost = ({ post, clickHandler, isModal }) => {
                 className="flex items-center raised-icon primary mr-8"
                 onClick={clickHandler}
               >
-                <i class="fas fa-grip-horizontal text-white text-xl mr-4"></i>
+                <i className="fas fa-grip-horizontal text-white text-xl mr-4"></i>
                 <p className="font-bold text-white">View snippet</p>
               </div>
             )}

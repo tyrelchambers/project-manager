@@ -31,7 +31,11 @@ const Feed = ({ ModalStore }) => {
       {feed
         .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
         .map((post) => (
-          <FeedPost post={post} clickHandler={() => clickhandler(post)} />
+          <FeedPost
+            key={post.uuid}
+            post={post}
+            clickHandler={() => clickhandler(post)}
+          />
         ))}
     </div>
   );

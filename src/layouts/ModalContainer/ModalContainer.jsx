@@ -4,6 +4,10 @@ import { inject, observer } from "mobx-react";
 
 const ModalContainer = ({ ModalStore }) => {
   if (ModalStore.isOpen) {
+    const body = document
+      .querySelector("body")
+      .classList.add("overflow-hidden");
+    console.log(body);
     return (
       <div className="modal-wrapper relative">
         <div
@@ -18,6 +22,8 @@ const ModalContainer = ({ ModalStore }) => {
       </div>
     );
   } else {
+    document.querySelector("body").classList.remove("overflow-hidden");
+
     return null;
   }
 };
