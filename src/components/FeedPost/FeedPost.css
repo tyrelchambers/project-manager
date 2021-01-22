@@ -1,7 +1,48 @@
-.feed-post:not(:last-child) {
-  margin-bottom: 2em;
+.feed-post {
+  transition: all 0.2s ease;
+}
+
+.feed-post.is-not-modal {
+  margin-bottom: 3em;
+  margin-top: 3em;
+}
+
+.feed-post.is-not-modal:hover {
+  background-color: var(--gray-800);
+  cursor: pointer;
 }
 
 .post-snippet-wrapper {
   border: 2px solid var(--pink-500);
+}
+
+.raised-icon {
+  display: flex;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.raised-icon.small {
+  border-radius: 50%;
+  background: var(--white);
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 35px;
+}
+
+.raised-icon.small i {
+  margin-right: -1px;
+  margin-bottom: -1px;
+}
+
+.raised-icon.primary {
+  background: var(--gray-700);
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.raised-icon.primary:hover {
+  background: var(--pink-500);
 }
