@@ -26,7 +26,10 @@ const UserSearch = () => {
       {results.length > 0 && (
         <SearchResults>
           {results.map((result) => (
-            <Link to={`/user/${result.uuid}`} className="flex items-center">
+            <Link
+              to={`/user/${result.uuid}`}
+              className="flex items-center item-wrapper"
+            >
               <Avatar url={result.avatar} className="mr-4" />
               <p className="text-gray-800 font-bold text-lg">{result.name}</p>
             </Link>
