@@ -20,11 +20,16 @@ import Signup from "../pages/Signup/Signup";
 import SnippetEdit from "../pages/SnippetEdit/SnippetEdit";
 import Snippets from "../pages/Snippets/Snippets";
 import SnippetShow from "../pages/SnippetShow/SnippetShow";
+import UserShowPage from "../pages/UserShowPage/UserShowPage";
 
 const sharedRoutes = [
   {
     slug: "/snippets/:snippet_uuid",
     component: SnippetShow,
+  },
+  {
+    slug: "/user/:user_id",
+    component: UserShowPage,
   },
 ];
 
