@@ -48,6 +48,10 @@ const App = () => {
         }).then((res) => {
           if (res.user) {
             stores.UserStore.setUser(res.user);
+          } else {
+            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("token");
+            window.location.reload();
           }
         });
       };
