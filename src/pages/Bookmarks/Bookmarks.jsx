@@ -24,8 +24,6 @@ const Bookmarks = ({ ModalStore, UserStore }) => {
     ModalStore.setIsOpen(true);
   };
 
-  if (!bookmarks.length) return null;
-
   return (
     <DisplayWrapper>
       <H1>My Bookmarks</H1>
