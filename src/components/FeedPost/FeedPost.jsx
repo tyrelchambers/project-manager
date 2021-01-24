@@ -8,11 +8,18 @@ import { getAxios } from "../../api";
 
 const FeedPost = ({ post, clickHandler, isModal, user }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+
   useEffect(() => {
     const exists = user.bookmarks.filter((b) => b.uuid === post.uuid);
+    const liked = post.likes.filter((l) => l.uuid === user.uuid);
 
     if (exists.length > 0) {
       setIsBookmarked(true);
+    }
+
+    if (liked.length > 0) {
+      setIsLiked(true);
     }
   }, []);
 
@@ -40,10 +47,30 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
     });
   };
 
+  const likeHandler = async () => {
+    await getAxios({
+      url: `/feed/${post.uuid}/like`,
+      method: "post",
+    }).then((res) => setIsLiked(true));
+  };
+
+  const dislikeHandler = async () => {
+    await getAxios({
+      url: `/feed/${post.uuid}/dislike`,
+      method: "delete",
+    }).then((res) => setIsLiked(false));
+  };
+
   const bookmarkIcon = isBookmarked ? (
     <i className="fas fa-bookmark text-gray-800" onClick={removeBookmark}></i>
   ) : (
     <i className="far fa-bookmark text-gray-800" onClick={bookmarkHandler}></i>
+  );
+
+  const likeIcon = isLiked ? (
+    <i className="fas fa-heart  text-red-500" onClick={dislikeHandler}></i>
+  ) : (
+    <i className="far fa-heart  text-gray-500" onClick={likeHandler}></i>
   );
 
   return (
@@ -101,8 +128,7 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
               </div>
             )}
             <div className="flex items-center  mr-8 raised-icon small">
-              <i className="fas fa-heart  text-red-500"></i>
-              {/* <p className="font-bold">{post.likes.length}</p> */}
+              {likeIcon}
             </div>
 
             <div className="flex items-center raised-icon small">
