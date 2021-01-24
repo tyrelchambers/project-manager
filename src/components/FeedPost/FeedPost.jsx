@@ -3,6 +3,7 @@ import "./FeedPost.css";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import Avatar from "../Avatar/Avatar";
 import Code from "../Code/Code";
+import { Link } from "react-router-dom";
 
 const FeedPost = ({ post, clickHandler, isModal }) => {
   return (
@@ -11,7 +12,6 @@ const FeedPost = ({ post, clickHandler, isModal }) => {
         className={`feed-post flex p-4 rounded-lg ${
           isModal ? "" : "is-not-modal"
         }`}
-        onClick={clickHandler}
       >
         <div className="feed-post-body flex flex-col w-full">
           <div className="flex justify-between items-center w-full">
@@ -20,16 +20,24 @@ const FeedPost = ({ post, clickHandler, isModal }) => {
                 <Avatar url={post.User.avatar} size="small" />
               </div>
 
-              <p className="font-bold mb-2 text-lg text-gray-200">
+              <Link
+                to={`/user/${post.User.uuid}`}
+                className="font-bold mb-2 text-lg text-gray-200 hover:underline"
+              >
                 {post.User.name}
-              </p>
+              </Link>
             </div>
             <p className="italic text-sm text-gray-400">
               {formatDistanceToNow(new Date(post.createdAt))} ago
             </p>
           </div>
 
-          <p className="text-white mt-8 mb-8 font-bold">{post.post}</p>
+          <p
+            className="text-white mt-8 mb-8 font-bold post-body"
+            onClick={clickHandler}
+          >
+            {post.post}
+          </p>
           {post.CodeSnippet && isModal && (
             <div className="flex flex-col">
               <div
