@@ -92,7 +92,7 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
             </div>
           </div>
 
-          {UserStore.user.uuid && (
+          {UserStore.user.uuid && UserStore.user.uuid !== user.uuid && (
             <div className="max-w-2xl">
               <FollowButton
                 isFollowing={isFollowing}

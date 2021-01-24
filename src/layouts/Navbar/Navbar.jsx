@@ -4,6 +4,7 @@ import "./Navbar.css";
 import { navRoutes, unauthenticatedRoutes } from "../../routes/nav.routes";
 import UserWidget from "../../components/UserWidget/UserWidget";
 import { inject, observer } from "mobx-react";
+import NavToolbar from "../../components/NavToolbar/NavToolbar";
 const Navbar = ({ UserStore }) => {
   const [openSubnav, setOpenSubnav] = useState("");
   const pathWithSearch = window.location.pathname + window.location.search;
@@ -84,13 +85,15 @@ const Navbar = ({ UserStore }) => {
 
   return (
     <nav className="m-2 navbar">
-      <div className="mb-4">
+      <div className="mb-4 h-full">
         {UserStore.user.uuid ? (
-          <>
+          <div className="relative h-full">
             <UserWidget />
 
             <AuthenticatedRoutes />
-          </>
+
+            <NavToolbar user={UserStore.user} />
+          </div>
         ) : (
           <UnauthenticatedRoutes />
         )}
