@@ -7,9 +7,10 @@ import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import { MainButton } from "../../components/Buttons/Buttons";
 import FeedPost from "../../components/FeedPost/FeedPost";
 import { inject, observer } from "mobx-react";
-const UserShowPage = ({ ModalStore }) => {
+const UserShowPage = ({ ModalStore, UserStore }) => {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
+  const [isFollowing, setIsFollowing] = useState(false);
   useEffect(() => {
     const fn = async () => {
       await getAxios({
@@ -24,11 +25,47 @@ const UserShowPage = ({ ModalStore }) => {
     fn();
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      const alreadyFollowing = user.followers.filter(
+        (f) => f.uuid === UserStore.user.uuid
+      );
+
+      alreadyFollowing.length === 0
+        ? setIsFollowing(false)
+        : setIsFollowing(true);
+    }
+  }, []);
+
   if (!user) return null;
 
   const clickhandler = (post) => {
     ModalStore.setRender(<FeedPost post={post} isModal={true} />);
     ModalStore.setIsOpen(true);
+  };
+
+  const followHandler = async () => {
+    await getAxios({
+      url: "/social/follow",
+      method: "post",
+      data: {
+        toFollow: user_id,
+      },
+    });
+
+    setIsFollowing(true);
+  };
+
+  const unfollowHandler = async () => {
+    await getAxios({
+      url: "/social/unfollow",
+      method: "post",
+      data: {
+        toUnfollow: user_id,
+      },
+    });
+
+    setIsFollowing(false);
   };
 
   return (
@@ -41,25 +78,30 @@ const UserShowPage = ({ ModalStore }) => {
           <div className="flex items-center w-full justify-evenly mt-6">
             <div className="flex flex-col">
               <p className="text-gray-300">Followers</p>
-              <p className="font-bold text-3xl">1,000</p>
+              <p className="font-bold text-3xl">{user.followers.length}</p>
             </div>
 
             <div className="flex flex-col">
               <p className="text-gray-300">Following</p>
-              <p className="font-bold text-3xl">1,000</p>
+              <p className="font-bold text-3xl">{user.followees.length}</p>
             </div>
 
             <div className="flex flex-col">
               <p className="text-gray-300">Snippets</p>
-              <p className="font-bold text-3xl">1,000</p>
+              <p className="font-bold text-3xl">{user.CodeSnippets.length}</p>
             </div>
           </div>
 
-          <div className="max-w-2xl">
-            <MainButton classes="mt-10" default>
-              Follow {user.name}
-            </MainButton>
-          </div>
+          {UserStore.user.uuid && (
+            <div className="max-w-2xl">
+              <FollowButton
+                isFollowing={isFollowing}
+                followHandler={followHandler}
+                unfollowHandler={unfollowHandler}
+                user={user}
+              />
+            </div>
+          )}
 
           <div className="container max-w-screen-lg">
             {user.FeedPosts.length === 0 && (
@@ -68,7 +110,11 @@ const UserShowPage = ({ ModalStore }) => {
             {user.FeedPosts.sort((a, b) =>
               a.createdAt > b.createdAt ? -1 : 1
             ).map((post) => (
-              <FeedPost post={post} clickHandler={() => clickhandler(post)} />
+              <FeedPost
+                key={post.uuid}
+                post={post}
+                clickHandler={() => clickhandler(post)}
+              />
             ))}
           </div>
         </div>
@@ -77,4 +123,21 @@ const UserShowPage = ({ ModalStore }) => {
   );
 };
 
-export default inject("ModalStore")(observer(UserShowPage));
+const FollowButton = ({
+  isFollowing,
+  user,
+  followHandler,
+  unfollowHandler,
+}) => {
+  return !isFollowing ? (
+    <MainButton classes="mt-10" default onClick={followHandler}>
+      Follow {user.name}
+    </MainButton>
+  ) : (
+    <MainButton classes="mt-10" muted onClick={unfollowHandler}>
+      Unfollow {user.name}
+    </MainButton>
+  );
+};
+
+export default inject("ModalStore", "UserStore")(observer(UserShowPage));

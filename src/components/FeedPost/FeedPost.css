@@ -11,9 +11,12 @@
   border-bottom: 2px solid var(--gray-800);
 }
 
+.post-body {
+  cursor: pointer;
+}
+
 .feed-post.is-not-modal:hover {
   background-color: var(--gray-800);
-  cursor: pointer;
 }
 
 .post-snippet-wrapper {
