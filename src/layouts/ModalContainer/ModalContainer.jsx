@@ -4,10 +4,7 @@ import { inject, observer } from "mobx-react";
 
 const ModalContainer = ({ ModalStore }) => {
   if (ModalStore.isOpen) {
-    const body = document
-      .querySelector("body")
-      .classList.add("overflow-hidden");
-    console.log(body);
+    document.querySelector("body").classList.add("overflow-hidden");
     return (
       <div className="modal-wrapper relative">
         <div

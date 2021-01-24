@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 
 import Account from "../pages/Account/Account";
+import Bookmarks from "../pages/Bookmarks/Bookmarks";
 import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";
 import EnvVars from "../pages/EnvVars/EnvVars";
 import EnvVarShow from "../pages/EnvVarShow/EnvVarShow";
@@ -123,5 +124,9 @@ export default [
       window.sessionStorage.removeItem("token");
       window.location.pathname = "/";
     },
+  },
+  {
+    slug: "/bookmarks",
+    component: Bookmarks,
   },
 ];

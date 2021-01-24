@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./FeedPost.css";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import Avatar from "../Avatar/Avatar";
 import Code from "../Code/Code";
 import { Link } from "react-router-dom";
+import { getAxios } from "../../api";
 
-const FeedPost = ({ post, clickHandler, isModal }) => {
+const FeedPost = ({ post, clickHandler, isModal, user }) => {
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  useEffect(() => {
+    console.log(post, "----- post ----");
+    const exists = post.User.Bookmarks.filter((b) => b.postId === post.uuid);
+
+    if (exists.length > 0) {
+      setIsBookmarked(true);
+    }
+  }, []);
+
+  const bookmarkHandler = async () => {
+    await getAxios({
+      url: "/bookmarks/save",
+      method: "post",
+      data: {
+        postId: post.uuid,
+      },
+    }).then((res) => {
+      setIsBookmarked(true);
+    });
+  };
+  const bookmarkIcon = isBookmarked ? (
+    <i className="fas fa-bookmark text-gray-800"></i>
+  ) : (
+    <i className="far fa-bookmark text-gray-800" onClick={bookmarkHandler}></i>
+  );
+
   return (
     <div className="feed-post-border">
       <div
@@ -66,7 +94,7 @@ const FeedPost = ({ post, clickHandler, isModal }) => {
             </div>
 
             <div className="flex items-center raised-icon small">
-              <i className="far fa-bookmark text-gray-800"></i>
+              {bookmarkIcon}
             </div>
           </div>
         </div>

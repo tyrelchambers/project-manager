@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getAxios } from "../../api";
 import FeedPost from "../../components/FeedPost/FeedPost";
 
-const Feed = ({ ModalStore }) => {
+const Feed = ({ ModalStore, UserStore }) => {
   const [feed, setFeed] = useState([]);
   useEffect(() => {
     const fn = async () => {
@@ -32,6 +32,7 @@ const Feed = ({ ModalStore }) => {
         .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
         .map((post) => (
           <FeedPost
+            user={UserStore.user}
             key={post.uuid}
             post={post}
             clickHandler={() => clickhandler(post)}
@@ -41,4 +42,4 @@ const Feed = ({ ModalStore }) => {
   );
 };
 
-export default inject("ModalStore")(observer(Feed));
+export default inject("ModalStore", "UserStore")(observer(Feed));

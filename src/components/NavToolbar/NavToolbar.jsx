@@ -9,7 +9,7 @@ const NavToolbar = ({ user }) => {
         <i className="fas fa-user-astronaut"></i>
       </Link>
 
-      <Link to={`/user/bookmarks`} className="nav-toolbar-item">
+      <Link to={`/bookmarks`} className="nav-toolbar-item">
         <i className="fas fa-bookmark"></i>
       </Link>
 
