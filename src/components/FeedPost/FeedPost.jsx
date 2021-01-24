@@ -10,7 +10,7 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   useEffect(() => {
     const exists = user.bookmarks.filter((b) => b.uuid === post.uuid);
-    console.log(post.uuid, exists);
+
     if (exists.length > 0) {
       setIsBookmarked(true);
     }

@@ -1,5 +1,6 @@
 import { inject, observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
+import { getAxios } from "../../api";
 import FeedPost from "../../components/FeedPost/FeedPost";
 import { H1 } from "../../components/Headings/Headings";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
@@ -8,10 +9,13 @@ const Bookmarks = ({ ModalStore, UserStore }) => {
   const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
-    if (UserStore.user.bookmarks) {
-      setBookmarks([...UserStore.user.bookmarks]);
-    }
-  }, [UserStore.user]);
+    const fn = async () => {
+      await getAxios({
+        url: "/bookmarks",
+      }).then((res) => setBookmarks(res.bookmarks));
+    };
+    fn();
+  }, []);
 
   const clickhandler = (post) => {
     ModalStore.setRender(
@@ -20,7 +24,7 @@ const Bookmarks = ({ ModalStore, UserStore }) => {
     ModalStore.setIsOpen(true);
   };
 
-  if (!UserStore.user.bookmarks) return null;
+  if (!bookmarks.length) return null;
 
   return (
     <DisplayWrapper>
