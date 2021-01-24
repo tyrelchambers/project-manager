@@ -23,10 +23,10 @@ export const getAxios = async ({
     },
   })
     .then((res) => {
-      if (res.data.message) {
-        toast.success(res.data.message);
-      }
-      if (res) {
+      if (res.status === 200) {
+        if (res.data.message) {
+          toast.success(res.data.message);
+        }
         return res.data;
       }
     })

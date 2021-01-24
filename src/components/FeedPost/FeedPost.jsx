@@ -9,7 +9,6 @@ import { getAxios } from "../../api";
 const FeedPost = ({ post, clickHandler, isModal, user }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   useEffect(() => {
-    console.log(post, "----- post ----");
     const exists = post.User.Bookmarks.filter((b) => b.postId === post.uuid);
 
     if (exists.length > 0) {
@@ -28,8 +27,21 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
       setIsBookmarked(true);
     });
   };
+
+  const removeBookmark = async () => {
+    await getAxios({
+      url: "/bookmarks/remove",
+      method: "delete",
+      data: {
+        bookmark_id: post.uuid,
+      },
+    }).then((res) => {
+      setIsBookmarked(false);
+    });
+  };
+
   const bookmarkIcon = isBookmarked ? (
-    <i className="fas fa-bookmark text-gray-800"></i>
+    <i className="fas fa-bookmark text-gray-800" onClick={removeBookmark}></i>
   ) : (
     <i className="far fa-bookmark text-gray-800" onClick={bookmarkHandler}></i>
   );
