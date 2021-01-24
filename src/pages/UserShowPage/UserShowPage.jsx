@@ -104,18 +104,19 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
           )}
 
           <div className="container max-w-screen-lg">
-            {user.FeedPosts.length === 0 && (
+            {user.posts.length === 0 && (
               <p className="font-bold text-center">Nothing to show!</p>
             )}
-            {user.FeedPosts.sort((a, b) =>
-              a.createdAt > b.createdAt ? -1 : 1
-            ).map((post) => (
-              <FeedPost
-                key={post.uuid}
-                post={post}
-                clickHandler={() => clickhandler(post)}
-              />
-            ))}
+            {user.posts
+              .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
+              .map((post) => (
+                <FeedPost
+                  key={post.uuid}
+                  post={post}
+                  user={UserStore.user}
+                  clickHandler={() => clickhandler(post)}
+                />
+              ))}
           </div>
         </div>
       </div>
