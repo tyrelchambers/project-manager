@@ -13,7 +13,7 @@ const NavToolbar = ({ user }) => {
         <i className="fas fa-bookmark"></i>
       </Link>
 
-      <Link to={`/user/likes`} className="nav-toolbar-item">
+      <Link to={`/likes`} className="nav-toolbar-item">
         <i className="fas fa-heart"></i>
       </Link>
     </div>

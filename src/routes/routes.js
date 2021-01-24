@@ -8,6 +8,7 @@ import EnvVars from "../pages/EnvVars/EnvVars";
 import EnvVarShow from "../pages/EnvVarShow/EnvVarShow";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Home from "../pages/Home/Home";
+import LikedPosts from "../pages/LikedPosts/LikedPosts";
 import Login from "../pages/Login/Login";
 import NewEnvVar from "../pages/NewEnvVar/NewEnvVar";
 import NewPackage from "../pages/NewPackage/NewPackage";
@@ -128,5 +129,9 @@ export default [
   {
     slug: "/bookmarks",
     component: Bookmarks,
+  },
+  {
+    slug: "/likes",
+    component: LikedPosts,
   },
 ];

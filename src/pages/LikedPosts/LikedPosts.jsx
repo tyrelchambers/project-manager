@@ -5,15 +5,16 @@ import FeedPost from "../../components/FeedPost/FeedPost";
 import { H1 } from "../../components/Headings/Headings";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
-const Bookmarks = ({ ModalStore, UserStore }) => {
-  const [bookmarks, setBookmarks] = useState([]);
+const LikedPosts = ({ UserStore, ModalStore }) => {
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fn = async () => {
       await getAxios({
-        url: "/bookmarks",
-      }).then((res) => setBookmarks(res.bookmarks));
+        url: "/user/likes",
+      }).then((res) => setPosts(res.likes));
     };
+
     fn();
   }, []);
 
@@ -24,29 +25,24 @@ const Bookmarks = ({ ModalStore, UserStore }) => {
     ModalStore.setIsOpen(true);
   };
 
-  if (!bookmarks.length) return null;
-
   return (
     <DisplayWrapper>
-      <H1>My Bookmarks</H1>
+      <H1>Liked Posts</H1>
+      {posts.length === 0 && <p className="font-bold">No liked posts</p>}
 
-      {bookmarks.length === 0 && (
-        <p className="font-bold mt-8">No saved bookmarks</p>
-      )}
-
-      {bookmarks.length > 0 &&
-        bookmarks
+      {posts.length > 0 &&
+        posts
           .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
-          .map((bk) => (
+          .map((post) => (
             <FeedPost
               user={UserStore.user}
-              key={bk.id}
-              post={bk.FeedPost}
-              clickHandler={() => clickhandler(bk)}
+              key={post.id}
+              post={post}
+              clickHandler={() => clickhandler(post)}
             />
           ))}
     </DisplayWrapper>
   );
 };
 
-export default inject("ModalStore", "UserStore")(observer(Bookmarks));
+export default inject("UserStore", "ModalStore")(observer(LikedPosts));

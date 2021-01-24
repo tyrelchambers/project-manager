@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
@@ -12,7 +12,7 @@ import { getAxios } from "./api";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UNAUTHENTICATED } from "./routes/routes";
-import isEmpty from "./helpers/isEmpty";
+
 const Unauthenticated = () =>
   UNAUTHENTICATED.map((route, id) => (
     <Route
@@ -54,7 +54,7 @@ const App = () => {
 
       fn();
     }
-  }, []);
+  }, [token]);
 
   return token ? <Authenticated /> : <Unauthenticated />;
 };

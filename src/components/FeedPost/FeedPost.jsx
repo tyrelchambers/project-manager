@@ -7,21 +7,15 @@ import { Link } from "react-router-dom";
 import { getAxios } from "../../api";
 
 const FeedPost = ({ post, clickHandler, isModal, user }) => {
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    const exists = user.bookmarks.filter((b) => b.uuid === post.uuid);
-    const liked = post.likes.filter((l) => l.uuid === user.uuid);
-
-    if (exists.length > 0) {
-      setIsBookmarked(true);
-    }
+    const liked = post.likedPosts.filter((l) => l.uuid === user.uuid);
 
     if (liked.length > 0) {
       setIsLiked(true);
     }
-  }, []);
+  }, [user]);
 
   const bookmarkHandler = async () => {
     await getAxios({
@@ -30,20 +24,6 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
       data: {
         postId: post.uuid,
       },
-    }).then((res) => {
-      setIsBookmarked(true);
-    });
-  };
-
-  const removeBookmark = async () => {
-    await getAxios({
-      url: "/bookmarks/remove",
-      method: "delete",
-      data: {
-        bookmark_id: post.uuid,
-      },
-    }).then((res) => {
-      setIsBookmarked(false);
     });
   };
 
@@ -60,12 +40,6 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
       method: "delete",
     }).then((res) => setIsLiked(false));
   };
-
-  const bookmarkIcon = isBookmarked ? (
-    <i className="fas fa-bookmark text-gray-800" onClick={removeBookmark}></i>
-  ) : (
-    <i className="far fa-bookmark text-gray-800" onClick={bookmarkHandler}></i>
-  );
 
   const likeIcon = isLiked ? (
     <i className="fas fa-heart  text-red-500" onClick={dislikeHandler}></i>
@@ -132,7 +106,10 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
             </div>
 
             <div className="flex items-center raised-icon small">
-              {bookmarkIcon}
+              <i
+                className="fas fa-bookmark text-gray-800"
+                onClick={bookmarkHandler}
+              ></i>
             </div>
           </div>
         </div>
