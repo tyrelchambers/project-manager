@@ -20,7 +20,9 @@ const Feed = ({ ModalStore, UserStore }) => {
   }, []);
 
   const clickhandler = (post) => {
-    ModalStore.setRender(<FeedPost post={post} isModal={true} />);
+    ModalStore.setRender(
+      <FeedPost user={UserStore.user} post={post} isModal={true} />
+    );
     ModalStore.setIsOpen(true);
   };
   return (
@@ -28,6 +30,7 @@ const Feed = ({ ModalStore, UserStore }) => {
       {feed.length === 0 && (
         <p className="font-bold text-center">Nothing to show!</p>
       )}
+
       {feed
         .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
         .map((post) => (
