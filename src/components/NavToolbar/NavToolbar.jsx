@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NotificationBell from "../../layouts/NotificationBell/NotificationBell";
 import "./NavToolbar.css";
 
 const NavToolbar = ({ user }) => {
@@ -16,6 +17,10 @@ const NavToolbar = ({ user }) => {
       <Link to={`/likes`} className="nav-toolbar-item">
         <i className="fas fa-heart"></i>
       </Link>
+
+      <div className="nav-toolbar-item with-badge relative">
+        <NotificationBell />
+      </div>
     </div>
   );
 };

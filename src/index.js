@@ -12,6 +12,9 @@ import { getAxios } from "./api";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UNAUTHENTICATED } from "./routes/routes";
+import { io } from "socket.io-client";
+
+io(process.env.REACT_APP_BACKEND);
 
 const Unauthenticated = () =>
   UNAUTHENTICATED.map((route, id) => (

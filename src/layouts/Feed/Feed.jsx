@@ -28,7 +28,6 @@ const Feed = ({ ModalStore, UserStore }) => {
   };
   return (
     <div className="container max-w-screen-lg">
-      <H1>Feed</H1>
       {feed.length === 0 && (
         <p className="font-bold text-center">Nothing to show!</p>
       )}
