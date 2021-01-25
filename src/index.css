@@ -164,5 +164,5 @@ p {
 }
 
 .pink-gradient {
-  background: var(--pinkGradient);
+  background: var(--pinkGradient) !important;
 }

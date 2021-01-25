@@ -1,6 +1,13 @@
 import React from "react";
-
+import { toast } from "react-toastify";
+import { socket } from "../..";
+import { heartToast } from "../../components/Notifications/Notifications";
 const NotificationBell = () => {
+  socket.on("notification", (data) => {
+    if (data.type === "post_like") {
+      heartToast();
+    }
+  });
   return (
     <>
       <i className="fas fa-bell"></i>

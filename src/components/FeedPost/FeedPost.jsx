@@ -5,6 +5,7 @@ import Avatar from "../Avatar/Avatar";
 import Code from "../Code/Code";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api";
+import { socket } from "../..";
 
 const FeedPost = ({ post, clickHandler, isModal, user }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -31,7 +32,13 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
     await getAxios({
       url: `/feed/${post.uuid}/like`,
       method: "post",
-    }).then((res) => setIsLiked(true));
+    }).then((res) => {
+      setIsLiked(true);
+      socket.emit("notification_post_like", {
+        name: user.name,
+        action: "liked",
+      });
+    });
   };
 
   const dislikeHandler = async () => {
