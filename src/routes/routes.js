@@ -33,6 +33,10 @@ const sharedRoutes = [
     slug: "/user/:user_id",
     component: UserShowPage,
   },
+  {
+    slug: "/login",
+    component: Login,
+  },
 ];
 
 export const UNAUTHENTICATED = [
@@ -40,10 +44,6 @@ export const UNAUTHENTICATED = [
   {
     slug: "/signup",
     component: Signup,
-  },
-  {
-    slug: "/login",
-    component: Login,
   },
   {
     slug: "/",

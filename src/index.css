@@ -166,3 +166,14 @@ p {
 .pink-gradient {
   background: var(--pinkGradient) !important;
 }
+
+.brown-gradient {
+  background: linear-gradient(
+    to right,
+    #b0773d,
+    #be7733,
+    #cc7629,
+    #db751e,
+    #eb7212
+  ) !important;
+}

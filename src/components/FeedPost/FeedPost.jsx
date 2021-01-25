@@ -6,6 +6,7 @@ import Code from "../Code/Code";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api";
 import { socket } from "../..";
+import { bookmarkToast } from "../Notifications/Notifications";
 
 const FeedPost = ({ post, clickHandler, isModal, user }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -25,7 +26,7 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
       data: {
         postId: post.uuid,
       },
-    });
+    }).then((res) => bookmarkToast());
   };
 
   const likeHandler = async () => {
