@@ -12,12 +12,14 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    const liked = post.likedPosts.filter((l) => l.uuid === user.uuid);
+    if (user) {
+      const liked = post.likedPosts.filter((l) => l.uuid === user.uuid);
 
-    if (liked.length > 0) {
-      setIsLiked(true);
+      if (liked.length > 0) {
+        setIsLiked(true);
+      }
     }
-  }, [user]);
+  }, []);
 
   const bookmarkHandler = async () => {
     await getAxios({

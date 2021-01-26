@@ -12,6 +12,7 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false);
+
   useEffect(() => {
     const fn = async () => {
       await getAxios({
@@ -32,8 +33,6 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
         (f) => f.uuid === UserStore.user.uuid
       );
 
-      console.log(alreadyFollowing);
-
       alreadyFollowing.length === 0
         ? setIsFollowing(false)
         : setIsFollowing(true);
@@ -43,7 +42,9 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
   if (!user) return null;
 
   const clickhandler = (post) => {
-    ModalStore.setRender(<FeedPost post={post} isModal={true} />);
+    ModalStore.setRender(
+      <FeedPost post={post} user={UserStore.user} isModal={true} />
+    );
     ModalStore.setIsOpen(true);
   };
 
