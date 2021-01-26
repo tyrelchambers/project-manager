@@ -9,12 +9,23 @@ import { Provider } from "mobx-react";
 import stores from "./stores/index";
 import ModalContainer from "./layouts/ModalContainer/ModalContainer";
 import { getAxios } from "./api";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UNAUTHENTICATED } from "./routes/routes";
 import { io } from "socket.io-client";
 
-export const socket = io(process.env.REACT_APP_BACKEND);
+export const socket = io(process.env.REACT_APP_BACKEND, {
+  transportOptions: {
+    polling: {
+      extraHeaders: {
+        token:
+          window.localStorage.getItem("token") ||
+          window.sessionStorage.getItem("token") ||
+          false,
+      },
+    },
+  },
+});
 
 const Unauthenticated = () =>
   UNAUTHENTICATED.map((route, id) => (

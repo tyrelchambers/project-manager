@@ -1,11 +1,18 @@
 import React from "react";
 import { socket } from "../..";
-import { heartToast } from "../../components/Notifications/Notifications";
+import {
+  followToast,
+  heartToast,
+} from "../../components/Notifications/Notifications";
 
 const NotificationBell = () => {
   socket.on("notification", (data) => {
-    if (data.type === "post_like") {
+    if (data.type === "like") {
       heartToast();
+    }
+
+    if (data.type === "follow") {
+      followToast();
     }
   });
 

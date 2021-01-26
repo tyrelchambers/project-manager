@@ -177,3 +177,7 @@ p {
     #eb7212
   ) !important;
 }
+
+.dark-gradient {
+  background: var(--darkGradient) !important;
+}

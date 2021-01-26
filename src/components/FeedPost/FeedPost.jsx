@@ -35,9 +35,10 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
       method: "post",
     }).then((res) => {
       setIsLiked(true);
-      socket.emit("notification_post_like", {
-        name: user.name,
-        action: "liked",
+      socket.emit("notification", {
+        from: user.uuid,
+        to: post.User.uuid,
+        type: "like",
       });
     });
   };

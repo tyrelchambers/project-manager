@@ -7,6 +7,7 @@ import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import { MainButton } from "../../components/Buttons/Buttons";
 import FeedPost from "../../components/FeedPost/FeedPost";
 import { inject, observer } from "mobx-react";
+import { socket } from "../..";
 const UserShowPage = ({ ModalStore, UserStore }) => {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
@@ -31,11 +32,13 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
         (f) => f.uuid === UserStore.user.uuid
       );
 
+      console.log(alreadyFollowing);
+
       alreadyFollowing.length === 0
         ? setIsFollowing(false)
         : setIsFollowing(true);
     }
-  }, []);
+  }, [user]);
 
   if (!user) return null;
 
@@ -52,7 +55,11 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
         toFollow: user_id,
       },
     });
-
+    socket.emit("notification", {
+      from: UserStore.user.uuid,
+      to: user_id,
+      type: "follow",
+    });
     setIsFollowing(true);
   };
 

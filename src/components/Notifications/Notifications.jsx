@@ -36,4 +36,16 @@ const bookmarkToast = () => {
   );
 };
 
-export { heartToast, bookmarkToast };
+const followToast = () => {
+  return toast(
+    <ToastEl text="Someone followed you!" icon={icon("fas fa-user-plus")} />,
+    {
+      progressStyle: {
+        background: "#A3CFCD",
+      },
+      className: "dark-gradient",
+    }
+  );
+};
+
+export { heartToast, bookmarkToast, followToast };
