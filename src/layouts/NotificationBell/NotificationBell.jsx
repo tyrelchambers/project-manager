@@ -3,11 +3,11 @@ import { socket } from "../..";
 import {
   followToast,
   heartToast,
-} from "../../components/Notifications/Notifications";
+} from "../../components/NotificationToasts/NotificationToasts";
 
 const NotificationBell = () => {
   socket.on("notification", (data) => {
-    if (data.type === "like") {
+    if (data.type === "post_like") {
       heartToast();
     }
 

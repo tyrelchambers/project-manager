@@ -12,13 +12,17 @@ const Avatar = ({ url, size, className }) => {
     avatarSize = "lg";
   }
 
+  if (size === "medium") {
+    avatarSize = "md";
+  }
+
   const noImage = (
     <div
       className={`avatar ${avatarSize} no-image ${className ? className : ""}`}
     >
       <i
         className={`fas fa-user-astronaut ${
-          avatarSize === "lg" ? "text-5xl" : "text-sm"
+          avatarSize !== "sm" ? "text-2xl" : "text-sm"
         }`}
       ></i>
     </div>

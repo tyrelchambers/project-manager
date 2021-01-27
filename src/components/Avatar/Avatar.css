@@ -9,6 +9,11 @@
   min-width: 130px;
 }
 
+.avatar.md {
+  min-width: 75px;
+  min-height: 75px;
+}
+
 .avatar.sm {
   min-width: 60px;
   min-height: 60px;

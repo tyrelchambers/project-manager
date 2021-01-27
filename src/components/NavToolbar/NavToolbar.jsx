@@ -18,9 +18,12 @@ const NavToolbar = ({ user }) => {
         <i className="fas fa-heart"></i>
       </Link>
 
-      <div className="nav-toolbar-item with-badge relative">
+      <Link
+        to="/notifications"
+        className="nav-toolbar-item with-badge relative"
+      >
         <NotificationBell />
-      </div>
+      </Link>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import FeedPost from "../../components/FeedPost/FeedPost";
 import { H1 } from "../../components/Headings/Headings";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
-const Bookmarks = ({ ModalStore, UserStore }) => {
+const Bookmarks = ({ UserStore }) => {
   const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
@@ -16,13 +16,6 @@ const Bookmarks = ({ ModalStore, UserStore }) => {
     };
     fn();
   }, []);
-
-  const clickhandler = (post) => {
-    ModalStore.setRender(
-      <FeedPost user={UserStore.user} post={post} isModal={true} />
-    );
-    ModalStore.setIsOpen(true);
-  };
 
   return (
     <DisplayWrapper>
@@ -36,15 +29,10 @@ const Bookmarks = ({ ModalStore, UserStore }) => {
         bookmarks
           .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
           .map((bk) => (
-            <FeedPost
-              user={UserStore.user}
-              key={bk.id}
-              post={bk.FeedPost}
-              clickHandler={() => clickhandler(bk)}
-            />
+            <FeedPost user={UserStore.user} key={bk.id} post={bk.FeedPost} />
           ))}
     </DisplayWrapper>
   );
 };
 
-export default inject("ModalStore", "UserStore")(observer(Bookmarks));
+export default inject("UserStore")(observer(Bookmarks));

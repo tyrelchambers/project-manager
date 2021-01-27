@@ -6,9 +6,9 @@ import Code from "../Code/Code";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api";
 import { socket } from "../..";
-import { bookmarkToast } from "../Notifications/Notifications";
+import { bookmarkToast } from "../NotificationToasts/NotificationToasts";
 
-const FeedPost = ({ post, clickHandler, isModal, user }) => {
+const FeedPost = ({ post, user }) => {
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
@@ -40,7 +40,8 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
       socket.emit("notification", {
         from: user.uuid,
         to: post.User.uuid,
-        type: "like",
+        type: "post_like",
+        post: post.uuid,
       });
     });
   };
@@ -60,11 +61,7 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
 
   return (
     <div className="feed-post-border">
-      <div
-        className={`feed-post flex p-4 rounded-lg ${
-          isModal ? "" : "is-not-modal"
-        }`}
-      >
+      <div className={`feed-post flex p-4 rounded-lg`}>
         <div className="feed-post-body flex flex-col w-full">
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center">
@@ -84,13 +81,13 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
             </p>
           </div>
 
-          <p
+          <Link
+            to={`/post/${post.uuid}`}
             className="text-white mt-8 mb-8 font-bold post-body"
-            onClick={clickHandler}
           >
             {post.post}
-          </p>
-          {post.CodeSnippet && isModal && (
+          </Link>
+          {post.CodeSnippet && (
             <div className="flex flex-col">
               <div
                 style={{
@@ -103,11 +100,8 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
             </div>
           )}
           <div className="flex items-center mt-4">
-            {post.CodeSnippet && !isModal && (
-              <div
-                className="flex items-center raised-icon primary mr-8"
-                onClick={clickHandler}
-              >
+            {post.CodeSnippet && (
+              <div className="flex items-center raised-icon primary mr-8">
                 <i className="fas fa-grip-horizontal text-white text-xl mr-4"></i>
                 <p className="font-bold text-white">View snippet</p>
               </div>
