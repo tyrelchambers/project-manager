@@ -1,9 +1,10 @@
 .notification {
-  height: 85px;
+  height: 130px;
+  padding: 1.5em;
 }
 
 .notification:not(:last-child) {
-  margin-bottom: 1.5em;
+  border-bottom: 1px solid var(--gray-800);
 }
 
 .notification-unread {

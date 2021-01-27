@@ -7,7 +7,7 @@ import { getType } from "./types";
 const Notification = ({ n }) => {
   return (
     <div className="notification flex items-center">
-      <span className="notification-unread"></span>
+      {n.unread && <span className="notification-unread"></span>}
       <div className="relative mr-4">
         <Avatar url={n.from.avatar} size="medium" />
         {getIcon(n.type)}

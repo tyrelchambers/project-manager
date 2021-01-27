@@ -1,3 +1,4 @@
+import { inject, observer } from "mobx-react";
 import React from "react";
 import { socket } from "../..";
 import {
@@ -5,7 +6,7 @@ import {
   heartToast,
 } from "../../components/NotificationToasts/NotificationToasts";
 
-const NotificationBell = () => {
+const NotificationBell = ({ NotificationStore }) => {
   socket.on("notification", (data) => {
     if (data.type === "post_like") {
       heartToast();
@@ -20,10 +21,12 @@ const NotificationBell = () => {
     <>
       <i className="fas fa-bell"></i>
       <div className="notification-badge bg-gray-800 box-shadow">
-        <p className="font-black text-white text-xs">3</p>
+        <p className="font-black text-white text-xs">
+          {NotificationStore.unread}
+        </p>
       </div>
     </>
   );
 };
 
-export default NotificationBell;
+export default inject("NotificationStore")(observer(NotificationBell));

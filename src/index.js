@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UNAUTHENTICATED } from "./routes/routes";
 import { io } from "socket.io-client";
+import NotificationStore from "./stores/NotificationStore";
 
 export const socket = io(process.env.REACT_APP_BACKEND, {
   transportOptions: {
@@ -64,6 +65,10 @@ const App = () => {
             stores.UserStore.setUser(res.user);
           }
         });
+
+        getAxios({
+          url: "/notifications/unread",
+        }).then((res) => NotificationStore.setUnread(res.unread));
       };
 
       fn();

@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from "react";
+import { inject, observer } from "mobx-react";
+import React, { useEffect } from "react";
 import { getAxios } from "../../api";
 import { H1 } from "../../components/Headings/Headings";
 import Notification from "../../components/Notification/Notification";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
-const Notifications = () => {
-  const [notifications, setNotifications] = useState([]);
-
+const Notifications = ({ NotificationStore }) => {
   useEffect(() => {
     const fn = async () => {
       await getAxios({
         url: "/notifications",
       }).then((res) => {
         if (res) {
-          setNotifications(res.notifications);
+          NotificationStore.setNotifications(res.notifications);
         }
       });
     };
 
     fn();
-  }, []);
+  }, [NotificationStore.notifications]);
 
   const unreadCount = () => {
-    if (notifications.length === 0) return null;
-    const unread = notifications.filter((n) => n.unread === true);
+    if (NotificationStore.notifications.length === 0) return null;
+    const unread = NotificationStore.notifications.filter(
+      (n) => n.unread === true
+    );
     return unread.length > 0 ? (
       <p className="text-yellow-400">
         <span className="font-bold">{unread.length} </span>unread notifications
@@ -31,14 +32,31 @@ const Notifications = () => {
     ) : null;
   };
 
+  const markAllAsRead = () => {
+    getAxios({
+      url: "/notifications/readall",
+    }).then((res) => {
+      if (res) {
+        NotificationStore.setUnread(0);
+      }
+    });
+  };
+
   return (
     <DisplayWrapper>
-      <H1>Notifications</H1>
+      <div className="flex justify-between">
+        <H1>Notifications</H1>
+        <div className="flex items-center " onClick={markAllAsRead}>
+          <i className="fas fa-check text-yellow-400 mr-2"></i>
+          <p className="text-yellow-400 underline">Mark all as read</p>
+        </div>
+      </div>
       {unreadCount()}
 
       <div className="mt-10">
-        {notifications.length > 0 &&
-          notifications
+        {NotificationStore.notifications.length > 0 &&
+          NotificationStore.notifications
+            .slice()
             .sort((a, b) => (a.date > b.date ? -1 : 1))
             .map((n) => <Notification n={n} />)}
       </div>
@@ -46,4 +64,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications;
+export default inject("NotificationStore")(observer(Notifications));
