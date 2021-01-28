@@ -38,7 +38,7 @@ const FeedPost = ({ post, user }) => {
     }).then((res) => {
       if (res) {
         setIsLiked(true);
-        socket.emit("notification", {
+        socket.emit("notification post like", {
           from: user.uuid,
           to: post.User.uuid,
           type: "post_like",

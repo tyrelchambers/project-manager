@@ -1,5 +1,5 @@
 import { inject, observer } from "mobx-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { socket } from "../..";
 import {
   followToast,
@@ -7,15 +7,17 @@ import {
 } from "../../components/NotificationToasts/NotificationToasts";
 
 const NotificationBell = ({ NotificationStore }) => {
-  socket.on("notification", (data) => {
-    if (data.type === "post_like") {
-      heartToast();
-    }
+  useEffect(() => {
+    socket.on("notification", (data) => {
+      if (data.type === "post_like") {
+        heartToast();
+      }
 
-    if (data.type === "follow") {
-      followToast();
-    }
-  });
+      if (data.type === "follow") {
+        followToast();
+      }
+    });
+  }, []);
 
   return (
     <>

@@ -28,6 +28,7 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
   }, []);
 
   useEffect(() => {
+    console.log(user);
     if (user) {
       const alreadyFollowing = user.followers.filter(
         (f) => f.uuid === UserStore.user.uuid
@@ -56,7 +57,7 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
         toFollow: user_id,
       },
     });
-    socket.emit("notification", {
+    socket.emit("notification user follow", {
       from: UserStore.user.uuid,
       to: user_id,
       type: "follow",
