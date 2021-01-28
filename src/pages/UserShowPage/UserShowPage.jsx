@@ -25,7 +25,7 @@ const UserShowPage = ({ UserStore }) => {
     };
 
     fn();
-  }, []);
+  }, [user_id]);
 
   useEffect(() => {
     if (UserStore.user && user) {

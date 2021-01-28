@@ -18,7 +18,7 @@ const Post = ({ UserStore }) => {
     };
 
     fn();
-  }, []);
+  }, [post_id]);
 
   if (isEmpty(post)) return null;
 

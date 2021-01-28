@@ -7,18 +7,7 @@ import Notification from "../../components/Notification/Notification";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
 const Notifications = ({ NotificationStore }) => {
-  const getNotifications = async () => {
-    await getAxios({
-      url: "/notifications",
-    }).then((res) => {
-      if (res) {
-        NotificationStore.setNotifications(res.notifications);
-      }
-    });
-  };
-
   useEffect(() => {
-    getNotifications();
     socket.on("notification", (data) => {
       NotificationStore.addNotification(data.notification);
     });

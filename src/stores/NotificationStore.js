@@ -25,7 +25,8 @@ class NotificationStore {
   }
 
   addNotification(n) {
-    this.notifications.push(n);
+    const clone = this.notifications;
+    this.notifications = [n, ...clone];
   }
 
   readAll() {

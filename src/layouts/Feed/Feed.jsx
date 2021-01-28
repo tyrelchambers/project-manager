@@ -2,7 +2,6 @@ import { inject, observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import { getAxios } from "../../api";
 import FeedPost from "../../components/FeedPost/FeedPost";
-import { H1 } from "../../components/Headings/Headings";
 
 const Feed = ({ UserStore }) => {
   const [feed, setFeed] = useState([]);

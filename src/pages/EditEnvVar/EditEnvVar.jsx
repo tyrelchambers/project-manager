@@ -25,7 +25,7 @@ const EditEnvVar = () => {
     };
 
     fn();
-  }, []);
+  }, [env_name]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
