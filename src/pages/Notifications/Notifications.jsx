@@ -1,30 +1,36 @@
 import { inject, observer } from "mobx-react";
 import React, { useEffect } from "react";
+import { socket } from "../..";
 import { getAxios } from "../../api";
 import { H1 } from "../../components/Headings/Headings";
 import Notification from "../../components/Notification/Notification";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
 const Notifications = ({ NotificationStore }) => {
-  useEffect(() => {
-    const fn = async () => {
-      await getAxios({
-        url: "/notifications",
-      }).then((res) => {
-        if (res) {
-          NotificationStore.setNotifications(res.notifications);
-        }
-      });
-    };
+  const getNotifications = async () => {
+    await getAxios({
+      url: "/notifications",
+    }).then((res) => {
+      if (res) {
+        NotificationStore.setNotifications(res.notifications);
+      }
+    });
+  };
 
-    fn();
-  }, [NotificationStore.notifications]);
+  useEffect(() => {
+    getNotifications();
+    socket.on("notification", (data) => {
+      NotificationStore.addNotification(data.notification);
+    });
+  }, []);
 
   const unreadCount = () => {
     if (NotificationStore.notifications.length === 0) return null;
+
     const unread = NotificationStore.notifications.filter(
       (n) => n.unread === true
     );
+
     return unread.length > 0 ? (
       <p className="text-yellow-400">
         <span className="font-bold">{unread.length} </span>unread notifications
@@ -37,7 +43,7 @@ const Notifications = ({ NotificationStore }) => {
       url: "/notifications/readall",
     }).then((res) => {
       if (res) {
-        NotificationStore.setUnread(0);
+        NotificationStore.readAll();
       }
     });
   };

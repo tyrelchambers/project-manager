@@ -19,13 +19,15 @@ const NotificationBell = ({ NotificationStore }) => {
     });
   }, []);
 
+  const unreadCount = () => {
+    return NotificationStore.notifications.filter((n) => n.unread === true)
+      .length;
+  };
   return (
     <>
       <i className="fas fa-bell"></i>
       <div className="notification-badge bg-gray-800 box-shadow">
-        <p className="font-black text-white text-xs">
-          {NotificationStore.unread}
-        </p>
+        <p className="font-black text-white text-xs">{unreadCount()}</p>
       </div>
     </>
   );

@@ -7,6 +7,8 @@ class NotificationStore {
       notifications: observable,
       setUnread: action,
       setNotifications: action,
+      addNotification: action,
+      readAll: action,
     });
   }
 
@@ -19,6 +21,21 @@ class NotificationStore {
 
   setNotifications(n) {
     this.notifications = n;
+  }
+
+  addNotification(n) {
+    this.notifications.push(n);
+  }
+
+  readAll() {
+    const clone = this.notifications;
+    const arr = clone.map((x) => {
+      return {
+        ...x,
+        unread: false,
+      };
+    });
+    this.notifications = arr;
   }
 }
 
