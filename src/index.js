@@ -12,6 +12,25 @@ import { getAxios } from "./api";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UNAUTHENTICATED } from "./routes/routes";
+import { io } from "socket.io-client";
+import NotificationStore from "./stores/NotificationStore";
+import {
+  followToast,
+  heartToast,
+} from "./components/NotificationToasts/NotificationToasts";
+
+export const socket = io(process.env.REACT_APP_BACKEND, {
+  transportOptions: {
+    polling: {
+      extraHeaders: {
+        token:
+          window.localStorage.getItem("token") ||
+          window.sessionStorage.getItem("token") ||
+          false,
+      },
+    },
+  },
+});
 
 const Unauthenticated = () =>
   UNAUTHENTICATED.map((route, id) => (
@@ -50,9 +69,28 @@ const App = () => {
             stores.UserStore.setUser(res.user);
           }
         });
+
+        await getAxios({
+          url: "/notifications",
+        }).then((res) => {
+          if (res) {
+            NotificationStore.setNotifications(res.notifications);
+          }
+        });
       };
 
       fn();
+
+      socket.on("notification", (data) => {
+        if (data.type === "post_like") {
+          console.log(data);
+          heartToast();
+        }
+
+        if (data.type === "follow") {
+          followToast();
+        }
+      });
     }
   }, [token]);
 

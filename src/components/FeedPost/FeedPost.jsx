@@ -5,17 +5,21 @@ import Avatar from "../Avatar/Avatar";
 import Code from "../Code/Code";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api";
+import { socket } from "../..";
+import { bookmarkToast } from "../NotificationToasts/NotificationToasts";
 
-const FeedPost = ({ post, clickHandler, isModal, user }) => {
+const FeedPost = ({ post, user }) => {
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    const liked = post.likedPosts.filter((l) => l.uuid === user.uuid);
+    if (user) {
+      const liked = post.likedPosts.filter((l) => l.uuid === user.uuid);
 
-    if (liked.length > 0) {
-      setIsLiked(true);
+      if (liked.length > 0) {
+        setIsLiked(true);
+      }
     }
-  }, [user]);
+  }, []);
 
   const bookmarkHandler = async () => {
     await getAxios({
@@ -24,14 +28,24 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
       data: {
         postId: post.uuid,
       },
-    });
+    }).then((res) => bookmarkToast());
   };
 
   const likeHandler = async () => {
     await getAxios({
       url: `/feed/${post.uuid}/like`,
       method: "post",
-    }).then((res) => setIsLiked(true));
+    }).then((res) => {
+      if (res) {
+        setIsLiked(true);
+        socket.emit("notification post like", {
+          from: user.uuid,
+          to: post.User.uuid,
+          type: "post_like",
+          post: post.uuid,
+        });
+      }
+    });
   };
 
   const dislikeHandler = async () => {
@@ -49,11 +63,7 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
 
   return (
     <div className="feed-post-border">
-      <div
-        className={`feed-post flex p-4 rounded-lg ${
-          isModal ? "" : "is-not-modal"
-        }`}
-      >
+      <div className={`feed-post flex p-4 rounded-lg`}>
         <div className="feed-post-body flex flex-col w-full">
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center">
@@ -73,13 +83,13 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
             </p>
           </div>
 
-          <p
+          <Link
+            to={`/post/${post.uuid}`}
             className="text-white mt-8 mb-8 font-bold post-body"
-            onClick={clickHandler}
           >
             {post.post}
-          </p>
-          {post.CodeSnippet && isModal && (
+          </Link>
+          {post.CodeSnippet && (
             <div className="flex flex-col">
               <div
                 style={{
@@ -92,25 +102,26 @@ const FeedPost = ({ post, clickHandler, isModal, user }) => {
             </div>
           )}
           <div className="flex items-center mt-4">
-            {post.CodeSnippet && !isModal && (
-              <div
-                className="flex items-center raised-icon primary mr-8"
-                onClick={clickHandler}
-              >
+            {post.CodeSnippet && (
+              <div className="flex items-center raised-icon primary mr-8">
                 <i className="fas fa-grip-horizontal text-white text-xl mr-4"></i>
                 <p className="font-bold text-white">View snippet</p>
               </div>
             )}
-            <div className="flex items-center  mr-8 raised-icon small">
-              {likeIcon}
-            </div>
+            {user.uuid && (
+              <>
+                <div className="flex items-center  mr-8 raised-icon small">
+                  {likeIcon}
+                </div>
 
-            <div className="flex items-center raised-icon small">
-              <i
-                className="fas fa-bookmark text-gray-800"
-                onClick={bookmarkHandler}
-              ></i>
-            </div>
+                <div className="flex items-center raised-icon small">
+                  <i
+                    className="fas fa-bookmark text-gray-800"
+                    onClick={bookmarkHandler}
+                  ></i>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

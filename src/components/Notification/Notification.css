@@ -1,0 +1,38 @@
+.notification {
+  height: 130px;
+  padding: 1.5em;
+}
+
+.notification:not(:last-child) {
+  border-bottom: 1px solid var(--gray-800);
+}
+
+.notification-unread {
+  height: 100%;
+  width: 5px;
+  background-color: var(--yellow-400);
+  transition: all 0.2s ease;
+  margin-right: 1em;
+}
+
+.notification-unread:hover {
+  width: 10px;
+}
+
+.notification-icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--white);
+}
+
+.notification-icon i {
+  margin-right: -1px;
+  margin-bottom: -1px;
+}

@@ -1,6 +1,5 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-
 import Account from "../pages/Account/Account";
 import Bookmarks from "../pages/Bookmarks/Bookmarks";
 import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";
@@ -12,8 +11,10 @@ import LikedPosts from "../pages/LikedPosts/LikedPosts";
 import Login from "../pages/Login/Login";
 import NewEnvVar from "../pages/NewEnvVar/NewEnvVar";
 import NewPackage from "../pages/NewPackage/NewPackage";
+import Notifications from "../pages/Notifications/Notifications";
 import PackageShow from "../pages/PackageShow/PackageShow";
 import PackagesPage from "../pages/PackagesPage/PackagesPage";
+import Post from "../pages/Post";
 import Profile from "../pages/Profile/Profile";
 import ProfileSetup from "../pages/ProfileSetup/ProfileSetup";
 import Projects from "../pages/Projects/Projects";
@@ -33,6 +34,14 @@ const sharedRoutes = [
     slug: "/user/:user_id",
     component: UserShowPage,
   },
+  {
+    slug: "/login",
+    component: Login,
+  },
+  {
+    slug: "/post/:post_id",
+    component: Post,
+  },
 ];
 
 export const UNAUTHENTICATED = [
@@ -40,10 +49,6 @@ export const UNAUTHENTICATED = [
   {
     slug: "/signup",
     component: Signup,
-  },
-  {
-    slug: "/login",
-    component: Login,
   },
   {
     slug: "/",
@@ -133,5 +138,9 @@ export default [
   {
     slug: "/likes",
     component: LikedPosts,
+  },
+  {
+    slug: "/notifications",
+    component: Notifications,
   },
 ];

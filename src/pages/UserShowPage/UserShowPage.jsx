@@ -7,10 +7,12 @@ import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import { MainButton } from "../../components/Buttons/Buttons";
 import FeedPost from "../../components/FeedPost/FeedPost";
 import { inject, observer } from "mobx-react";
-const UserShowPage = ({ ModalStore, UserStore }) => {
+import { socket } from "../..";
+const UserShowPage = ({ UserStore }) => {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false);
+
   useEffect(() => {
     const fn = async () => {
       await getAxios({
@@ -23,10 +25,10 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
     };
 
     fn();
-  }, []);
+  }, [user_id]);
 
   useEffect(() => {
-    if (user) {
+    if (UserStore.user && user) {
       const alreadyFollowing = user.followers.filter(
         (f) => f.uuid === UserStore.user.uuid
       );
@@ -35,14 +37,9 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
         ? setIsFollowing(false)
         : setIsFollowing(true);
     }
-  }, []);
+  }, [UserStore.user, user]);
 
   if (!user) return null;
-
-  const clickhandler = (post) => {
-    ModalStore.setRender(<FeedPost post={post} isModal={true} />);
-    ModalStore.setIsOpen(true);
-  };
 
   const followHandler = async () => {
     await getAxios({
@@ -52,7 +49,11 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
         toFollow: user_id,
       },
     });
-
+    socket.emit("notification user follow", {
+      from: UserStore.user.uuid,
+      to: user_id,
+      type: "follow",
+    });
     setIsFollowing(true);
   };
 
@@ -66,6 +67,23 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
     });
 
     setIsFollowing(false);
+  };
+
+  const FollowButton = ({
+    isFollowing,
+    user,
+    followHandler,
+    unfollowHandler,
+  }) => {
+    return !isFollowing ? (
+      <MainButton classes="mt-10" default onClick={followHandler}>
+        Follow {user.name}
+      </MainButton>
+    ) : (
+      <MainButton classes="mt-10" muted onClick={unfollowHandler}>
+        Unfollow {user.name}
+      </MainButton>
+    );
   };
 
   return (
@@ -110,12 +128,7 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
             {user.posts
               .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
               .map((post) => (
-                <FeedPost
-                  key={post.uuid}
-                  post={post}
-                  user={UserStore.user}
-                  clickHandler={() => clickhandler(post)}
-                />
+                <FeedPost key={post.uuid} post={post} user={UserStore.user} />
               ))}
           </div>
         </div>
@@ -124,21 +137,4 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
   );
 };
 
-const FollowButton = ({
-  isFollowing,
-  user,
-  followHandler,
-  unfollowHandler,
-}) => {
-  return !isFollowing ? (
-    <MainButton classes="mt-10" default onClick={followHandler}>
-      Follow {user.name}
-    </MainButton>
-  ) : (
-    <MainButton classes="mt-10" muted onClick={unfollowHandler}>
-      Unfollow {user.name}
-    </MainButton>
-  );
-};
-
-export default inject("ModalStore", "UserStore")(observer(UserShowPage));
+export default inject("UserStore")(observer(UserShowPage));

@@ -21,3 +21,20 @@
 .nav-toolbar-item:hover {
   border: 2px solid var(--white);
 }
+
+.notification-badge {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.notification-badge p {
+  margin-right: -1px;
+  margin-top: -1px;
+}

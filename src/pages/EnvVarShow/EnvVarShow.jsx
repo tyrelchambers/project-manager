@@ -22,7 +22,7 @@ const EnvVarShow = () => {
     };
 
     fn();
-  }, []);
+  }, [env_name]);
 
   if (isEmpty(envVar)) return null;
 
