@@ -9,6 +9,7 @@ class NotificationStore {
       setNotifications: action,
       addNotification: action,
       readAll: action,
+      clear: action,
     });
   }
 
@@ -36,6 +37,10 @@ class NotificationStore {
       };
     });
     this.notifications = arr;
+  }
+
+  clear() {
+    this.notifications = [];
   }
 }
 

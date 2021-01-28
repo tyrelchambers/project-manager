@@ -108,16 +108,20 @@ const FeedPost = ({ post, user }) => {
                 <p className="font-bold text-white">View snippet</p>
               </div>
             )}
-            <div className="flex items-center  mr-8 raised-icon small">
-              {likeIcon}
-            </div>
+            {user.uuid && (
+              <>
+                <div className="flex items-center  mr-8 raised-icon small">
+                  {likeIcon}
+                </div>
 
-            <div className="flex items-center raised-icon small">
-              <i
-                className="fas fa-bookmark text-gray-800"
-                onClick={bookmarkHandler}
-              ></i>
-            </div>
+                <div className="flex items-center raised-icon small">
+                  <i
+                    className="fas fa-bookmark text-gray-800"
+                    onClick={bookmarkHandler}
+                  ></i>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

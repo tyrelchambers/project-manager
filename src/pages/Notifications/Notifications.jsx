@@ -48,13 +48,31 @@ const Notifications = ({ NotificationStore }) => {
     });
   };
 
+  const removeAll = () => {
+    getAxios({
+      url: "/notifications/clear",
+      method: "post",
+    }).then((res) => {
+      if (res) {
+        NotificationStore.clear();
+      }
+    });
+  };
+
   return (
     <DisplayWrapper>
       <div className="flex justify-between">
         <H1>Notifications</H1>
-        <div className="flex items-center " onClick={markAllAsRead}>
-          <i className="fas fa-check text-yellow-400 mr-2"></i>
-          <p className="text-yellow-400 underline">Mark all as read</p>
+        <div className="flex items-center">
+          <div className="flex items-center mr-6" onClick={markAllAsRead}>
+            <i className="fas fa-check text-yellow-400 mr-2"></i>
+            <p className="text-yellow-400 underline">Mark all as read</p>
+          </div>
+
+          <div className="flex items-center " onClick={removeAll}>
+            <i className="fas fa-eraser text-gray-500 mr-2"></i>
+            <p className="text-gray-500 underline">Remove all</p>
+          </div>
         </div>
       </div>
       {unreadCount()}
@@ -64,7 +82,7 @@ const Notifications = ({ NotificationStore }) => {
           NotificationStore.notifications
             .slice()
             .sort((a, b) => (a.date > b.date ? -1 : 1))
-            .map((n) => <Notification n={n} />)}
+            .map((n, id) => <Notification key={id} n={n} />)}
       </div>
     </DisplayWrapper>
   );
