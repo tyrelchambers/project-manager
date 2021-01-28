@@ -28,8 +28,8 @@ const UserShowPage = ({ ModalStore, UserStore }) => {
   }, []);
 
   useEffect(() => {
-    console.log(user);
     if (user) {
+      console.log(user);
       const alreadyFollowing = user.followers.filter(
         (f) => f.uuid === UserStore.user.uuid
       );
