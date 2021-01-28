@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import Page404 from "../pages/404/404";
 import Account from "../pages/Account/Account";
 import Bookmarks from "../pages/Bookmarks/Bookmarks";
 import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";

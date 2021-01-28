@@ -18,6 +18,7 @@ import {
   followToast,
   heartToast,
 } from "./components/NotificationToasts/NotificationToasts";
+import Page404 from "./pages/404/404";
 
 export const socket = io(process.env.REACT_APP_BACKEND, {
   transportOptions: {
