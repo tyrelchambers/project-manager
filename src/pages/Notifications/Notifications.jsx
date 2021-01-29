@@ -1,18 +1,11 @@
 import { inject, observer } from "mobx-react";
 import React, { useEffect } from "react";
-import { socket } from "../..";
 import { getAxios } from "../../api";
 import { H1 } from "../../components/Headings/Headings";
 import Notification from "../../components/Notification/Notification";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
 const Notifications = ({ NotificationStore }) => {
-  useEffect(() => {
-    socket.on("notification", (data) => {
-      NotificationStore.addNotification(data.notification);
-    });
-  }, []);
-
   const unreadCount = () => {
     if (NotificationStore.notifications.length === 0) return null;
 

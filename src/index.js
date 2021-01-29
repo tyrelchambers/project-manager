@@ -70,14 +70,6 @@ const App = () => {
             stores.UserStore.setUser(res.user);
           }
         });
-
-        await getAxios({
-          url: "/notifications",
-        }).then((res) => {
-          if (res) {
-            NotificationStore.setNotifications(res.notifications);
-          }
-        });
       };
 
       fn();

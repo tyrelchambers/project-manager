@@ -8,21 +8,19 @@ const NotificationBell = ({ NotificationStore }) => {
   });
 
   useEffect(() => {
-    console.log(
-      NotificationStore.notifications.filter((n) => n.unread === true)
-    );
     setUnread(
       NotificationStore.notifications.filter((n) => n.unread === true).length
     );
-    console.log("called");
   }, [NotificationStore.notifications]);
 
   return (
     <>
       <i className="fas fa-bell"></i>
-      <div className="notification-badge bg-gray-800 box-shadow">
-        <p className="font-black text-white text-xs">{unread}</p>
-      </div>
+      {unread > 0 && (
+        <div className="notification-badge bg-gray-800 box-shadow">
+          <p className="font-black text-white text-xs">{unread}</p>
+        </div>
+      )}
     </>
   );
 };

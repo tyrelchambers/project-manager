@@ -96,7 +96,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
           <H3>Options</H3>
 
           <p className="mt-4 mb-4">
-            <span className="font-bold">Visibility:</span>{" "}
+            <span className="font-bold">Visibility: </span>
             {!snippet.visibility ? "Private" : "Public"}
           </p>
           <div className="flex items-center">
@@ -110,21 +110,27 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
               Copy to Clipboard
             </MainButton>
 
-            <MainButton
-              muted
-              classes="m-2"
-              onClick={() => {
-                ModalStore.setRender(
-                  <ShareSnippetModal
-                    shareLink={`${process.env.REACT_APP_CLIENT}/snippets/${snippet_uuid}`}
-                    snippet={snippet}
-                  />
-                );
-                ModalStore.setIsOpen(true);
-              }}
-            >
-              Share
-            </MainButton>
+            {snippet.visibility ? (
+              <MainButton
+                muted
+                classes="m-2"
+                onClick={() => {
+                  ModalStore.setRender(
+                    <ShareSnippetModal
+                      shareLink={`${process.env.REACT_APP_CLIENT}/snippets/${snippet_uuid}`}
+                      snippet={snippet}
+                    />
+                  );
+                  ModalStore.setIsOpen(true);
+                }}
+              >
+                Share
+              </MainButton>
+            ) : (
+              <MainButton muted classes="m-2" disabled>
+                Can't share: Snippet isn't public
+              </MainButton>
+            )}
           </div>
 
           {UserStore.user.uuid === snippet.userId && (
