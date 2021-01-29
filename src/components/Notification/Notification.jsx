@@ -1,5 +1,6 @@
 import { formatDistanceToNow } from "date-fns";
 import React from "react";
+import { Link } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
 import "./Notification.css";
 import { getIcon } from "./notificationIcon";
@@ -14,7 +15,9 @@ const Notification = ({ n }) => {
       </div>
       <div className="flex flex-col">
         <p>
-          <span className="font-bold">{n.from.name} </span>
+          <Link to={`/user/${n.from.uuid}`} className="font-bold underline">
+            {n.from.name}{" "}
+          </Link>
           {getType({ type: n.type, target: n.post.uuid })}
         </p>
         <p className="text-yellow-400 italic">

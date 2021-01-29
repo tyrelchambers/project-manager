@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { getType } from "../Notification/types";
 
 const ToastEl = ({ text, icon }) => (
   <div className="flex items-center">
@@ -12,26 +14,48 @@ const icon = (iconName) => (
   <i className={`${iconName} mr-4 text-white text-xl `}></i>
 );
 
-const heartToast = (props) => {
+const heartToast = (n) => {
   return toast(
-    <ToastEl text="Someone liked your post" icon={icon("fas fa-heart")} />,
+    <ToastEl
+      text={
+        <>
+          <Link to={`/user/${n.from.uuid}`} className="font-bold underline">
+            {n.from.name}
+          </Link>{" "}
+          {getType({ type: n.type, target: n.post.uuid })}
+        </>
+      }
+      icon={icon("fas fa-heart")}
+    />,
     {
       progressStyle: {
         background: "#b83280",
       },
       className: "pink-gradient",
+      closeOnClick: false,
     }
   );
 };
 
-const bookmarkToast = () => {
+const bookmarkToast = (n) => {
   return toast(
-    <ToastEl text="Post saved as a bookmark" icon={icon("fas fa-bookmark")} />,
+    <ToastEl
+      text={
+        <>
+          <Link to={`/user/${n.from.uuid}`} className="font-bold underline">
+            {n.from.name}
+          </Link>{" "}
+          {getType({ type: n.type, target: n.post.uuid })}
+        </>
+      }
+      icon={icon("fas fa-bookmark")}
+    />,
     {
       progressStyle: {
         background: "#F7CC00",
       },
       className: "brown-gradient",
+      closeOnClick: false,
     }
   );
 };
@@ -44,6 +68,7 @@ const followToast = () => {
         background: "#A3CFCD",
       },
       className: "dark-gradient",
+      closeOnClick: false,
     }
   );
 };

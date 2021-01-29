@@ -77,11 +77,11 @@ const App = () => {
       socket.on("notification", (data) => {
         if (data.type === "post_like") {
           console.log(data);
-          heartToast();
+          heartToast(data.notification);
         }
 
         if (data.type === "follow") {
-          followToast();
+          followToast(data.notification);
         }
       });
     }
