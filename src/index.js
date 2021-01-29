@@ -76,7 +76,6 @@ const App = () => {
 
       socket.on("notification", (data) => {
         if (data.type === "post_like") {
-          console.log(data);
           heartToast(data.notification);
         }
 
