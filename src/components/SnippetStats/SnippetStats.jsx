@@ -14,7 +14,7 @@ const SnippetStats = ({ stats }) => {
 
       <div className="flex items-center mr-4">
         <Status
-          text={`${stats.likers.length} like your code`}
+          text={`${stats.likers.length} have liked your code`}
           icon={<i className="far fa-grin-hearts text-white mr-2"></i>}
           wrapperClass="bg-gray-900"
         />

@@ -13,12 +13,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UNAUTHENTICATED } from "./routes/routes";
 import { io } from "socket.io-client";
-import NotificationStore from "./stores/NotificationStore";
 import {
   followToast,
   heartToast,
 } from "./components/NotificationToasts/NotificationToasts";
-import Page404 from "./pages/404/404";
 
 export const socket = io(process.env.REACT_APP_BACKEND, {
   transportOptions: {

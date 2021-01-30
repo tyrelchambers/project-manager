@@ -9,7 +9,7 @@ const DisplayWrapper = (props) => {
       <Header />
       <div className="flex">
         {showNavbar}
-        <div className="m-4 w-full">{props.children}</div>
+        <div className="w-full">{props.children}</div>
       </div>
     </div>
   );

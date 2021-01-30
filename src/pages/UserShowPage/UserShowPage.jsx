@@ -8,6 +8,7 @@ import { MainButton } from "../../components/Buttons/Buttons";
 import FeedPost from "../../components/FeedPost/FeedPost";
 import { inject, observer } from "mobx-react";
 import { socket } from "../..";
+import "./UserShowPage.css";
 const UserShowPage = ({ UserStore }) => {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
@@ -87,8 +88,8 @@ const UserShowPage = ({ UserStore }) => {
   };
 
   return (
-    <DisplayWrapper hideNavbar>
-      <div className="user-show-wrapper flex justify-center">
+    <DisplayWrapper className="relative" hideNavbar>
+      <div className="user-show-wrapper flex justify-center relative z-10">
         <div className="flex flex-col items-center container max-w-screen-md">
           <Avatar url={user.avatar} size="large" />
           <H1 className="mt-4">{user.name}</H1>
@@ -121,7 +122,7 @@ const UserShowPage = ({ UserStore }) => {
             </div>
           )}
 
-          <div className="container max-w-screen-lg">
+          <div className="container max-w-screen-lg mt-6">
             {user.posts.length === 0 && (
               <p className="font-bold text-center">Nothing to show!</p>
             )}
