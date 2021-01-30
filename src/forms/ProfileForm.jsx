@@ -148,7 +148,7 @@ const ProfileForm = ({ user }) => {
           type="text"
           name="facebook"
           className="form-input"
-          placeholder="link to Facebook"
+          placeholder="link to Facebook profile"
           value={state.facebook}
           onChange={(e) => inputHandler(e)}
         />
@@ -159,7 +159,7 @@ const ProfileForm = ({ user }) => {
           type="text"
           name="devto"
           className="form-input"
-          placeholder="link to Dev.to"
+          placeholder="link to Dev.to profile"
           value={state.devto}
           onChange={(e) => inputHandler(e)}
         />
@@ -170,7 +170,7 @@ const ProfileForm = ({ user }) => {
           type="text"
           name="stackoverflow"
           className="form-input"
-          placeholder="link to StackOverflow"
+          placeholder="link to StackOverflow profile"
           value={state.stackoverflow}
           onChange={(e) => inputHandler(e)}
         />
@@ -225,7 +225,7 @@ const ProfileForm = ({ user }) => {
           type="text"
           name="youtube"
           className="form-input"
-          placeholder="link to your Youtube"
+          placeholder="link to your Youtube channel"
           value={state.youtube}
           onChange={(e) => inputHandler(e)}
         />
