@@ -44,7 +44,7 @@ const Profile = ({ UserStore }) => {
           )}
         </div>
       </div>
-      <div className="mt-6">
+      <div className="mt-6 mb-10">
         <ProfileForm user={UserStore.user} />
       </div>
     </DisplayWrapper>

@@ -9,6 +9,7 @@ import FeedPost from "../../components/FeedPost/FeedPost";
 import { inject, observer } from "mobx-react";
 import { socket } from "../..";
 import "./UserShowPage.css";
+import UserSocials from "../../layouts/UserSocials/UserSocials";
 const UserShowPage = ({ UserStore }) => {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
@@ -95,6 +96,8 @@ const UserShowPage = ({ UserStore }) => {
           <H1 className="mt-4">{user.name}</H1>
 
           <p className="mt-4 mb-4">{user.bio}</p>
+
+          <UserSocials user={user} />
 
           <div className="flex items-center w-full justify-evenly mt-6">
             <div className="flex flex-col">
