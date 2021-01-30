@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import Upload from "../components/Upload/Upload";
+import isEmpty from "../helpers/isEmpty";
 import UserStore from "../stores/UserStore";
 
-const AccountForm = ({ user }) => {
+const ProfileForm = ({ user }) => {
   const [state, setState] = useState({
     email: "",
     name: "",
     avatar: "",
+    bio: "",
   });
   const [files, setFiles] = useState([]);
   const pond = React.createRef(null);
@@ -43,9 +46,14 @@ const AccountForm = ({ user }) => {
       const files = await pond.current.processFiles().then((res) => res[0]);
       fileEndpoint = files.serverId;
     }
+
+    if (state.bio.length > 250) {
+      return toast.error("Bio is too long");
+    }
+
     await getAxios({
-      url: "/account/update",
-      method: "patch",
+      url: "/user/update",
+      method: "post",
       data: {
         state: {
           ...state,
@@ -54,6 +62,8 @@ const AccountForm = ({ user }) => {
       },
     });
   };
+
+  if (isEmpty(state)) return null;
 
   return (
     <form className="container max-w-screen-sm">
@@ -72,6 +82,24 @@ const AccountForm = ({ user }) => {
           onChange={(e) => setState({ ...state, name: e.target.value })}
         />
       </div>
+
+      <div className="field-group">
+        <FormLabel text="Bio" name="bio" />
+        <textarea
+          className="form-input"
+          placeholder="Tell us about yourself..."
+          rows={5}
+          onChange={(e) => setState({ ...state, bio: e.target.value })}
+          value={state.bio}
+        />
+        <div className="flex justify-end mt-2">
+          <p className="text-yellow-500">{`${state.bio.length}/250`}</p>
+          {state.bio.length > 250 && (
+            <p className="text-red-500 ml-2">(+{state.bio.length - 250})</p>
+          )}
+        </div>
+      </div>
+
       <div className="field-group">
         <FormLabel text="Email" name="email" />
         <input
@@ -88,4 +116,4 @@ const AccountForm = ({ user }) => {
   );
 };
 
-export default AccountForm;
+export default ProfileForm;

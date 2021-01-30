@@ -4,14 +4,14 @@ import { getAxios } from "../../api";
 import Avatar from "../../components/Avatar/Avatar";
 import { MainButton } from "../../components/Buttons/Buttons";
 import { H2, H2Subtitle } from "../../components/Headings/Headings";
-import AccountForm from "../../forms/AccountForm";
+import ProfileForm from "../../forms/ProfileForm";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
 const Profile = ({ UserStore }) => {
   const removeProfilePhoto = async () => {
     await getAxios({
-      url: "/account/update",
-      method: "patch",
+      url: "/user/update",
+      method: "post",
       data: {
         state: {
           avatar: "",
@@ -45,7 +45,7 @@ const Profile = ({ UserStore }) => {
         </div>
       </div>
       <div className="mt-6">
-        <AccountForm user={UserStore.user} />
+        <ProfileForm user={UserStore.user} />
       </div>
     </DisplayWrapper>
   );

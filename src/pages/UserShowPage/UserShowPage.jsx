@@ -94,6 +94,8 @@ const UserShowPage = ({ UserStore }) => {
           <Avatar url={user.avatar} size="large" />
           <H1 className="mt-4">{user.name}</H1>
 
+          <p className="mt-4 mb-4">{user.bio}</p>
+
           <div className="flex items-center w-full justify-evenly mt-6">
             <div className="flex flex-col">
               <p className="text-gray-300">Followers</p>
