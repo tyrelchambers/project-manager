@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { getAxios } from "../../api";
 import { MainButton } from "../../components/Buttons/Buttons";
-import { H2, H3 } from "../../components/Headings/Headings";
+import { H1, H3 } from "../../components/Headings/Headings";
 import { copyToClipboard } from "../../helpers/copyToClipboard";
 import isEmpty from "../../helpers/isEmpty";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
@@ -10,6 +10,7 @@ import SnippetStats from "../../components/SnippetStats/SnippetStats";
 import { inject, observer } from "mobx-react";
 import ShareSnippetModal from "../../modals/ShareSnippetModal/ShareSnippetModal";
 import Code from "../../components/Code/Code";
+import Status from "../../components/Status/Status";
 
 const SnippetShow = ({ UserStore, ModalStore }) => {
   const { snippet_uuid } = useParams();
@@ -69,8 +70,10 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
 
   return (
     <DisplayWrapper>
-      <div className="flex items-center">
-        <div className="mr-4">
+      <div className="flex flex-col">
+        <H1 className="mr-4">{snippet.name}</H1>
+
+        <div className="mt-6 mb-6 flex">
           {liked ? (
             <i
               className="fas fa-heart text-red-500"
@@ -79,11 +82,13 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
           ) : (
             <i className="far fa-heart text-gray-500" onClick={likeHandler}></i>
           )}
+          {UserStore.user.uuid === snippet.userId && (
+            <i
+              className="fas fa-trash text-red-500 ml-6"
+              onClick={deleteHandler}
+            ></i>
+          )}
         </div>
-        <H2 className="mr-4">{snippet.name}</H2>
-        {UserStore.user.uuid === snippet.userId && (
-          <i className="fas fa-trash text-red-500" onClick={deleteHandler}></i>
-        )}
       </div>
       <div className="flex  mb-4 mt-4">
         <div
@@ -93,13 +98,17 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
           <Code language="javascript" code={snippet.snippet} />
         </div>
         <div className="w-2/5">
-          <H3>Options</H3>
+          <H3 className="mb-4">Options</H3>
 
-          <p className="mt-4 mb-4">
-            <span className="font-bold">Visibility: </span>
-            {!snippet.visibility ? "Private" : "Public"}
-          </p>
-          <div className="flex items-center">
+          {!snippet.visibility && (
+            <Status text="Hidden from others" wrapperClass="bg-red-700" />
+          )}
+
+          {snippet.visibility && (
+            <Status text="Can be seen by others" wrapperClass="bg-green-500" />
+          )}
+
+          <div className="flex items-center mt-4">
             <MainButton
               className="m-2"
               muted
