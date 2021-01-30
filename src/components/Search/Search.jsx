@@ -19,6 +19,7 @@ const Search = ({ onChange, customIcon, children, placeholder }) => {
           className="bg-transparent w-full outline-none text-white"
           placeholder={placeholder}
           onChange={onChange}
+          autocomplete="off"
         />
       </div>
 

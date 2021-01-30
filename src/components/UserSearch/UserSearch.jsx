@@ -10,7 +10,7 @@ const UserSearch = () => {
   const [results, setResults] = useState([]);
 
   const queryHandler = (e) => {
-    if (e.target.value.length > 3) {
+    if (e.target.value.length > 2) {
       getAxios({
         url: "/search/users",
         params: {
