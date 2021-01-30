@@ -109,10 +109,8 @@ const ProfileForm = ({ user }) => {
         />
         <div className="flex justify-end mt-2">
           <p className="text-yellow-500">{`${state.bio.length}/250`}</p>
-          {state.bio.length > 250 && (
-            <p className="text-red-500 ml-2">
-              (+{state.bio && state.bio.length - 250})
-            </p>
+          {state?.bio && state.bio.length > 250 && (
+            <p className="text-red-500 ml-2">(+{state.bio.length - 250})</p>
           )}
         </div>
       </div>
