@@ -6,10 +6,10 @@ import Social from "../../components/Social/Social";
 const ShareSnippetModal = ({ shareLink, snippet }) => {
   return (
     <div>
-      <div className="p-4 flex flex-col items-center">
+      {/* <div className="p-4 flex flex-col items-center">
         <H2 className="text-gray-800">Share</H2>
         <Social />
-      </div>
+      </div> */}
 
       <div className="p-4 flex flex-col items-center bg-gray-800">
         <H2>Public link</H2>
