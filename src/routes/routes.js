@@ -1,6 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
-import Page404 from "../pages/404/404";
 import Account from "../pages/Account/Account";
 import Bookmarks from "../pages/Bookmarks/Bookmarks";
 import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";
@@ -24,6 +22,7 @@ import Signup from "../pages/Signup/Signup";
 import SnippetEdit from "../pages/SnippetEdit/SnippetEdit";
 import Snippets from "../pages/Snippets/Snippets";
 import SnippetShow from "../pages/SnippetShow/SnippetShow";
+import Index from "../pages/Static/Index";
 import UserShowPage from "../pages/UserShowPage/UserShowPage";
 
 const sharedRoutes = [
@@ -53,7 +52,7 @@ export const UNAUTHENTICATED = [
   },
   {
     slug: "/",
-    render: () => <Redirect to="/signup" />,
+    component: Index,
   },
   {
     slug: "/forgot_password",
