@@ -1,9 +1,9 @@
 import React from "react";
-
+import "./index.css";
 const VSCode = () => {
   return (
-    <div className="flex bg-white h-screen overflow-hidden">
-      <div className="w-1/2 p-8 flex flex-col justify-center relative ">
+    <div className="flex bg-white h-screen overflow-hidden vscode wrapper">
+      <div className="w-1/2 p-8 flex flex-col justify-center relative wrapper-left">
         <div
           className="bg-gray-800 w-full h-full absolute"
           style={{
@@ -19,7 +19,7 @@ const VSCode = () => {
         />
       </div>
 
-      <div className="w-1/2 flex flex-col justify-center items-center relative">
+      <div className="w-1/2 flex flex-col justify-center items-center relative wrapper-right">
         <div className="w-4/5">
           <h1 className="font-black text-gray-800 text-6xl">
             Integrates with VSCode

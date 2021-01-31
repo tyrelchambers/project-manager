@@ -11,7 +11,7 @@ import VSCode from "./VSCode";
 
 const Index = () => {
   return (
-    <>
+    <div className="overflow-y-hidden">
       <Hero />
       <CodeShare />
       <VSCode />
@@ -21,7 +21,7 @@ const Index = () => {
       <EnvVars />
       <Footer />
       <CTA />
-    </>
+    </div>
   );
 };
 

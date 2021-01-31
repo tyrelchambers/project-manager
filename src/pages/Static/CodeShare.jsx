@@ -1,10 +1,10 @@
 import React from "react";
-
+import "./index.css";
 const CodeShare = () => {
   return (
-    <div className="w-full relative h-screen bg-white">
+    <div className="w-full relative h-screen bg-white code wrapper">
       <div
-        className="absolute w-2/5 z-10"
+        className="absolute w-2/5 z-10 mobile-w-full wrapper-left"
         style={{
           left: "4em",
           top: "4em",
@@ -19,7 +19,10 @@ const CodeShare = () => {
         </p>
       </div>
 
-      <div className="absolute " style={{ bottom: "4em", right: "9em" }}>
+      <div
+        className="absolute mobile-hidden wrapper-right"
+        style={{ bottom: "4em", right: "9em" }}
+      >
         <img
           src={require("../../assets/undraw_code_inspection_bdl7.svg")}
           alt=""

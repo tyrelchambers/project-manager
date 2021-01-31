@@ -1,9 +1,9 @@
 import React from "react";
-
+import "./index.css";
 const EnvVars = () => {
   return (
-    <div className="flex bg-white h-screen overflow-hidden">
-      <div className="w-1/2 p-8 flex flex-col justify-center">
+    <div className="flex bg-white h-screen overflow-hidden envvar wrapper">
+      <div className="w-1/2 p-8 flex flex-col justify-center wrapper-left">
         <div className="w-full">
           <p className="uppercase font-bold text-pink-500">
             don’t worry... it’s going to be okay
@@ -24,7 +24,7 @@ const EnvVars = () => {
         </div>
       </div>
 
-      <div className="w-1/2 flex flex-col justify-center relative">
+      <div className="w-1/2 flex flex-col justify-center relative wrapper-right">
         <div
           className="bg-gray-800 w-full h-full absolute"
           style={{

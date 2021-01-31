@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import "./index.css";
 const Hero = () => {
   return (
-    <div className="flex bg-white h-screen overflow-hidden">
-      <div className="w-1/2 p-8 flex flex-col justify-center">
+    <div className="flex bg-white h-screen overflow-hidden wrapper hero">
+      <div className="w-1/2 p-8 flex flex-col justify-center z-10 relative wrapper-left">
         <h1 className="font-black text-pink-500 text-6xl">
           Discuss. Share. Grow.
         </h1>
@@ -21,7 +21,7 @@ const Hero = () => {
         </Link>
       </div>
 
-      <div className="w-1/2 flex flex-col justify-center relative">
+      <div className="w-1/2 flex flex-col justify-center relative wrapper-right">
         <div
           className="bg-gray-800 w-full h-full absolute"
           style={{

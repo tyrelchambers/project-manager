@@ -1,9 +1,9 @@
 import React from "react";
-
+import "./index.css";
 const CLI = () => {
   return (
-    <div className="h-screen bg-white overflow-hidden flex flex-col items-center">
-      <div className="w-3/5 mt-10">
+    <div className="h-screen bg-white overflow-hidden flex flex-col items-center cli wrapper">
+      <div className="w-3/5 mt-10 body">
         <p className="uppercase font-bold text-pink-500">
           From idea to creation in 2.2 clicks
         </p>
@@ -22,7 +22,7 @@ const CLI = () => {
           </p>
         </div>
 
-        <div className="flex mt-10">
+        <div className="flex mt-10 cli-options">
           <div className="flex flex-col w-1/2">
             <h3 className="text-gray-700 font-bold">Name</h3>
             <p className="text-4xl text-gray-800">my-cool-app</p>
@@ -51,12 +51,12 @@ const CLI = () => {
 
         <div className="flex mt-20">
           <div className="flex items-center mr-10">
-            <i class="fab fa-react text-blue-500 text-6xl mr-4"></i>
+            <i className="fab fa-react text-blue-500 text-6xl mr-4"></i>
             <p className="text-gray-800 text-4xl font-bold">React</p>
           </div>
 
           <div className="flex items-center">
-            <i class="fab fa-vuejs text-green-500 text-6xl mr-4"></i>
+            <i className="fab fa-vuejs text-green-500 text-6xl mr-4"></i>
             <p className="text-gray-800 text-4xl font-bold">Vue</p>
           </div>
         </div>

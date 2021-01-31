@@ -1,8 +1,8 @@
 import React from "react";
-
+import "./index.css";
 const Footer = () => {
   return (
-    <div className="bg-white flex flex-col justify-center items-center h-screen">
+    <div className="bg-white flex flex-col justify-center items-center h-screen wrapper footer p-6">
       <div className="w-4/5">
         <h1 className="font-black text-gray-800 text-6xl">
           If you made it this far, thank you.

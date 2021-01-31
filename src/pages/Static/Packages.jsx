@@ -1,9 +1,9 @@
 import React from "react";
-
+import "./index.css";
 const Packages = () => {
   return (
-    <div className="w-full h-screen overflow-hidden flex justify-center  bg-white">
-      <div className="w-3/5 relative">
+    <div className="w-full h-screen overflow-hidden flex justify-center  bg-white package wrapper">
+      <div className="w-3/5 relative body">
         <div className="flex flex-col w-full h-full z-10 mt-10 relative">
           <p className="uppercase font-bold text-pink-500">
             quicker get-up-and-go
