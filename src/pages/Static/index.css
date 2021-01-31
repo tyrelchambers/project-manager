@@ -1,0 +1,78 @@
+@media screen and (max-width: 425px) {
+  .cli-options {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cli-options div {
+    width: 100%;
+  }
+
+  .cli-options div:last-child {
+    margin-top: 1em;
+  }
+
+  .text-6xl {
+    font-size: 3rem !important;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .hero .wrapper-right,
+  .code .wrapper-right,
+  .vscode .wrapper-left,
+  .envvar .wrapper-right {
+    display: none !important;
+  }
+
+  .hero .wrapper-left,
+  .code .wrapper-left,
+  .vscode .wrapper-right,
+  .envvar .wrapper-left {
+    width: 100% !important;
+  }
+
+  .code .wrapper-left {
+    left: 0 !important;
+    padding: 1em;
+    right: 0 !important;
+  }
+
+  .package .body,
+  .feed .body {
+    width: 100% !important;
+    padding: 3em;
+  }
+
+  .package .body img,
+  .feed .body img {
+    display: none;
+  }
+
+  .cli .body {
+    width: 100% !important;
+    padding: 3em;
+  }
+
+  .feed .body {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .feed .body > div {
+    position: relative;
+  }
+  .wrapper {
+    height: 100% !important;
+    min-height: 100vh !important;
+  }
+
+  .footer > div {
+    width: 100% !important;
+  }
+
+  .wrapper .text-4xl {
+    font-size: 1.5rem;
+  }
+}
