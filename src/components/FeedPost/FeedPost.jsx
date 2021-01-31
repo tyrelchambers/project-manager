@@ -8,6 +8,7 @@ import { getAxios } from "../../api";
 import { socket } from "../..";
 import { bookmarkToast } from "../NotificationToasts/NotificationToasts";
 import Status from "../Status/Status";
+import { toast } from "react-toastify";
 
 const FeedPost = ({ post, user }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -29,7 +30,7 @@ const FeedPost = ({ post, user }) => {
       data: {
         postId: post.uuid,
       },
-    }).then((res) => bookmarkToast());
+    });
   };
 
   const likeHandler = async () => {
@@ -57,9 +58,9 @@ const FeedPost = ({ post, user }) => {
   };
 
   const likeIcon = isLiked ? (
-    <i className="fas fa-heart  text-red-500 mr-2" onClick={dislikeHandler}></i>
+    <i className="fas fa-heart  text-red-500 mr-2"></i>
   ) : (
-    <i className="far fa-heart  text-gray-500 mr-2" onClick={likeHandler}></i>
+    <i className="far fa-heart  text-gray-500 mr-2"></i>
   );
 
   return (
@@ -110,17 +111,16 @@ const FeedPost = ({ post, user }) => {
                     text="like this code"
                     wrapperClass="bg-gray-800 cursor-pointer m-2"
                     textClass="text-gray-200"
+                    onClick={isLiked ? dislikeHandler : likeHandler}
                   />
                   <Status
                     icon={
-                      <i
-                        className="fas fa-bookmark text-gray-200 mr-2"
-                        onClick={bookmarkHandler}
-                      ></i>
+                      <i className="fas fa-bookmark text-gray-200 mr-2"></i>
                     }
                     text="Add to bookmarks"
                     wrapperClass="bg-gray-800 cursor-pointer m-2"
                     textClass="text-gray-200"
+                    onClick={bookmarkHandler}
                   />
                 </>
               )}

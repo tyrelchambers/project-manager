@@ -57,7 +57,7 @@ const ProfileForm = ({ user }) => {
       fileEndpoint = files.serverId;
     }
 
-    if (state.bio.length > 250) {
+    if (state.bio && state.bio.length > 250) {
       return toast.error("Bio is too long");
     }
 

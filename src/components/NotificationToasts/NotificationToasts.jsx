@@ -37,28 +37,28 @@ const heartToast = (n) => {
   );
 };
 
-const bookmarkToast = (n) => {
-  return toast(
-    <ToastEl
-      text={
-        <>
-          <Link to={`/user/${n.from.uuid}`} className="font-bold underline">
-            {n.from.name}
-          </Link>{" "}
-          {getType({ type: n.type, target: n.post.uuid })}
-        </>
-      }
-      icon={icon("fas fa-bookmark")}
-    />,
-    {
-      progressStyle: {
-        background: "#F7CC00",
-      },
-      className: "brown-gradient",
-      closeOnClick: false,
-    }
-  );
-};
+// const bookmarkToast = (n) => {
+//   return toast(
+//     <ToastEl
+//       text={
+//         <>
+//           <Link to={`/user/${n.from.uuid}`} className="font-bold underline">
+//             {n.from.name}
+//           </Link>{" "}
+//           {getType({ type: n.type, target: n.post.uuid })}
+//         </>
+//       }
+//       icon={icon("fas fa-bookmark")}
+//     />,
+//     {
+//       progressStyle: {
+//         background: "#F7CC00",
+//       },
+//       className: "brown-gradient",
+//       closeOnClick: false,
+//     }
+//   );
+// };
 
 const followToast = () => {
   return toast(
@@ -73,4 +73,4 @@ const followToast = () => {
   );
 };
 
-export { heartToast, bookmarkToast, followToast };
+export { heartToast, followToast };
