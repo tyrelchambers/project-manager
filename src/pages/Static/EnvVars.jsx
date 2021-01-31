@@ -25,13 +25,7 @@ const EnvVars = () => {
       </div>
 
       <div className="w-1/2 flex flex-col justify-center relative wrapper-right">
-        <div
-          className="bg-gray-800 w-full h-full absolute"
-          style={{
-            transform: "skew(-15deg) scale(2)",
-            right: "-350px",
-          }}
-        ></div>
+        <div className="bg-gray-800 w-full h-full absolute"></div>
         <img
           src={require("../../assets/shield.png")}
           alt="Code"

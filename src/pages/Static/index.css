@@ -30,6 +30,7 @@
   .vscode .wrapper-right,
   .envvar .wrapper-left {
     width: 100% !important;
+    position: relative;
   }
 
   .code .wrapper-left {

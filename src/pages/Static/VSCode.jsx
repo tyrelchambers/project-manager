@@ -3,14 +3,8 @@ import "./index.css";
 const VSCode = () => {
   return (
     <div className="flex bg-white h-screen overflow-hidden vscode wrapper">
-      <div className="w-1/2 p-8 flex flex-col justify-center relative wrapper-left">
-        <div
-          className="bg-gray-800 w-full h-full absolute"
-          style={{
-            transform: "skew(15deg) scale(2)",
-            left: "-450px",
-          }}
-        ></div>
+      <div className="w-1/2 flex flex-col justify-center relative wrapper-left">
+        <div className="bg-gray-800 w-full h-full absolute"></div>
         <img
           src={require("../../assets/code.png")}
           alt="Code"

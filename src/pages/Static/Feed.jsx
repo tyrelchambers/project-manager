@@ -4,7 +4,10 @@ import "./index.css";
 const Feed = () => {
   return (
     <div className="h-screen overflow-hidden flex justify-center items-center bg-white feed wrapper">
-      <div className="w-3/5 relative h-full body">
+      <div
+        className="w-3/5 relative h-full body"
+        style={{ maxHeight: "900px" }}
+      >
         <div className="flex flex-col absolute z-10" style={{ top: "3em" }}>
           <p className="uppercase font-bold text-pink-500">Personalized feed</p>
           <h1 className="font-black text-gray-800 text-6xl">
