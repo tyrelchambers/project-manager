@@ -3,12 +3,12 @@ import "./index.css";
 const CodeShare = () => {
   return (
     <div className="w-full h-screen bg-white code wrapper flex justify-center items-center">
-      <div className="w-3/5 relative h-full" style={{ maxHeight: "900px" }}>
+      <div className="w-4/5 relative h-full" style={{ maxHeight: "900px" }}>
         <div
           className="absolute w-3/5 z-10 mobile-w-full wrapper-left"
           style={{
-            left: "4em",
-            top: "4em",
+            left: "3em",
+            top: "3em",
           }}
         >
           <h1 className="font-black text-gray-800 text-6xl">
