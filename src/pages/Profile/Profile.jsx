@@ -3,7 +3,7 @@ import React from "react";
 import { getAxios } from "../../api";
 import Avatar from "../../components/Avatar/Avatar";
 import { MainButton } from "../../components/Buttons/Buttons";
-import { H2, H2Subtitle } from "../../components/Headings/Headings";
+import { H1, H2Subtitle } from "../../components/Headings/Headings";
 import ProfileForm from "../../forms/ProfileForm";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
@@ -30,7 +30,7 @@ const Profile = ({ UserStore }) => {
 
   return (
     <DisplayWrapper>
-      <H2>Profile</H2>
+      <H1>Profile</H1>
       <H2Subtitle>This is your public facing information</H2Subtitle>
 
       <div className="flex mt-10 mb-10">

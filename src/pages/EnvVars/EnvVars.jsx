@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
-import { H2 } from "../../components/Headings/Headings";
+import { H1 } from "../../components/Headings/Headings";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api/index";
 import { formatUrl } from "../../helpers/formatUrl";
@@ -23,7 +23,7 @@ const EnvVars = () => {
   return (
     <DisplayWrapper>
       <div className="flex justify-between items-center">
-        <H2>Environment Variables</H2>
+        <H1>Environment Variables</H1>
         <div className="w-fit">
           <Link className="btn primary  bg-pink-500" to="/env/new">
             New Environment Variable

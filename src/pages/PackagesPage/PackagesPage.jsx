@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { H2, H2Subtitle, H3 } from "../../components/Headings/Headings";
+import { H1, H2Subtitle, H3 } from "../../components/Headings/Headings";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./PackagesPage.css";
 import { Link } from "react-router-dom";
@@ -23,7 +23,7 @@ const PackagesPage = ({ UserStore }) => {
 
   const NpmPkgs = () => (
     <section className="mt-10">
-      <H3>Saved NPM Defaults</H3>
+      <H3>Saved NPM Packages</H3>
 
       <div className="flex mt-4">
         {defaultPackages.length > 0 &&
@@ -45,7 +45,7 @@ const PackagesPage = ({ UserStore }) => {
 
   const YarnPkgs = () => (
     <section className="mt-10">
-      <H3>Saved Yarn Defaults</H3>
+      <H3>Saved Yarn Packages</H3>
 
       <div className="flex mt-4">
         {defaultPackages.length > 0 &&
@@ -68,7 +68,7 @@ const PackagesPage = ({ UserStore }) => {
     <DisplayWrapper>
       <div className="flex justify-between">
         <div className="flex flex-col">
-          <H2>Defaults</H2>
+          <H1>Packages</H1>
           <H2Subtitle>
             Create default package.json files that you can import into other
             projects to make setup a breeze.

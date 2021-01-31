@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { getAxios } from "../../api";
 import { MainButton } from "../../components/Buttons/Buttons";
-import { H2 } from "../../components/Headings/Headings";
+import { H1 } from "../../components/Headings/Headings";
 import { copyToClipboard } from "../../helpers/copyToClipboard";
 import { formatUrl } from "../../helpers/formatUrl";
 import isEmpty from "../../helpers/isEmpty";
@@ -28,7 +28,7 @@ const EnvVarShow = () => {
 
   return (
     <DisplayWrapper>
-      <H2>{envVar.name}</H2>
+      <H1>{envVar.name}</H1>
       <div className="w-2/5">
         <pre className="mt-6 p-4 rounded-md bg-gray-800 text-gray-200 whitespace-pre-wrap">
           <code>{envVar.variables}</code>

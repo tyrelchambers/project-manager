@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./Snippets.css";
-import { H2 } from "../../components/Headings/Headings";
+import { H1 } from "../../components/Headings/Headings";
 import { MainButton } from "../../components/Buttons/Buttons";
 import { inject, observer } from "mobx-react";
 import SnippetForm from "../../forms/SnippetForm";
@@ -30,7 +30,7 @@ const Snippets = ({ ModalStore }) => {
   return (
     <DisplayWrapper>
       <div className="flex justify-between">
-        <H2 className="mr-4">Code Snippets</H2>
+        <H1 className="mr-4">Code Snippets</H1>
 
         <div className="w-fit">
           <MainButton default onClick={addSnippetModelHandler}>
