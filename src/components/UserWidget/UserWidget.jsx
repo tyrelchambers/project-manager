@@ -7,7 +7,7 @@ const UserWidget = ({ UserStore }) => {
   return (
     <Link
       to={`/user/${UserStore.user.uuid}`}
-      className="flex  user-widget-wrapper p-4"
+      className="flex  user-widget-wrapper mt-4 mb-4"
     >
       <Avatar url={UserStore.user.avatar} size="small" />
       <div className="flex flex-col ml-4">

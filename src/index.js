@@ -3,20 +3,15 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import activeRoutes from "./routes/routes";
 import "./assets/main.css";
 import { Provider } from "mobx-react";
 import stores from "./stores/index";
 import ModalContainer from "./layouts/ModalContainer/ModalContainer";
-import { getAxios } from "./api";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UNAUTHENTICATED } from "./routes/routes";
 import { io } from "socket.io-client";
-import {
-  followToast,
-  heartToast,
-} from "./components/NotificationToasts/NotificationToasts";
+import AuthProvider from "./providers/AuthProvider";
 
 export const socket = io(process.env.REACT_APP_BACKEND, {
   transportOptions: {
@@ -41,16 +36,6 @@ const Unauthenticated = () =>
       render={route.render}
     />
   ));
-const Authenticated = () =>
-  activeRoutes.map((route, id) => (
-    <Route
-      key={id}
-      exact
-      path={route.slug}
-      component={route.component}
-      render={route.render}
-    />
-  ));
 
 const App = () => {
   const token =
@@ -58,33 +43,7 @@ const App = () => {
     window.sessionStorage.getItem("token") ||
     false;
 
-  useEffect(() => {
-    if (token) {
-      const fn = async () => {
-        await getAxios({
-          url: "/user/me",
-        }).then((res) => {
-          if (res.user) {
-            stores.UserStore.setUser(res.user);
-          }
-        });
-      };
-
-      fn();
-
-      socket.on("notification", (data) => {
-        if (data.type === "post_like") {
-          heartToast(data.notification);
-        }
-
-        if (data.type === "follow") {
-          followToast(data.notification);
-        }
-      });
-    }
-  }, [token]);
-
-  return token ? <Authenticated /> : <Unauthenticated />;
+  return token ? <AuthProvider stores={stores} /> : <Unauthenticated />;
 };
 ReactDOM.render(
   <React.StrictMode>

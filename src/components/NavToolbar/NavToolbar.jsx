@@ -25,7 +25,7 @@ const NavToolbar = ({ user, NotificationStore }) => {
     fn();
   }, []);
   return (
-    <div className="flex nav-toolbar-wrapper rounded-lg pt-2 pb-2 pr-4 pl-4 justify-around box-shadow">
+    <div className="flex nav-toolbar-wrapper rounded-lg pt-2 pb-2 pr-4 pl-4 justify-around box-shadow z-10">
       <Link to={`/user/${user.uuid}`} className="nav-toolbar-item">
         <i className="fas fa-user-astronaut"></i>
       </Link>

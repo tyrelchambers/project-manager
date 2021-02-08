@@ -24,11 +24,7 @@
 .navbar {
   width: 100%;
   max-width: 350px;
-  border-right: 2px solid var(--gray-800);
-  padding-right: 1em;
-  position: sticky;
-  top: 0;
-  height: calc(100vh - 80px);
+  height: 100%;
 }
 
 .nav-item.active i {

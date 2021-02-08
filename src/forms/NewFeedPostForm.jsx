@@ -29,11 +29,11 @@ const NewFeedPostForm = ({ UserStore, SearchStore }) => {
     });
   };
   const buttonState = state.post ? (
-    <MainButton classes="w-20" default onClick={(e) => submitHandler(e)}>
+    <MainButton default onClick={(e) => submitHandler(e)}>
       Share
     </MainButton>
   ) : (
-    <MainButton classes="w-20" muted disabled>
+    <MainButton muted disabled>
       Share
     </MainButton>
   );
@@ -48,7 +48,7 @@ const NewFeedPostForm = ({ UserStore, SearchStore }) => {
           value={state.post}
         />
 
-        {buttonState}
+        <div className="max-w-xl">{buttonState}</div>
       </div>
 
       {!isEmpty(SearchStore.postSnippet) && (

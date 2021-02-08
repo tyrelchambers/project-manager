@@ -4,13 +4,15 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageCrop from "filepond-plugin-image-crop";
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import useStorage from "../../hooks/useStorage";
 registerPlugin(
   FilePondPluginImageExifOrientation,
   FilePondPluginImagePreview,
-  FilePondPluginImageCrop
+  FilePondPluginImageCrop,
+  FilePondPluginFileValidateSize
 );
 
 const Upload = React.forwardRef((props, ref) => {
@@ -41,6 +43,7 @@ const Upload = React.forwardRef((props, ref) => {
       allowImageResize={true}
       imageResizeTargetWidth="400"
       imageResizeTargetHeight="400"
+      maxFileSize="3MB"
     />
   );
 });

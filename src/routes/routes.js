@@ -15,7 +15,6 @@ import PackageShow from "../pages/PackageShow/PackageShow";
 import PackagesPage from "../pages/PackagesPage/PackagesPage";
 import Post from "../pages/Post";
 import Profile from "../pages/Profile/Profile";
-import ProfileSetup from "../pages/ProfileSetup/ProfileSetup";
 import Projects from "../pages/Projects/Projects";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import Signup from "../pages/Signup/Signup";
@@ -118,10 +117,6 @@ export default [
   {
     slug: "/settings/profile",
     component: Profile,
-  },
-  {
-    slug: "/profile/setup",
-    component: ProfileSetup,
   },
   {
     slug: "/signout",
