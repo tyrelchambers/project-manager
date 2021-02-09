@@ -7,10 +7,8 @@ import Spinner from "../components/Spinner/Spinner";
 import { inject, observer } from "mobx-react";
 import { getAxios } from "../api";
 import List from "../components/List/List";
-import useStorage from "../hooks/useStorage";
 import { useForm } from "react-hook-form";
 import FormErrors from "../components/FormErrors/FormErrors";
-import { useHistory } from "react-router-dom";
 import { copyToClipboard } from "../helpers/copyToClipboard";
 
 const NewPackageForm = ({ ModalStore, UserStore }) => {
@@ -124,7 +122,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
         userId: UserStore.user.uuid,
         packageName: state.packageName,
         folderName: state.defaultName,
-        bundler: state.framework.framework,
+        body: JSON.stringify(packageTemp),
       },
     });
   };

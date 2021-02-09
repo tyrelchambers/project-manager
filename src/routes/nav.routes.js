@@ -26,20 +26,8 @@ export const navRoutes = [
   },
   {
     label: "Packages",
-    url: "/#",
+    url: "/packages",
     icon: <i className="fab fa-buffer"></i>,
-    subnav: [
-      {
-        label: "NPM",
-        icon: <i className="fab fa-npm"></i>,
-        url: "/packages?f=npm",
-      },
-      {
-        label: "Yarn",
-        icon: <i className="fab fa-yarn"></i>,
-        url: "/packages?f=yarn",
-      },
-    ],
   },
   {
     label: "Code Snippets",

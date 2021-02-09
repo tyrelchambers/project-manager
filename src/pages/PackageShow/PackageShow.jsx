@@ -18,7 +18,6 @@ const PackageShow = ({ match }) => {
       }).then((res) => {
         setPkg({
           package: res.package,
-          body: res.body,
         });
       });
     };
@@ -52,7 +51,7 @@ const PackageShow = ({ match }) => {
           <div className="p-4 bg-gray-800 w-3/5 rounded-lg flex flex-col mb-4 mt-4">
             <pre>
               <code className="text-gray-300" id="package">
-                {JSON.parse(pkg.body)}
+                {JSON.parse(pkg.package.body)}
               </code>
             </pre>
             <MainButton
