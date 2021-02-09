@@ -31,11 +31,9 @@ const PackageShow = ({ match }) => {
       method: "delete",
       data: {
         package_id,
-        keyName: pkg.package.folderName,
       },
     }).then((res) => {
       window.history.back();
-      toast.success(res.message);
     });
   };
   return (
