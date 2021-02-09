@@ -3,16 +3,15 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
-import SelectField from "../components/SelectField/SelectField";
 import Spinner from "../components/Spinner/Spinner";
 import { inject, observer } from "mobx-react";
 import { getAxios } from "../api";
 import List from "../components/List/List";
 import useStorage from "../hooks/useStorage";
-import { packagePrefs } from "../constants/frameworks";
 import { useForm } from "react-hook-form";
 import FormErrors from "../components/FormErrors/FormErrors";
 import { useHistory } from "react-router-dom";
+import { copyToClipboard } from "../helpers/copyToClipboard";
 
 const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [state, setState] = useState({
@@ -22,15 +21,12 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
     framework: {},
   });
 
-  const [downloading, setDownloading] = useState(false);
   const [query, setQuery] = useState("");
   const [queryResults, setQueryResults] = useState([]);
   const [searching, setSearching] = useState(false);
-  const [token, _] = useStorage("token");
   const { errors, register, handleSubmit } = useForm({
     reValidateMode: "onSubmit",
   });
-  const history = useHistory();
 
   const searchNpm = async (q) => {
     return await Axios.get(
@@ -115,64 +111,26 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
 `;
 
   const openModal = () => {
+    submitHandler();
     ModalStore.setRender(<PackageWindow />);
     ModalStore.setIsOpen(true);
   };
 
   const submitHandler = async (e) => {
-    let linkToPackage;
-
-    await getAxios({
-      method: "post",
-      url: "/packages/upload",
-      data: {
-        packageJson: JSON.stringify(packageTemp),
-        folderName: state.defaultName,
-      },
-    }).then((res) => {
-      linkToPackage = res.endpoint;
-    });
-
     await getAxios({
       method: "post",
       url: "/packages/save",
       data: {
-        url: linkToPackage,
         userId: UserStore.user.uuid,
         packageName: state.packageName,
         folderName: state.defaultName,
         bundler: state.framework.framework,
       },
     });
-    const downloadWindow = window.open(``, "_blank");
-    downloadWindow.window.location = `${process.env.REACT_APP_BACKEND}/api/v1/packages/download?defaultName=${state.defaultName}&token=${token}`;
-    setTimeout(() => {
-      downloadWindow.close();
-    }, 1500);
-    history.push("/");
   };
 
   const PackageWindow = () => (
     <div className="flex flex-col">
-      <div className="flex flex-col items-center p-4 pt-8 pb-8">
-        <p className="font-bold text-lg mb-4 text-gray-800">
-          Download your package.json
-        </p>
-
-        {downloading && (
-          <div className="flex items-center mt-4">
-            <Spinner />
-            <p className="text-pink-500 font-bold ml-4">Preparing files...</p>
-          </div>
-        )}
-
-        {!downloading && (
-          <MainButton default onClick={submitHandler}>
-            <i className="fas fa-cloud-download-alt mr-4 "></i>Create and
-            download
-          </MainButton>
-        )}
-      </div>
       <div className="flex flex-col items-center p-4 pt-8 pb-8 bg-gray-900 ">
         <p className="font-bold text-white text-lg mb-4 ">
           Copy to your own package.json
@@ -183,7 +141,9 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
             <code className="text-gray-300">{packageTemp}</code>
           </pre>
         </div>
-        <MainButton default>Copy to Clipboard</MainButton>
+        <MainButton default onClick={() => copyToClipboard(packageTemp)}>
+          Copy to Clipboard
+        </MainButton>
       </div>
     </div>
   );
@@ -229,24 +189,6 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
           })}
         />
         <FormErrors error={errors.packageName} />
-      </div>
-
-      <div className="field-group">
-        <FormLabel name="manager" text="NPM or Yarn?" />
-        <SelectField
-          data={packagePrefs}
-          state={state}
-          stateHandler={setState}
-          stateKey="framework"
-          label="Choose a bundler"
-          ref={register({
-            required: {
-              value: true,
-              message: "Please choose a bundler",
-            },
-          })}
-        />
-        <FormErrors error={errors.framework} />
       </div>
 
       <div className="field-group">

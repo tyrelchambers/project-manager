@@ -19,11 +19,6 @@ const Home = () => {
           style={{ position: "sticky", top: "1em" }}
         >
           <UserSearch />
-          <Callout
-            text="Check out the Kanlen VSCode extension"
-            link="Somelink"
-            id="vscode-extension"
-          />
         </div>
       </div>
     </DisplayWrapper>

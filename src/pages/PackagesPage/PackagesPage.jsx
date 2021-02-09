@@ -7,8 +7,6 @@ import { inject, observer } from "mobx-react";
 import { getAxios } from "../../api";
 
 const PackagesPage = ({ UserStore }) => {
-  const params = new URLSearchParams(window.location.search);
-
   const [defaultPackages, setDefaultPackage] = useState([]);
 
   useEffect(() => {
@@ -21,49 +19,6 @@ const PackagesPage = ({ UserStore }) => {
     }
   }, []);
 
-  const NpmPkgs = () => (
-    <section className="mt-10">
-      <H3>Saved NPM Packages</H3>
-
-      <div className="flex mt-4">
-        {defaultPackages.length > 0 &&
-          defaultPackages
-            .filter((x) => x.bundler === "npm")
-            .map((pkg, id) => (
-              <Link
-                key={id}
-                className="flex items-center mr-2 p-2 bg-gray-800 rounded-sm"
-                to={`/package/${pkg.uuid}`}
-              >
-                <i className="fab fa-node-js text-green-500 mr-2"></i>
-                <p className="text-gray-300">{pkg.folderName}</p>
-              </Link>
-            ))}
-      </div>
-    </section>
-  );
-
-  const YarnPkgs = () => (
-    <section className="mt-10">
-      <H3>Saved Yarn Packages</H3>
-
-      <div className="flex mt-4">
-        {defaultPackages.length > 0 &&
-          defaultPackages
-            .filter((x) => x.bundler === "yarn")
-            .map((pkg, id) => (
-              <Link
-                key={id}
-                className="flex items-center mr-2 p-2 bg-gray-800 rounded-sm"
-                to={`/package/${pkg.uuid}`}
-              >
-                <i className="fab fa-yarn  text-green-500 mr-2"></i>
-                <p className="text-gray-300">{pkg.folderName}</p>
-              </Link>
-            ))}
-      </div>
-    </section>
-  );
   return (
     <DisplayWrapper>
       <div className="flex justify-between">
@@ -82,9 +37,23 @@ const PackagesPage = ({ UserStore }) => {
         </div>
       </div>
 
-      {params.get("f") === "npm" && <NpmPkgs />}
+      <section className="mt-10">
+        <H3>Saved Packages</H3>
 
-      {params.get("f") === "yarn" && <YarnPkgs />}
+        <div className="flex mt-4">
+          {defaultPackages.length > 0 &&
+            defaultPackages.map((pkg, id) => (
+              <Link
+                key={id}
+                className="flex items-center mr-2 p-2 bg-gray-800 rounded-md"
+                to={`/package/${pkg.uuid}`}
+              >
+                <i className="fas fa-box-open text-green-500 mr-2"></i>
+                <p className="text-gray-300">{pkg.folderName}</p>
+              </Link>
+            ))}
+        </div>
+      </section>
     </DisplayWrapper>
   );
 };

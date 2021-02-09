@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from "react";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
-import { H1 } from "../../components/Headings/Headings";
+import { H1, H2Subtitle } from "../../components/Headings/Headings";
 import "./Projects.css";
 import ProjectForm from "../../forms/ProjectForm";
 import ProjectFlags from "../../components/ProjectFlags/ProjectFlags";
@@ -41,6 +41,10 @@ const Projects = () => {
   return (
     <DisplayWrapper>
       <H1>Project Command Line</H1>
+      <H2Subtitle>
+        Structure a CLI command to build your next project. Just give it a name,
+        select a framework, select any flags, and build away.
+      </H2Subtitle>
       <div className="container mt-8 ">
         <div className="bg-gray-900 w-full rounded-lg flex justify-between">
           <p className="text-white flex items-center p-4 ">
