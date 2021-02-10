@@ -12,7 +12,7 @@ const UserWidget = ({ UserStore }) => {
       <Avatar url={UserStore.user.avatar} size="small" />
       <div className="flex flex-col ml-4">
         <p>Signed in as</p>
-        <p className="text-white font-bold text-2xl break-words">
+        <p className="text-white font-bold text-2xl break-all">
           {UserStore.user.name ? UserStore.user.name : UserStore.user.email}
         </p>
       </div>

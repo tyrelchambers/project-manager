@@ -34,7 +34,7 @@ const Profile = ({ UserStore }) => {
       <H2Subtitle>This is your public facing information</H2Subtitle>
 
       <div className="flex mt-10 mb-10">
-        <Avatar url={UserStore.user.avatar} size="large" />
+        <Avatar url={UserStore.user.avatar} size="medium" />
         <div className="flex flex-col ml-4">
           <p className=" font-bold text-3xl">{UserStore.user.name}</p>
           {UserStore.user.avatar && (

@@ -11,6 +11,9 @@ class UserStore {
   }
 
   setUser(user) {
+    if (!user.name) {
+      user.name = user.email;
+    }
     this.user = user;
   }
 }
