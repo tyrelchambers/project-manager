@@ -11,6 +11,7 @@ import { inject, observer } from "mobx-react";
 import ShareSnippetModal from "../../modals/ShareSnippetModal/ShareSnippetModal";
 import Code from "../../components/Code/Code";
 import Status from "../../components/Status/Status";
+import "./SnippetShow.css";
 
 const SnippetShow = ({ UserStore, ModalStore }) => {
   const { snippet_uuid } = useParams();
@@ -90,7 +91,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
           )}
         </div>
       </div>
-      <div className="flex  mb-4 mt-4">
+      <div className="flex  mb-4 mt-4 snippet-show-body">
         <div
           className="w-3/5 rounded-lg flex flex-col mr-4"
           style={{ height: "fit-content" }}
@@ -108,7 +109,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
             <Status text="Can be seen by others" wrapperClass="bg-green-500" />
           )}
 
-          <div className="flex items-center mt-4">
+          <div className="flex items-center mt-4 snippet-actions">
             <MainButton
               className="m-2"
               muted

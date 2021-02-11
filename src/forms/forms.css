@@ -19,3 +19,23 @@
 .form-input::placeholder {
   font-style: italic;
 }
+
+@media screen and (max-width: 425px) {
+  .form .mobile-column {
+    flex-direction: column;
+  }
+
+  .form .mobile-column .btn {
+    width: 100%;
+    margin: 0.5em 0;
+    margin-top: 1em;
+  }
+
+  .form .mobile-column textarea {
+    margin: 0;
+  }
+
+  .form .mobile-column > div {
+    width: 100%;
+  }
+}

@@ -6,3 +6,13 @@
 .selected-project i {
   color: var(--gray-800);
 }
+
+@media screen and (max-width: 587px) {
+  .projects-options {
+    flex-direction: column;
+  }
+  .projects-options > div {
+    margin-left: 0;
+    margin-top: 1em;
+  }
+}

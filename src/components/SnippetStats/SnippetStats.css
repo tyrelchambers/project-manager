@@ -1,0 +1,9 @@
+@media screen and (max-width: 425px) {
+  .stats-wrapper {
+    flex-direction: column;
+  }
+
+  .stats-wrapper div {
+    margin: 0.25em 0;
+  }
+}

@@ -7,16 +7,22 @@
 .avatar.lg {
   min-height: 130px;
   min-width: 130px;
+  max-height: 130px;
+  max-width: 130px;
 }
 
 .avatar.md {
   min-width: 75px;
   min-height: 75px;
+  max-width: 75px;
+  max-height: 75px;
 }
 
 .avatar.sm {
   min-width: 60px;
   min-height: 60px;
+  max-width: 60px;
+  max-height: 60px;
 }
 
 .avatar.no-image {
@@ -25,4 +31,11 @@
   justify-content: center;
   align-items: center;
   color: var(--white);
+}
+
+@media screen and (max-width: 425px) {
+  .avatar {
+    width: 45px !important;
+    height: 45px !important;
+  }
 }

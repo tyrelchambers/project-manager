@@ -1,9 +1,10 @@
 import { inject, observer } from "mobx-react";
-import React, { useEffect } from "react";
+import React from "react";
 import { getAxios } from "../../api";
 import { H1 } from "../../components/Headings/Headings";
 import Notification from "../../components/Notification/Notification";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
+import "./Notifications.css";
 
 const Notifications = ({ NotificationStore }) => {
   const unreadCount = () => {
@@ -43,9 +44,9 @@ const Notifications = ({ NotificationStore }) => {
 
   return (
     <DisplayWrapper>
-      <div className="flex justify-between">
+      <div className="flex justify-between notifications-header">
         <H1>Notifications</H1>
-        <div className="flex items-center">
+        <div className="flex items-center notifications-actions">
           <div className="flex items-center mr-6" onClick={markAllAsRead}>
             <i className="fas fa-check text-yellow-400 mr-2"></i>
             <p className="text-yellow-400 underline">Mark all as read</p>

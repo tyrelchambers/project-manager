@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { getAxios } from "../../api";
-import { H2 } from "../../components/Headings/Headings";
+import { H1 } from "../../components/Headings/Headings";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./SnippetEdit.css";
 import FormLabel from "../../components/FormLabel/FormLabel";
@@ -39,7 +39,7 @@ const SnippetEdit = () => {
 
   return (
     <DisplayWrapper>
-      <H2>Editing {snippet.name}</H2>
+      <H1>Editing {snippet.name}</H1>
       <form className="form container max-w-screen-md">
         <div className="field-group mt-6">
           <FormLabel name="name" text="Snippet Name" />

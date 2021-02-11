@@ -41,7 +41,7 @@ const LoginForm = () => {
   };
   return (
     <form
-      className="container max-w-screen-sm"
+      className="container max-w-screen-sm p-4"
       onSubmit={handleSubmit(submitHandler)}
     >
       <div className="field-group">

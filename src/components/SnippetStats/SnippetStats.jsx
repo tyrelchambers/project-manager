@@ -1,9 +1,10 @@
 import React from "react";
 import Status from "../Status/Status";
+import "./SnippetStats.css";
 
 const SnippetStats = ({ stats }) => {
   return (
-    <div className="flex mt-6 mb-6">
+    <div className="flex mt-6 mb-6 stats-wrapper">
       <div className="flex items-center mr-4 ">
         <Status
           text={`${stats.views} people have seen your code`}

@@ -1,8 +1,10 @@
 import React from "react";
+import { docWidth } from "../../constants/constants";
+import "./Headings.css";
 
 export const H1 = (props) => (
   <h1
-    className={`text-4xl font-black text-white ${
+    className={`heading text-4xl font-black text-white ${docWidth && "mt-16"} ${
       props.className ? props.className : ""
     }`}
     style={props.style}
@@ -12,7 +14,7 @@ export const H1 = (props) => (
 );
 export const H2 = (props) => (
   <h2
-    className={`text-2xl font-bold text-white ${
+    className={`heading text-2xl font-bold text-white  ${
       props.className ? props.className : ""
     }`}
     style={props.style}
@@ -22,7 +24,7 @@ export const H2 = (props) => (
 );
 export const H3 = (props) => (
   <h3
-    className={`text-lg font-bold flex items-center text-white ${
+    className={`heading text-lg font-bold flex items-center text-white ${
       props.className ? props.className : ""
     }`}
     style={props.style}

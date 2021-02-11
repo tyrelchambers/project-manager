@@ -1,0 +1,10 @@
+@media screen and (max-width: 375px) {
+  .profile-header {
+    flex-direction: column;
+  }
+
+  .profile-username {
+    margin: 0;
+    margin-top: 0.5em;
+  }
+}

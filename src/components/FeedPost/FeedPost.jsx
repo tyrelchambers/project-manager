@@ -6,11 +6,11 @@ import Code from "../Code/Code";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api";
 import { socket } from "../..";
-import { bookmarkToast } from "../NotificationToasts/NotificationToasts";
 import Status from "../Status/Status";
-import { toast } from "react-toastify";
+import { inject, observer } from "mobx-react";
+import { docWidth } from "../../constants/constants";
 
-const FeedPost = ({ post, user }) => {
+const FeedPost = ({ ModalStore, post, user }) => {
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
@@ -63,6 +63,13 @@ const FeedPost = ({ post, user }) => {
     <i className="far fa-heart  text-gray-500 mr-2"></i>
   );
 
+  const mobileSnippetHandler = (snippet) => {
+    ModalStore.setRender(
+      <Code language="js" code={post.CodeSnippet.snippet} />
+    );
+    ModalStore.setIsOpen(true);
+  };
+
   return (
     <div className="feed-post-border">
       <div className={`feed-post flex p-4 rounded-lg`}>
@@ -75,7 +82,7 @@ const FeedPost = ({ post, user }) => {
               <div className="flex items-center">
                 <Link
                   to={`/user/${post.User.uuid}`}
-                  className="font-black mb-2 text-lg text-gray-200 hover:underline"
+                  className="font-black mb-2 text-lg text-gray-200 hover:underline truncate feed-post-username"
                 >
                   {post.User.name}
                 </Link>
@@ -91,7 +98,7 @@ const FeedPost = ({ post, user }) => {
             >
               {post.post}
             </Link>
-            {post.CodeSnippet && (
+            {post.CodeSnippet && !docWidth && (
               <div className="flex flex-col">
                 <div
                   style={{
@@ -109,9 +116,10 @@ const FeedPost = ({ post, user }) => {
                   <Status
                     icon={likeIcon}
                     text="like this code"
-                    wrapperClass="bg-gray-800 cursor-pointer m-2"
+                    wrapperClass="bg-gray-800 cursor-pointer m-2 "
                     textClass="text-gray-200"
                     onClick={isLiked ? dislikeHandler : likeHandler}
+                    hideOnMobile
                   />
                   <Status
                     icon={
@@ -121,8 +129,15 @@ const FeedPost = ({ post, user }) => {
                     wrapperClass="bg-gray-800 cursor-pointer m-2"
                     textClass="text-gray-200"
                     onClick={bookmarkHandler}
+                    hideOnMobile
                   />
                 </>
+              )}
+              {post.CodeSnippet && docWidth && (
+                <Status
+                  icon={<i className="fas fa-laptop-code text-gray-200 "></i>}
+                  onClick={mobileSnippetHandler}
+                />
               )}
             </div>
           </div>
@@ -132,4 +147,4 @@ const FeedPost = ({ post, user }) => {
   );
 };
 
-export default FeedPost;
+export default inject("ModalStore")(observer(FeedPost));
