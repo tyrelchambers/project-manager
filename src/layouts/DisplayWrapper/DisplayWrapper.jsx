@@ -1,10 +1,9 @@
 import React from "react";
 import MobileNav from "../../components/MobileNav/MobileNav";
+import { docWidth } from "../../constants/constants";
 import Header from "../Header/Header";
 
 const DisplayWrapper = (props) => {
-  const docWidth = document.body.clientWidth <= 768;
-
   return (
     <>
       {docWidth ? (

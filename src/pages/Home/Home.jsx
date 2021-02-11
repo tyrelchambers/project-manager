@@ -7,10 +7,9 @@ import UserSearch from "../../components/UserSearch/UserSearch";
 import Callout from "../../callouts/Callout";
 import "./Home.css";
 import MobileSearch from "../../components/MobileSearch/MobileSearch";
+import { docWidth } from "../../constants/constants";
 
 const Home = () => {
-  const docWidth = document.body.clientWidth <= 768;
-
   return (
     <DisplayWrapper>
       <div className="flex">

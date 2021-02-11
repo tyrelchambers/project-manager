@@ -8,10 +8,10 @@ import { getAxios } from "../../api";
 import { socket } from "../..";
 import Status from "../Status/Status";
 import { inject, observer } from "mobx-react";
+import { docWidth } from "../../constants/constants";
 
 const FeedPost = ({ ModalStore, post, user }) => {
   const [isLiked, setIsLiked] = useState(false);
-  const docWidth = document.body.clientWidth <= 768;
 
   useEffect(() => {
     if (user) {

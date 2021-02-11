@@ -29,8 +29,8 @@ const Snippets = ({ ModalStore }) => {
   };
   return (
     <DisplayWrapper>
-      <div className="flex justify-between">
-        <div className="flex flex-col">
+      <div className="flex justify-between snippets-header">
+        <div className="flex flex-col ">
           <H1 className="mr-4">Code Snippets</H1>
           <H2Subtitle>
             Save your favourite functions and share them with others (if you

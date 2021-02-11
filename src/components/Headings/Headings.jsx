@@ -1,7 +1,6 @@
 import React from "react";
+import { docWidth } from "../../constants/constants";
 import "./Headings.css";
-
-const docWidth = document.body.clientWidth <= 768;
 
 export const H1 = (props) => (
   <h1

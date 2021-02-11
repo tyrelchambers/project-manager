@@ -1,0 +1,16 @@
+@media screen and (max-width: 768px) {
+  .packages-header {
+    flex-direction: column;
+  }
+
+  .packages-header .btn.primary {
+    width: 250px;
+    margin-top: 1em;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .packages-header .btn.primary {
+    width: 100%;
+  }
+}

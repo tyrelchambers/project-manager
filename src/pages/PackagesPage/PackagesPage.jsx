@@ -21,7 +21,7 @@ const PackagesPage = ({ UserStore }) => {
 
   return (
     <DisplayWrapper>
-      <div className="flex justify-between">
+      <div className="flex justify-between packages-header">
         <div className="flex flex-col">
           <H1>Packages</H1>
           <H2Subtitle>
