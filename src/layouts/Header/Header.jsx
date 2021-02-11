@@ -12,7 +12,7 @@ const Header = ({ UserStore, hideNavbar }) => {
   return (
     <header className="header flex flex-col  p-4">
       <div className="flex-1">
-        <H1>
+        <H1 className="mobile">
           <Link to="/">Kanlen</Link>
         </H1>
         {showNavbar}

@@ -1,0 +1,89 @@
+.toggle-wrapper {
+  position: fixed;
+  top: 1.5em;
+  left: 1.5em;
+  z-index: 99;
+  gap: 0.25em;
+}
+
+.toggle-wrapper .dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.toggle-wrapper .white {
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.toggle-wrapper:hover .white {
+  opacity: 1;
+  background-color: var(--gray-800);
+}
+
+.toggle-wrapper:hover .arrow {
+  background-color: var(--pink-500);
+}
+
+.toggle-wrapper.open .white {
+  opacity: 1;
+  background-color: var(--gray-800);
+}
+
+.mobile-nav-wrapper {
+  position: fixed;
+  left: -100%;
+  height: 100vh;
+  width: 90%;
+  background-color: var(--gray-100);
+  z-index: 98;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 3px 0px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+.mobile-nav-wrapper.open {
+  left: 0px;
+}
+
+.mobile-nav-wrapper.dark {
+  background-color: var(--gray-800);
+}
+
+.mobile-nav-wrapper.dark .white {
+  background-color: var(--white);
+}
+
+.mobile-nav {
+  margin-top: 6em;
+}
+
+.mobile-nav-item:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+.mobile-nav-item a {
+  color: var(--gray-800);
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.mobile-nav-item:hover a {
+  color: var(--pink-500);
+  transition: all 0.2s ease;
+}
+
+@media screen and (min-width: 426px) {
+  .mobile-nav-wrapper {
+    max-width: 400px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .mobile-nav-wrapper {
+    width: 100vw;
+  }
+}

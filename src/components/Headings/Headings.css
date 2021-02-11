@@ -1,0 +1,9 @@
+@media screen and (max-width: 768px) {
+  .heading {
+    margin-left: 2em;
+  }
+
+  .mobile.heading {
+    display: none;
+  }
+}
