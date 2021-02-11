@@ -1,0 +1,17 @@
+@media screen and (max-width: 768px) {
+  .status-text {
+    display: none;
+  }
+
+  .status-wrapper .span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+  }
+
+  .status-wrapper .span i {
+    margin: 0;
+  }
+}

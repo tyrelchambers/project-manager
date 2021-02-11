@@ -53,3 +53,23 @@
 .raised-icon.primary:hover {
   background: var(--pink-500);
 }
+
+@media screen and (max-width: 425px) {
+  .feed-post {
+    padding: 1em 0;
+  }
+
+  .feed-post-username {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .feed-post {
+    padding: 1em 0;
+  }
+
+  .feed-post-username {
+    width: 100px;
+  }
+}

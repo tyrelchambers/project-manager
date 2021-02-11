@@ -5,6 +5,7 @@ import { MainButton } from "../components/Buttons/Buttons";
 import { getAxios } from "../api/index";
 import Code from "../components/Code/Code";
 import isEmpty from "../helpers/isEmpty";
+import "./forms.css";
 const NewFeedPostForm = ({ UserStore, SearchStore }) => {
   const [state, setState] = useState({
     post: "",
@@ -39,7 +40,7 @@ const NewFeedPostForm = ({ UserStore, SearchStore }) => {
   );
   return (
     <form className="form flex flex-col w-full mt-4">
-      <div className="flex items-center w-full">
+      <div className="flex items-center w-full mobile-column">
         <TextareaAutosize
           className="form-input mr-4"
           placeholder="Share a thought or a snippet..."

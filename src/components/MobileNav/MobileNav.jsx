@@ -17,21 +17,13 @@ const MobileNav = ({ routes, children, dark }) => {
         } `}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span
-          className={`dot arrow ${isOpen ? "bg-pink-500" : "bg-gray-800"}`}
-        ></span>
+        <span className={`dot arrow`}></span>
         <span className="dot white"></span>
         <span className="dot white"></span>
-        <span
-          className={`dot arrow ${isOpen ? "bg-pink-500" : "bg-gray-800"}`}
-        ></span>
-        <span
-          className={`dot arrow ${isOpen ? "bg-pink-500" : "bg-gray-800"}`}
-        ></span>
+        <span className={`dot arrow`}></span>
+        <span className={`dot arrow`}></span>
         <span className="dot white"></span>
-        <span
-          className={`dot arrow ${isOpen ? "bg-pink-500" : "bg-gray-800"}`}
-        ></span>
+        <span className={`dot arrow`}></span>
         <span className="dot white"></span>
         <span className="dot white"></span>
       </div>
@@ -41,7 +33,9 @@ const MobileNav = ({ routes, children, dark }) => {
           <ul>
             {routes.map((r) => (
               <li className="mobile-nav-item" key={r.label}>
-                <Link to={r.slug}>{r.label}</Link>
+                <Link to={r.slug} onClick={() => setIsOpen(false)}>
+                  {r.label}
+                </Link>
               </li>
             ))}
           </ul>

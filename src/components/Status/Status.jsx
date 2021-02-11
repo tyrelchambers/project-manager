@@ -1,4 +1,5 @@
 import React from "react";
+import "./Status.css";
 
 const Status = ({
   text,
@@ -9,12 +10,12 @@ const Status = ({
 }) => {
   return (
     <div
-      className={`p-2 font-bold w-fit rounded-lg flex items-center ${wrapperClass} ${textClass}`}
+      className={`p-2 status-wrapper font-bold w-fit rounded-lg flex items-center ${wrapperClass} ${textClass}`}
       title={text}
       onClick={onClick}
     >
       <div className="span">{icon}</div>
-      <p>{text}</p>
+      <p className="status-text">{text}</p>
     </div>
   );
 };

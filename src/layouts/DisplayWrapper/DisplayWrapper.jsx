@@ -6,7 +6,7 @@ const DisplayWrapper = (props) => {
   const docWidth = document.body.clientWidth <= 768;
 
   return (
-    <div className="flex ">
+    <>
       {docWidth ? (
         <MobileNav dark>
           <Header showNavbar={props.hideNavbar} />
@@ -15,9 +15,9 @@ const DisplayWrapper = (props) => {
         <Header showNavbar={props.hideNavbar} />
       )}
       <div className="flex w-full">
-        <div className="m-4 w-full">{props.children}</div>
+        <div className="p-4 w-full">{props.children}</div>
       </div>
-    </div>
+    </>
   );
 };
 

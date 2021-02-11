@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <DisplayWrapper>
       <div className="flex">
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col w-full">
           <div className="flex items-center justify-between mb-8">
             <H1 className={docWidth && "ml-16"}>Feed</H1>
 
