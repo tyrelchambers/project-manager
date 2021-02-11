@@ -1,8 +1,11 @@
 import React from "react";
 import "./Headings.css";
+
+const docWidth = document.body.clientWidth <= 768;
+
 export const H1 = (props) => (
   <h1
-    className={`heading text-4xl font-black text-white ${
+    className={`heading text-4xl font-black text-white ${docWidth && "mt-16"} ${
       props.className ? props.className : ""
     }`}
     style={props.style}
@@ -12,7 +15,7 @@ export const H1 = (props) => (
 );
 export const H2 = (props) => (
   <h2
-    className={`heading text-2xl font-bold text-white ${
+    className={`heading text-2xl font-bold text-white  ${
       props.className ? props.className : ""
     }`}
     style={props.style}
