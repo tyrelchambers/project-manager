@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 
 const DisplayWrapper = (props) => {
   const docWidth = document.body.clientWidth <= 768;
-  console.log(docWidth);
+
   return (
     <div className="flex ">
       {docWidth ? (

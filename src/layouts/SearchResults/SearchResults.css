@@ -10,3 +10,8 @@
 .item-wrapper:hover p {
   color: var(--pink-500);
 }
+@media screen and (max-width: 768px) {
+  .results-wrapper {
+    position: relative;
+  }
+}
