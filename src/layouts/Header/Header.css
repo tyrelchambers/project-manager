@@ -13,3 +13,10 @@
     min-width: fit-content;
   }
 }
+
+@media screen and (min-width: 769px) {
+  .header {
+    height: 100vh;
+    width: 330px;
+  }
+}

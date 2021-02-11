@@ -4,6 +4,7 @@ import { H1 } from "../../components/Headings/Headings";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api/index";
 import { formatUrl } from "../../helpers/formatUrl";
+import "./EnvVars.css";
 
 const EnvVars = () => {
   const [vars, setVars] = useState([]);
@@ -22,7 +23,7 @@ const EnvVars = () => {
 
   return (
     <DisplayWrapper>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between envvar-header">
         <H1>Environment Variables</H1>
         <div className="w-fit">
           <Link className="btn primary  bg-pink-500" to="/env/new">
@@ -31,7 +32,7 @@ const EnvVars = () => {
         </div>
       </div>
 
-      <div className="snippet-list grid grid-cols-5 mt-5 gap-4">
+      <div className="envvar-list grid grid-cols-5 mt-5 gap-4">
         {vars.length > 0 &&
           vars.map((variable, id) => (
             <Link

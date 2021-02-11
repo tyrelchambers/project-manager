@@ -13,7 +13,7 @@ import NewPackage from "../pages/NewPackage/NewPackage";
 import Notifications from "../pages/Notifications/Notifications";
 import PackageShow from "../pages/PackageShow/PackageShow";
 import PackagesPage from "../pages/PackagesPage/PackagesPage";
-import Post from "../pages/Post";
+import Post from "../pages/Post/Post";
 import Profile from "../pages/Profile/Profile";
 import Projects from "../pages/Projects/Projects";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";

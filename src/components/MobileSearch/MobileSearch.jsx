@@ -23,7 +23,7 @@ const MobileSearch = () => {
   return (
     <div className="mobile-search-wrapper">
       <div className="search-toggle" onClick={() => setIsOpen(!isOpen)}>
-        <i class="fas fa-search text-gray-500"></i>
+        <i className="fas fa-search text-gray-500"></i>
       </div>
 
       {isOpen && (
@@ -32,11 +32,11 @@ const MobileSearch = () => {
             className="search-close flex items-center"
             onClick={() => setIsOpen(!isOpen)}
           >
-            <i class="fas fa-times text-gray-500 mr-4"></i>
+            <i className="fas fa-times text-gray-500 mr-4"></i>
           </div>
           <div className="content">
             <div className="content-search flex items-center pl-4 pr-4 pt-2 pb-2 w-full rounded-md">
-              <i class="fas fa-search text-gray-500 mr-4"></i>
+              <i className="fas fa-search text-gray-500 mr-4"></i>
 
               <input
                 type="search"

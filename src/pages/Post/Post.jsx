@@ -1,10 +1,11 @@
 import { inject, observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getAxios } from "../api";
-import FeedPost from "../components/FeedPost/FeedPost";
-import isEmpty from "../helpers/isEmpty";
-import DisplayWrapper from "../layouts/DisplayWrapper/DisplayWrapper";
+import { getAxios } from "../../api";
+import FeedPost from "../../components/FeedPost/FeedPost";
+import isEmpty from "../../helpers/isEmpty";
+import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
+import "./Post.css";
 
 const Post = ({ UserStore }) => {
   const { post_id } = useParams();
@@ -24,7 +25,9 @@ const Post = ({ UserStore }) => {
 
   return (
     <DisplayWrapper>
-      <FeedPost post={post} user={UserStore.user} />
+      <div className="post-wrapper">
+        <FeedPost post={post} user={UserStore.user} />
+      </div>
     </DisplayWrapper>
   );
 };

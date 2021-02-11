@@ -6,6 +6,7 @@ import { MainButton } from "../../components/Buttons/Buttons";
 import { H1, H2Subtitle } from "../../components/Headings/Headings";
 import ProfileForm from "../../forms/ProfileForm";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
+import "./Profile.css";
 
 const Profile = ({ UserStore }) => {
   const removeProfilePhoto = async () => {
@@ -33,9 +34,9 @@ const Profile = ({ UserStore }) => {
       <H1>Profile</H1>
       <H2Subtitle>This is your public facing information</H2Subtitle>
 
-      <div className="flex mt-10 mb-10">
+      <div className="flex mt-10 mb-10 profile-header">
         <Avatar url={UserStore.user.avatar} size="medium" />
-        <div className="flex flex-col ml-4">
+        <div className="flex flex-col ml-4 profile-username">
           <p className=" font-bold text-3xl">{UserStore.user.name}</p>
           {UserStore.user.avatar && (
             <MainButton classes="mt-2" muted onClick={removeProfilePhoto}>

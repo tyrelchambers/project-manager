@@ -5,7 +5,7 @@ import Header from "../Header/Header";
 
 const DisplayWrapper = (props) => {
   return (
-    <>
+    <div className="flex">
       {docWidth ? (
         <MobileNav dark>
           <Header showNavbar={props.hideNavbar} />
@@ -16,7 +16,7 @@ const DisplayWrapper = (props) => {
       <div className="flex w-full">
         <div className="p-4 w-full">{props.children}</div>
       </div>
-    </>
+    </div>
   );
 };
 

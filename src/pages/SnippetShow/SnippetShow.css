@@ -1,0 +1,20 @@
+@media screen and (max-width: 1024px) {
+  .snippet-show-body {
+    flex-direction: column;
+  }
+
+  .snippet-show-body .w-3\/5,
+  .snippet-show-body .w-2\/5 {
+    width: 100%;
+  }
+
+  .snippet-show-body .w-2\/5 {
+    margin-top: 1em;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .snippet-actions {
+    flex-direction: column;
+  }
+}

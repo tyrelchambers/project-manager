@@ -119,6 +119,7 @@ const FeedPost = ({ ModalStore, post, user }) => {
                     wrapperClass="bg-gray-800 cursor-pointer m-2 "
                     textClass="text-gray-200"
                     onClick={isLiked ? dislikeHandler : likeHandler}
+                    hideOnMobile
                   />
                   <Status
                     icon={
@@ -128,12 +129,13 @@ const FeedPost = ({ ModalStore, post, user }) => {
                     wrapperClass="bg-gray-800 cursor-pointer m-2"
                     textClass="text-gray-200"
                     onClick={bookmarkHandler}
+                    hideOnMobile
                   />
                 </>
               )}
               {post.CodeSnippet && docWidth && (
                 <Status
-                  icon={<i class="fas fa-laptop-code text-gray-200 "></i>}
+                  icon={<i className="fas fa-laptop-code text-gray-200 "></i>}
                   onClick={mobileSnippetHandler}
                 />
               )}
