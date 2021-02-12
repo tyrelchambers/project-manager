@@ -3,6 +3,8 @@
   top: 1.5em;
   left: 1.5em;
   z-index: 99;
+  -webkit-transform: translateZ(0);
+
   gap: 0.25em;
 }
 
