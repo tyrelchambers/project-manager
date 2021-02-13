@@ -20,7 +20,7 @@ const MobileNav = ({ routes, children, dark }) => {
     <>
       <div
         className={`toggle-wrapper ${
-          dark && "dark"
+          dark ? "dark" : "light"
         } grid grid-cols-3 grid-rows-3 ${isOpen && "open"} `}
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -36,13 +36,13 @@ const MobileNav = ({ routes, children, dark }) => {
       </div>
 
       <div
-        className={`mobile-nav-wrapper relative ${dark ? "dark" : ""} ${
+        className={`mobile-nav-wrapper relative ${dark ? "dark" : "light"} ${
           isOpen ? "open" : ""
         }`}
       >
         <nav className="mobile-nav p-4">
           {!children && (
-            <ul>
+            <ul className="mt-6">
               {routes.map((r) => (
                 <li className="mobile-nav-item" key={r.label}>
                   <Link to={r.slug} onClick={() => setIsOpen(false)}>

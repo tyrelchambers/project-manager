@@ -62,6 +62,10 @@
   background-color: var(--white);
 }
 
+.toggle-wrapper.light .arrow {
+  background-color: var(--gray-800);
+}
+
 .toggle-wrapper.dark .white {
   background-color: var(--white);
 }

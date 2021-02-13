@@ -24,7 +24,7 @@ const Home = () => {
         </div>
         {!docWidth && (
           <div
-            className="w-2/6 h-full pl-4 offset-column"
+            className="w-3/6 h-full pl-4 offset-column"
             style={{ position: "sticky", top: "1em" }}
           >
             <UserSearch />

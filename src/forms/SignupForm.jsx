@@ -44,7 +44,6 @@ const SignupForm = () => {
     }).then((res) => {
       if (res) {
         setToken({ value: res.token });
-        history.push("/profile/setup");
       }
     });
   };
