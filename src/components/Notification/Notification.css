@@ -36,3 +36,9 @@
   margin-right: -1px;
   margin-bottom: -1px;
 }
+@media screen and (max-width: 425px) {
+  .notification {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

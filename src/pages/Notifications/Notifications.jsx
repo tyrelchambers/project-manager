@@ -58,7 +58,7 @@ const Notifications = ({ NotificationStore }) => {
           </div>
         </div>
       </div>
-      {unreadCount()}
+      <div className="unread-count">{unreadCount()}</div>
 
       <div className="mt-10">
         {NotificationStore.notifications.length > 0 &&

@@ -80,22 +80,22 @@ const FeedPost = ({ ModalStore, post, user, hideOnMobile = true, stacked }) => {
             </div>
           )}
           {stacked && (
-            <div className="flex justify-between items-center w-full">
+            <div className="flex justify-between items-center w-full mb-4">
               <div className="flex items-center">
                 <Avatar url={post.User.avatar} size="small" />
 
-                <div className="flex items-center ml-2">
+                <div className="flex flex-col ml-2">
                   <Link
                     to={`/user/${post.User.uuid}`}
                     className="font-black mb-2 text-lg text-gray-200 hover:underline truncate feed-post-username"
                   >
                     {post.User.name}
                   </Link>
+                  <p className="italic text-sm text-gray-400">
+                    {formatDistanceToNow(new Date(post.createdAt))} ago
+                  </p>
                 </div>
               </div>
-              <p className="italic text-sm text-gray-400">
-                {formatDistanceToNow(new Date(post.createdAt))} ago
-              </p>
             </div>
           )}
           <div className="flex flex-col w-full">

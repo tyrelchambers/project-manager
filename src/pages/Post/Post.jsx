@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAxios } from "../../api";
 import FeedPost from "../../components/FeedPost/FeedPost";
+import { docWidth } from "../../constants/constants";
 import isEmpty from "../../helpers/isEmpty";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./Post.css";
@@ -30,7 +31,7 @@ const Post = ({ UserStore }) => {
           post={post}
           user={UserStore.user}
           hideOnMobile={false}
-          stacked
+          stacked={docWidth}
         />
       </div>
     </DisplayWrapper>
