@@ -10,7 +10,7 @@ import Status from "../Status/Status";
 import { inject, observer } from "mobx-react";
 import { docWidth } from "../../constants/constants";
 
-const FeedPost = ({ ModalStore, post, user }) => {
+const FeedPost = ({ ModalStore, post, user, hideOnMobile = true, stacked }) => {
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
@@ -73,24 +73,47 @@ const FeedPost = ({ ModalStore, post, user }) => {
   return (
     <div className="feed-post-border">
       <div className={`feed-post flex p-4 rounded-lg`}>
-        <div className="feed-post-body flex w-full">
-          <div className="mr-4">
-            <Avatar url={post.User.avatar} size="small" />
-          </div>
-          <div className="flex flex-col w-full">
+        <div className={`feed-post-body flex ${stacked && "flex-col"} w-full`}>
+          {!stacked && (
+            <div className="mr-4">
+              <Avatar url={post.User.avatar} size="small" />
+            </div>
+          )}
+          {stacked && (
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center">
-                <Link
-                  to={`/user/${post.User.uuid}`}
-                  className="font-black mb-2 text-lg text-gray-200 hover:underline truncate feed-post-username"
-                >
-                  {post.User.name}
-                </Link>
+                <Avatar url={post.User.avatar} size="small" />
+
+                <div className="flex items-center ml-2">
+                  <Link
+                    to={`/user/${post.User.uuid}`}
+                    className="font-black mb-2 text-lg text-gray-200 hover:underline truncate feed-post-username"
+                  >
+                    {post.User.name}
+                  </Link>
+                </div>
               </div>
               <p className="italic text-sm text-gray-400">
                 {formatDistanceToNow(new Date(post.createdAt))} ago
               </p>
             </div>
+          )}
+          <div className="flex flex-col w-full">
+            {!stacked && (
+              <div className="flex justify-between items-center w-full">
+                <div className="flex items-center">
+                  <Link
+                    to={`/user/${post.User.uuid}`}
+                    className="font-black mb-2 text-lg text-gray-200 hover:underline truncate feed-post-username"
+                  >
+                    {post.User.name}
+                  </Link>
+                </div>
+                <p className="italic text-sm text-gray-400">
+                  {formatDistanceToNow(new Date(post.createdAt))} ago
+                </p>
+              </div>
+            )}
 
             <Link
               to={`/post/${post.uuid}`}
@@ -119,7 +142,7 @@ const FeedPost = ({ ModalStore, post, user }) => {
                     wrapperClass="bg-gray-800 cursor-pointer m-2 "
                     textClass="text-gray-200"
                     onClick={isLiked ? dislikeHandler : likeHandler}
-                    hideOnMobile
+                    hideOnMobile={hideOnMobile}
                   />
                   <Status
                     icon={
@@ -129,7 +152,7 @@ const FeedPost = ({ ModalStore, post, user }) => {
                     wrapperClass="bg-gray-800 cursor-pointer m-2"
                     textClass="text-gray-200"
                     onClick={bookmarkHandler}
-                    hideOnMobile
+                    hideOnMobile={hideOnMobile}
                   />
                 </>
               )}

@@ -26,7 +26,12 @@ const Post = ({ UserStore }) => {
   return (
     <DisplayWrapper>
       <div className="post-wrapper">
-        <FeedPost post={post} user={UserStore.user} />
+        <FeedPost
+          post={post}
+          user={UserStore.user}
+          hideOnMobile={false}
+          stacked
+        />
       </div>
     </DisplayWrapper>
   );
