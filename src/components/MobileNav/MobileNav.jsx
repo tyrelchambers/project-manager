@@ -17,15 +17,11 @@ const MobileNav = ({ routes, children, dark }) => {
   }, [isOpen]);
 
   return (
-    <div
-      className={`mobile-nav-wrapper ${dark ? "dark" : ""} ${
-        isOpen ? "open" : ""
-      }`}
-    >
+    <>
       <div
-        className={`toggle-wrapper grid grid-cols-3 grid-rows-3 ${
-          isOpen ? "open" : ""
-        } `}
+        className={`toggle-wrapper ${
+          dark && "dark"
+        } grid grid-cols-3 grid-rows-3 ${isOpen && "open"} `}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className={`dot arrow`}></span>
@@ -39,21 +35,27 @@ const MobileNav = ({ routes, children, dark }) => {
         <span className="dot white"></span>
       </div>
 
-      <nav className="mobile-nav p-4">
-        {!children && (
-          <ul>
-            {routes.map((r) => (
-              <li className="mobile-nav-item" key={r.label}>
-                <Link to={r.slug} onClick={() => setIsOpen(false)}>
-                  {r.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-        {children && children}
-      </nav>
-    </div>
+      <div
+        className={`mobile-nav-wrapper relative ${dark ? "dark" : ""} ${
+          isOpen ? "open" : ""
+        }`}
+      >
+        <nav className="mobile-nav p-4">
+          {!children && (
+            <ul>
+              {routes.map((r) => (
+                <li className="mobile-nav-item" key={r.label}>
+                  <Link to={r.slug} onClick={() => setIsOpen(false)}>
+                    {r.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+          {children && children}
+        </nav>
+      </div>
+    </>
   );
 };
 
