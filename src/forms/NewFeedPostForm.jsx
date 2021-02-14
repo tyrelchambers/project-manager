@@ -54,10 +54,13 @@ const NewFeedPostForm = ({ UserStore, SearchStore }) => {
 
       {!isEmpty(SearchStore.postSnippet) && (
         <div
-          className="attached-snippet"
+          className="attached-snippet mt-4"
           style={{ maxHeight: "200px", overflowY: "auto" }}
         >
-          <Code language="js" code={SearchStore.postSnippet.snippet} />
+          <Code
+            language={SearchStore.postSnippet.syntax}
+            code={SearchStore.postSnippet.snippet}
+          />
         </div>
       )}
     </form>

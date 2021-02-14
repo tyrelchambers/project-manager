@@ -7,6 +7,7 @@ import { inject, observer } from "mobx-react";
 import SnippetForm from "../../forms/SnippetForm";
 import { getAxios } from "../../api";
 import { Link } from "react-router-dom";
+import SnippetItem from "../../components/SnippetItem/SnippetItem";
 
 const Snippets = ({ ModalStore }) => {
   const [snippets, setSnippets] = useState([]);
@@ -48,14 +49,7 @@ const Snippets = ({ ModalStore }) => {
       <div className="snippet-list grid grid-cols-5 mt-5 gap-4">
         {snippets.length > 0 &&
           snippets.map((snippet, id) => (
-            <Link
-              className="flex items-center bg-gray-900 p-4 rounded-md snippet-item"
-              key={id}
-              to={`/snippets/${snippet.uuid}`}
-            >
-              <i className="fas fa-code mr-4 text-pink-500"></i>
-              <p>{snippet.name}</p>
-            </Link>
+            <SnippetItem key={id} snippet={snippet} />
           ))}
       </div>
     </DisplayWrapper>

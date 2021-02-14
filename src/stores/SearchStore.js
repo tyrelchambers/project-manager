@@ -13,7 +13,6 @@ class SearchStore {
   postSnippet = {};
 
   setPostSnippet(snippet) {
-    console.log(snippet);
     this.postSnippet = snippet;
   }
 

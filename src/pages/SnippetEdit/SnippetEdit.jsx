@@ -50,7 +50,9 @@ const SnippetEdit = () => {
         className="mt-1 mb-1 bg-gray-700 p-4 rounded-lg"
         key={x}
         onClick={() => {
+          setUpdated({ ...updated, syntax: x });
           setSnippet({ ...snippet, syntax: x });
+
           setQSyntax("");
         }}
       >
