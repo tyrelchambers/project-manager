@@ -63,9 +63,12 @@ const FeedPost = ({ ModalStore, post, user, hideOnMobile = true, stacked }) => {
     <i className="far fa-heart  text-gray-500 mr-2"></i>
   );
 
-  const mobileSnippetHandler = (snippet) => {
+  const mobileSnippetHandler = () => {
     ModalStore.setRender(
-      <Code language="js" code={post.CodeSnippet.snippet} />
+      <Code
+        language={post.CodeSnippet.syntax}
+        code={post.CodeSnippet.snippet}
+      />
     );
     ModalStore.setIsOpen(true);
   };
@@ -129,7 +132,10 @@ const FeedPost = ({ ModalStore, post, user, hideOnMobile = true, stacked }) => {
                   }}
                   className="post-snippet-wrapper rounded-md mt-2 mb-4 h-fit"
                 >
-                  <Code language="js" code={post.CodeSnippet.snippet} />
+                  <Code
+                    language={post.CodeSnippet.syntax}
+                    code={post.CodeSnippet.snippet}
+                  />
                 </div>
               </div>
             )}
