@@ -43,7 +43,7 @@
   height: 100%;
   width: 90%;
   background-color: var(--gray-100);
-  z-index: 98;
+  z-index: 3;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 3px 0px 30px rgba(0, 0, 0, 0.1);

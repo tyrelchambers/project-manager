@@ -1,7 +1,7 @@
 .header {
   height: 100vh;
   min-width: 330px;
-  z-index: 11;
+  z-index: 0;
   position: sticky;
   top: 0;
   border-right: 2px solid var(--gray-800);

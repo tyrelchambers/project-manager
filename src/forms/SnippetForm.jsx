@@ -5,12 +5,17 @@ import FormLabel from "../components/FormLabel/FormLabel";
 import { getAxios } from "../api/index";
 import { useForm } from "react-hook-form";
 import FormError from "../components/FormErrors/FormErrors";
-
+import Code from "../components/Code/Code";
+import { H3 } from "../components/Headings/Headings";
+import { syntax } from "../constants/syntax";
 const SnippetForm = () => {
   const [snippet, setSnippet] = useState({
     name: "",
     snippet: "",
+    syntax: "",
   });
+
+  const [qSyntax, setQSyntax] = useState("");
 
   const { handleSubmit, errors, register, setError } = useForm({
     reValidateMode: "onSubmit",
@@ -39,6 +44,21 @@ const SnippetForm = () => {
       }
     });
   };
+
+  const syntaxes = syntax
+    .filter((x) => qSyntax.length > 0 && x.includes(qSyntax))
+    .map((x) => (
+      <p
+        className="mt-1 mb-1 bg-gray-700 p-4 rounded-lg"
+        key={x}
+        onClick={() => {
+          setSnippet({ ...snippet, syntax: x });
+          setQSyntax("");
+        }}
+      >
+        {x}
+      </p>
+    ));
 
   return (
     <form
@@ -75,7 +95,32 @@ const SnippetForm = () => {
           placeholder="Paste code snippet..."
           onChange={(e) => inputHandler(e)}
           value={snippet.snippet}
+          rows={10}
         />
+      </div>
+
+      <div className="field-group">
+        <FormLabel name="syntax" text="Syntax" />
+        <input
+          type="text"
+          name="syntax"
+          value={qSyntax}
+          className="form-input"
+          placeholder="Search for a syntax..."
+          onChange={(e) => setQSyntax(e.target.value)}
+        />
+        <div className="mt-4">{syntaxes}</div>
+        {snippet.syntax && (
+          <p className="mt-4 text-white">
+            <i className="fas fa-chevron-right text-green-500 mr-6"></i>
+            {snippet.syntax}
+          </p>
+        )}
+      </div>
+
+      <div className="mb-4">
+        <H3>Preview</H3>
+        <Code code={snippet.snippet} language={snippet.syntax} />
       </div>
 
       <MainButton default type="submit">

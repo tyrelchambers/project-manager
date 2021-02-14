@@ -61,13 +61,13 @@ const SelectField = forwardRef((props, ref) => {
           ))}
         </div>
       )}
-      {console.log(state)}
+
       <input
         type="text"
         style={{ display: "none" }}
         name={stateKey}
         ref={ref}
-        value={state.framework.framework}
+        value={state[stateKey] || state.framework?.framework}
       />
     </div>
   );
