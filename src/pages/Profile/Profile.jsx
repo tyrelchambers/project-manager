@@ -39,9 +39,11 @@ const Profile = ({ UserStore }) => {
         <div className="flex flex-col ml-4 profile-username">
           <p className=" font-bold text-3xl">{UserStore.user.name}</p>
           {UserStore.user.avatar && (
-            <MainButton classes="mt-2" muted onClick={removeProfilePhoto}>
-              Remove profile picture
-            </MainButton>
+            <div className="mt-2 max-w-xs">
+              <MainButton muted onClick={removeProfilePhoto}>
+                Remove profile picture
+              </MainButton>
+            </div>
           )}
         </div>
       </div>

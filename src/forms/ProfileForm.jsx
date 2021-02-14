@@ -71,6 +71,8 @@ const ProfileForm = ({ user }) => {
         },
       },
     });
+
+    window.location.reload();
   };
 
   const inputHandler = (e) => {
