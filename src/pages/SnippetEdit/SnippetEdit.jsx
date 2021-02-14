@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getAxios } from "../../api";
-import { H1 } from "../../components/Headings/Headings";
+import { H1, H3 } from "../../components/Headings/Headings";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./SnippetEdit.css";
 import FormLabel from "../../components/FormLabel/FormLabel";
 import { MainButton } from "../../components/Buttons/Buttons";
+import Code from "../../components/Code/Code";
+import { syntax } from "../../constants/syntax";
+import isEmpty from "../../helpers/isEmpty";
 
 const SnippetEdit = () => {
   const { snippet_uuid } = useParams();
   const [snippet, setSnippet] = useState({});
   const [updated, setUpdated] = useState({});
-  const history = useHistory();
+  const [qSyntax, setQSyntax] = useState("");
+
   useEffect(() => {
     const fn = async () => {
       await getAxios({
@@ -25,6 +29,8 @@ const SnippetEdit = () => {
     fn();
   }, []);
 
+  if (isEmpty(snippet)) return null;
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -36,6 +42,21 @@ const SnippetEdit = () => {
 
     window.location.pathname = `/snippets/${snippet.uuid}`;
   };
+
+  const syntaxes = syntax
+    .filter((x) => qSyntax.length > 0 && x.includes(qSyntax))
+    .map((x) => (
+      <p
+        className="mt-1 mb-1 bg-gray-700 p-4 rounded-lg"
+        key={x}
+        onClick={() => {
+          setSnippet({ ...snippet, syntax: x });
+          setQSyntax("");
+        }}
+      >
+        {x}
+      </p>
+    ));
 
   return (
     <DisplayWrapper>
@@ -91,6 +112,31 @@ const SnippetEdit = () => {
             <p className="ml-4 ">Private</p>
           </div>
         </div>
+
+        <div className="field-group">
+          <FormLabel name="syntax" text="Syntax" />
+          <input
+            type="text"
+            name="syntax"
+            value={qSyntax}
+            className="form-input"
+            placeholder="Search for a syntax..."
+            onChange={(e) => setQSyntax(e.target.value)}
+          />
+          <div className="mt-4">{syntaxes}</div>
+          {snippet.syntax && (
+            <p className="mt-4 text-white">
+              <i className="fas fa-chevron-right text-green-500 mr-6"></i>
+              {snippet.syntax}
+            </p>
+          )}
+        </div>
+
+        <div className="mb-4">
+          <H3>Preview</H3>
+          <Code code={snippet.snippet} language={snippet.syntax} />
+        </div>
+
         <MainButton default onClick={(e) => submitHandler(e)}>
           Save changes
         </MainButton>
