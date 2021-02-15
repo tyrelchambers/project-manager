@@ -10,10 +10,10 @@ function Flag({ flag, label, showInputs, value }) {
 
 const createReactAppFlags = {
   flags: {
-    useNpm: new Flag({ flag: "--use-npm", label: "Use NPM" }),
+    useNpm: new Flag({ flag: "--use-npm", label: "--use-npm" }),
     template: new Flag({
       flag: "--template",
-      label: "Use template",
+      label: "--template",
       showInputs: true,
     }),
   },
@@ -24,38 +24,146 @@ const createVueFlags = {
   flags: {
     usePreset: new Flag({
       flag: "--preset",
-      label: "Use Preset",
+      label: "--preset",
       showInputs: true,
     }),
-    useDefault: new Flag({ flag: "--default", label: "Use Default" }),
+    useDefault: new Flag({ flag: "--default", label: "--default" }),
     useInlinePreset: new Flag({
       flag: "--inlinePreset",
-      label: "Use Inline Present",
+      label: "--inlinePreset",
       showInputs: true,
     }),
     packageManager: new Flag({
       flag: "--packageManager",
-      label: "Use a Package Manager",
+      label: "--packageManager",
       showInputs: true,
     }),
     registry: new Flag({
       flag: "--registry",
-      label: "Use Specified Registry",
+      label: "--registry",
       showInputs: true,
     }),
     git: new Flag({
       flag: "--git",
-      label: "Git Initialization",
+      label: "--git",
       showInputs: true,
     }),
-    force: new Flag({ flag: "--force", label: "Force" }),
-    clone: new Flag({ flag: "--clone", label: "Clone" }),
-    proxy: new Flag({ flag: "--proxy", label: "Proxy" }),
-    bare: new Flag({ flag: "--bare", label: "Scaffold Bare" }),
+    force: new Flag({ flag: "--force", label: "--git" }),
+    clone: new Flag({ flag: "--clone", label: "--clone" }),
+    proxy: new Flag({ flag: "--proxy", label: "--proxy" }),
+    bare: new Flag({ flag: "--bare", label: "--bare" }),
   },
 };
 
+const angularFlags = {
+  flags: {
+    collection: new Flag({
+      flag: "--collection",
+      label: "--collection",
+      showInputs: true,
+    }),
+    commit: new Flag({
+      flag: "--commit",
+      label: "--commit",
+    }),
+    createApplication: new Flag({
+      flag: "--create-application",
+      label: "--create-application",
+    }),
+    defaults: new Flag({
+      flag: "--defaults",
+      label: "--defaults",
+    }),
+    direction: new Flag({
+      flag: "--directory",
+      label: "--directory",
+      showInputs: true,
+    }),
+    dryRun: new Flag({
+      flag: "--dry-run",
+      label: "--dry-run",
+    }),
+    force: new Flag({
+      flag: "--force",
+      label: "--force",
+    }),
+    help: new Flag({
+      flag: "--help",
+      label: "--help",
+    }),
+    inlineStyle: new Flag({
+      flag: "--inline-style",
+      label: "--line-style",
+    }),
+    inlineTemplate: new Flag({
+      flag: "--inline-template",
+      label: "--inline-template",
+    }),
+    interactive: new Flag({
+      flag: "--interactive",
+      label: "--interactive",
+    }),
+    legacyBrowsers: new Flag({
+      flag: "--legacy-browsers",
+      label: "--legacy-browsers",
+    }),
+    minimal: new Flag({
+      flag: "--minimal",
+      label: "--minimal",
+    }),
+    newProjectRoot: new Flag({
+      flag: "--new-project-root",
+      label: "--new-project-root",
+      showInputs: true,
+    }),
+    packageManager: new Flag({
+      flag: "--package-manager",
+      label: "--package-manager",
+      showInputs: true,
+    }),
+    prefix: new Flag({
+      flag: "--prefix",
+      label: "--prefix",
+      showInputs: true,
+    }),
+    routing: new Flag({
+      flag: "--routing",
+      label: "--routing",
+    }),
+    skipGit: new Flag({
+      flag: "--skip-git",
+      label: "--skip-git",
+    }),
+    skipInstall: new Flag({
+      flag: "--skip-install",
+      label: "--skip-install",
+    }),
+    skipTests: new Flag({
+      flag: "--skip-tests",
+      label: "--skip-tests",
+    }),
+    strict: new Flag({
+      flag: "--strict",
+      label: "--strict",
+    }),
+    style: new Flag({
+      flag: "--style",
+      label: "--style",
+      showInputs: true,
+    }),
+    verbose: new Flag({
+      flag: "--verbose",
+      label: "--verbose",
+    }),
+    viewEncapsulation: new Flag({
+      flag: "--view-encapsulation",
+      label: "--view-encapsulation",
+      showInputs: true,
+    }),
+  },
+};
 export default {
   "Create React App": createReactAppFlags,
   Vue: createVueFlags,
+  Angular: angularFlags,
 };

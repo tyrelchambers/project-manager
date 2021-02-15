@@ -22,18 +22,10 @@ export const frameworks = [
     icon: <i className={`fab fa-vuejs text-green-500 ${iconStyle}`}></i>,
     install: "vue create",
   }),
-];
-
-export const packagePrefs = [
   new Select({
-    label: "NPM",
-    framework: "npm",
-    icon: <i className={`fab fa-npm text-red-500 ${iconStyle}`}></i>,
-  }),
-
-  new Select({
-    label: "Yarn",
-    framework: "yarn",
-    icon: <i className={`fab fa-yarn text-blue-400 ${iconStyle}`}></i>,
+    label: "Angular",
+    framework: "Angular",
+    icon: <i className={`fab fa-angular text-red-500 ${iconStyle}`}></i>,
+    install: "ng new",
   }),
 ];
