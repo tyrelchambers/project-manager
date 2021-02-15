@@ -93,7 +93,7 @@ const UserShowPage = ({ UserStore }) => {
       <div className="user-show-wrapper flex justify-center relative z-10">
         <div className="flex flex-col items-center container max-w-screen-md">
           <Avatar url={user.avatar} size="large" />
-          <H1 className="mt-4">{user.name}</H1>
+          <H1 className="mt-4">{user.name || user.email}</H1>
 
           <p className="mt-4 mb-4">{user.bio}</p>
 

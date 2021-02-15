@@ -92,7 +92,7 @@ const FeedPost = ({ ModalStore, post, user, hideOnMobile = true, stacked }) => {
                     to={`/user/${post.User.uuid}`}
                     className="font-black mb-2 text-lg text-gray-200 hover:underline truncate feed-post-username"
                   >
-                    {post.User.name}
+                    {post.User.name || post.User.email}
                   </Link>
                   <p className="italic text-sm text-gray-400">
                     {formatDistanceToNow(new Date(post.createdAt))} ago
@@ -109,7 +109,7 @@ const FeedPost = ({ ModalStore, post, user, hideOnMobile = true, stacked }) => {
                     to={`/user/${post.User.uuid}`}
                     className="font-black mb-2 text-lg text-gray-200 hover:underline truncate feed-post-username"
                   >
-                    {post.User.name}
+                    {post.User.name || post.User.email}
                   </Link>
                 </div>
                 <p className="italic text-sm text-gray-400">
