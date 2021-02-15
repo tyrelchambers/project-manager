@@ -4,7 +4,7 @@ import FormLabel from "../components/FormLabel/FormLabel";
 import "./forms.css";
 import { getAxios } from "../api/index";
 import useStorage from "../hooks/useStorage";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import FormErrors from "../components/FormErrors/FormErrors";
 
@@ -15,7 +15,7 @@ const SignupForm = () => {
     confirmPassword: "",
   });
   const [_, setToken] = useStorage("token");
-  const history = useHistory();
+  const [pending, setPending] = useState(false);
   const { register, handleSubmit, errors, setError, getValues } = useForm({
     reValidateMode: "onSubmit",
   });
@@ -33,6 +33,7 @@ const SignupForm = () => {
         message: "Passwords don't match",
       });
     }
+    setPending(true);
 
     getAxios({
       url: "/auth/signup",
@@ -129,7 +130,7 @@ const SignupForm = () => {
         <FormErrors error={errors.confirmPassword} />
       </div>
 
-      <MainButton default type="submit">
+      <MainButton default type="submit" pending={pending}>
         Register
       </MainButton>
       <p className="mt-6 text-gray-400">

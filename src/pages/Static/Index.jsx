@@ -1,6 +1,4 @@
 import React from "react";
-import MobileNav from "../../components/MobileNav/MobileNav";
-import { routes } from "../../routes/mobileRoutesIndex.routes";
 import CLI from "./CLI";
 import CodeShare from "./CodeShare";
 import CTA from "./CTA";
@@ -14,7 +12,6 @@ import VSCode from "./VSCode";
 const Index = () => {
   return (
     <div className="overflow-y-hidden">
-      <MobileNav routes={routes} />
       <Hero />
       <CodeShare />
       <VSCode />

@@ -16,8 +16,10 @@ const LoginForm = () => {
   const { register, handleSubmit, errors } = useForm({
     reValidateMode: "onSubmit",
   });
+  const [pending, setPending] = useState(false);
 
   const submitHandler = () => {
+    setPending(true);
     getAxios({
       url: "/auth/login",
       method: "post",
@@ -91,7 +93,7 @@ const LoginForm = () => {
         <FormErrors error={errors.password} />
       </div>
 
-      <MainButton default type="submit">
+      <MainButton default type="submit" pending={pending}>
         Login
       </MainButton>
 

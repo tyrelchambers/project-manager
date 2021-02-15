@@ -19,15 +19,25 @@ export const MainButton = (props) => {
     base += "primary";
   }
 
-  return (
-    <button
-      className={` ${base} ${variant} ${props.classes ? props.classes : ""}`}
-      onClick={props.onClick}
-      disabled={props.disabled}
-      type={props.type}
-    >
-      {props.delete && deleteIcon}
-      {props.children}
-    </button>
-  );
+  if (props.pending) {
+    return (
+      <div className={`btn muted jc-c d-f ai-c disabled`} disabled>
+        <span className="dot"></span>
+        <span className="dot"></span>
+        <span className="dot"></span>
+      </div>
+    );
+  } else {
+    return (
+      <button
+        className={` ${base} ${variant} ${props.classes ? props.classes : ""}`}
+        onClick={props.onClick}
+        disabled={props.disabled}
+        type={props.type}
+      >
+        {props.delete && deleteIcon}
+        {props.children}
+      </button>
+    );
+  }
 };
