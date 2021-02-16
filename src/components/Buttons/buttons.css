@@ -62,7 +62,7 @@
   cursor: not-allowed;
 }
 
-.dot {
+.loading-dot {
   display: flex;
   height: 9px;
   width: 9px;
@@ -70,15 +70,15 @@
   background: white;
   margin: 0 0.2em;
 }
-.dot:nth-child(1) {
+.loading-dot:nth-child(1) {
   animation: grow 3s ease infinite;
 }
 
-.dot:nth-child(2) {
+.loading-dot:nth-child(2) {
   animation: grow 3s ease 300ms infinite;
 }
 
-.dot:nth-child(3) {
+.loading-dot:nth-child(3) {
   animation: grow 3s ease 600ms infinite;
 }
 

@@ -22,9 +22,9 @@ export const MainButton = (props) => {
   if (props.pending) {
     return (
       <div className={`btn muted jc-c d-f ai-c disabled`} disabled>
-        <span className="dot"></span>
-        <span className="dot"></span>
-        <span className="dot"></span>
+        <span className="loading-dot"></span>
+        <span className="loading-dot"></span>
+        <span className="loading-dot"></span>
       </div>
     );
   } else {
