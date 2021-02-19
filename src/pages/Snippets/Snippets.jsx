@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./Snippets.css";
 import { H1, H2Subtitle } from "../../components/Headings/Headings";
-import { MainButton } from "../../components/Buttons/Buttons";
+import { MinimalButton } from "../../components/Buttons/Buttons";
 import { inject, observer } from "mobx-react";
 import SnippetForm from "../../forms/SnippetForm";
 import { getAxios } from "../../api";
-import { Link } from "react-router-dom";
 import SnippetItem from "../../components/SnippetItem/SnippetItem";
 
-const Snippets = ({ ModalStore }) => {
+const Snippets = ({ ModalStore, UserStore }) => {
   const [snippets, setSnippets] = useState([]);
-
+  const [pullingGists, setPullingGists] = useState(false);
   useEffect(() => {
     const fn = async () => {
       await getAxios({
@@ -28,10 +27,30 @@ const Snippets = ({ ModalStore }) => {
     ModalStore.setRender(<SnippetForm />);
     ModalStore.setIsOpen(true);
   };
+
+  const getGists = async () => {
+    setPullingGists(true);
+    const gists = await getAxios({
+      url: "/github/gists",
+    }).then((res) => res.gists);
+
+    await getAxios({
+      url: "/github/convert",
+      method: "post",
+      data: {
+        gists,
+      },
+    }).then((res) => {
+      if (res.snippets) {
+        setSnippets([...snippets, ...res.snippets]);
+      }
+    });
+    setPullingGists(false);
+  };
   return (
     <DisplayWrapper>
-      <div className="flex justify-between snippets-header">
-        <div className="flex flex-col ">
+      <div className="flex snippets-header">
+        <div className="flex flex-col">
           <H1 className="mr-4">Code Snippets</H1>
           <H2Subtitle>
             Save your favourite functions and share them with others (if you
@@ -40,9 +59,24 @@ const Snippets = ({ ModalStore }) => {
           </H2Subtitle>
         </div>
         <div className="w-fit">
-          <MainButton default onClick={addSnippetModelHandler}>
-            Add Snippet
-          </MainButton>
+          {pullingGists ? (
+            <MinimalButton classes="text-yellow-400 mr-4 " onClick={getGists}>
+              <i className="fas fa-sync mr-2 text-sm animate-spin"></i>
+              pulling gists
+            </MinimalButton>
+          ) : (
+            <MinimalButton classes="text-yellow-400 mr-4" onClick={getGists}>
+              <i className="fas fa-sync mr-2 text-sm"></i>
+              pull gists
+            </MinimalButton>
+          )}
+          <MinimalButton
+            classes="text-yellow-400"
+            onClick={addSnippetModelHandler}
+          >
+            <i className="fas fa-plus mr-2 text-sm"></i>
+            add snippet
+          </MinimalButton>
         </div>
       </div>
 
@@ -56,4 +90,4 @@ const Snippets = ({ ModalStore }) => {
   );
 };
 
-export default inject("ModalStore")(observer(Snippets));
+export default inject("ModalStore", "UserStore")(observer(Snippets));
