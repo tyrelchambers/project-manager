@@ -97,3 +97,12 @@
     opacity: 1;
   }
 }
+
+.btn.github {
+  background-color: white;
+  color: var(--gray-800);
+}
+
+.btn-minimal {
+  text-decoration: underline;
+}

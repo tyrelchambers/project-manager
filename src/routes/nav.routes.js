@@ -55,6 +55,11 @@ export const navRoutes = [
         url: "/settings/account",
       },
       {
+        label: "Integrations",
+        icon: <i className="fas fa-rocket"></i>,
+        url: "/settings/integrations",
+      },
+      {
         label: "Sign Out",
         icon: <i className="fas fa-sign-out-alt"></i>,
         url: "/signout",

@@ -1,4 +1,5 @@
 import React from "react";
+import { getAxios } from "../api";
 import Account from "../pages/Account/Account";
 import Bookmarks from "../pages/Bookmarks/Bookmarks";
 import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";
@@ -6,6 +7,7 @@ import EnvVars from "../pages/EnvVars/EnvVars";
 import EnvVarShow from "../pages/EnvVarShow/EnvVarShow";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Home from "../pages/Home/Home";
+import Integrations from "../pages/Integrations/Integrations";
 import LikedPosts from "../pages/LikedPosts/LikedPosts";
 import Login from "../pages/Login/Login";
 import NewEnvVar from "../pages/NewEnvVar/NewEnvVar";
@@ -137,5 +139,27 @@ export default [
   {
     slug: "/notifications",
     component: Notifications,
+  },
+  {
+    slug: "/settings/integrations",
+    component: Integrations,
+  },
+  {
+    slug: "/callback",
+    render: async () => {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+
+      await getAxios({
+        url: "/github/access_token",
+        params: {
+          code,
+        },
+      }).then((res) => {
+        if (res) {
+          window.close();
+        }
+      });
+    },
   },
 ];

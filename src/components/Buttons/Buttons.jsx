@@ -4,19 +4,23 @@ import "./buttons.css";
 export const MainButton = (props) => {
   let base = "btn ";
   const deleteIcon = <i className="fas fa-trash mr-4"></i>;
-  let variant;
+  let colour;
 
   if (props.delete) {
-    variant = "delete";
+    colour = "delete";
     base += "shadow-lg";
   }
 
   if (props.muted) {
-    variant = "muted";
+    colour = "muted";
   }
 
   if (props.default) {
     base += "primary";
+  }
+
+  if (props.github) {
+    colour = "github";
   }
 
   if (props.pending) {
@@ -30,7 +34,7 @@ export const MainButton = (props) => {
   } else {
     return (
       <button
-        className={` ${base} ${variant} ${props.classes ? props.classes : ""}`}
+        className={` ${base} ${colour} ${props.classes ? props.classes : ""}`}
         onClick={props.onClick}
         disabled={props.disabled}
         type={props.type}
@@ -40,4 +44,15 @@ export const MainButton = (props) => {
       </button>
     );
   }
+};
+
+export const MinimalButton = (props) => {
+  return (
+    <button
+      className={`btn-minimal ${props.classes ? props.classes : ""}`}
+      onClick={props.onClick}
+    >
+      {props.children}
+    </button>
+  );
 };

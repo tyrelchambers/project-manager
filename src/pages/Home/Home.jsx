@@ -28,6 +28,10 @@ const Home = () => {
             style={{ position: "sticky", top: "1em" }}
           >
             <UserSearch />
+            <Callout
+              text="Make sure to download the Kanlen extension"
+              id="kanlen-vscode"
+            />
           </div>
         )}
       </div>

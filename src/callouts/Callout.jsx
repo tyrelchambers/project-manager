@@ -31,8 +31,8 @@ const Callout = ({ text, link, id }) => {
       className="callout flex p-4 bg-white rounded-lg mt-4 box-shadow"
       id={id}
     >
-      <i className="fas fa-bullhorn mr-4"></i>
-      <p className="font-bold text-gray-800">
+      <i className="fas fa-bullhorn mr-4 text-pink-500"></i>
+      <p className="font-bold text-gray-800 ml-2 mr-2">
         {text}{" "}
         <a
           href={link}
