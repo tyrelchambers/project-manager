@@ -8,7 +8,7 @@ import SnippetForm from "../../forms/SnippetForm";
 import { getAxios } from "../../api";
 import SnippetItem from "../../components/SnippetItem/SnippetItem";
 
-const Snippets = ({ ModalStore, UserStore }) => {
+const Snippets = ({ ModalStore }) => {
   const [snippets, setSnippets] = useState([]);
   const [pullingGists, setPullingGists] = useState(false);
   useEffect(() => {
@@ -80,7 +80,7 @@ const Snippets = ({ ModalStore, UserStore }) => {
         </div>
       </div>
 
-      <div className="snippet-list grid grid-cols-5 mt-5 gap-4">
+      <div className="snippet-list grid grid-cols-3 mt-5 gap-4">
         {snippets.length > 0 &&
           snippets.map((snippet, id) => (
             <SnippetItem key={id} snippet={snippet} />
@@ -90,4 +90,4 @@ const Snippets = ({ ModalStore, UserStore }) => {
   );
 };
 
-export default inject("ModalStore", "UserStore")(observer(Snippets));
+export default inject("ModalStore")(observer(Snippets));

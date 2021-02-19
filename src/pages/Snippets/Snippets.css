@@ -1,10 +1,23 @@
 .snippet-item {
   transition: all 0.2s ease;
+  background-color: var(--gray-800);
+  height: 150px;
 }
 
 .snippet-item:hover {
   background-color: var(--gray-800);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.snippet-item-stats {
+  height: 60px;
+  background-color: var(--gray-900);
+  border-bottom-right-radius: 0.375em;
+  border-bottom-left-radius: 0.375em;
+}
+
+.snippet-item-header {
+  height: 90px;
 }
 
 @media screen and (max-width: 768px) {
