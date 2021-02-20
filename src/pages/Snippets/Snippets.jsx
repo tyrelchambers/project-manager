@@ -8,7 +8,7 @@ import SnippetForm from "../../forms/SnippetForm";
 import { getAxios } from "../../api";
 import SnippetItem from "../../components/SnippetItem/SnippetItem";
 
-const Snippets = ({ ModalStore }) => {
+const Snippets = ({ ModalStore, UserStore }) => {
   const [snippets, setSnippets] = useState([]);
   const [pullingGists, setPullingGists] = useState(false);
   useEffect(() => {
@@ -41,8 +41,8 @@ const Snippets = ({ ModalStore }) => {
         gists,
       },
     }).then((res) => {
-      if (res.snippets) {
-        setSnippets([...snippets, ...res.snippets]);
+      if (res) {
+        window.location.reload();
       }
     });
     setPullingGists(false);
@@ -59,20 +59,21 @@ const Snippets = ({ ModalStore }) => {
           </H2Subtitle>
         </div>
         <div className="w-fit">
-          {pullingGists ? (
-            <MinimalButton
-              classes="text-yellow-400 mr-4 "
-              onClick={() => getGists()}
-            >
-              <i className="fas fa-sync mr-2 text-sm animate-spin"></i>
-              pulling gists
-            </MinimalButton>
-          ) : (
-            <MinimalButton classes="text-yellow-400 mr-4" onClick={getGists}>
-              <i className="fas fa-sync mr-2 text-sm"></i>
-              pull gists
-            </MinimalButton>
-          )}
+          {UserStore.user.githubAccessToken &&
+            (pullingGists ? (
+              <MinimalButton
+                classes="text-yellow-400 mr-4 "
+                onClick={() => getGists()}
+              >
+                <i className="fas fa-sync mr-2 text-sm animate-spin"></i>
+                pulling gists
+              </MinimalButton>
+            ) : (
+              <MinimalButton classes="text-yellow-400 mr-4" onClick={getGists}>
+                <i className="fas fa-sync mr-2 text-sm"></i>
+                pull gists
+              </MinimalButton>
+            ))}
           <MinimalButton
             classes="text-yellow-400"
             onClick={addSnippetModelHandler}
@@ -93,4 +94,4 @@ const Snippets = ({ ModalStore }) => {
   );
 };
 
-export default inject("ModalStore")(observer(Snippets));
+export default inject("ModalStore", "UserStore")(observer(Snippets));
