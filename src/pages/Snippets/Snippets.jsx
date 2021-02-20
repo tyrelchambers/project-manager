@@ -60,7 +60,10 @@ const Snippets = ({ ModalStore }) => {
         </div>
         <div className="w-fit">
           {pullingGists ? (
-            <MinimalButton classes="text-yellow-400 mr-4 " onClick={getGists}>
+            <MinimalButton
+              classes="text-yellow-400 mr-4 "
+              onClick={() => getGists()}
+            >
               <i className="fas fa-sync mr-2 text-sm animate-spin"></i>
               pulling gists
             </MinimalButton>

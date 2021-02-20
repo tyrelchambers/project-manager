@@ -14,7 +14,7 @@ const SnippetItem = ({ snippet }) => {
       <div className="flex flex-1 p-3 snippet-item-header">
         <Link
           to={`/snippets/${snippet.uuid}`}
-          className="font-bold w-full text-xl text-gray-200"
+          className="font-bold w-full text-xl text-gray-200 truncate"
         >
           {snippet.name}
         </Link>
