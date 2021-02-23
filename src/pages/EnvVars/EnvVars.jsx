@@ -36,7 +36,7 @@ const EnvVars = () => {
         {vars.length > 0 &&
           vars.map((variable, id) => (
             <Link
-              className="flex items-center bg-gray-900 p-4 rounded-md snippet-item"
+              className="flex items-center bg-gray-900 p-4 rounded-md "
               key={id}
               to={`/env/${formatUrl(variable.name)}`}
             >
