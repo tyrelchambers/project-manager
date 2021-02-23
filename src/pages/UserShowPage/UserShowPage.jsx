@@ -10,10 +10,13 @@ import { inject, observer } from "mobx-react";
 import { socket } from "../..";
 import "./UserShowPage.css";
 import UserSocials from "../../layouts/UserSocials/UserSocials";
+import UserSubNav from "../../layouts/UserSubNav/UserSubNav";
 const UserShowPage = ({ UserStore }) => {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [snippets, setSnippets] = useState([]);
+  const [tab, setTab] = useState("feed");
 
   useEffect(() => {
     const fn = async () => {
@@ -101,20 +104,22 @@ const UserShowPage = ({ UserStore }) => {
 
           <div className="flex items-center w-full justify-evenly mt-6">
             <div className="flex flex-col">
-              <p className="text-gray-300">Followers</p>
               <p className="font-bold text-3xl">{user.followers.length}</p>
+              <p className="text-gray-300">Followers</p>
             </div>
 
             <div className="flex flex-col">
-              <p className="text-gray-300">Following</p>
               <p className="font-bold text-3xl">{user.followees.length}</p>
+              <p className="text-gray-300">Following</p>
             </div>
 
             <div className="flex flex-col">
-              <p className="text-gray-300">Snippets</p>
               <p className="font-bold text-3xl">{user.CodeSnippets.length}</p>
+              <p className="text-gray-300">Snippets</p>
             </div>
           </div>
+
+          <UserSubNav tab={tab} setTab={setTab} />
 
           {UserStore.user.uuid && UserStore.user.uuid !== user.uuid && (
             <div className="max-w-2xl">
@@ -128,14 +133,17 @@ const UserShowPage = ({ UserStore }) => {
           )}
 
           <div className="container max-w-screen-lg mt-6">
-            {user.posts.length === 0 && (
+            {tab === "feed" && user.posts.length === 0 && (
               <p className="font-bold text-center">Nothing to show!</p>
             )}
-            {user.posts
-              .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
-              .map((post) => (
-                <FeedPost key={post.uuid} post={post} user={UserStore.user} />
-              ))}
+            {tab === "feed" &&
+              user.posts
+                .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
+                .map((post) => (
+                  <FeedPost key={post.uuid} post={post} user={UserStore.user} />
+                ))}
+
+            {/* Add followers, following and snippets tab content */}
           </div>
         </div>
       </div>

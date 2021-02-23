@@ -35,6 +35,12 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .snippet-actions {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+}
 @media screen and (max-width: 425px) {
   .snippets-header .btn.primary {
     width: 100%;

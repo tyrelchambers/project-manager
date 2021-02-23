@@ -1,0 +1,10 @@
+.subnav-item {
+  color: white;
+  font-weight: bold;
+  background-color: var(--gray-900);
+  padding: 1em;
+}
+
+.subnav-item.active {
+  background-color: var(--pink-500);
+}
