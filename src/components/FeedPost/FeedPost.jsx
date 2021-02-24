@@ -112,7 +112,7 @@ const FeedPost = ({ ModalStore, post, user, hideOnMobile = true, stacked }) => {
                     {post.User.name || post.User.email}
                   </Link>
                 </div>
-                <p className="italic text-sm text-gray-400">
+                <p className="italic text-sm text-gray-400 ">
                   {formatDistanceToNow(new Date(post.createdAt))} ago
                 </p>
               </div>

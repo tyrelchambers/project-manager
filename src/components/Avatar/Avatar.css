@@ -1,7 +1,10 @@
 .avatar {
+  object-fit: cover;
+}
+
+.avatar.circle {
   border: 3px solid var(--white);
   border-radius: 50%;
-  object-fit: cover;
 }
 
 .avatar.lg {

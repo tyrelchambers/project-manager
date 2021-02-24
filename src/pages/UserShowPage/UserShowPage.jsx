@@ -11,14 +11,20 @@ import { socket } from "../..";
 import "./UserShowPage.css";
 import UserSocials from "../../layouts/UserSocials/UserSocials";
 import UserSubNav from "../../layouts/UserSubNav/UserSubNav";
+import UserBadge from "../../components/UserBadge/UserBadge";
+import SnippetItem from "../../components/SnippetItem/SnippetItem";
 const UserShowPage = ({ UserStore }) => {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false);
   const [snippets, setSnippets] = useState([]);
   const [tab, setTab] = useState("feed");
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
 
   useEffect(() => {
+    setTab("feed");
+
     const fn = async () => {
       await getAxios({
         url: `/user/${user_id}`,
@@ -31,6 +37,26 @@ const UserShowPage = ({ UserStore }) => {
 
     fn();
   }, [user_id]);
+
+  useEffect(() => {
+    if (tab === "followers") {
+      getAxios({
+        url: `/user/${user_id}/followers`,
+      }).then((res) => setFollowers(res.followers));
+    }
+
+    if (tab === "following") {
+      getAxios({
+        url: `/user/${user_id}/following`,
+      }).then((res) => setFollowing(res.following));
+    }
+
+    if (tab === "snippets") {
+      getAxios({
+        url: `/user/${user_id}/snippets`,
+      }).then((res) => setSnippets(res.snippets));
+    }
+  }, [tab, user_id]);
 
   useEffect(() => {
     if (UserStore.user && user) {
@@ -96,7 +122,7 @@ const UserShowPage = ({ UserStore }) => {
       <div className="user-show-wrapper flex justify-center relative z-10">
         <div className="flex flex-col items-center container max-w-screen-md">
           <Avatar url={user.avatar} size="large" />
-          <H1 className="mt-4">{user.name || user.email}</H1>
+          <H1 className="mt-4 user-name">{user.name || user.email}</H1>
 
           <p className="mt-4 mb-4">{user.bio}</p>
 
@@ -119,8 +145,6 @@ const UserShowPage = ({ UserStore }) => {
             </div>
           </div>
 
-          <UserSubNav tab={tab} setTab={setTab} />
-
           {UserStore.user.uuid && UserStore.user.uuid !== user.uuid && (
             <div className="max-w-2xl">
               <FollowButton
@@ -131,6 +155,8 @@ const UserShowPage = ({ UserStore }) => {
               />
             </div>
           )}
+
+          <UserSubNav tab={tab} setTab={setTab} />
 
           <div className="container max-w-screen-lg mt-6">
             {tab === "feed" && user.posts.length === 0 && (
@@ -143,7 +169,21 @@ const UserShowPage = ({ UserStore }) => {
                   <FeedPost key={post.uuid} post={post} user={UserStore.user} />
                 ))}
 
-            {/* Add followers, following and snippets tab content */}
+            {tab === "followers" &&
+              followers.length > 0 &&
+              followers.map((f) => <UserBadge user={f} key={f.uuid} />)}
+
+            {tab === "following" &&
+              following.length > 0 &&
+              following.map((f) => <UserBadge user={f} key={f.uuid} />)}
+
+            {tab === "snippets" && (
+              <div className="snippet-list grid grid-cols-3 mt-5 gap-4">
+                {snippets.map((f) => (
+                  <SnippetItem snippet={f} key={f.uuid} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

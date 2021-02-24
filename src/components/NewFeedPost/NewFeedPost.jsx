@@ -42,7 +42,7 @@ const NewFeedPost = ({ UserStore, SearchStore }) => {
           }}
         >
           <i
-            class="fas fa-chevron-right mr-4 text-green-500"
+            className="fas fa-chevron-right mr-4 text-green-500"
             style={{ transform: toggleCode && "rotate(90deg)" }}
           ></i>
           <p>Add a snippet</p>

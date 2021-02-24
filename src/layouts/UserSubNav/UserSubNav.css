@@ -8,3 +8,9 @@
 .subnav-item.active {
   background-color: var(--pink-500);
 }
+
+@media screen and (max-width: 425px) {
+  .user-subnav {
+    flex-direction: column;
+  }
+}

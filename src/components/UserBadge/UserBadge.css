@@ -1,0 +1,23 @@
+.user-badge {
+  height: 75px;
+  margin-bottom: 1em;
+}
+
+.user-avatar {
+  position: relative;
+}
+
+.user-avatar:after {
+  content: "";
+  background: linear-gradient(
+    270deg,
+    rgba(26, 33, 44, 1) 5%,
+    rgba(0, 212, 255, 0) 70%
+  );
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

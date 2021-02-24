@@ -1,7 +1,7 @@
 import React from "react";
 import "./Avatar.css";
 
-const Avatar = ({ url, size, className }) => {
+const Avatar = ({ url, size, className, square }) => {
   let avatarSize = "xs";
 
   if (size === "small") {
@@ -18,7 +18,9 @@ const Avatar = ({ url, size, className }) => {
 
   const noImage = (
     <div
-      className={`avatar ${avatarSize} no-image ${className ? className : ""}`}
+      className={`avatar ${
+        square ? "square" : "circle"
+      } ${avatarSize} no-image ${className ? className : ""}`}
     >
       <i
         className={`fas fa-user-astronaut ${
@@ -28,16 +30,18 @@ const Avatar = ({ url, size, className }) => {
     </div>
   );
 
-  return url ? (
+  if (!url) {
+    return noImage;
+  }
+
+  return (
     <img
       src={url}
-      className={`avatar box-shadow ${avatarSize} ${
-        className ? className : ""
-      }`}
+      className={`avatar ${
+        square ? "square" : "circle"
+      } box-shadow ${avatarSize} ${className ? className : ""}`}
       alt="Profile"
     />
-  ) : (
-    noImage
   );
 };
 

@@ -58,7 +58,7 @@ const Snippets = ({ ModalStore, UserStore }) => {
             code.
           </H2Subtitle>
         </div>
-        <div className="w-fit snippet-actions">
+        <div className="snippet-actions">
           {UserStore.user.githubAccessToken &&
             (pullingGists ? (
               <MinimalButton

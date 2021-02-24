@@ -58,6 +58,10 @@
   .feed-post {
     padding: 1em 0;
   }
+
+  .feed-post-username {
+    width: 170px;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -66,6 +70,6 @@
   }
 
   .feed-post-username {
-    width: 200px;
+    width: 150px;
   }
 }

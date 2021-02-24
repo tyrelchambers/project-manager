@@ -1,8 +1,9 @@
+import { inject, observer } from "mobx-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api";
 
-const SnippetItem = ({ snippet }) => {
+const SnippetItem = ({ snippet, UserStore }) => {
   const deleteHandler = async () => {
     await getAxios({
       url: `/snippets/${snippet.uuid}/delete`,
@@ -36,13 +37,15 @@ const SnippetItem = ({ snippet }) => {
           </div>
         </div>
 
-        <i
-          className="fas fa-trash text-gray-500 ml-6"
-          onClick={deleteHandler}
-        ></i>
+        {snippet.userId === UserStore.user.uuid && (
+          <i
+            className="fas fa-trash text-gray-500 ml-6"
+            onClick={deleteHandler}
+          ></i>
+        )}
       </div>
     </div>
   );
 };
 
-export default SnippetItem;
+export default inject("UserStore")(observer(SnippetItem));
