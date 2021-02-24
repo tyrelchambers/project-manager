@@ -30,7 +30,7 @@ const UserSocials = ({ user }) => {
   if (arr.length === 0) return null;
 
   return (
-    <div className="rounded-lg pl-3 pr-3 pt-1 pb-1 pink-gradient mt-6 mb-6 box-shadow">
+    <div className="pl-3 pr-3 pt-1 pb-1 ">
       {arr.map((i) => (
         <a
           href={i.link}
