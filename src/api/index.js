@@ -32,11 +32,6 @@ export const getAxios = async ({
     })
     .catch((err) => {
       if (err.response) {
-        if (err.response.data.action === "USER_NOT_FOUND") {
-          window.localStorage.clear("token");
-          window.sessionStorage.clear("token");
-          window.location.pathname = "/";
-        }
         toast.error(err.response.data);
       }
       return err;

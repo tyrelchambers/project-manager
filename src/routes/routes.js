@@ -1,4 +1,6 @@
+import axios from "axios";
 import React from "react";
+import { github } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { getAxios } from "../api";
 import Account from "../pages/Account/Account";
 import Bookmarks from "../pages/Bookmarks/Bookmarks";
@@ -35,10 +37,7 @@ const sharedRoutes = [
     slug: "/user/:user_id",
     component: UserShowPage,
   },
-  {
-    slug: "/login",
-    component: Login,
-  },
+
   {
     slug: "/post/:post_id",
     component: Post,
@@ -52,6 +51,10 @@ export const UNAUTHENTICATED = [
     component: Signup,
   },
   {
+    slug: "/login",
+    component: Login,
+  },
+  {
     slug: "/",
     component: Index,
   },
@@ -62,6 +65,97 @@ export const UNAUTHENTICATED = [
   {
     slug: "/reset",
     component: ResetPassword,
+  },
+  {
+    slug: "/callback/signup",
+    render: async () => {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+
+      const access_token = await getAxios({
+        url: "/github/access_token/public",
+        params: {
+          code,
+        },
+      }).then((res) => res.access_token);
+
+      const githubUser = await axios
+        .get("https://api.github.com/user", {
+          headers: {
+            Authorization: `token ${access_token}`,
+            Accept: "application/vnd.github.v3+json",
+          },
+        })
+        .then((res) => res.data);
+
+      await getAxios({
+        url: "/auth/signup",
+        method: "post",
+        data: {
+          githubId: githubUser.id,
+        },
+      }).then((res) => {
+        if (res) {
+          window.localStorage.setItem("token", res.token);
+        }
+      });
+
+      await getAxios({
+        url: "/user/update",
+        method: "post",
+        data: {
+          state: {
+            bio: githubUser.bio,
+            name: githubUser.name || githubUser.login,
+            twitter: githubUser.twitter_username,
+            avatar: githubUser.avatar_url,
+          },
+        },
+      });
+
+      window.location.search = "";
+      window.location.pathname = "/";
+
+      return null;
+    },
+  },
+  {
+    slug: "/callback/login",
+    render: async () => {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+
+      const access_token = await getAxios({
+        url: "/github/access_token/public",
+        params: {
+          code,
+        },
+      }).then((res) => res.access_token);
+
+      const githubUser = await axios
+        .get("https://api.github.com/user", {
+          headers: {
+            Authorization: `token ${access_token}`,
+            Accept: "application/vnd.github.v3+json",
+          },
+        })
+        .then((res) => res.data);
+
+      await getAxios({
+        url: "/auth/login",
+        method: "post",
+        data: {
+          githubId: githubUser.id,
+        },
+      }).then((res) => {
+        if (res) {
+          window.localStorage.setItem("token", res.token);
+        }
+      });
+
+      window.location.pathname = "/";
+      return null;
+    },
   },
 ];
 

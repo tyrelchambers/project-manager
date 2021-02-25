@@ -52,86 +52,96 @@ const SignupForm = () => {
   const inputHandler = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
+
+  const authenticate = () => {
+    window.open(
+      `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT}&redirect_uri=${process.env.REACT_APP_GITHUB_REDIRECT}/signup&scope=user`,
+      "tab"
+    );
+  };
   return (
-    <form
-      className="container max-w-screen-sm p-4"
-      onSubmit={handleSubmit(submitHandler)}
-    >
-      <div className="field-group">
-        <FormLabel name="email" text="Email" />
-        <input
-          type="email"
-          placeholder="email@example.com"
-          className="form-input"
-          name="email"
-          value={credentials.email}
-          onChange={(e) => inputHandler(e)}
-          ref={register({
-            required: {
-              value: true,
-              message: "Email is required",
-            },
-            pattern: {
-              value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
-              message: "Your email doesn't seem to be a real email?",
-            },
-            maxLength: {
-              value: 50,
-              message: "Your email can't be more than 50 characters, sorry!",
-            },
-          })}
-        />
-        <FormErrors error={errors.email} />
-      </div>
+    <div className="container max-w-screen-sm p-4">
+      <form onSubmit={handleSubmit(submitHandler)}>
+        <div className="field-group">
+          <FormLabel name="email" text="Email" />
+          <input
+            type="email"
+            placeholder="email@example.com"
+            className="form-input"
+            name="email"
+            value={credentials.email}
+            onChange={(e) => inputHandler(e)}
+            ref={register({
+              required: {
+                value: true,
+                message: "Email is required",
+              },
+              pattern: {
+                value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
+                message: "Your email doesn't seem to be a real email?",
+              },
+              maxLength: {
+                value: 50,
+                message: "Your email can't be more than 50 characters, sorry!",
+              },
+            })}
+          />
+          <FormErrors error={errors.email} />
+        </div>
 
-      <div className="field-group">
-        <FormLabel name="password" text="Password" />
-        <input
-          type="password"
-          placeholder="password"
-          className="form-input"
-          name="password"
-          value={credentials.password}
-          onChange={(e) => inputHandler(e)}
-          ref={register({
-            required: {
-              value: true,
-              message: "Password is required",
-            },
-            maxLength: {
-              value: 50,
-              message: "Password can't be more than 50 characters",
-            },
-            minLength: {
-              value: 6,
-              message: "Password can't be less than 6 characters",
-            },
-          })}
-        />
-        <FormErrors error={errors.password} />
-      </div>
+        <div className="field-group">
+          <FormLabel name="password" text="Password" />
+          <input
+            type="password"
+            placeholder="password"
+            className="form-input"
+            name="password"
+            value={credentials.password}
+            onChange={(e) => inputHandler(e)}
+            ref={register({
+              required: {
+                value: true,
+                message: "Password is required",
+              },
+              maxLength: {
+                value: 50,
+                message: "Password can't be more than 50 characters",
+              },
+              minLength: {
+                value: 6,
+                message: "Password can't be less than 6 characters",
+              },
+            })}
+          />
+          <FormErrors error={errors.password} />
+        </div>
 
-      <div className="field-group">
-        <FormLabel name="confirmPassword" text="Confirm Password" />
-        <input
-          type="password"
-          placeholder="confirm password"
-          className="form-input"
-          name="confirmPassword"
-          value={credentials.confirmPassword}
-          onChange={(e) => inputHandler(e)}
-          ref={register({
-            required: {
-              value: true,
-              message: "Please confirm your password. They should match.",
-            },
-          })}
-        />
-        <FormErrors error={errors.confirmPassword} />
-      </div>
+        <div className="field-group">
+          <FormLabel name="confirmPassword" text="Confirm Password" />
+          <input
+            type="password"
+            placeholder="confirm password"
+            className="form-input"
+            name="confirmPassword"
+            value={credentials.confirmPassword}
+            onChange={(e) => inputHandler(e)}
+            ref={register({
+              required: {
+                value: true,
+                message: "Please confirm your password. They should match.",
+              },
+            })}
+          />
+          <FormErrors error={errors.confirmPassword} />
+        </div>
 
-      <MainButton default type="submit" pending={pending}>
-        Register
+        <MainButton default type="submit" pending={pending}>
+          Register
+        </MainButton>
+        <hr />
+      </form>
+      <MainButton classes="mt-4" github onClick={authenticate}>
+        <i className="fab fa-github mr-4"></i>Authenticate with Github
       </MainButton>
       <p className="mt-6 text-gray-400">
         Or{" "}
@@ -139,7 +149,7 @@ const SignupForm = () => {
           Login
         </Link>
       </p>
-    </form>
+    </div>
   );
 };
 
