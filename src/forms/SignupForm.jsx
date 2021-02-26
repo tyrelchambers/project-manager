@@ -20,7 +20,7 @@ const SignupForm = () => {
     reValidateMode: "onSubmit",
   });
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     const { email, password, confirmPassword } = credentials;
 
     if (!email || !password || !confirmPassword) {
@@ -35,7 +35,7 @@ const SignupForm = () => {
     }
     setPending(true);
 
-    getAxios({
+    await getAxios({
       url: "/auth/signup",
       method: "post",
       data: {
@@ -43,8 +43,9 @@ const SignupForm = () => {
         password: credentials.password,
       },
     }).then((res) => {
-      if (res) {
+      if (res.token !== undefined) {
         setToken({ value: res.token });
+        window.location.pathname = "/";
       }
     });
   };
