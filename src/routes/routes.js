@@ -93,6 +93,7 @@ export const UNAUTHENTICATED = [
         method: "post",
         data: {
           githubId: githubUser.id,
+          access_token,
         },
       }).then((res) => {
         if (res) {
@@ -147,9 +148,10 @@ export const UNAUTHENTICATED = [
           method: "post",
           data: {
             githubId: githubUser.id,
+            access_token,
           },
         }).then((res) => {
-          if (res) {
+          if (res.token) {
             window.localStorage.setItem("token", res.token);
           }
         });
