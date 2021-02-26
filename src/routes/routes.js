@@ -122,39 +122,43 @@ export const UNAUTHENTICATED = [
   {
     slug: "/callback/login",
     render: async () => {
-      const params = new URLSearchParams(window.location.search);
-      const code = params.get("code");
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get("code");
 
-      const access_token = await getAxios({
-        url: "/github/access_token/public",
-        params: {
-          code,
-        },
-      }).then((res) => res.access_token);
-
-      const githubUser = await axios
-        .get("https://api.github.com/user", {
-          headers: {
-            Authorization: `token ${access_token}`,
-            Accept: "application/vnd.github.v3+json",
+        const access_token = await getAxios({
+          url: "/github/access_token/public",
+          params: {
+            code,
           },
-        })
-        .then((res) => res.data);
+        }).then((res) => res.access_token);
 
-      await getAxios({
-        url: "/auth/login",
-        method: "post",
-        data: {
-          githubId: githubUser.id,
-        },
-      }).then((res) => {
-        if (res) {
-          window.localStorage.setItem("token", res.token);
-        }
-      });
+        const githubUser = await axios
+          .get("https://api.github.com/user", {
+            headers: {
+              Authorization: `token ${access_token}`,
+              Accept: "application/vnd.github.v3+json",
+            },
+          })
+          .then((res) => res.data);
 
-      window.location.pathname = "/";
-      return null;
+        await getAxios({
+          url: "/auth/login",
+          method: "post",
+          data: {
+            githubId: githubUser.id,
+          },
+        }).then((res) => {
+          if (res) {
+            window.localStorage.setItem("token", res.token);
+          }
+        });
+
+        window.location.pathname = "/";
+        return null;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 ];

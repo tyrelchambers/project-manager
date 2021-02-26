@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
-import { H1 } from "../../components/Headings/Headings";
+import { H1, H2Subtitle } from "../../components/Headings/Headings";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api/index";
 import { formatUrl } from "../../helpers/formatUrl";
@@ -24,10 +24,16 @@ const EnvVars = () => {
   return (
     <DisplayWrapper>
       <div className="flex justify-between envvar-header">
-        <H1>Environment Variables</H1>
+        <div className="flex-1">
+          <H1>Environment Variables</H1>
+          <H2Subtitle>
+            Environment variables are not encrypted. Don't add any sensitive
+            information.
+          </H2Subtitle>
+        </div>
         <div className="w-fit">
-          <Link className="btn primary  bg-pink-500" to="/env/new">
-            New Environment Variable
+          <Link className="text-yellow-500 font-bold underline" to="/env/new">
+            Create Environment Variable
           </Link>
         </div>
       </div>

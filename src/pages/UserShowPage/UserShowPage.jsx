@@ -124,7 +124,7 @@ const UserShowPage = ({ UserStore }) => {
           <Avatar url={user.avatar} size="large" />
           <H1 className="mt-4 user-name">{user.name || user.email}</H1>
 
-          <p className="mt-4 mb-4">{user.bio}</p>
+          <pre className="mt-4 mb-4 text-white user-bio">{user.bio}</pre>
 
           <UserSocials user={user} />
 
