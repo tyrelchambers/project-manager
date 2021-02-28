@@ -1,0 +1,14 @@
+.input-wrapper .form-input {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.wrapper-icon {
+  height: 56px;
+  border-top-left-radius: var(--border-radius-sm);
+  border-bottom-left-radius: var(--border-radius-sm);
+}
+
+.wrapper-icon i {
+  font-size: 1.25rem;
+}

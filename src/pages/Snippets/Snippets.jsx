@@ -7,6 +7,7 @@ import { inject, observer } from "mobx-react";
 import SnippetForm from "../../forms/SnippetForm";
 import { getAxios } from "../../api";
 import SnippetItem from "../../components/SnippetItem/SnippetItem";
+import { Link } from "react-router-dom";
 
 const Snippets = ({ ModalStore, UserStore }) => {
   const [snippets, setSnippets] = useState([]);
@@ -74,13 +75,10 @@ const Snippets = ({ ModalStore, UserStore }) => {
                 pull gists
               </MinimalButton>
             ))}
-          <MinimalButton
-            classes="text-yellow-400"
-            onClick={addSnippetModelHandler}
-          >
+          <Link to="/snippet/new" className="text-yellow-400 underline">
             <i class="fas fa-pencil-alt mr-2"></i>
             Create a snippet
-          </MinimalButton>
+          </Link>
         </div>
       </div>
 

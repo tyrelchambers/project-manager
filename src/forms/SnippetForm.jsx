@@ -8,6 +8,7 @@ import FormError from "../components/FormErrors/FormErrors";
 import Code from "../components/Code/Code";
 import { H3 } from "../components/Headings/Headings";
 import { syntax } from "../constants/syntax";
+import InputWrapper from "../components/InputWrapper/InputWrapper";
 const SnippetForm = () => {
   const [snippet, setSnippet] = useState({
     name: "",
@@ -62,26 +63,28 @@ const SnippetForm = () => {
 
   return (
     <form
-      className="bg-gray-800 flex flex-col p-4 w-full container "
-      onSubmit={handleSubmit(submitHandler)}
+      className="container max-w-screen-sm p-4 flex flex-col"
+      onSubmit={() => handleSubmit(submitHandler)}
     >
       <div className="field-group">
         <FormLabel name="name" text="Snippet Name" />
 
-        <input
-          type="text"
-          name="name"
-          placeholder="Name your snippet"
-          className="form-input"
-          onChange={(e) => inputHandler(e)}
-          value={snippet.name}
-          ref={register({
-            required: {
-              value: true,
-              message: "We need a name for your snippet",
-            },
-          })}
-        />
+        <InputWrapper icon={<i class="fas fa-signature"></i>}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name your snippet"
+            className="form-input"
+            onChange={(e) => inputHandler(e)}
+            value={snippet.name}
+            ref={register({
+              required: {
+                value: true,
+                message: "We need a name for your snippet",
+              },
+            })}
+          />
+        </InputWrapper>
         <FormError error={errors.name} />
       </div>
 

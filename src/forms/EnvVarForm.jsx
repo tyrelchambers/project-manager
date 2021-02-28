@@ -5,6 +5,7 @@ import FormLabel from "../components/FormLabel/FormLabel";
 import { useForm } from "react-hook-form";
 import FormError from "../components/FormErrors/FormErrors";
 import { useHistory } from "react-router-dom";
+import InputWrapper from "../components/InputWrapper/InputWrapper";
 
 const EnvVarForm = () => {
   const [state, setState] = useState({
@@ -39,20 +40,22 @@ const EnvVarForm = () => {
     >
       <div className="field-group">
         <FormLabel text="Name" name="envName" />
-        <input
-          type="text"
-          name="name"
-          className="form-input"
-          placeholder="Variable name"
-          value={state.name}
-          onChange={(e) => setState({ ...state, name: e.target.value })}
-          ref={register({
-            required: {
-              value: true,
-              message: "We need a name for your variables",
-            },
-          })}
-        />
+        <InputWrapper icon={<i class="fas fa-signature"></i>}>
+          <input
+            type="text"
+            name="name"
+            className="form-input"
+            placeholder="Variable name"
+            value={state.name}
+            onChange={(e) => setState({ ...state, name: e.target.value })}
+            ref={register({
+              required: {
+                value: true,
+                message: "We need a name for your variables",
+              },
+            })}
+          />
+        </InputWrapper>
         <FormError error={errors.name} />
       </div>
 
