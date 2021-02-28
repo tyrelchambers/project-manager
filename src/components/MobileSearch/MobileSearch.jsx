@@ -9,7 +9,7 @@ const MobileSearch = () => {
   const [results, setResults] = useState([]);
 
   const queryHandler = (e) => {
-    if (e.target.value.length > 2) {
+    if (e.target.value.length > 0) {
       getAxios({
         url: "/search/users",
         params: {
@@ -57,10 +57,15 @@ const MobileSearch = () => {
                     className="flex items-center item-wrapper"
                     onClick={() => setIsOpen(false)}
                   >
-                    <Avatar url={result.avatar} className="mr-4" />
-                    <p className="text-gray-800 font-bold text-lg">
-                      {result.name}
-                    </p>
+                    <Avatar url={result.avatar} className="mr-4" size="small" />
+                    <div className="flex flez-1 flex-col truncate">
+                      <p className="text-gray-800 font-bold text-lg truncate">
+                        {result.name || result.email}
+                      </p>
+                      <p className="text-pink-500 text-md italic truncate">
+                        @{result.username}
+                      </p>
+                    </div>
                   </Link>
                 ))}
               </SearchResults>

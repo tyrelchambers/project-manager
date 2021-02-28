@@ -9,6 +9,8 @@
   left: 0;
   background-color: var(--gray-900);
   z-index: 10;
+  overflow: auto;
+  padding-bottom: 2em;
 }
 
 .search-close {
@@ -18,7 +20,7 @@
 }
 
 .mobile-search-body .content {
-  width: 75%;
+  width: 90%;
   margin-top: 6em;
 }
 

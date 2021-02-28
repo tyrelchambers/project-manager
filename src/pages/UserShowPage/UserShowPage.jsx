@@ -119,7 +119,7 @@ const UserShowPage = ({ UserStore }) => {
 
   return (
     <DisplayWrapper className="relative" hideNavbar>
-      <div className="user-show-wrapper flex justify-center relative z-10">
+      <div className="user-show-wrapper flex justify-center relative">
         <div className="flex flex-col items-center container max-w-screen-md">
           <Avatar url={user.avatar} size="large" />
           <H1 className="mt-4 user-name">{user.name || user.email}</H1>
