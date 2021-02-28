@@ -78,8 +78,8 @@ const Snippets = ({ ModalStore, UserStore }) => {
             classes="text-yellow-400"
             onClick={addSnippetModelHandler}
           >
-            <i className="fas fa-plus mr-2 text-sm"></i>
-            add snippet
+            <i class="fas fa-pencil-alt mr-2"></i>
+            Create a snippet
           </MinimalButton>
         </div>
       </div>

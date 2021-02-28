@@ -32,7 +32,8 @@ const EnvVars = () => {
           </H2Subtitle>
         </div>
         <div className="w-fit">
-          <Link className="text-yellow-500 font-bold underline" to="/env/new">
+          <Link className="text-yellow-500 underline" to="/env/new">
+            <i class="fas fa-pencil-alt mr-2"></i>
             Create Environment Variable
           </Link>
         </div>

@@ -31,8 +31,12 @@ const PackagesPage = ({ UserStore }) => {
         </div>
 
         <div className="flex">
-          <Link className=" btn primary bg-pink-500" to="/packages/new">
-            New Package.json
+          <Link
+            className=" text-yellow-500 underline font-bold"
+            to="/packages/new"
+          >
+            <i className="fas fa-pencil-alt mr-2"></i>
+            Create new package
           </Link>
         </div>
       </div>

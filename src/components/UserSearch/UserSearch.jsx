@@ -9,7 +9,7 @@ const UserSearch = () => {
   const [results, setResults] = useState([]);
 
   const queryHandler = (e) => {
-    if (e.target.value.length > 2) {
+    if (e.target.value.length > 0) {
       getAxios({
         url: "/search/users",
         params: {
@@ -30,7 +30,7 @@ const UserSearch = () => {
               className="flex items-center item-wrapper"
             >
               <Avatar url={result.avatar} className="mr-4" size="small" />
-              <p className="text-gray-800 font-bold text-lg">
+              <p className="text-gray-800 font-bold text-lg truncate">
                 {result.name || result.email}
               </p>
             </Link>

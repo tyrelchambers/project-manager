@@ -32,7 +32,7 @@ const Callout = ({ text, link, id }) => {
       id={id}
     >
       <i className="fas fa-bullhorn mr-4 text-pink-500"></i>
-      <p className="font-bold text-gray-800 ml-2 mr-2">
+      <p className="font-bold text-gray-800 ml-2 mr-2 flex-1">
         {text}{" "}
         <a
           href={link}
