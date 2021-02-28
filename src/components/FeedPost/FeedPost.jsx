@@ -90,9 +90,14 @@ const FeedPost = ({ ModalStore, post, user, hideOnMobile = true, stacked }) => {
                 <div className="flex flex-col ml-2">
                   <Link
                     to={`/user/${post.User.uuid}`}
-                    className="font-black mb-2 text-lg text-gray-200 hover:underline truncate feed-post-username"
+                    className=" mb-2  text-gray-200 hover:underline truncate feed-post-username"
                   >
-                    {post.User.name || post.User.email}
+                    <p className="font-black text-lg text-gray-200">
+                      {post.User.name || post.User.email}
+                    </p>
+                    <p className="italic text-gray-400 text-sm">
+                      @{post.User.username}
+                    </p>
                   </Link>
                   <p className="italic text-sm text-gray-400">
                     {formatDistanceToNow(new Date(post.createdAt))} ago
@@ -104,14 +109,18 @@ const FeedPost = ({ ModalStore, post, user, hideOnMobile = true, stacked }) => {
           <div className="flex flex-col w-full">
             {!stacked && (
               <div className="flex justify-between items-center w-full">
-                <div className="flex items-center">
-                  <Link
-                    to={`/user/${post.User.uuid}`}
-                    className="font-black mb-2 text-lg text-gray-200 hover:underline truncate feed-post-username"
-                  >
+                <Link
+                  to={`/user/${post.User.uuid}`}
+                  className="mb-2 text-gray-200 hover:underline truncate feed-post-username flex items-center w-3/4"
+                >
+                  <p className="font-black text-lg text-gray-200 truncate">
                     {post.User.name || post.User.email}
-                  </Link>
-                </div>
+
+                    <span className="italic text-gray-400 text-sm ml-2 font-thin">
+                      @{post.User.username}
+                    </span>
+                  </p>
+                </Link>
                 <p className="italic text-sm text-gray-400 ">
                   {formatDistanceToNow(new Date(post.createdAt))} ago
                 </p>
