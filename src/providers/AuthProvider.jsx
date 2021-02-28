@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { getAxios } from "../api";
 import {
   followToast,
@@ -7,9 +7,10 @@ import {
 } from "../components/NotificationToasts/NotificationToasts";
 import activeRoutes from "../routes/routes";
 import { socket } from "../index";
+import { toast } from "react-toastify";
 
 const AuthProvider = ({ stores }) => {
-  const [user, setUser] = useState({});
+  const history = useHistory();
 
   useEffect(() => {
     const fn = async () => {
@@ -17,8 +18,11 @@ const AuthProvider = ({ stores }) => {
         url: "/user/me",
       }).then((res) => {
         if (res.user) {
-          setUser(user);
           stores.UserStore.setUser(res.user);
+          if (!res.user.username) {
+            history.push("/settings/profile");
+            toast.warn("Please add a username");
+          }
         }
       });
     };

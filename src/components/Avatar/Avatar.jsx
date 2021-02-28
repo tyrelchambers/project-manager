@@ -2,7 +2,7 @@ import React from "react";
 import "./Avatar.css";
 
 const Avatar = ({ url, size, className, square }) => {
-  let avatarSize = "xs";
+  let avatarSize = "";
 
   if (size === "small") {
     avatarSize = "sm";

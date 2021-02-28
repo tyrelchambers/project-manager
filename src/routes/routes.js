@@ -14,6 +14,7 @@ import LikedPosts from "../pages/LikedPosts/LikedPosts";
 import Login from "../pages/Login/Login";
 import NewEnvVar from "../pages/NewEnvVar/NewEnvVar";
 import NewPackage from "../pages/NewPackage/NewPackage";
+import NewSnippet from "../pages/NewSnippet/NewSnippet";
 import Notifications from "../pages/Notifications/Notifications";
 import PackageShow from "../pages/PackageShow/PackageShow";
 import PackagesPage from "../pages/PackagesPage/PackagesPage";
@@ -191,7 +192,10 @@ export default [
     slug: "/snippets",
     component: Snippets,
   },
-
+  {
+    slug: "/snippet/new",
+    component: NewSnippet,
+  },
   {
     slug: "/snippets/:snippet_uuid/edit",
     component: SnippetEdit,

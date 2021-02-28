@@ -13,7 +13,7 @@ const UserWidget = ({ UserStore }) => {
       <div className="flex flex-col ml-4">
         <p>Signed in as</p>
         <p className="text-white font-bold text-2xl break-all">
-          {UserStore.user.name ? UserStore.user.name : UserStore.user.email}
+          @{UserStore.user.username}
         </p>
       </div>
     </Link>

@@ -31,8 +31,11 @@ export const getAxios = async ({
       }
     })
     .catch((err) => {
-      if (err.response) {
+      if (err.response.data) {
         toast.error(err.response.data);
+      }
+      if (err.response.data?.error) {
+        toast.error(err.response.data.error);
       }
       return err;
     });

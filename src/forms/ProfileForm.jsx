@@ -4,6 +4,7 @@ import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import { H2 } from "../components/Headings/Headings";
+import InputWrapper from "../components/InputWrapper/InputWrapper";
 import Upload from "../components/Upload/Upload";
 import isEmpty from "../helpers/isEmpty";
 import UserStore from "../stores/UserStore";
@@ -23,9 +24,11 @@ const ProfileForm = ({ user }) => {
     website: "",
     youtube: "",
     podcast: "",
+    username: "",
   });
   const [files, setFiles] = useState([]);
   const pond = React.createRef(null);
+  const [username, setUsername] = useState(false);
 
   useEffect(() => {
     setState({
@@ -81,6 +84,26 @@ const ProfileForm = ({ user }) => {
 
   if (isEmpty(state)) return null;
 
+  const checkUsername = (e) => {
+    const username = e.target.value.replace(/[\W]/gi, "");
+    getAxios({
+      url: "/user/username",
+      params: {
+        username: e.target.value,
+      },
+    }).then((res) => {
+      if (
+        res.response?.status === 401 &&
+        res.response?.data.custom === "USERNAME_EXISTS"
+      ) {
+        setUsername(true);
+      } else {
+        setUsername(false);
+      }
+    });
+    setState({ ...state, username });
+  };
+
   return (
     <form className="container max-w-screen-sm">
       <div className="field-group">
@@ -89,14 +112,33 @@ const ProfileForm = ({ user }) => {
       </div>
       <div className="field-group">
         <FormLabel text="Name" name="name" />
-        <input
-          type="text"
-          name="name"
-          className="form-input"
-          placeholder="John Smith"
-          value={state.name}
-          onChange={(e) => inputHandler(e)}
-        />
+        <InputWrapper icon={<i class="fas fa-signature"></i>}>
+          <input
+            type="text"
+            name="name"
+            className="form-input"
+            placeholder="John Smith"
+            value={state.name}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputWrapper>
+      </div>
+
+      <div className="field-group">
+        <FormLabel text="Username" name="username" />
+        <InputWrapper icon={<i class="fas fa-at"></i>}>
+          <input
+            type="text"
+            name="nausernameme"
+            className="form-input"
+            placeholder="John Smith"
+            value={state.username}
+            onChange={(e) => checkUsername(e)}
+          />
+        </InputWrapper>
+        {username && (
+          <p className="text-red-400 text-right mt-2">Username exists</p>
+        )}
       </div>
 
       <div className="field-group">
@@ -121,116 +163,136 @@ const ProfileForm = ({ user }) => {
 
       <div className="field-group">
         <FormLabel text="Email" name="email" />
-        <input
-          type="email"
-          name="email"
-          className="form-input"
-          placeholder="user@example.com"
-          value={state.email}
-          onChange={(e) => inputHandler(e)}
-        />
+        <InputWrapper icon={<i class="fas fa-envelope"></i>}>
+          <input
+            type="email"
+            name="email"
+            className="form-input"
+            placeholder="user@example.com"
+            value={state.email}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputWrapper>
       </div>
 
       <H2 className="mb-6 mt-6">Socials</H2>
 
       <div className="field-group">
         <FormLabel text="Twitter" name="twitter" />
-        <input
-          type="text"
-          name="twitter"
-          className="form-input"
-          placeholder="@username"
-          value={state.twitter}
-          onChange={(e) => inputHandler(e)}
-        />
+        <InputWrapper icon={<i class="fab fa-twitter"></i>}>
+          <input
+            type="text"
+            name="twitter"
+            className="form-input"
+            placeholder="@username"
+            value={state.twitter}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputWrapper>
       </div>
       <div className="field-group">
         <FormLabel text="Facebook" name="facebook" />
-        <input
-          type="text"
-          name="facebook"
-          className="form-input"
-          placeholder="link to Facebook profile"
-          value={state.facebook}
-          onChange={(e) => inputHandler(e)}
-        />
+        <InputWrapper icon={<i class="fab fa-facebook"></i>}>
+          <input
+            type="text"
+            name="facebook"
+            className="form-input"
+            placeholder="link to Facebook profile"
+            value={state.facebook}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputWrapper>
       </div>
       <div className="field-group">
         <FormLabel text="Dev.to" name="devto" />
-        <input
-          type="text"
-          name="devto"
-          className="form-input"
-          placeholder="link to Dev.to profile"
-          value={state.devto}
-          onChange={(e) => inputHandler(e)}
-        />
+        <InputWrapper icon={<i class="fab fa-dev"></i>}>
+          <input
+            type="text"
+            name="devto"
+            className="form-input"
+            placeholder="link to Dev.to profile"
+            value={state.devto}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputWrapper>
       </div>
       <div className="field-group">
         <FormLabel text="StackOverflow" name="stackoverflow" />
-        <input
-          type="text"
-          name="stackoverflow"
-          className="form-input"
-          placeholder="link to StackOverflow profile"
-          value={state.stackoverflow}
-          onChange={(e) => inputHandler(e)}
-        />
+        <InputWrapper icon={<i class="fab fa-stack-overflow"></i>}>
+          <input
+            type="text"
+            name="stackoverflow"
+            className="form-input"
+            placeholder="link to StackOverflow profile"
+            value={state.stackoverflow}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputWrapper>
       </div>
       <div className="field-group">
         <FormLabel text="Instagram" name="instagram" />
-        <input
-          type="text"
-          name="instagram"
-          className="form-input"
-          placeholder="@username"
-          value={state.instagram}
-          onChange={(e) => inputHandler(e)}
-        />
+        <InputWrapper icon={<i class="fab fa-instagram"></i>}>
+          <input
+            type="text"
+            name="instagram"
+            className="form-input"
+            placeholder="@username"
+            value={state.instagram}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputWrapper>
       </div>
       <div className="field-group">
         <FormLabel text="Website" name="website" />
-        <input
-          type="text"
-          name="website"
-          className="form-input"
-          placeholder="link to your website"
-          value={state.website}
-          onChange={(e) => inputHandler(e)}
-        />
+        <InputWrapper icon={<i class="fas fa-globe-americas"></i>}>
+          <input
+            type="text"
+            name="website"
+            className="form-input"
+            placeholder="link to your website"
+            value={state.website}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputWrapper>
       </div>
       <div className="field-group">
         <FormLabel text="Github" name="github" />
-        <input
-          type="text"
-          name="github"
-          className="form-input"
-          placeholder="@username"
-          value={state.github}
-          onChange={(e) => inputHandler(e)}
-        />
+        <InputWrapper icon={<i class="fab fa-github"></i>}>
+          <input
+            type="text"
+            name="github"
+            className="form-input"
+            placeholder="@username"
+            value={state.github}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputWrapper>
       </div>
       <div className="field-group">
         <FormLabel text="Podcast" name="podcast" />
-        <input
-          type="text"
-          name="podcast"
-          className="form-input"
-          placeholder="link to your podcast"
-          value={state.podcast}
-          onChange={(e) => inputHandler(e)}
-        />
+        <InputWrapper icon={<i class="fas fa-microphone-alt"></i>}>
+          <input
+            type="text"
+            name="podcast"
+            className="form-input"
+            placeholder="link to your podcast"
+            value={state.podcast}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputWrapper>
       </div>
       <div className="field-group">
         <FormLabel text="Youtube" name="youtube" />
-        <input
-          type="text"
-          name="youtube"
-          className="form-input"
-          placeholder="link to your Youtube channel"
-          value={state.youtube}
-          onChange={(e) => inputHandler(e)}
-        />
+        <InputWrapper icon={<i class="fab fa-youtube"></i>}>
+          <input
+            type="text"
+            name="youtube"
+            className="form-input"
+            placeholder="link to your Youtube channel"
+            value={state.youtube}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputWrapper>
       </div>
       {buttonState()}
     </form>

@@ -1,5 +1,6 @@
 import React from "react";
 import FormLabel from "../components/FormLabel/FormLabel";
+import InputWrapper from "../components/InputWrapper/InputWrapper";
 import SelectField from "../components/SelectField/SelectField";
 import { frameworks } from "../constants/frameworks";
 
@@ -12,14 +13,16 @@ const ProjectForm = ({ state, setState }) => {
     <form className="container max-w-screen-sm">
       <div className="field-group">
         <FormLabel name="appName" text="App Name" />
-        <input
-          type="text"
-          className="form-input"
-          name="appName"
-          placeholder="an-awesome-project"
-          value={state.appName}
-          onChange={(e) => inputHandler(e)}
-        />
+        <InputWrapper icon={<i class="fas fa-signature"></i>}>
+          <input
+            type="text"
+            className="form-input"
+            name="appName"
+            placeholder="an-awesome-project"
+            value={state.appName}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputWrapper>
       </div>
 
       <div className="mt-4 field-group">

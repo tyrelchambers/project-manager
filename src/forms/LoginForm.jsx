@@ -35,6 +35,8 @@ const LoginForm = () => {
       if (res.user) {
         window.location.pathname = "/";
       }
+
+      setPending(false);
     });
   };
 

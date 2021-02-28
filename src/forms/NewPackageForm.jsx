@@ -10,6 +10,7 @@ import List from "../components/List/List";
 import { useForm } from "react-hook-form";
 import FormErrors from "../components/FormErrors/FormErrors";
 import { copyToClipboard } from "../helpers/copyToClipboard";
+import InputWrapper from "../components/InputWrapper/InputWrapper";
 
 const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [state, setState] = useState({
@@ -153,39 +154,43 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
     >
       <div className="field-group">
         <FormLabel name="defaultName" text="Name to Save as" />
-        <input
-          type="text"
-          className="form-input"
-          name="defaultName"
-          placeholder="my-new-package"
-          value={state.defaultName}
-          onChange={(v) => inputHandler(v)}
-          ref={register({
-            required: {
-              value: true,
-              message: "Need a name to save as",
-            },
-          })}
-        />
+        <InputWrapper icon={<i class="fas fa-signature"></i>}>
+          <input
+            type="text"
+            className="form-input"
+            name="defaultName"
+            placeholder="my-new-package"
+            value={state.defaultName}
+            onChange={(v) => inputHandler(v)}
+            ref={register({
+              required: {
+                value: true,
+                message: "Need a name to save as",
+              },
+            })}
+          />
+        </InputWrapper>
         <FormErrors error={errors.defaultName} />
       </div>
 
       <div className="field-group">
         <FormLabel name="packageName" text="Name of Package.json" />
-        <input
-          type="text"
-          className="form-input"
-          name="packageName"
-          placeholder="The name of the package.json: {name: 'my-app'}"
-          value={state.packageName}
-          onChange={(v) => inputHandler(v)}
-          ref={register({
-            required: {
-              value: true,
-              message: "Please give your package a name",
-            },
-          })}
-        />
+        <InputWrapper icon={<i class="fas fa-signature"></i>}>
+          <input
+            type="text"
+            className="form-input"
+            name="packageName"
+            placeholder="The name of the package.json: {name: 'my-app'}"
+            value={state.packageName}
+            onChange={(v) => inputHandler(v)}
+            ref={register({
+              required: {
+                value: true,
+                message: "Please give your package a name",
+              },
+            })}
+          />
+        </InputWrapper>
         <FormErrors error={errors.packageName} />
       </div>
 

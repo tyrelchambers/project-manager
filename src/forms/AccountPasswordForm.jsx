@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
+import InputWrapper from "../components/InputWrapper/InputWrapper";
 
 const AccountPasswordForm = () => {
   const [state, setState] = useState({
@@ -47,38 +48,44 @@ const AccountPasswordForm = () => {
     <form className="container max-w-screen-sm">
       <div className="field-group">
         <FormLabel text="Current password" name="currentPassword" />
-        <input
-          type="password"
-          className="form-input"
-          name="currentPassword"
-          value={state.currentPassword}
-          onChange={(e) => inputHandler(e)}
-          autoComplete="new-password"
-        />
+        <InputWrapper icon={<i class="fas fa-lock"></i>}>
+          <input
+            type="password"
+            className="form-input"
+            name="currentPassword"
+            value={state.currentPassword}
+            onChange={(e) => inputHandler(e)}
+            autoComplete="new-password"
+          />
+        </InputWrapper>
       </div>
 
       <div className="field-group">
         <FormLabel text="New Password" name="newPassword" />
-        <input
-          type="password"
-          name="newPassword"
-          className="form-input"
-          value={state.newPassword}
-          onChange={(e) => inputHandler(e)}
-          autoComplete="new-password"
-        />
+        <InputWrapper icon={<i class="fas fa-lock"></i>}>
+          <input
+            type="password"
+            name="newPassword"
+            className="form-input"
+            value={state.newPassword}
+            onChange={(e) => inputHandler(e)}
+            autoComplete="new-password"
+          />
+        </InputWrapper>
       </div>
 
       <div className="field-group">
         <FormLabel text="Confirm New Password" name="confirmNewPassword" />
-        <input
-          type="password"
-          className="form-input"
-          name="confirmNewPassword"
-          value={state.confirmNewPassword}
-          onChange={(e) => inputHandler(e)}
-          autoComplete="new-password"
-        />
+        <InputWrapper icon={<i class="fas fa-lock"></i>}>
+          <input
+            type="password"
+            className="form-input"
+            name="confirmNewPassword"
+            value={state.confirmNewPassword}
+            onChange={(e) => inputHandler(e)}
+            autoComplete="new-password"
+          />
+        </InputWrapper>
       </div>
 
       {buttonState()}
