@@ -97,7 +97,7 @@ export const UNAUTHENTICATED = [
           access_token,
         },
       }).then((res) => {
-        if (res) {
+        if (res.token) {
           window.localStorage.setItem("token", res.token);
         }
       });
