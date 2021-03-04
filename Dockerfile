@@ -34,7 +34,7 @@ RUN npm init -y && \
   npm install http-server
 
 # Copy the built artifacts from the build stage
-COPY --from=build /app/dist /app
+COPY --from=build /app/build /app
 
 # Expose port
 EXPOSE 8080
