@@ -37,6 +37,8 @@ RUN npm init -y && \
 # Copy the built artifacts from the build stage
 COPY --from=build /app/build /app 
 
+COPY ENV /.env
+
 # Expose port
 EXPOSE 8080
 
