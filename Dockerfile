@@ -6,7 +6,6 @@ RUN mkdir /app
 # Set up the working directory
 WORKDIR /app
 
-RUN bash -c 'ls -a'
 COPY package*.json ./
 
 # Note that we're installing all dependencies, unlike the buildpack
@@ -14,6 +13,7 @@ RUN npm install
 
 # Copy the rest of the application
 COPY . .
+RUN bash -c 'ls -a'
 
 EXPOSE 8080
 
