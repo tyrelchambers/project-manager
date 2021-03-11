@@ -1,5 +1,6 @@
 FROM node:10-slim AS build
 
+RUN bash -c 'ls -a'
 # Create a folder for our app
 RUN mkdir /app
 
@@ -13,7 +14,6 @@ RUN npm install
 
 # Copy the rest of the application
 COPY . .
-RUN bash -c 'ls -a'
 
 EXPOSE 8080
 
