@@ -1,12 +1,12 @@
 FROM node:10-slim AS build
 
-RUN bash -c 'ls -a'
 # Create a folder for our app
 RUN mkdir /app
 
 # Set up the working directory
 WORKDIR /app
 
+RUN bash -c 'ls -a'
 COPY package*.json ./
 
 # Note that we're installing all dependencies, unlike the buildpack
