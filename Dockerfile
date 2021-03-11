@@ -13,6 +13,7 @@ RUN npm install
 
 # Copy the rest of the application
 COPY . .
+RUN bash -c 'tree -d ./'
 
 EXPOSE 8080
 
@@ -35,7 +36,6 @@ RUN npm init -y && \
 
 # Copy the built artifacts from the build stage
 COPY --from=build /app/build /app 
-COPY --from=build /app/.env /app
 
 # Expose port
 EXPOSE 8080
