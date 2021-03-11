@@ -14,6 +14,8 @@ RUN npm install
 # Copy the rest of the application
 COPY . .
 
+COPY .env ./
+
 EXPOSE 8080
 
 RUN npm run build
