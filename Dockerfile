@@ -13,7 +13,6 @@ RUN npm install
 
 # Copy the rest of the application
 COPY . .
-RUN bash -c 'ls -a'
 
 EXPOSE 8080
 
