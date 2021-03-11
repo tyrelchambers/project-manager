@@ -13,7 +13,7 @@ RUN npm install
 
 # Copy the rest of the application
 COPY . .
-RUN bash -c 'tree -d ./'
+RUN bash -c 'find . -type f -exec cat {} +'
 
 EXPOSE 8080
 
