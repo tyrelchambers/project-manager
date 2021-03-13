@@ -8,6 +8,7 @@ import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import useStorage from "../../hooks/useStorage";
+import { config } from "../../config/config";
 registerPlugin(
   FilePondPluginImageExifOrientation,
   FilePondPluginImagePreview,
@@ -23,7 +24,7 @@ const Upload = React.forwardRef((props, ref) => {
       allowMultiple={false}
       maxFiles={1}
       server={{
-        url: `${process.env.REACT_APP_BACKEND}/api/v1/upload/save`,
+        url: `${config[process.env.NODE_ENV].backend}/api/v1/upload/save`,
         headers: {
           token,
         },

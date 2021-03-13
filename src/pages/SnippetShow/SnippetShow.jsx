@@ -12,6 +12,7 @@ import ShareSnippetModal from "../../modals/ShareSnippetModal/ShareSnippetModal"
 import Code from "../../components/Code/Code";
 import Status from "../../components/Status/Status";
 import "./SnippetShow.css";
+import { config } from "../../config/config";
 
 const SnippetShow = ({ UserStore, ModalStore }) => {
   const { snippet_uuid } = useParams();
@@ -127,7 +128,9 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
                 onClick={() => {
                   ModalStore.setRender(
                     <ShareSnippetModal
-                      shareLink={`${process.env.REACT_APP_CLIENT}/snippets/${snippet_uuid}`}
+                      shareLink={`${
+                        config[process.env.NODE_ENV].backend
+                      }/snippets/${snippet_uuid}`}
                       snippet={snippet}
                     />
                   );

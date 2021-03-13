@@ -1,11 +1,14 @@
 import React from "react";
 import { MainButton } from "../../../components/Buttons/Buttons";
 import { H2 } from "../../../components/Headings/Headings";
+import { config } from "../../../config/config";
 
 const Github = ({ user }) => {
   const authenticate = () => {
     window.open(
-      `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT}&redirect_uri=${process.env.REACT_APP_GITHUB_REDIRECT}`,
+      `https://github.com/login/oauth/authorize?client_id=${
+        config[process.env.NODE_ENV].githubClient
+      }&redirect_uri=${config[process.env.NODE_ENV].githubRedirect}`,
       "tab"
     );
   };

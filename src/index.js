@@ -12,8 +12,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { UNAUTHENTICATED } from "./routes/routes";
 import { io } from "socket.io-client";
 import AuthProvider from "./providers/AuthProvider";
+import { config } from "./config/config";
 
-export const socket = io(process.env.REACT_APP_BACKEND, {
+export const socket = io(config[process.env.NODE_ENV].backend, {
   transportOptions: {
     polling: {
       extraHeaders: {

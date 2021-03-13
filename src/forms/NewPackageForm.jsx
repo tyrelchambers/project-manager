@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import FormErrors from "../components/FormErrors/FormErrors";
 import { copyToClipboard } from "../helpers/copyToClipboard";
 import InputWrapper from "../components/InputWrapper/InputWrapper";
+import { config } from "../config/config";
 
 const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [state, setState] = useState({
@@ -29,7 +30,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
 
   const searchNpm = async (q) => {
     return await Axios.get(
-      `${process.env.REACT_APP_BACKEND}/api/v1/packages/search/npm`,
+      `${config[process.env.NODE_ENV].backend}/api/v1/packages/search/npm`,
       {
         params: {
           q,

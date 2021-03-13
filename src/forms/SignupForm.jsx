@@ -7,6 +7,7 @@ import useStorage from "../hooks/useStorage";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import FormErrors from "../components/FormErrors/FormErrors";
+import { config } from "../config/config";
 
 const SignupForm = () => {
   const [credentials, setCredentials] = useState({
@@ -56,7 +57,11 @@ const SignupForm = () => {
 
   const authenticate = () => {
     window.open(
-      `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT}&redirect_uri=${process.env.REACT_APP_GITHUB_REDIRECT}/signup&scope=user`,
+      `https://github.com/login/oauth/authorize?client_id=${
+        config[process.env.NODE_ENV].githubClient
+      }&redirect_uri=${
+        config[process.env.NODE_ENV].githubRedirect
+      }/signup&scope=user`,
       "tab"
     );
   };

@@ -1,7 +1,8 @@
 import Axios from "axios";
 import { toast } from "react-toastify";
+import { config } from "../config/config";
 
-const BACKEND = process.env.REACT_APP_BACKEND;
+const BACKEND = config[process.env.NODE_ENV].backend;
 
 export const getAxios = async ({
   method = "get",
