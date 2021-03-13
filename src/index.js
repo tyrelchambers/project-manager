@@ -42,7 +42,6 @@ const App = () => {
     window.localStorage.getItem("token") ||
     window.sessionStorage.getItem("token") ||
     false;
-  console.log(process.env);
   return token ? <AuthProvider stores={stores} /> : <Unauthenticated />;
 };
 ReactDOM.render(
