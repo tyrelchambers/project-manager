@@ -40,4 +40,4 @@ COPY --from=build /app/build /app
 EXPOSE 8080
 
 # Set the startup command
-CMD ["./node_modules/.bin/http-server", "-P https://kanlen.ca"]
+CMD ["./node_modules/.bin/http-server", "-P https://kanlen.ca?"]
