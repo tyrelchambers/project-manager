@@ -65,6 +65,7 @@ const SignupForm = () => {
       <form onSubmit={handleSubmit(submitHandler)}>
         <div className="field-group">
           <FormLabel name="email" text="Email" />
+          <p></p>
           <input
             type="email"
             placeholder="email@example.com"
