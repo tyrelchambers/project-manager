@@ -7,7 +7,7 @@ export const config = {
   },
   production: {
     backend: "https://kanlen.ca",
-    githubClient: "9d594cc618a01efff866",
+    githubClient: "8ea42c2512522a4ee599",
     githubRedirect: "https://kanlen.ca/callback",
     githubState: "nugyftud7568fyvihbo",
   },
