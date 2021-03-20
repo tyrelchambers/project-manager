@@ -58,27 +58,33 @@ const Snippets = ({ ModalStore, UserStore }) => {
             choose). Use the Kanlen extension to import them directly into your
             code.
           </H2Subtitle>
-        </div>
-        <div className="snippet-actions">
-          {UserStore.user.githubAccessToken &&
-            (pullingGists ? (
-              <MinimalButton
-                classes="text-yellow-400 mr-4 "
-                onClick={() => getGists()}
-              >
-                <i className="fas fa-sync mr-2 text-sm animate-spin"></i>
-                pulling gists
-              </MinimalButton>
-            ) : (
-              <MinimalButton classes="text-yellow-400 mr-4" onClick={getGists}>
-                <i className="fas fa-sync mr-2 text-sm"></i>
-                pull gists
-              </MinimalButton>
-            ))}
-          <Link to="/snippet/new" className="text-yellow-400 underline">
-            <i class="fas fa-pencil-alt mr-2"></i>
-            Create a snippet
-          </Link>
+          <div className="snippet-actions mt-4">
+            {UserStore.user.githubAccessToken &&
+              (pullingGists ? (
+                <MinimalButton
+                  classes="text-yellow-400 mr-4 font-bold"
+                  onClick={() => getGists()}
+                >
+                  <i className="fas fa-sync mr-2 text-sm animate-spin"></i>
+                  pulling gists
+                </MinimalButton>
+              ) : (
+                <MinimalButton
+                  classes="text-yellow-400 mr-4 font-bold"
+                  onClick={getGists}
+                >
+                  <i className="fas fa-sync mr-2 text-sm"></i>
+                  pull gists
+                </MinimalButton>
+              ))}
+            <Link
+              to="/snippet/new"
+              className="text-yellow-400 underline font-bold"
+            >
+              <i class="fas fa-pencil-alt mr-2"></i>
+              Create a snippet
+            </Link>
+          </div>
         </div>
       </div>
 

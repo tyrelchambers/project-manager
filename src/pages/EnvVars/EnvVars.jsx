@@ -30,12 +30,12 @@ const EnvVars = () => {
             Environment variables are not encrypted. Don't add any sensitive
             information.
           </H2Subtitle>
-        </div>
-        <div className="w-fit">
-          <Link className="text-yellow-500 underline" to="/env/new">
-            <i class="fas fa-pencil-alt mr-2"></i>
-            Create Environment Variable
-          </Link>
+          <div className="w-fit mt-4">
+            <Link className="text-yellow-500 underline font-bold" to="/env/new">
+              <i class="fas fa-pencil-alt mr-2"></i>
+              Create Environment Variable
+            </Link>
+          </div>
         </div>
       </div>
 

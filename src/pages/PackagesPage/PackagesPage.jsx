@@ -28,16 +28,15 @@ const PackagesPage = ({ UserStore }) => {
             Create default package.json files that you can import into other
             projects to make setup a breeze.
           </H2Subtitle>
-        </div>
-
-        <div className="flex">
-          <Link
-            className=" text-yellow-500 underline font-bold"
-            to="/packages/new"
-          >
-            <i className="fas fa-pencil-alt mr-2"></i>
-            Create new package
-          </Link>
+          <div className="flex">
+            <Link
+              className=" text-yellow-500 underline font-bold mt-4"
+              to="/packages/new"
+            >
+              <i className="fas fa-pencil-alt mr-2"></i>
+              Create new package
+            </Link>
+          </div>
         </div>
       </div>
 
