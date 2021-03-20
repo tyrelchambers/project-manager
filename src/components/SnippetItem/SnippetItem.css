@@ -6,4 +6,6 @@
   background-attachment: fixed;
   background-size: cover;
   mix-blend-mode: multiply;
+  border-top-right-radius: 0.375em;
+  border-top-left-radius: 0.375em;
 }

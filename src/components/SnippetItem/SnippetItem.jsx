@@ -12,8 +12,8 @@ const SnippetItem = ({ snippet, UserStore }) => {
   };
   return (
     <div className="snippet-item rounded-md">
-      <div className="flex snippet-item-header relative">
-        <div className="flex flex-1 p-3 absolute z-10">
+      <div className="flex snippet-item-header relative ">
+        <div className="flex flex-1 p-3 absolute z-10 w-full">
           <Link
             to={`/snippets/${snippet.uuid}`}
             className="font-bold w-full text-xl text-gray-200 truncate"
