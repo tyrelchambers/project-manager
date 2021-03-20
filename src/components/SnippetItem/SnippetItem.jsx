@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api";
-
+import "./SnippetItem.css";
 const SnippetItem = ({ snippet, UserStore }) => {
   const deleteHandler = async () => {
     await getAxios({
@@ -12,16 +12,19 @@ const SnippetItem = ({ snippet, UserStore }) => {
   };
   return (
     <div className="snippet-item rounded-md">
-      <div className="flex flex-1 p-3 snippet-item-header">
-        <Link
-          to={`/snippets/${snippet.uuid}`}
-          className="font-bold w-full text-xl text-gray-200 truncate"
-        >
-          {snippet.name}
-        </Link>
-        {snippet.isGist && (
-          <i className="fab fa-github text-pink-500 text-xl"></i>
-        )}
+      <div className="flex snippet-item-header relative">
+        <div className="flex flex-1 p-3 absolute z-10">
+          <Link
+            to={`/snippets/${snippet.uuid}`}
+            className="font-bold w-full text-xl text-gray-200 truncate"
+          >
+            {snippet.name}
+          </Link>
+          {snippet.isGist && (
+            <i className="fab fa-github text-pink-500 text-xl"></i>
+          )}
+        </div>
+        <div className="snippet-bg absolute"></div>
       </div>
 
       <div className="flex justify-between snippet-item-stats items-center p-3">

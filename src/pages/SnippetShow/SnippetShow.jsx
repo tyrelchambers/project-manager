@@ -92,11 +92,19 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
           )}
         </div>
       </div>
+
       <div className="flex  mb-4 mt-4 snippet-show-body">
         <div
           className="w-3/5 rounded-lg flex flex-col mr-4"
           style={{ height: "fit-content" }}
         >
+          <H3>Description</H3>
+          <pre className="whitespace-pre-wrap pre text-gray-500 mt-2 max-w-screen-sm">
+            {snippet.description}
+          </pre>
+
+          <H3 className="mt-6">Snippet</H3>
+
           <Code language={snippet.syntax} code={snippet.snippet} />
         </div>
         <div className="w-2/5">

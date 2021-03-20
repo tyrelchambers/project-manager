@@ -76,6 +76,20 @@ const SnippetEdit = () => {
             value={updated.name}
           />
         </div>
+        <div className="field-group">
+          <FormLabel name="description" text="Description" />
+
+          <textarea
+            type="text"
+            name="description"
+            placeholder="What does this snippet do?"
+            className="form-input"
+            onChange={(e) =>
+              setUpdated({ ...updated, description: e.target.value })
+            }
+            value={updated.description}
+          />
+        </div>
         <div className="field-group mt-6">
           <FormLabel text="Snippet" />
           <textarea

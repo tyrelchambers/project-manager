@@ -14,6 +14,7 @@ const SnippetForm = () => {
     name: "",
     snippet: "",
     syntax: "",
+    description: "",
   });
 
   const [qSyntax, setQSyntax] = useState("");
@@ -64,7 +65,7 @@ const SnippetForm = () => {
   return (
     <form
       className="container max-w-screen-sm p-4 flex flex-col"
-      onSubmit={() => handleSubmit(submitHandler)}
+      onSubmit={handleSubmit(submitHandler)}
     >
       <div className="field-group">
         <FormLabel name="name" text="Snippet Name" />
@@ -86,6 +87,19 @@ const SnippetForm = () => {
           />
         </InputWrapper>
         <FormError error={errors.name} />
+      </div>
+
+      <div className="field-group">
+        <FormLabel name="description" text="Description" />
+
+        <textarea
+          type="text"
+          name="description"
+          placeholder="What does this snippet do?"
+          className="form-input"
+          onChange={(e) => inputHandler(e)}
+          value={snippet.description}
+        />
       </div>
 
       <div className="field-group">

@@ -39,7 +39,6 @@ const Unauthenticated = () =>
   ));
 
 const App = () => {
-  console.log(process.env);
   const token =
     window.localStorage.getItem("token") ||
     window.sessionStorage.getItem("token") ||

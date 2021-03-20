@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Redirect, Route, Switch, useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { getAxios } from "../api";
 import {
   followToast,
