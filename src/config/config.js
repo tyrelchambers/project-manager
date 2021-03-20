@@ -6,7 +6,7 @@ export const config = {
     githubState: "nugyftud7568fyvihbo",
   },
   production: {
-    backend: "https://kanlen.ca",
+    backend: "https://api.kanlen.ca",
     githubClient: "8ea42c2512522a4ee599",
     githubRedirect: "https://kanlen.ca/callback",
     githubState: "nugyftud7568fyvihbo",
