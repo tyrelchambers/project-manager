@@ -49,7 +49,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
       url: `/snippets/${snippet_uuid}/delete`,
       method: "delete",
     }).then((res) => {
-      history.goBack();
+      history.push("/snippets");
     });
   };
 

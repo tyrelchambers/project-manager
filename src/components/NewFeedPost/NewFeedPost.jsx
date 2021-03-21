@@ -51,7 +51,7 @@ const NewFeedPost = ({ UserStore, SearchStore }) => {
           <div className="flex flex-wrap">
             {results.map((i, id) => (
               <div
-                className="flex items-center bg-gray-900 p-4 rounded-md snippet-item m-2"
+                className="flex items-center bg-gray-900 p-4 rounded-md  m-2"
                 onClick={() => addSnippet(i)}
                 key={id}
               >
