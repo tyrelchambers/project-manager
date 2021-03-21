@@ -10,7 +10,14 @@ import Status from "../Status/Status";
 import { inject, observer } from "mobx-react";
 import { docWidth } from "../../constants/constants";
 
-const FeedPost = ({ ModalStore, post, user, hideOnMobile = true, stacked }) => {
+const FeedPost = ({
+  ModalStore,
+  post,
+  user,
+  hideOnMobile = true,
+  stacked,
+  isBookmarked,
+}) => {
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
@@ -24,13 +31,27 @@ const FeedPost = ({ ModalStore, post, user, hideOnMobile = true, stacked }) => {
   }, []);
 
   const bookmarkHandler = async () => {
-    await getAxios({
-      url: "/bookmarks/save",
-      method: "post",
-      data: {
-        postId: post.uuid,
-      },
-    });
+    if (isBookmarked) {
+      await getAxios({
+        url: "/bookmarks/remove",
+        method: "delete",
+        data: {
+          postId: post.uuid,
+        },
+      }).then((res) => {
+        if (res) {
+          window.location.reload();
+        }
+      });
+    } else {
+      await getAxios({
+        url: "/bookmarks/save",
+        method: "post",
+        data: {
+          postId: post.uuid,
+        },
+      });
+    }
   };
 
   const likeHandler = async () => {
@@ -163,7 +184,11 @@ const FeedPost = ({ ModalStore, post, user, hideOnMobile = true, stacked }) => {
                     icon={
                       <i className="fas fa-bookmark text-gray-200 mr-2"></i>
                     }
-                    text="Add to bookmarks"
+                    text={
+                      isBookmarked
+                        ? "Remove from bookmarks"
+                        : "Add to bookmarks"
+                    }
                     wrapperClass="bg-gray-800 cursor-pointer m-2"
                     textClass="text-gray-200"
                     onClick={bookmarkHandler}

@@ -29,7 +29,12 @@ const Bookmarks = ({ UserStore }) => {
         bookmarks
           .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
           .map((bk) => (
-            <FeedPost user={UserStore.user} key={bk.id} post={bk.FeedPost} />
+            <FeedPost
+              user={UserStore.user}
+              key={bk.id}
+              post={bk.FeedPost}
+              isBookmarked
+            />
           ))}
     </DisplayWrapper>
   );
