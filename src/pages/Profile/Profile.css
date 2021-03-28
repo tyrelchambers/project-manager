@@ -8,3 +8,7 @@
     margin-top: 0.5em;
   }
 }
+
+.filepond--action-process-item {
+  display: none;
+}
