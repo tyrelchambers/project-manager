@@ -61,6 +61,8 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
       return;
     }
     setState({ ...state, packagesToInstall: [...state.packagesToInstall, p] });
+    setQuery("");
+    setQueryResults([]);
   };
 
   const removePackageHandler = (p) => {
@@ -202,6 +204,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
           className="form-input"
           placeholder="Search..."
           onChange={(e) => setQuery(e.target.value)}
+          value={query}
         />
         <div className="mt-6">
           {searching && (
