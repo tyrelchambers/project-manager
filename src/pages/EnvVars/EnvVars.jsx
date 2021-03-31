@@ -5,21 +5,25 @@ import { Link } from "react-router-dom";
 import { getAxios } from "../../api/index";
 import { formatUrl } from "../../helpers/formatUrl";
 import "./EnvVars.css";
+import { MainButton } from "../../components/Buttons/Buttons";
 
 const EnvVars = () => {
   const [vars, setVars] = useState([]);
-
+  const [locked, setLocked] = useState(true);
+  const [password, setPassword] = useState("");
   useEffect(() => {
     const fn = async () => {
-      await getAxios({
-        url: "/env/me",
-      }).then((res) => {
-        setVars([...res.variables]);
-      });
+      if (!locked) {
+        await getAxios({
+          url: "/env/me",
+        }).then((res) => {
+          setVars([...res.variables]);
+        });
+      }
     };
 
     fn();
-  }, []);
+  }, [locked]);
 
   return (
     <DisplayWrapper>
@@ -39,19 +43,52 @@ const EnvVars = () => {
         </div>
       </div>
 
-      <div className="envvar-list grid grid-cols-5 mt-5 gap-4">
-        {vars.length > 0 &&
-          vars.map((variable, id) => (
-            <Link
-              className="flex items-center bg-gray-900 p-4 rounded-md "
-              key={id}
-              to={`/env/${formatUrl(variable.name)}`}
-            >
-              <i className="fas fa-code mr-4 text-pink-500"></i>
-              <p>{variable.name}</p>
+      {locked && (
+        <div className="flex justify-center w-full mt-20">
+          <div className="max-w-xl flex flex-col items-center bg-gray-900 p-10 rounded-lg">
+            <i className="fas fa-lock text-6xl mb-10 text-yellow-500"></i>
+            <p className="text-2xl text-center mb-8">
+              Environment variables locked. Enter password to unlock.
+            </p>
+            <input
+              type="password"
+              className="form-input"
+              name="password"
+              placeholder="Environment password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {password ? (
+              <MainButton default classes="mt-4">
+                Unlock
+              </MainButton>
+            ) : (
+              <MainButton muted classes="mt-4">
+                Unlock
+              </MainButton>
+            )}
+            <Link className="mt-4 text-yellow-500 underline">
+              Change password
             </Link>
-          ))}
-      </div>
+          </div>
+        </div>
+      )}
+
+      {!locked && (
+        <div className="envvar-list grid grid-cols-5 mt-5 gap-4">
+          {vars.length > 0 &&
+            vars.map((variable, id) => (
+              <Link
+                className="flex items-center bg-gray-900 p-4 rounded-md "
+                key={id}
+                to={`/env/${formatUrl(variable.name)}`}
+              >
+                <i className="fas fa-code mr-4 text-pink-500"></i>
+                <p>{variable.name}</p>
+              </Link>
+            ))}
+        </div>
+      )}
     </DisplayWrapper>
   );
 };
