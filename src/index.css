@@ -175,3 +175,9 @@ p {
 .pre {
   font-family: "Nunito", sans-serif;
 }
+
+.link {
+  font-weight: bold;
+  color: var(--yellow-500);
+  text-decoration: underline;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
@@ -17,6 +18,12 @@ const AccountPasswordForm = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    const { newPassword, confirmNewPassword } = state;
+
+    if (newPassword !== confirmNewPassword) {
+      return toast.error("Passwords don't match");
+    }
+
     await getAxios({
       url: "/account/save",
       method: "post",

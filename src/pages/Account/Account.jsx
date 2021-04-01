@@ -4,12 +4,15 @@ import {
   H1,
   H2,
   H2Subtitle,
+  H3,
   H3Subtitle,
 } from "../../components/Headings/Headings";
 import AccountPasswordForm from "../../forms/AccountPasswordForm";
 import { inject, observer } from "mobx-react";
 import { MainButton } from "../../components/Buttons/Buttons";
 import { getAxios } from "../../api";
+import AccountEnvVarForm from "../../forms/AccountEnvVarForm";
+import { Link } from "react-router-dom";
 
 const Account = ({ UserStore }) => {
   const deleteAccount = async () => {
@@ -33,6 +36,14 @@ const Account = ({ UserStore }) => {
 
       <div className="mt-6 container max-w-screen-sm">
         <AccountPasswordForm user={UserStore.user} />
+        <hr />
+        <p className="mt-4 mb-4 text-xl">
+          Enter a password to encrypt your environment variables.
+        </p>
+        <AccountEnvVarForm />
+        <Link className="link mt-4" to="#">
+          Forgot your environment variable password?
+        </Link>
         <hr />
 
         <H2>Danger Zone</H2>

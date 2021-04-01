@@ -6,12 +6,20 @@ import { getAxios } from "../../api/index";
 import { formatUrl } from "../../helpers/formatUrl";
 import "./EnvVars.css";
 import { MainButton } from "../../components/Buttons/Buttons";
+import { inject, observer } from "mobx-react";
 
-const EnvVars = () => {
+const EnvVars = ({ UserStore }) => {
   const [vars, setVars] = useState([]);
   const [locked, setLocked] = useState(true);
   const [password, setPassword] = useState("");
+
   useEffect(() => {
+    const isLocked = window.sessionStorage.getItem("env_var_unlocked");
+    if (!isLocked) {
+      setLocked(true);
+    } else {
+      setLocked(false);
+    }
     const fn = async () => {
       if (!locked) {
         await getAxios({
@@ -24,6 +32,23 @@ const EnvVars = () => {
 
     fn();
   }, [locked]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    getAxios({
+      url: "/account/envvar",
+      params: {
+        password,
+      },
+    }).then((res) => {
+      if (res === "OK") {
+        console.log(res);
+        window.sessionStorage.setItem("env_var_unlocked", true);
+        setLocked(false);
+      }
+    });
+  };
 
   return (
     <DisplayWrapper>
@@ -43,7 +68,19 @@ const EnvVars = () => {
         </div>
       </div>
 
-      {locked && (
+      {!UserStore.user.envVariablePassword && (
+        <div className=" mt-10">
+          <p className="text-xl">
+            No password set.{" "}
+            <Link className="link" to="/settings/account">
+              Please set one
+            </Link>{" "}
+            so we can show you your variables
+          </p>
+        </div>
+      )}
+
+      {locked && UserStore.user.envVariablePassword && (
         <div className="flex justify-center w-full mt-20">
           <div className="max-w-xl flex flex-col items-center bg-gray-900 p-10 rounded-lg">
             <i className="fas fa-lock text-6xl mb-10 text-yellow-500"></i>
@@ -59,7 +96,11 @@ const EnvVars = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             {password ? (
-              <MainButton default classes="mt-4">
+              <MainButton
+                default
+                classes="mt-4"
+                onClick={(e) => submitHandler(e)}
+              >
                 Unlock
               </MainButton>
             ) : (
@@ -93,4 +134,4 @@ const EnvVars = () => {
   );
 };
 
-export default EnvVars;
+export default inject("UserStore")(observer(EnvVars));
