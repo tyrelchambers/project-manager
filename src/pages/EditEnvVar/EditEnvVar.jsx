@@ -9,7 +9,7 @@ import isEmpty from "../../helpers/isEmpty";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
 const EditEnvVar = () => {
-  const { env_name } = useParams();
+  const { env_uuid } = useParams();
   const [envVar, setEnvVar] = useState({});
   const [updated, setUpdated] = useState({});
   const history = useHistory();
@@ -17,7 +17,7 @@ const EditEnvVar = () => {
   useEffect(() => {
     const fn = async () => {
       await getAxios({
-        url: `/env/${env_name}`,
+        url: `/env/${env_uuid}`,
       }).then((res) => {
         setEnvVar(res);
         setUpdated(res);
@@ -25,7 +25,7 @@ const EditEnvVar = () => {
     };
 
     fn();
-  }, [env_name]);
+  }, [env_uuid]);
 
   const submitHandler = async (e) => {
     e.preventDefault();

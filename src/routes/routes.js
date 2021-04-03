@@ -209,11 +209,11 @@ export default [
     component: NewEnvVar,
   },
   {
-    slug: "/env/:env_name",
+    slug: "/envs/:env_uuid",
     component: EnvVarShow,
   },
   {
-    slug: "/env/:env_name/edit",
+    slug: "/env/:env_uuid/edit",
     component: EditEnvVar,
   },
   {

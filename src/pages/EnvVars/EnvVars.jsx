@@ -42,9 +42,10 @@ const EnvVars = ({ UserStore }) => {
         password,
       },
     }).then((res) => {
-      if (res === "OK") {
-        console.log(res);
+      if (res) {
         window.sessionStorage.setItem("env_var_unlocked", true);
+        setVars([...res]);
+
         setLocked(false);
       }
     });
@@ -122,7 +123,7 @@ const EnvVars = ({ UserStore }) => {
               <Link
                 className="flex items-center bg-gray-900 p-4 rounded-md "
                 key={id}
-                to={`/env/${formatUrl(variable.name)}`}
+                to={`/envs/${variable.uuid}`}
               >
                 <i className="fas fa-code mr-4 text-pink-500"></i>
                 <p>{variable.name}</p>

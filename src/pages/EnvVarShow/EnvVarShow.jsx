@@ -10,19 +10,19 @@ import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
 const EnvVarShow = () => {
   const [envVar, setEnvVar] = useState({});
-  const { env_name } = useParams();
+  const { env_uuid } = useParams();
   const history = useHistory(0);
   useEffect(() => {
     const fn = async () => {
       await getAxios({
-        url: `/env/${env_name}`,
+        url: `/env/${env_uuid}`,
       }).then((res) => {
         setEnvVar(res);
       });
     };
 
     fn();
-  }, [env_name]);
+  }, [env_uuid]);
 
   if (isEmpty(envVar)) return null;
 
