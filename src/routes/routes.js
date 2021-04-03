@@ -213,10 +213,6 @@ export default [
     component: EnvVarShow,
   },
   {
-    slug: "/env/:env_uuid/edit",
-    component: EditEnvVar,
-  },
-  {
     slug: "/settings/account",
     component: Account,
   },
