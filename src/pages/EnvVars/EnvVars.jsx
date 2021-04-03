@@ -56,13 +56,13 @@ const EnvVars = ({ UserStore }) => {
       <div className="flex justify-between envvar-header">
         <div className="flex-1">
           <H1>Environment Variables</H1>
-          <H2Subtitle>
-            Environment variables are not encrypted. Don't add any sensitive
-            information.
-          </H2Subtitle>
+          <div className="flex bg-green-500 items-center rounded-sm w-fit pl-2 pr-2 pt-1 pb-1">
+            <i className="fas fa-lock text-white text-sm mr-2"></i>
+            <p className="font-bold">Encrypted</p>
+          </div>
           <div className="w-fit mt-4">
             <Link className="text-yellow-500 underline font-bold" to="/env/new">
-              <i class="fas fa-pencil-alt mr-2"></i>
+              <i className="fas fa-pencil-alt mr-2"></i>
               Create Environment Variable
             </Link>
           </div>

@@ -28,12 +28,16 @@ const EnvVarShow = () => {
   if (isEmpty(envVar)) return null;
 
   const deleteEnv = async () => {
-    await getAxios({
-      url: `/env/${env_uuid}`,
-      method: "delete",
-    });
+    const prompt = window.confirm("Are you sure you want to delete this?");
 
-    history.push("/env");
+    if (prompt) {
+      await getAxios({
+        url: `/env/${env_uuid}`,
+        method: "delete",
+      });
+
+      history.push("/env");
+    }
   };
 
   return (
@@ -44,8 +48,8 @@ const EnvVarShow = () => {
         <i className="fas fa-trash text-red-500" onClick={deleteEnv}></i>
       </div>
       <div className="w-2/5">
-        <pre className="mt-6 p-4 rounded-md bg-gray-800 text-gray-200 whitespace-pre-wrap">
-          <code>{envVar.variables}</code>
+        <pre className="mt-6 p-4 rounded-md bg-gray-800 text-gray-200 whitespace-pre-wrap w-fit max-w-5xl">
+          {envVar.variables}
         </pre>
         <div className="flex mt-6">
           <MainButton default onClick={() => copyToClipboard(envVar.variables)}>
