@@ -63,6 +63,7 @@ const AccountPasswordForm = () => {
             value={state.currentPassword}
             onChange={(e) => inputHandler(e)}
             autoComplete="new-password"
+            placeholder="current password"
           />
         </InputWrapper>
       </div>
@@ -77,6 +78,7 @@ const AccountPasswordForm = () => {
             value={state.newPassword}
             onChange={(e) => inputHandler(e)}
             autoComplete="new-password"
+            placeholder="new password"
           />
         </InputWrapper>
       </div>
@@ -91,6 +93,7 @@ const AccountPasswordForm = () => {
             value={state.confirmNewPassword}
             onChange={(e) => inputHandler(e)}
             autoComplete="new-password"
+            placeholder="confirm new password"
           />
         </InputWrapper>
       </div>

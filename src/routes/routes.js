@@ -7,6 +7,7 @@ import Bookmarks from "../pages/Bookmarks/Bookmarks";
 import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";
 import EnvVars from "../pages/EnvVars/EnvVars";
 import EnvVarShow from "../pages/EnvVarShow/EnvVarShow";
+import ForgotEnvPassword from "../pages/ForgotEnvPassword/ForgotEnvPassword";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Home from "../pages/Home/Home";
 import Integrations from "../pages/Integrations/Integrations";
@@ -261,5 +262,9 @@ export default [
         }
       });
     },
+  },
+  {
+    slug: "/reset_environment_password",
+    component: ForgotEnvPassword,
   },
 ];

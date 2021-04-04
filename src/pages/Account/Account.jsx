@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import {
   H1,
   H2,
   H2Subtitle,
-  H3,
   H3Subtitle,
 } from "../../components/Headings/Headings";
 import AccountPasswordForm from "../../forms/AccountPasswordForm";
@@ -29,6 +28,14 @@ const Account = ({ UserStore }) => {
       });
     }
   };
+
+  const sendResetPassword = () => {
+    getAxios({
+      url: "/auth/forgot_environment_password",
+      method: "post",
+    });
+  };
+
   return (
     <DisplayWrapper>
       <H1>Account</H1>
@@ -40,10 +47,18 @@ const Account = ({ UserStore }) => {
         <p className="mt-4 mb-4 text-xl">
           Enter a password to encrypt your environment variables.
         </p>
-        <AccountEnvVarForm />
-        <Link className="link mt-4" to="#">
-          Forgot your environment variable password?
-        </Link>
+
+        {!UserStore.user.envVariablePassword ? (
+          <AccountEnvVarForm />
+        ) : (
+          <p className="p-4 bg-gray-800 rounded-md ">Password already set</p>
+        )}
+
+        <div className="mt-4">
+          <MainButton muted onClick={() => sendResetPassword()}>
+            Send link to reset environment password
+          </MainButton>
+        </div>
         <hr />
 
         <H2>Danger Zone</H2>

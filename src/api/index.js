@@ -28,6 +28,10 @@ export const getAxios = async ({
         if (res.data.message) {
           toast.success(res.data.message);
         }
+
+        if (res.data.error) {
+          toast.error(res.data.error);
+        }
         return res.data;
       }
     })
