@@ -25,7 +25,7 @@ export const MainButton = (props) => {
 
   if (props.pending) {
     return (
-      <div className={`btn muted jc-c d-f ai-c disabled`} disabled>
+      <div className={`btn muted jc-c d-f ai-c disabled mt-4`} disabled>
         <span className="loading-dot"></span>
         <span className="loading-dot"></span>
         <span className="loading-dot"></span>

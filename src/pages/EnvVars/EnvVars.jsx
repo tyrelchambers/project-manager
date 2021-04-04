@@ -12,7 +12,7 @@ const EnvVars = ({ UserStore }) => {
   const [vars, setVars] = useState([]);
   const [locked, setLocked] = useState(true);
   const [password, setPassword] = useState("");
-
+  const [unlocking, setUnlocking] = useState(false);
   useEffect(() => {
     const isLocked = window.sessionStorage.getItem("env_var_unlocked");
     if (!isLocked) {
@@ -33,10 +33,10 @@ const EnvVars = ({ UserStore }) => {
     fn();
   }, [locked]);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-
-    getAxios({
+    setUnlocking(true);
+    await getAxios({
       url: "/account/envvar",
       params: {
         password,
@@ -49,7 +49,18 @@ const EnvVars = ({ UserStore }) => {
         setLocked(false);
       }
     });
+    setUnlocking(false);
   };
+
+  const button = password ? (
+    <MainButton default classes="mt-4" onClick={(e) => submitHandler(e)}>
+      Unlock
+    </MainButton>
+  ) : (
+    <MainButton muted classes="mt-4">
+      Unlock
+    </MainButton>
+  );
 
   return (
     <DisplayWrapper>
@@ -96,18 +107,10 @@ const EnvVars = ({ UserStore }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            {password ? (
-              <MainButton
-                default
-                classes="mt-4"
-                onClick={(e) => submitHandler(e)}
-              >
-                Unlock
-              </MainButton>
+            {!unlocking ? (
+              button
             ) : (
-              <MainButton muted classes="mt-4">
-                Unlock
-              </MainButton>
+              <MainButton pending>Unlocking...</MainButton>
             )}
             <Link className="mt-4 text-yellow-500 underline">
               Change password
