@@ -181,3 +181,7 @@ p {
   color: var(--yellow-500);
   text-decoration: underline;
 }
+
+.filepond--credits {
+  display: none;
+}
