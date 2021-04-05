@@ -42,14 +42,14 @@ const EnvVars = ({ UserStore }) => {
         password,
       },
     }).then((res) => {
-      if (res) {
+      if (res.variables) {
         window.sessionStorage.setItem("env_var_unlocked", true);
-        setVars([...res]);
+        setVars([res]);
 
         setLocked(false);
       }
+      setUnlocking(false);
     });
-    setUnlocking(false);
   };
 
   const button = password ? (
