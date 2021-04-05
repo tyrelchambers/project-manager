@@ -28,7 +28,7 @@ const ProjectForm = ({ state, setState }) => {
       <div className="mt-4 field-group">
         <FormLabel text="Pick a framework" />
         <SelectField
-          data={frameworks}
+          data={frameworks()}
           stateHandler={setState}
           state={state}
           label="Select a framework"

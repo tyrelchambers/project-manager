@@ -12,6 +12,8 @@ import FormErrors from "../components/FormErrors/FormErrors";
 import { copyToClipboard } from "../helpers/copyToClipboard";
 import InputWrapper from "../components/InputWrapper/InputWrapper";
 import { config } from "../config/config";
+import SelectField from "../components/SelectField/SelectField";
+import { frameworks } from "../constants/frameworks";
 
 const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [state, setState] = useState({
@@ -19,6 +21,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
     defaultName: "",
     packageName: "",
     framework: {},
+    bundler: {},
   });
 
   const [query, setQuery] = useState("");
@@ -195,6 +198,17 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
           />
         </InputWrapper>
         <FormErrors error={errors.packageName} />
+      </div>
+
+      <div className="mt-4 field-group">
+        <FormLabel text="Pick a framework" />
+        <SelectField
+          data={frameworks(["Create React App", "Vue"])}
+          stateHandler={setState}
+          state={state}
+          label="Select a bundler"
+          stateKey="bundler"
+        />
       </div>
 
       <div className="field-group">
