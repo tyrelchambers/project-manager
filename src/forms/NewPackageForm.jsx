@@ -14,7 +14,7 @@ import InputWrapper from "../components/InputWrapper/InputWrapper";
 import { config } from "../config/config";
 import SelectField from "../components/SelectField/SelectField";
 import { frameworks } from "../constants/frameworks";
-
+import { packageTemplate } from "../lib/newPackage.js";
 const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [state, setState] = useState({
     packagesToInstall: [],
@@ -78,43 +78,6 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  const packageTemp = `
-{
-  "name": "${state.packageName}",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    ${state.packagesToInstall
-      .map((pkg, id) => {
-        return `"${pkg.name}": "^${pkg.version}"`;
-      })
-      .join(`,\n    `)}
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "now-build": "react-scripts build"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-}
-`;
-
   const openModal = () => {
     submitHandler();
     ModalStore.setRender(<PackageWindow />);
@@ -122,16 +85,22 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
   };
 
   const submitHandler = async (e) => {
-    await getAxios({
-      method: "post",
-      url: "/packages/save",
-      data: {
-        userId: UserStore.user.uuid,
-        packageName: state.packageName,
-        folderName: state.defaultName,
-        body: JSON.stringify(packageTemp),
-      },
-    });
+    // await getAxios({
+    //   method: "post",
+    //   url: "/packages/save",
+    //   data: {
+    //     userId: UserStore.user.uuid,
+    //     packageName: state.packageName,
+    //     folderName: state.defaultName,
+    //     body: JSON.stringify(
+    //       packageTemplate({
+    //         packageName: state.packageName,
+    //         packagesToInstall: state.packagesToInstall,
+    //         bundler: state.bundler,
+    //       })
+    //     ),
+    //   },
+    // });
   };
 
   const PackageWindow = () => (
@@ -143,10 +112,27 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
 
         <div className="p-4 bg-gray-800 w-full rounded-lg flex mb-4">
           <pre>
-            <code className="text-gray-300">{packageTemp}</code>
+            <code className="text-gray-300">
+              {packageTemplate({
+                packageName: state.packageName,
+                packagesToInstall: state.packagesToInstall,
+                bundler: state.bundler,
+              })}
+            </code>
           </pre>
         </div>
-        <MainButton default onClick={() => copyToClipboard(packageTemp)}>
+        <MainButton
+          default
+          onClick={() =>
+            copyToClipboard(
+              packageTemplate({
+                packageName: state.packageName,
+                packagesToInstall: state.packagesToInstall,
+                bundler: state.bundler,
+              })
+            )
+          }
+        >
           Copy to Clipboard
         </MainButton>
       </div>
