@@ -3,7 +3,7 @@ import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import { useForm } from "react-hook-form";
-import FormError from "../components/FormErrors/FormErrors";
+import FormErrors from "../components/FormErrors/FormErrors";
 import { useHistory } from "react-router-dom";
 import InputWrapper from "../components/InputWrapper/InputWrapper";
 
@@ -56,7 +56,7 @@ const EnvVarForm = () => {
             })}
           />
         </InputWrapper>
-        <FormError error={errors.name} />
+        <FormErrors error={errors.name} />
       </div>
 
       <div className="field-group">

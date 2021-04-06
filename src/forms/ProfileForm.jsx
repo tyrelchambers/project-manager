@@ -64,6 +64,19 @@ const ProfileForm = ({ user }) => {
       return toast.error("Bio is too long");
     }
 
+    if (!state.username.trim()) {
+      return toast.error("Username cannot be blank");
+    }
+
+    // for (const key in state) {
+    //   if (Object.hasOwnProperty.call(state, key)) {
+    //     const element = state[key];
+    //     if (element.length > 255) {
+    //       return;
+    //     }
+    //   }
+    // }
+
     await getAxios({
       url: "/user/update",
       method: "post",

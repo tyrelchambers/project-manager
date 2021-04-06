@@ -18,12 +18,25 @@ const UserSocials = ({ user }) => {
 
   for (const key in icons) {
     if (Object.hasOwnProperty.call(user, key)) {
-      if (user[key]) {
-        arr.push({
-          label: key,
-          link: user[key],
-        });
+      const obj = {};
+
+      if (key === "twitter") {
+        obj.label = key;
+        obj.link = `https://twitter.com/${user["twitter"]}`;
+      } else if (key === "instagram") {
+        obj.label = key;
+        obj.link = `https://instagram.com/${user["instagram"]}`;
+      } else if (key === "github") {
+        obj.label = key;
+        obj.link = `https://github.com/${user["github"]}`;
+      } else {
+        if (user[key]) {
+          obj.label = key;
+          obj.link = user[key];
+        }
       }
+
+      arr.push(obj);
     }
   }
 

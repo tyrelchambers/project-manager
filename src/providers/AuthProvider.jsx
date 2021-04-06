@@ -20,8 +20,8 @@ const AuthProvider = ({ stores }) => {
         if (res.user) {
           stores.UserStore.setUser(res.user);
           if (!res.user.username) {
-            history.push("/settings/profile");
-            toast.warn("Please add a username");
+            history.push("/profile_setup");
+            toast.warn("Please finish setting up your account");
           }
         }
       });
