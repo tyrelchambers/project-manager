@@ -34,6 +34,12 @@ export const getAxios = async ({
         }
         return res.data;
       }
+
+      if (res.data.action === "USER_NOT_FOUND") {
+        window.sessionStorage.removeItem("token");
+        window.localStorage.removeItem("token");
+        toast.error("Please sign in again");
+      }
     })
     .catch((err) => {
       if (err.response.data) {
