@@ -34,12 +34,6 @@ export const getAxios = async ({
         }
         return res.data;
       }
-
-      if (res.data.action === "USER_NOT_FOUND") {
-        window.sessionStorage.removeItem("token");
-        window.localStorage.removeItem("token");
-        toast.error("Please sign in again");
-      }
     })
     .catch((err) => {
       if (err.response.data) {
@@ -47,6 +41,12 @@ export const getAxios = async ({
       }
       if (err.response.data?.error) {
         toast.error(err.response.data.error);
+      }
+      console.log(err.response.data);
+      if (err.response.data?.action === "USER_NOT_FOUND") {
+        window.sessionStorage.removeItem("token");
+        window.localStorage.removeItem("token");
+        window.location.pathname = "/";
       }
       return err;
     });
