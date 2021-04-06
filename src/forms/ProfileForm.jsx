@@ -31,7 +31,9 @@ const ProfileForm = ({ user }) => {
   const [files, setFiles] = useState([]);
   const pond = React.createRef(null);
   const [username, setUsername] = useState(false);
-  const { handleSubmit, errors, register } = useForm();
+  const { handleSubmit, errors, register } = useForm({
+    reValidateMode: "onSubmit",
+  });
 
   useEffect(() => {
     setState({
