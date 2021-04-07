@@ -20,13 +20,13 @@ const UserSocials = ({ user }) => {
     if (Object.hasOwnProperty.call(user, key)) {
       const obj = {};
 
-      if (key === "twitter") {
+      if (key === "twitter" && user[key]) {
         obj.label = key;
         obj.link = `https://twitter.com/${user["twitter"]}`;
-      } else if (key === "instagram") {
+      } else if (key === "instagram" && user[key]) {
         obj.label = key;
         obj.link = `https://instagram.com/${user["instagram"]}`;
-      } else if (key === "github") {
+      } else if (key === "github" && user[key]) {
         obj.label = key;
         obj.link = `https://github.com/${user["github"]}`;
       } else {
