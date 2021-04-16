@@ -49,15 +49,20 @@ const CLI = () => {
           </div>
         </div>
 
-        <div className="flex mt-20">
+        <div className="flex mt-20 flex-wrap">
           <div className="flex items-center mr-10">
             <i className="fab fa-react text-blue-500 text-6xl mr-4"></i>
             <p className="text-gray-800 text-4xl font-bold">React</p>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center mr-10">
             <i className="fab fa-vuejs text-green-500 text-6xl mr-4"></i>
             <p className="text-gray-800 text-4xl font-bold">Vue</p>
+          </div>
+
+          <div className="flex items-center">
+            <i className="fab fa-angular text-red-500 text-6xl mr-4"></i>
+            <p className="text-gray-800 text-4xl font-bold">Angular</p>
           </div>
         </div>
       </div>
