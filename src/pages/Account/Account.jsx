@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import {
   H1,
@@ -11,7 +11,6 @@ import { inject, observer } from "mobx-react";
 import { MainButton } from "../../components/Buttons/Buttons";
 import { getAxios } from "../../api";
 import AccountEnvVarForm from "../../forms/AccountEnvVarForm";
-import { Link } from "react-router-dom";
 
 const Account = ({ UserStore }) => {
   const deleteAccount = async () => {

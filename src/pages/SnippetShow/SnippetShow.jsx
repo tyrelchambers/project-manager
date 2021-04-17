@@ -42,7 +42,12 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
     }
   }, [snippet]);
 
-  if (isEmpty(snippet)) return null;
+  if (isEmpty(snippet))
+    return (
+      <DisplayWrapper>
+        <H1>Snippet is not public!</H1>
+      </DisplayWrapper>
+    );
 
   const deleteHandler = async () => {
     await getAxios({

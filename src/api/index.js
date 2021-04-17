@@ -42,7 +42,6 @@ export const getAxios = async ({
       if (err.response.data?.error) {
         toast.error(err.response.data.error);
       }
-      console.log(err.response.data);
       if (err.response.data?.action === "USER_NOT_FOUND") {
         window.sessionStorage.removeItem("token");
         window.localStorage.removeItem("token");
