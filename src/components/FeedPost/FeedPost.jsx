@@ -94,19 +94,34 @@ const FeedPost = ({
     ModalStore.setIsOpen(true);
   };
 
+  const deletePost = () => {
+    getAxios({
+      url: `/feed/${post.uuid}`,
+      method: "delete",
+    });
+    window.location.reload();
+  };
+
   return (
     <div className="feed-post-border">
       <div className={`feed-post flex p-4 rounded-lg`}>
         <div className={`feed-post-body flex ${stacked && "flex-col"} w-full`}>
           {!stacked && (
-            <div className="mr-4">
+            <div className="mr-4 flex flex-col items-center">
               <Avatar url={post.User.avatar} size="small" />
+              <i
+                className="fas fa-trash text-red-500 mt-6"
+                onClick={deletePost}
+              ></i>
             </div>
           )}
           {stacked && (
             <div className="flex justify-between items-center w-full mb-4">
               <div className="flex items-center">
-                <Avatar url={post.User.avatar} size="small" />
+                <div className="flex flex-col">
+                  <Avatar url={post.User.avatar} size="small" />
+                  <i className="fas fa-trash text-red-500"></i>
+                </div>
 
                 <div className="flex flex-col ml-2">
                   <Link

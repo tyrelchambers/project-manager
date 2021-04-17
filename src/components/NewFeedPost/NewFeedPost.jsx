@@ -35,6 +35,9 @@ const NewFeedPost = ({ UserStore, SearchStore, ModalStore }) => {
             clickHandler={() => addSnippet(i)}
           />
         ))}
+        {results.length === 0 && (
+          <p>Looks like you haven't created any snippets</p>
+        )}
       </div>
     );
   };
