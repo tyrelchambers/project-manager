@@ -12,3 +12,9 @@
     width: 100%;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .snippet-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

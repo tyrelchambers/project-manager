@@ -27,7 +27,7 @@ const NewFeedPost = ({ UserStore, SearchStore, ModalStore }) => {
 
   const SnippetModal = () => {
     return (
-      <div className="grid grid-cols-2 p-4 gap-4">
+      <div className="snippet-list grid grid-cols-2 p-4 gap-4">
         {results.map((i, id) => (
           <SnippetItem
             key={id}
