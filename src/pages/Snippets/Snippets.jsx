@@ -24,11 +24,6 @@ const Snippets = ({ ModalStore, UserStore }) => {
     fn();
   }, []);
 
-  const addSnippetModelHandler = () => {
-    ModalStore.setRender(<SnippetForm />);
-    ModalStore.setIsOpen(true);
-  };
-
   const getGists = async () => {
     setPullingGists(true);
     const gists = await getAxios({

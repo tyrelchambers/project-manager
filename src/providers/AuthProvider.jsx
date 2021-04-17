@@ -7,7 +7,6 @@ import {
 } from "../components/NotificationToasts/NotificationToasts";
 import activeRoutes from "../routes/routes";
 import { socket } from "../index";
-import { toast } from "react-toastify";
 
 const AuthProvider = ({ stores }) => {
   const history = useHistory();
@@ -21,7 +20,6 @@ const AuthProvider = ({ stores }) => {
           stores.UserStore.setUser(res.user);
           if (!res.user.username) {
             history.push("/profile_setup");
-            toast.warn("Please finish setting up your account");
           }
         }
       });
