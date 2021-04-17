@@ -1,24 +1,46 @@
 import { inject, observer } from "mobx-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAxios } from "../../api";
 import NewFeedPostForm from "../../forms/NewFeedPostForm";
+import isEmpty from "../../helpers/isEmpty";
 import Avatar from "../Avatar/Avatar";
 import SnippetItem from "../SnippetItem/SnippetItem";
 import "./NewFeedPost.css";
 
-const NewFeedPost = ({ UserStore, SearchStore }) => {
+const NewFeedPost = ({ UserStore, SearchStore, ModalStore }) => {
   const [toggleCode, setToggleSearch] = useState(false);
   const [results, setResults] = useState([]);
 
-  const queryHandler = (e) => {
-    getAxios({
-      url: "/snippets/me",
-    }).then((res) => setResults(res.snippets));
-  };
+  useEffect(() => {
+    if (results.length === 0) {
+      getAxios({
+        url: "/snippets/me",
+      }).then((res) => setResults(res.snippets));
+    }
+  }, []);
 
   const addSnippet = (snippet) => {
     SearchStore.setPostSnippet(snippet);
     setToggleSearch(false);
+    ModalStore.setIsOpen(false);
+  };
+
+  const SnippetModal = () => {
+    return (
+      <div className="snippet-list grid grid-cols-2 p-4 gap-4">
+        {results.map((i, id) => (
+          <SnippetItem
+            key={id}
+            snippet={i}
+            clickHandler={() => addSnippet(i)}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  const clearSnippet = () => {
+    SearchStore.setPostSnippet({});
   };
 
   return (
@@ -34,18 +56,22 @@ const NewFeedPost = ({ UserStore, SearchStore }) => {
       </div>
       <NewFeedPostForm />
       <div className="feed-post-actions flex flex-col mt-6 flex-1 ">
-        <div
-          className="flex items-center cursor-pointer"
-          onClick={() => {
-            setToggleSearch(!toggleCode);
-            queryHandler();
-          }}
-        >
-          <i
-            className="fas fa-chevron-right mr-4 text-green-500"
-            style={{ transform: toggleCode && "rotate(90deg)" }}
-          ></i>
-          <p>Add a snippet</p>
+        <div className="flex items-center">
+          <div
+            className="flex items-center cursor-pointer bg-gray-800 w-fit p-2 rounded-md"
+            onClick={() => {
+              ModalStore.setRender(<SnippetModal />);
+              ModalStore.setIsOpen(true);
+            }}
+          >
+            <i className="fas fa-plus-square mr-4 text-gray-400"></i>
+            <p>Add snippet</p>
+          </div>
+          {!isEmpty(SearchStore.postSnippet) && (
+            <p className="text-red-500 ml-4" onClick={clearSnippet}>
+              Clear snippet
+            </p>
+          )}
         </div>
         {toggleCode && (
           <div className="flex flex-wrap">
@@ -66,4 +92,8 @@ const NewFeedPost = ({ UserStore, SearchStore }) => {
   );
 };
 
-export default inject("UserStore", "SearchStore")(observer(NewFeedPost));
+export default inject(
+  "UserStore",
+  "SearchStore",
+  "ModalStore"
+)(observer(NewFeedPost));

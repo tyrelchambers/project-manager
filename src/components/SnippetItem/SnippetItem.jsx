@@ -3,23 +3,34 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api";
 import "./SnippetItem.css";
-const SnippetItem = ({ snippet, UserStore }) => {
+const SnippetItem = ({ snippet, UserStore, clickHandler }) => {
   const deleteHandler = async () => {
     await getAxios({
       url: `/snippets/${snippet.uuid}/delete`,
       method: "delete",
     });
   };
+
+  const title = !clickHandler ? (
+    <Link
+      to={`/snippets/${snippet.uuid}`}
+      className="font-bold w-full text-xl text-gray-200 truncate"
+    >
+      {snippet.name}
+    </Link>
+  ) : (
+    <p
+      className="font-bold w-full text-xl text-gray-200 truncate"
+      onClick={clickHandler}
+    >
+      {snippet.name}
+    </p>
+  );
   return (
     <div className="snippet-item rounded-md">
       <div className="flex snippet-item-header relative ">
         <div className="flex flex-1 p-3 absolute z-10 w-full">
-          <Link
-            to={`/snippets/${snippet.uuid}`}
-            className="font-bold w-full text-xl text-gray-200 truncate"
-          >
-            {snippet.name}
-          </Link>
+          {title}
           {snippet.isGist && (
             <i className="fab fa-github text-pink-500 text-xl"></i>
           )}
