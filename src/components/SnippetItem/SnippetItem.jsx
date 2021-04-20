@@ -1,3 +1,4 @@
+import { format, parseISO } from "date-fns";
 import { inject, observer } from "mobx-react";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -7,7 +8,22 @@ const SnippetItem = ({ snippet, UserStore, clickHandler }) => {
   const deleteHandler = async () => {
     await getAxios({
       url: `/snippets/${snippet.uuid}/delete`,
-      method: "delete",
+      method: "post",
+    }).then((res) => {
+      if (res) {
+        window.location.reload();
+      }
+    });
+  };
+
+  const undoDelete = async () => {
+    await getAxios({
+      url: `/snippets/${snippet.uuid}/undo_delete`,
+      method: "post",
+    }).then((res) => {
+      if (res) {
+        window.location.reload();
+      }
     });
   };
 
@@ -51,11 +67,27 @@ const SnippetItem = ({ snippet, UserStore, clickHandler }) => {
           </div>
         </div>
 
-        {snippet.userId === UserStore.user.uuid && (
+        {snippet.userId === UserStore.user.uuid && !snippet.deleteDate && (
           <i
             className="fas fa-trash text-gray-500 ml-6"
             onClick={deleteHandler}
           ></i>
+        )}
+
+        {snippet.deleteDate && (
+          <div className="flex items-center">
+            <i
+              className="fas fa-exclamation-triangle text-yellow-500 mr-2"
+              title={`Set to delete on ${format(
+                parseISO(snippet.deleteDate),
+                "MMM do, yyyy"
+              )}`}
+            ></i>
+            <i
+              className="fas fa-undo-alt text-gray-500"
+              onClick={undoDelete}
+            ></i>
+          </div>
         )}
       </div>
     </div>

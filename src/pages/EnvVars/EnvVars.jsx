@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
-import { H1, H2Subtitle } from "../../components/Headings/Headings";
+import { H1 } from "../../components/Headings/Headings";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api/index";
-import { formatUrl } from "../../helpers/formatUrl";
 import "./EnvVars.css";
 import { MainButton } from "../../components/Buttons/Buttons";
 import { inject, observer } from "mobx-react";

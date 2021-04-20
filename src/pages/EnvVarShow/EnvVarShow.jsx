@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import { getAxios } from "../../api";
 import { MainButton } from "../../components/Buttons/Buttons";
 import { H1 } from "../../components/Headings/Headings";
 import { copyToClipboard } from "../../helpers/copyToClipboard";
-import { formatUrl } from "../../helpers/formatUrl";
 import isEmpty from "../../helpers/isEmpty";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 

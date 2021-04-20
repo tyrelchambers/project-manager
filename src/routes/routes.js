@@ -1,10 +1,8 @@
 import axios from "axios";
 import React from "react";
-import { github } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { getAxios } from "../api";
 import Account from "../pages/Account/Account";
 import Bookmarks from "../pages/Bookmarks/Bookmarks";
-import EditEnvVar from "../pages/EditEnvVar/EditEnvVar";
 import EnvVars from "../pages/EnvVars/EnvVars";
 import EnvVarShow from "../pages/EnvVarShow/EnvVarShow";
 import ForgotEnvPassword from "../pages/ForgotEnvPassword/ForgotEnvPassword";

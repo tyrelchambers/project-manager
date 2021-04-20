@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { getAxios } from "../../api";
 import { MainButton } from "../../components/Buttons/Buttons";
 import { H1 } from "../../components/Headings/Headings";

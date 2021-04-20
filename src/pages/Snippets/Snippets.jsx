@@ -4,12 +4,11 @@ import "./Snippets.css";
 import { H1, H2Subtitle } from "../../components/Headings/Headings";
 import { MinimalButton } from "../../components/Buttons/Buttons";
 import { inject, observer } from "mobx-react";
-import SnippetForm from "../../forms/SnippetForm";
 import { getAxios } from "../../api";
 import SnippetItem from "../../components/SnippetItem/SnippetItem";
 import { Link } from "react-router-dom";
 
-const Snippets = ({ ModalStore, UserStore }) => {
+const Snippets = ({ UserStore }) => {
   const [snippets, setSnippets] = useState([]);
   const [pullingGists, setPullingGists] = useState(false);
   useEffect(() => {
@@ -93,4 +92,4 @@ const Snippets = ({ ModalStore, UserStore }) => {
   );
 };
 
-export default inject("ModalStore", "UserStore")(observer(Snippets));
+export default inject("UserStore")(observer(Snippets));

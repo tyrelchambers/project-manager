@@ -5,7 +5,6 @@ import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import Spinner from "../components/Spinner/Spinner";
 import { inject, observer } from "mobx-react";
-import { getAxios } from "../api";
 import List from "../components/List/List";
 import { useForm } from "react-hook-form";
 import FormErrors from "../components/FormErrors/FormErrors";

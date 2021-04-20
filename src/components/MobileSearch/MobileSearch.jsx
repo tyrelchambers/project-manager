@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api";
 import SearchResults from "../../layouts/SearchResults/SearchResults";
