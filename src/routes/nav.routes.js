@@ -66,4 +66,26 @@ export const navRoutes = [
       },
     ],
   },
+  {
+    label: "Info",
+    url: "/#",
+    icon: <i className="fas fa-info-circle"></i>,
+    subnav: [
+      // {
+      //   label: "Terms of Service",
+      //   icon: <i className="fas fa-file-contract"></i>,
+      //   url: "/tos",
+      // },
+      // {
+      //   label: "Privacy Policy",
+      //   icon: <i className="fas fa-eye-slash"></i>,
+      //   url: "/privacy-policy",
+      // },
+      {
+        label: "Contact Us",
+        icon: <i className="fas fa-phone"></i>,
+        url: "/contact-us",
+      },
+    ],
+  },
 ];

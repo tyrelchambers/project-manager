@@ -3,6 +3,7 @@ import React from "react";
 import { getAxios } from "../api";
 import Account from "../pages/Account/Account";
 import Bookmarks from "../pages/Bookmarks/Bookmarks";
+import ContactUs from "../pages/ContactUs/ContactUs";
 import EnvVars from "../pages/EnvVars/EnvVars";
 import EnvVarShow from "../pages/EnvVarShow/EnvVarShow";
 import ForgotEnvPassword from "../pages/ForgotEnvPassword/ForgotEnvPassword";
@@ -18,6 +19,7 @@ import Notifications from "../pages/Notifications/Notifications";
 import PackageShow from "../pages/PackageShow/PackageShow";
 import PackagesPage from "../pages/PackagesPage/PackagesPage";
 import Post from "../pages/Post/Post";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 import Profile from "../pages/Profile/Profile";
 import ProfileSetup from "../pages/ProfileSetup/ProfileSetup";
 import Projects from "../pages/Projects/Projects";
@@ -42,6 +44,14 @@ const sharedRoutes = [
   {
     slug: "/post/:post_id",
     component: Post,
+  },
+  // {
+  //   slug: "/privacy-policy",
+  //   component: PrivacyPolicy,
+  // },
+  {
+    slug: "/contact-us",
+    component: ContactUs,
   },
 ];
 
