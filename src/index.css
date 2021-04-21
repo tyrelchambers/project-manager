@@ -70,7 +70,7 @@
     #ffb359
   );
 
-  --pinkGradient: linear-gradient(to right, var(--pink-400), var(--pink-600));
+  --pinkGradient: linear-gradient(to right, var(--pink-400), var(--pink-500));
 
   --border-radius-sm: 5px;
   --border-radius-md: 10px;

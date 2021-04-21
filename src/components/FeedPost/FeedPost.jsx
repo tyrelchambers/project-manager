@@ -184,13 +184,15 @@ const FeedPost = ({
                 </div>
               </div>
             )}
-            <div className="flex bg-yellow-400 p-2 rounded-md">
-              <i className="fas fa-exclamation-triangle text-gray-800 mr-2 mt-1"></i>
-              <p className="text-gray-800">
-                This code snippet is set to be deleted. If you'd like to hang
-                onto it, please copy it and create your own snippet.
-              </p>
-            </div>
+            {post.CodeSnippet.deleteDate && (
+              <div className="flex bg-yellow-400 p-2 rounded-md">
+                <i className="fas fa-exclamation-triangle text-gray-800 mr-2 mt-1"></i>
+                <p className="text-gray-800">
+                  This code snippet is set to be deleted. If you'd like to hang
+                  onto it, please copy it and create your own snippet.
+                </p>
+              </div>
+            )}
             <div className="flex items-center mt-4">
               {user.uuid && (
                 <>
