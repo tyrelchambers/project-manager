@@ -14,6 +14,7 @@ import { config } from "../config/config";
 import SelectField from "../components/SelectField/SelectField";
 import { frameworks } from "../constants/frameworks";
 import { packageTemplate } from "../lib/newPackage.js";
+import { getAxios } from "../api";
 const NewPackageForm = ({ ModalStore, UserStore }) => {
   const [state, setState] = useState({
     packagesToInstall: [],
@@ -84,22 +85,22 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
   };
 
   const submitHandler = async (e) => {
-    // await getAxios({
-    //   method: "post",
-    //   url: "/packages/save",
-    //   data: {
-    //     userId: UserStore.user.uuid,
-    //     packageName: state.packageName,
-    //     folderName: state.defaultName,
-    //     body: JSON.stringify(
-    //       packageTemplate({
-    //         packageName: state.packageName,
-    //         packagesToInstall: state.packagesToInstall,
-    //         bundler: state.bundler,
-    //       })
-    //     ),
-    //   },
-    // });
+    await getAxios({
+      method: "post",
+      url: "/packages/save",
+      data: {
+        userId: UserStore.user.uuid,
+        packageName: state.packageName,
+        folderName: state.defaultName,
+        body: JSON.stringify(
+          packageTemplate({
+            packageName: state.packageName,
+            packagesToInstall: state.packagesToInstall,
+            bundler: state.bundler,
+          })
+        ),
+      },
+    });
   };
 
   const PackageWindow = () => (
