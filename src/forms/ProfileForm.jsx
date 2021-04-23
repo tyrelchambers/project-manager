@@ -65,9 +65,12 @@ const ProfileForm = ({ user }) => {
           avatar: fileEndpoint,
         },
       },
+    }).then((res) => {
+      if (res) {
+        console.log(res);
+        // window.location.reload();
+      }
     });
-
-    window.location.reload();
   };
 
   const inputHandler = (e) => {

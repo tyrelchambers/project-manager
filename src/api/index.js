@@ -11,8 +11,9 @@ export const getAxios = async ({
   url = "",
 } = {}) => {
   const token = await window.localStorage.getItem("token");
+  const payload = {};
 
-  return await Axios({
+  await Axios({
     method,
     url: `${BACKEND}/api/v1${url}`,
     data,
@@ -32,7 +33,7 @@ export const getAxios = async ({
         if (res.data.error) {
           toast.error(res.data.error);
         }
-        return res.data;
+        payload.success = res.data;
       }
     })
     .catch((err) => {
@@ -40,13 +41,15 @@ export const getAxios = async ({
         toast.error(err.response.data);
       }
       if (err.response.data?.error) {
-        toast.error(err.response.data.error);
+        toast.error(err.response.data.error.error);
       }
       if (err.response.data?.action === "USER_NOT_FOUND") {
         window.sessionStorage.removeItem("token");
         window.localStorage.removeItem("token");
         window.location.pathname = "/";
       }
-      return err;
+      payload.error = err;
     });
+
+  return payload;
 };

@@ -38,6 +38,8 @@ const Profile = ({ UserStore }) => {
         <Avatar url={UserStore.user.avatar} size="medium" />
         <div className="flex flex-col ml-4 profile-username">
           <p className=" font-bold text-3xl">{UserStore.user.name}</p>
+          <p className=" font-bold text-xl">@{UserStore.user.username}</p>
+
           {UserStore.user.avatar && (
             <div className="mt-2 max-w-xs">
               <MainButton muted onClick={removeProfilePhoto}>
