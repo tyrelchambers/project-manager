@@ -10,9 +10,9 @@ const Feed = ({ UserStore }) => {
     const fn = async () => {
       await getAxios({
         url: "/feed",
-      }).then((res) => {
-        if (res.feed) {
-          setFeed(res.feed);
+      }).then(({ success }) => {
+        if (success.feed) {
+          setFeed(success.feed);
         }
       });
     };

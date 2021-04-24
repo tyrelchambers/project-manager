@@ -28,9 +28,9 @@ const UserShowPage = ({ UserStore }) => {
     const fn = async () => {
       await getAxios({
         url: `/user/${user_id}`,
-      }).then((res) => {
-        if (res) {
-          setUser(res.user);
+      }).then(({ success }) => {
+        if (success) {
+          setUser(success.user);
         }
       });
     };
@@ -42,19 +42,19 @@ const UserShowPage = ({ UserStore }) => {
     if (tab === "followers") {
       getAxios({
         url: `/user/${user_id}/followers`,
-      }).then((res) => setFollowers(res.followers));
+      }).then(({ success }) => setFollowers(success.followers));
     }
 
     if (tab === "following") {
       getAxios({
         url: `/user/${user_id}/following`,
-      }).then((res) => setFollowing(res.following));
+      }).then(({ success }) => setFollowing(success.following));
     }
 
     if (tab === "snippets") {
       getAxios({
         url: `/user/${user_id}/snippets`,
-      }).then((res) => setSnippets(res.snippets));
+      }).then(({ success }) => setSnippets(success.snippets));
     }
   }, [tab, user_id]);
 

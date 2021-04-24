@@ -41,7 +41,7 @@ export const getAxios = async ({
         toast.error(err.response.data);
       }
       if (err.response.data?.error) {
-        toast.error(err.response.data.error.error);
+        toast.error(err.response.data.error);
       }
       if (err.response.data?.action === "USER_NOT_FOUND") {
         window.sessionStorage.removeItem("token");
@@ -50,6 +50,8 @@ export const getAxios = async ({
       }
       payload.error = err;
     });
+
+  console.log(payload);
 
   return payload;
 };

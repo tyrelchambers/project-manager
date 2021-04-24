@@ -65,10 +65,9 @@ const ProfileForm = ({ user }) => {
           avatar: fileEndpoint,
         },
       },
-    }).then((res) => {
-      if (res) {
-        console.log(res);
-        // window.location.reload();
+    }).then(({ success }) => {
+      if (success) {
+        window.location.reload();
       }
     });
   };
@@ -86,10 +85,10 @@ const ProfileForm = ({ user }) => {
       params: {
         username: e.target.value,
       },
-    }).then((res) => {
+    }).then(({ success }) => {
       if (
-        res.response?.status === 401 &&
-        res.response?.data.custom === "USERNAME_EXISTS"
+        success.response?.status === 401 &&
+        success.response?.data.custom === "USERNAME_EXISTS"
       ) {
         setUsername(true);
       } else {

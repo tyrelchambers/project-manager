@@ -19,8 +19,8 @@ const ForgotPassword = () => {
       data: {
         email,
       },
-    }).then((res) => {
-      if (res) {
+    }).then(({ success }) => {
+      if (success) {
         setEmailSent(true);
       }
     });

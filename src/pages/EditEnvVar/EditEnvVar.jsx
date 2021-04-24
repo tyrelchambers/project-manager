@@ -18,9 +18,9 @@ const EditEnvVar = () => {
     const fn = async () => {
       await getAxios({
         url: `/env/${env_uuid}`,
-      }).then((res) => {
-        setEnvVar(res);
-        setUpdated(res);
+      }).then(({ success }) => {
+        setEnvVar(success);
+        setUpdated(success);
       });
     };
 

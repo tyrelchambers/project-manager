@@ -24,8 +24,8 @@ const Notifications = ({ NotificationStore }) => {
   const markAllAsRead = () => {
     getAxios({
       url: "/notifications/readall",
-    }).then((res) => {
-      if (res) {
+    }).then(({ success }) => {
+      if (success) {
         NotificationStore.readAll();
       }
     });
@@ -35,8 +35,8 @@ const Notifications = ({ NotificationStore }) => {
     getAxios({
       url: "/notifications/clear",
       method: "post",
-    }).then((res) => {
-      if (res) {
+    }).then(({ success }) => {
+      if (success) {
         NotificationStore.clear();
       }
     });

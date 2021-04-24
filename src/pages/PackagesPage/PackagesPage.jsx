@@ -13,8 +13,8 @@ const PackagesPage = ({ UserStore }) => {
     if (UserStore.user) {
       getAxios({
         url: "/packages/me",
-      }).then((res) => {
-        setDefaultPackage(res.packages);
+      }).then(({ success }) => {
+        setDefaultPackage(success.packages);
       });
     }
   }, []);

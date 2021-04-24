@@ -16,7 +16,7 @@ const Post = ({ UserStore }) => {
     const fn = async () => {
       await getAxios({
         url: `/feed/${post_id}`,
-      }).then((res) => setPost(res.post));
+      }).then(({ success }) => setPost(success.post));
     };
 
     fn();

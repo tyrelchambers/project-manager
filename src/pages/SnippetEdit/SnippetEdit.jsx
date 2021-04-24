@@ -20,9 +20,9 @@ const SnippetEdit = () => {
     const fn = async () => {
       await getAxios({
         url: `/snippets/${snippet_uuid}`,
-      }).then((res) => {
-        setSnippet(res.snippet);
-        setUpdated(res.snippet);
+      }).then(({ success }) => {
+        setSnippet(success.snippet);
+        setUpdated(success.snippet);
       });
     };
 

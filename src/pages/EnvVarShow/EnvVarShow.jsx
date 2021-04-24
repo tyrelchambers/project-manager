@@ -15,8 +15,8 @@ const EnvVarShow = () => {
     const fn = async () => {
       await getAxios({
         url: `/env/${env_uuid}`,
-      }).then((res) => {
-        setEnvVar(res);
+      }).then(({ success }) => {
+        setEnvVar(success);
       });
     };
 

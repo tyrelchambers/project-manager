@@ -12,7 +12,7 @@ const Bookmarks = ({ UserStore }) => {
     const fn = async () => {
       await getAxios({
         url: "/bookmarks",
-      }).then((res) => setBookmarks(res.bookmarks));
+      }).then(({ success }) => setBookmarks(success.bookmarks));
     };
     fn();
   }, []);

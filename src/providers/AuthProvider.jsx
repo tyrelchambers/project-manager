@@ -15,10 +15,10 @@ const AuthProvider = ({ stores }) => {
     const fn = async () => {
       await getAxios({
         url: "/user/me",
-      }).then((res) => {
-        if (res.user) {
-          stores.UserStore.setUser(res.user);
-          if (!res.user.username) {
+      }).then(({ success }) => {
+        if (success.user) {
+          stores.UserStore.setUser(success.user);
+          if (!success.user.username) {
             history.push("/profile_setup");
           }
         }

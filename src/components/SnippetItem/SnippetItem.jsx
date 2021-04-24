@@ -9,8 +9,8 @@ const SnippetItem = ({ snippet, UserStore, clickHandler }) => {
     await getAxios({
       url: `/snippets/${snippet.uuid}/delete`,
       method: "post",
-    }).then((res) => {
-      if (res) {
+    }).then(({ success }) => {
+      if (success) {
         window.location.reload();
       }
     });
@@ -20,8 +20,8 @@ const SnippetItem = ({ snippet, UserStore, clickHandler }) => {
     await getAxios({
       url: `/snippets/${snippet.uuid}/undo_delete`,
       method: "post",
-    }).then((res) => {
-      if (res) {
+    }).then(({ success }) => {
+      if (success) {
         window.location.reload();
       }
     });

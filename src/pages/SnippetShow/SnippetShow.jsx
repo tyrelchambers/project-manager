@@ -24,8 +24,8 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
     const fn = async () => {
       await getAxios({
         url: `/snippets/${snippet_uuid}`,
-      }).then((res) => {
-        setSnippet(res.snippet);
+      }).then(({ success }) => {
+        setSnippet(success.snippet);
       });
     };
 
@@ -48,7 +48,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
     await getAxios({
       url: `/snippets/${snippet_uuid}/delete`,
       method: "delete",
-    }).then((res) => {
+    }).then(({ success }) => {
       history.push("/snippets");
     });
   };

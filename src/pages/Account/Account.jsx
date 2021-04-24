@@ -19,8 +19,8 @@ const Account = ({ UserStore }) => {
       await getAxios({
         url: "/user/me",
         method: "delete",
-      }).then((res) => {
-        if (res) {
+      }).then(({ success }) => {
+        if (success) {
           window.localStorage.clear();
           window.location.pathname = "/";
         }

@@ -28,12 +28,12 @@ const LoginForm = () => {
         email: credentials.email,
         password: credentials.password,
       },
-    }).then((res) => {
-      if (res.token) {
-        setToken({ value: res.token });
+    }).then(({ success }) => {
+      if (success.token) {
+        setToken({ value: success.token });
       }
 
-      if (res.user) {
+      if (success.user) {
         window.location.pathname = "/";
       }
 

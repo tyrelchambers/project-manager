@@ -15,7 +15,7 @@ const MobileSearch = () => {
         params: {
           q: e.target.value,
         },
-      }).then((res) => setResults(res));
+      }).then(({ success }) => setResults(success));
     } else {
       setResults([]);
     }

@@ -15,7 +15,7 @@ const NewFeedPost = ({ UserStore, SearchStore, ModalStore }) => {
     if (results.length === 0) {
       getAxios({
         url: "/snippets/me",
-      }).then((res) => setResults(res.snippets));
+      }).then(({ success }) => setResults(success.snippets));
     }
   }, []);
 

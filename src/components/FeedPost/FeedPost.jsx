@@ -38,8 +38,8 @@ const FeedPost = ({
         data: {
           postId: post.uuid,
         },
-      }).then((res) => {
-        if (res) {
+      }).then(({ success }) => {
+        if (success) {
           window.location.reload();
         }
       });
@@ -58,8 +58,8 @@ const FeedPost = ({
     await getAxios({
       url: `/feed/${post.uuid}/like`,
       method: "post",
-    }).then((res) => {
-      if (res) {
+    }).then(({ success }) => {
+      if (success) {
         setIsLiked(true);
         socket.emit("notification post like", {
           from: user.uuid,
@@ -75,7 +75,7 @@ const FeedPost = ({
     await getAxios({
       url: `/feed/${post.uuid}/dislike`,
       method: "delete",
-    }).then((res) => setIsLiked(false));
+    }).then(({ success }) => setIsLiked(false));
   };
 
   const likeIcon = isLiked ? (

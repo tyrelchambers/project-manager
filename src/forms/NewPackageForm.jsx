@@ -39,7 +39,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
           q,
         },
       }
-    ).then((res) => res.data);
+    ).then(({ success }) => success.data);
   };
 
   useEffect(() => {

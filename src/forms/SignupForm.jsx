@@ -43,9 +43,9 @@ const SignupForm = () => {
         email: credentials.email,
         password: credentials.password,
       },
-    }).then((res) => {
-      if (res.token !== undefined) {
-        setToken({ value: res.token });
+    }).then(({ success }) => {
+      if (success.token !== undefined) {
+        setToken({ value: success.token });
         window.location.pathname = "/";
       }
     });

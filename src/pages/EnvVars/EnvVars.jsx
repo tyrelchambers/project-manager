@@ -23,8 +23,8 @@ const EnvVars = ({ UserStore }) => {
       if (!locked) {
         await getAxios({
           url: "/env/me",
-        }).then((res) => {
-          setVars([...res.variables]);
+        }).then(({ success }) => {
+          setVars([...success.variables]);
         });
       }
     };
@@ -40,10 +40,10 @@ const EnvVars = ({ UserStore }) => {
       params: {
         password,
       },
-    }).then((res) => {
-      if (res.variables) {
+    }).then(({ success }) => {
+      if (success.variables) {
         window.sessionStorage.setItem("env_var_unlocked", true);
-        setVars([res]);
+        setVars([success]);
 
         setLocked(false);
       }

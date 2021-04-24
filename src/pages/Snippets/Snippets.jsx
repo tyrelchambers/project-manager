@@ -15,8 +15,8 @@ const Snippets = ({ UserStore }) => {
     const fn = async () => {
       await getAxios({
         url: "/snippets/me",
-      }).then((res) => {
-        setSnippets(res.snippets);
+      }).then(({ success }) => {
+        setSnippets(success.snippets);
       });
     };
 
@@ -27,7 +27,7 @@ const Snippets = ({ UserStore }) => {
     setPullingGists(true);
     const gists = await getAxios({
       url: "/github/gists",
-    }).then((res) => res.gists);
+    }).then(({ success }) => success.gists);
 
     await getAxios({
       url: "/github/convert",
@@ -35,8 +35,8 @@ const Snippets = ({ UserStore }) => {
       data: {
         gists,
       },
-    }).then((res) => {
-      if (res) {
+    }).then(({ success }) => {
+      if (success) {
         window.location.reload();
       }
     });

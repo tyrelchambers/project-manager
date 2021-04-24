@@ -15,9 +15,9 @@ const NavToolbar = ({ user, NotificationStore }) => {
     const fn = async () => {
       await getAxios({
         url: "/notifications",
-      }).then((res) => {
-        if (res) {
-          NotificationStore.setNotifications(res.notifications);
+      }).then(({ success }) => {
+        if (success) {
+          NotificationStore.setNotifications(success.notifications);
         }
       });
     };

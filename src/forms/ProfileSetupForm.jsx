@@ -29,8 +29,8 @@ const ProfileSetupForm = () => {
       data: {
         state,
       },
-    }).then((res) => {
-      if (res) {
+    }).then(({ success }) => {
+      if (success) {
         window.location.pathname = "/";
       }
     });

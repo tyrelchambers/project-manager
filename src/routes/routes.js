@@ -88,7 +88,7 @@ export const UNAUTHENTICATED = [
         params: {
           code,
         },
-      }).then((res) => res.access_token);
+      }).then(({ success }) => success.access_token);
 
       const githubUser = await axios
         .get("https://api.github.com/user", {
@@ -97,7 +97,7 @@ export const UNAUTHENTICATED = [
             Accept: "application/vnd.github.v3+json",
           },
         })
-        .then((res) => res.data);
+        .then(({ success }) => success.data);
 
       await getAxios({
         url: "/auth/signup",
@@ -106,9 +106,9 @@ export const UNAUTHENTICATED = [
           githubId: githubUser.id,
           access_token,
         },
-      }).then((res) => {
-        if (res.token) {
-          window.localStorage.setItem("token", res.token);
+      }).then(({ success }) => {
+        if (success.token) {
+          window.localStorage.setItem("token", success.token);
         }
       });
 
@@ -143,7 +143,7 @@ export const UNAUTHENTICATED = [
           params: {
             code,
           },
-        }).then((res) => res.access_token);
+        }).then(({ success }) => success.access_token);
 
         const githubUser = await axios
           .get("https://api.github.com/user", {
@@ -161,9 +161,9 @@ export const UNAUTHENTICATED = [
             githubId: githubUser.id,
             access_token,
           },
-        }).then((res) => {
-          if (res.token) {
-            window.localStorage.setItem("token", res.token);
+        }).then(({ success }) => {
+          if (success.token) {
+            window.localStorage.setItem("token", success.token);
           }
         });
 
@@ -265,8 +265,8 @@ export default [
         params: {
           code,
         },
-      }).then((res) => {
-        if (res) {
+      }).then(({ success }) => {
+        if (success) {
           window.close();
         }
       });

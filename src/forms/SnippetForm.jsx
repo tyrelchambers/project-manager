@@ -40,8 +40,8 @@ const SnippetForm = () => {
       data: {
         ...snippet,
       },
-    }).then((res) => {
-      if (res) {
+    }).then(({ success }) => {
+      if (success) {
         window.location.reload();
       }
     });
