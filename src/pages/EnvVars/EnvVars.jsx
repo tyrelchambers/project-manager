@@ -12,6 +12,7 @@ const EnvVars = ({ UserStore }) => {
   const [locked, setLocked] = useState(true);
   const [password, setPassword] = useState("");
   const [unlocking, setUnlocking] = useState(false);
+
   useEffect(() => {
     const isLocked = window.sessionStorage.getItem("env_var_unlocked");
     if (!isLocked) {
@@ -20,7 +21,7 @@ const EnvVars = ({ UserStore }) => {
       setLocked(false);
     }
     const fn = async () => {
-      if (!locked) {
+      if (!locked && UserStore.user.envVariablePassword) {
         await getAxios({
           url: "/env/me",
         }).then(({ success }) => {
@@ -30,7 +31,7 @@ const EnvVars = ({ UserStore }) => {
     };
 
     fn();
-  }, [locked]);
+  }, [UserStore.user, locked]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -43,7 +44,7 @@ const EnvVars = ({ UserStore }) => {
     }).then(({ success }) => {
       if (success.variables) {
         window.sessionStorage.setItem("env_var_unlocked", true);
-        setVars([success]);
+        setVars(success.variables);
 
         setLocked(false);
       }
@@ -78,7 +79,6 @@ const EnvVars = ({ UserStore }) => {
           </div>
         </div>
       </div>
-
       {!UserStore.user.envVariablePassword && (
         <div className=" mt-10">
           <p className="text-xl">
