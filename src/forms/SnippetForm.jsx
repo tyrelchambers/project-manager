@@ -9,6 +9,8 @@ import Code from "../components/Code/Code";
 import { H3 } from "../components/Headings/Headings";
 import { syntax } from "../constants/syntax";
 import InputWrapper from "../components/InputWrapper/InputWrapper";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 const SnippetForm = () => {
   const [snippet, setSnippet] = useState({
     name: "",
@@ -16,6 +18,7 @@ const SnippetForm = () => {
     syntax: "",
     description: "",
   });
+  const history = useHistory();
 
   const [qSyntax, setQSyntax] = useState("");
 
@@ -42,7 +45,7 @@ const SnippetForm = () => {
       },
     }).then(({ success }) => {
       if (success) {
-        window.location.reload();
+        history.push("/snippets");
       }
     });
   };
