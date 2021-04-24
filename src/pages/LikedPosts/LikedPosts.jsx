@@ -12,7 +12,7 @@ const LikedPosts = ({ UserStore, ModalStore }) => {
     const fn = async () => {
       await getAxios({
         url: "/user/likes",
-      }).then((res) => setPosts(res.likes));
+      }).then(({ success }) => setPosts(success.likes));
     };
 
     fn();

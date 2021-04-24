@@ -14,9 +14,9 @@ const PackageShow = ({ match }) => {
     const fn = async () => {
       await getAxios({
         url: `/packages/${package_id}`,
-      }).then((res) => {
+      }).then(({ success }) => {
         setPkg({
-          package: res.package,
+          package: success.package,
         });
       });
     };
@@ -31,7 +31,7 @@ const PackageShow = ({ match }) => {
       data: {
         package_id,
       },
-    }).then((res) => {
+    }).then(({ success }) => {
       window.history.back();
     });
   };
