@@ -31,7 +31,7 @@ const UserSearch = () => {
             >
               <Avatar url={result.avatar} className="mr-4" size="small" />
               <p className="text-gray-800 font-bold text-lg truncate">
-                {result.name || result.email}
+                {result.username || result.name || result.email}
               </p>
             </Link>
           ))}
