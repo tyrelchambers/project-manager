@@ -53,7 +53,11 @@ const NewFeedPost = ({ UserStore, SearchStore, ModalStore }) => {
           <Avatar url={UserStore.user.avatar} size="small" />
           <div className="flex flex-col ml-4">
             <p className="text-sm">Posting as:</p>
-            <p className="font-bold text-lg">{UserStore.user.name}</p>
+            <p className="font-bold text-lg">
+              {UserStore.user.name || UserStore.user.username
+                ? `@${UserStore.user.username}`
+                : ""}
+            </p>
           </div>
         </div>
       </div>
