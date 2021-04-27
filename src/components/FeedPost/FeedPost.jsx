@@ -184,7 +184,7 @@ const FeedPost = ({
                 </div>
               </div>
             )}
-            {post.CodeSnippet.deleteDate && (
+            {post.CodeSnippet?.deleteDate && (
               <div className="flex bg-yellow-400 p-2 rounded-md">
                 <i className="fas fa-exclamation-triangle text-gray-800 mr-2 mt-1"></i>
                 <p className="text-gray-800">

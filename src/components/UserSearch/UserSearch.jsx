@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api";
+import { userDisplayName } from "../../helpers/userDisplayName";
 import SearchResults from "../../layouts/SearchResults/SearchResults";
 import Avatar from "../Avatar/Avatar";
 import Search from "../Search/Search";
@@ -31,7 +32,7 @@ const UserSearch = () => {
             >
               <Avatar url={result.avatar} className="mr-4" size="small" />
               <p className="text-gray-800 font-bold text-lg truncate">
-                {result.username || result.name || result.email}
+                {userDisplayName(result)}
               </p>
             </Link>
           ))}

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getAxios } from "../../api";
 import NewFeedPostForm from "../../forms/NewFeedPostForm";
 import isEmpty from "../../helpers/isEmpty";
+import { userDisplayName } from "../../helpers/userDisplayName";
 import Avatar from "../Avatar/Avatar";
 import SnippetItem from "../SnippetItem/SnippetItem";
 import "./NewFeedPost.css";
@@ -54,9 +55,7 @@ const NewFeedPost = ({ UserStore, SearchStore, ModalStore }) => {
           <div className="flex flex-col ml-4">
             <p className="text-sm">Posting as:</p>
             <p className="font-bold text-lg">
-              {UserStore.user.name || UserStore.user.username
-                ? `@${UserStore.user.username}`
-                : ""}
+              {userDisplayName(UserStore.user)}
             </p>
           </div>
         </div>
