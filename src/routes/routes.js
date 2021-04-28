@@ -97,7 +97,7 @@ export const UNAUTHENTICATED = [
             Accept: "application/vnd.github.v3+json",
           },
         })
-        .then(({ success }) => success.data);
+        .then((res) => res.data);
 
       await getAxios({
         url: "/auth/signup",
@@ -121,6 +121,7 @@ export const UNAUTHENTICATED = [
             name: githubUser.name || githubUser.login,
             twitter: githubUser.twitter_username,
             avatar: githubUser.avatar_url,
+            email: githubUser.email || null,
           },
         },
       });

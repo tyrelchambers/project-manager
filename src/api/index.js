@@ -51,7 +51,5 @@ export const getAxios = async ({
       payload.error = err;
     });
 
-  console.log(payload);
-
   return payload;
 };

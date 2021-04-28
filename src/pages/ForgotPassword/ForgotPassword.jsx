@@ -12,7 +12,6 @@ const ForgotPassword = () => {
 
   const { handleSubmit, errors, register } = useForm();
   const submitHandler = () => {
-    console.log(email);
     getAxios({
       url: "/auth/forgot_password",
       method: "post",
