@@ -111,7 +111,10 @@ const EnvVars = ({ UserStore }) => {
             ) : (
               <MainButton pending>Unlocking...</MainButton>
             )}
-            <Link className="mt-4 text-yellow-500 underline">
+            <Link
+              to="/settings/account"
+              className="mt-4 text-yellow-500 underline"
+            >
               Change password
             </Link>
           </div>
