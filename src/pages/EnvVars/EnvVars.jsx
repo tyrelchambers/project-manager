@@ -86,7 +86,7 @@ const EnvVars = ({ UserStore }) => {
             <Link className="link" to="/settings/account">
               Please set one
             </Link>{" "}
-            so we can show you your variables
+            so we can encrypt your variables.
           </p>
         </div>
       )}
