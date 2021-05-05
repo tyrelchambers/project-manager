@@ -10,6 +10,7 @@ const ProfileSetupForm = ({ UserStore }) => {
   const [state, setstate] = useState({
     username: "",
     email: "",
+    name: "",
   });
   const { handleSubmit, errors, setError, register } = useForm();
 
@@ -22,6 +23,20 @@ const ProfileSetupForm = ({ UserStore }) => {
       return setError("username", {
         type: "manual",
         message: "Still need a username",
+      });
+    }
+
+    if (!state.email.trim()) {
+      return setError("email", {
+        type: "manual",
+        message: "Still need an email",
+      });
+    }
+
+    if (!state.name.trim()) {
+      return setError("name", {
+        type: "manual",
+        message: "Still need a name",
       });
     }
 
@@ -57,6 +72,25 @@ const ProfileSetupForm = ({ UserStore }) => {
           })}
         />
         <FormErrors error={errors.username} />
+      </div>
+
+      <div className="field-group">
+        <FormLabel text="Name" name="name" />
+        <input
+          type="text"
+          className="form-input"
+          name="name"
+          placeholder="Your name"
+          value={state.name}
+          onChange={(e) => inputHandler(e)}
+          ref={register({
+            required: {
+              value: true,
+              message: "Please add a name",
+            },
+          })}
+        />
+        <FormErrors error={errors.name} />
       </div>
 
       {!UserStore.user.email && (
