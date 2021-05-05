@@ -150,7 +150,7 @@ const FeedPost = ({
                   className="mb-2 text-gray-200 hover:underline truncate feed-post-username flex items-center w-3/4"
                 >
                   <p className="font-black text-lg text-gray-200 truncate">
-                    {post.User.name || post.User.email}
+                    {post.User.name}
 
                     <span className="italic text-gray-400 text-sm ml-2 font-thin">
                       @{post.User.username}
