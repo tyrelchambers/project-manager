@@ -11,13 +11,13 @@ const NewFeedPostForm = ({ UserStore, SearchStore }) => {
     post: "",
   });
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     if (!state.post) {
       return;
     }
 
-    getAxios({
+    await getAxios({
       url: "/feed/post",
       method: "post",
       data: {
@@ -28,6 +28,8 @@ const NewFeedPostForm = ({ UserStore, SearchStore }) => {
         },
       },
     });
+
+    window.location.reload();
   };
   const buttonState = state.post ? (
     <MainButton default onClick={(e) => submitHandler(e)}>
