@@ -1,5 +1,5 @@
 import { inject, observer } from "mobx-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
@@ -15,6 +15,10 @@ const ProfileSetupForm = ({ UserStore }) => {
   });
   const { handleSubmit, errors, setError, register } = useForm();
 
+  useEffect(() => {
+    setstate({ ...UserStore.user });
+  }, [UserStore.user]);
+
   const inputHandler = (e) => {
     setstate({ ...state, [e.target.name]: e.target.value });
   };
@@ -24,13 +28,6 @@ const ProfileSetupForm = ({ UserStore }) => {
       return setError("username", {
         type: "manual",
         message: "Still need a username",
-      });
-    }
-
-    if (!state.email.trim()) {
-      return setError("email", {
-        type: "manual",
-        message: "Still need an email",
       });
     }
 
