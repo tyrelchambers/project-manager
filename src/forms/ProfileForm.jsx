@@ -9,6 +9,7 @@ import { H2 } from "../components/Headings/Headings";
 import InputWrapper from "../components/InputWrapper/InputWrapper";
 import Upload from "../components/Upload/Upload";
 import isEmpty from "../helpers/isEmpty";
+import { removeSpecialChar } from "../helpers/removeSpecialChar";
 import UserStore from "../stores/UserStore";
 
 const ProfileForm = ({ user }) => {
@@ -79,7 +80,7 @@ const ProfileForm = ({ user }) => {
   if (isEmpty(state)) return null;
 
   const checkUsername = (e) => {
-    const username = e.target.value.replace(/[\W]/gi, "");
+    const username = removeSpecialChar(e.target.value);
     getAxios({
       url: "/user/username",
       params: {

@@ -17,10 +17,10 @@ const AuthProvider = ({ stores }) => {
         url: "/user/me",
       }).then(({ success }) => {
         if (success.user) {
-          stores.UserStore.setUser(success.user);
-          if (!success.user.username) {
+          if (!success.user.username || !success.user.name) {
             history.push("/profile_setup");
           }
+          stores.UserStore.setUser(success.user);
         }
       });
     };

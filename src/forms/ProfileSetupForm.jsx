@@ -5,6 +5,7 @@ import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormErrors from "../components/FormErrors/FormErrors";
 import FormLabel from "../components/FormLabel/FormLabel";
+import { removeSpecialChar } from "../helpers/removeSpecialChar";
 
 const ProfileSetupForm = ({ UserStore }) => {
   const [state, setstate] = useState({
@@ -63,7 +64,9 @@ const ProfileSetupForm = ({ UserStore }) => {
           name="username"
           placeholder="@username"
           value={state.username}
-          onChange={(e) => inputHandler(e)}
+          onChange={(e) =>
+            setstate({ ...state, username: removeSpecialChar(e.target.value) })
+          }
           ref={register({
             required: {
               value: true,
