@@ -71,12 +71,17 @@ const EnvVars = ({ UserStore }) => {
             <i className="fas fa-lock text-white text-sm mr-2"></i>
             <p className="font-bold">Encrypted</p>
           </div>
-          <div className="w-fit mt-4">
-            <Link className="text-yellow-500 underline font-bold" to="/env/new">
-              <i className="fas fa-pencil-alt mr-2"></i>
-              Create Environment Variable
-            </Link>
-          </div>
+          {UserStore.user.envVariablePassword && (
+            <div className="w-fit mt-4">
+              <Link
+                className="text-yellow-500 underline font-bold"
+                to="/env/new"
+              >
+                <i className="fas fa-pencil-alt mr-2"></i>
+                Create Environment Variable
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       {!UserStore.user.envVariablePassword && (
