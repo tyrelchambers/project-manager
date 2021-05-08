@@ -24,6 +24,11 @@ const Footer = () => {
           - Tyrel Chambers
         </p>
         <p className="text-pink-500 font-bold text-xl">Creator of Kanlen</p>
+        <img
+          src={require("../../assets/k - dark.svg")}
+          alt="kanlen wordmark"
+          className="w-64 mt-10"
+        />
       </div>
     </div>
   );

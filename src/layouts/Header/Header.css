@@ -5,6 +5,7 @@
   position: sticky;
   top: 0;
   border-right: 2px solid var(--gray-800);
+  overflow-y: auto;
 }
 
 @media screen and (max-width: 768px) {

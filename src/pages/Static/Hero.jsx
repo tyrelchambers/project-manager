@@ -6,6 +6,11 @@ const Hero = () => {
     <div className="flex bg-white h-screen overflow-hidden wrapper hero">
       <div className="w-1/2 p-8 flex flex-col justify-center z-10 relative wrapper-left">
         <div className="w-4/5">
+          <img
+            src={require("../../assets/k - dark.svg")}
+            alt="kanlen wordmark"
+            className="w-56 mb-20"
+          />
           <h1 className="font-black text-pink-500 text-6xl">
             Discuss. Share. Grow.
           </h1>

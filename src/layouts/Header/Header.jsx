@@ -13,8 +13,14 @@ const Header = ({ UserStore, hideNavbar }) => {
   return (
     <header className="header flex flex-col  p-4">
       <div className="flex-1">
-        <H1 className="mobile">
-          <Link to="/">Kanlen</Link>
+        <H1 className="mobile mb-10 mt-4">
+          <Link to="/">
+            <img
+              src={require("../../assets/k - light.svg")}
+              alt=""
+              className="w-3/5"
+            />
+          </Link>
         </H1>
         {showNavbar}
       </div>
