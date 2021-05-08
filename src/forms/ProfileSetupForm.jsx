@@ -16,7 +16,7 @@ const ProfileSetupForm = ({ UserStore }) => {
   const { handleSubmit, errors, setError, register } = useForm();
 
   useEffect(() => {
-    setstate({ ...UserStore.user });
+    setstate({ email: UserStore.user.email });
   }, [UserStore.user]);
 
   const inputHandler = (e) => {
@@ -73,6 +73,7 @@ const ProfileSetupForm = ({ UserStore }) => {
         />
         <FormErrors error={errors.username} />
       </div>
+      {console.log(state)}
 
       <div className="field-group">
         <FormLabel text="Name" name="name" />
