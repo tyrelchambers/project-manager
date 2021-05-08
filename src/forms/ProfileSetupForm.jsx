@@ -73,7 +73,6 @@ const ProfileSetupForm = ({ UserStore }) => {
         />
         <FormErrors error={errors.username} />
       </div>
-      {console.log(state)}
 
       <div className="field-group">
         <FormLabel text="Name" name="name" />
