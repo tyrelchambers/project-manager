@@ -18,7 +18,7 @@ const Header = ({ UserStore, hideNavbar }) => {
             <img
               src={require("../../assets/k - light.svg")}
               alt=""
-              className="w-3/5"
+              className="w-2/5"
             />
           </Link>
         </H1>
