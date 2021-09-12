@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getAxios } from "../../api";
 import { MainButton } from "../../components/Buttons/Buttons";

@@ -4,12 +4,12 @@ import { H1 } from "../../components/Headings/Headings";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import NavToolbar from "../../components/NavToolbar/NavToolbar";
-import { inject, observer } from "mobx-react";
-import useStorage from "../../hooks/useStorage";
+import { useUser } from "../../hooks/useUser";
 
-const Header = ({ UserStore, hideNavbar }) => {
+const Header = ({ hideNavbar }) => {
   const showNavbar = hideNavbar ? null : <Navbar />;
-  const [token, _] = useStorage("token");
+  const query = useUser();
+
   return (
     <header className="header flex flex-col  p-4">
       <div className="flex-1">
@@ -24,9 +24,11 @@ const Header = ({ UserStore, hideNavbar }) => {
         </H1>
         {showNavbar}
       </div>
-      {token && <NavToolbar user={UserStore.user} />}
+      {query.isSuccess && query.data.user && (
+        <NavToolbar user={query.data.user} />
+      )}
     </header>
   );
 };
 
-export default inject("UserStore")(observer(Header));
+export default Header;

@@ -7,24 +7,13 @@ import {
 } from "../components/NotificationToasts/NotificationToasts";
 import activeRoutes from "../routes/routes";
 import { socket } from "../index";
+import { useUser } from "../hooks/useUser";
 
 const AuthProvider = ({ stores }) => {
   const history = useHistory();
+  const query = useUser();
 
   useEffect(() => {
-    const fn = async () => {
-      await getAxios({
-        url: "/user/me",
-      }).then(({ success }) => {
-        if (success.user) {
-          if (!success.user.username || !success.user.name) {
-            history.push("/profile_setup");
-          }
-          stores.UserStore.setUser(success.user);
-        }
-      });
-    };
-
     socket.on("notification", (data) => {
       if (data.type === "post_like") {
         heartToast(data.notification);
@@ -34,9 +23,11 @@ const AuthProvider = ({ stores }) => {
         followToast(data.notification);
       }
     });
-
-    fn();
   }, []);
+
+  if (query.isSuccess && (!query.data.user.username || !query.data.user.name)) {
+    history.push("/profile_setup");
+  }
 
   return (
     <Switch>

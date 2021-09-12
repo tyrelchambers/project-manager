@@ -13,7 +13,9 @@ import { UNAUTHENTICATED } from "./routes/routes";
 import { io } from "socket.io-client";
 import AuthProvider from "./providers/AuthProvider";
 import { config } from "./config/config";
+import { QueryClient, QueryClientProvider } from "react-query";
 
+const queryClient = new QueryClient();
 export const socket = io(config[process.env.NODE_ENV].backend, {
   transportOptions: {
     polling: {
@@ -47,15 +49,17 @@ const App = () => {
 };
 ReactDOM.render(
   <React.StrictMode>
-    <Provider {...stores}>
-      <Router basename="/">
-        <ModalContainer />
-        <ToastContainer />
-        <Switch>
-          <App />
-        </Switch>
-      </Router>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider {...stores}>
+        <Router basename="/">
+          <ModalContainer />
+          <ToastContainer />
+          <Switch>
+            <App />
+          </Switch>
+        </Router>
+      </Provider>
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

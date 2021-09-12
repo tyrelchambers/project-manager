@@ -4,9 +4,11 @@ import "./Navbar.css";
 import { navRoutes, unauthenticatedRoutes } from "../../routes/nav.routes";
 import UserWidget from "../../components/UserWidget/UserWidget";
 import { inject, observer } from "mobx-react";
-const Navbar = ({ UserStore }) => {
+import { useUser } from "../../hooks/useUser";
+const Navbar = () => {
   const [openSubnav, setOpenSubnav] = useState("");
   const pathWithSearch = window.location.pathname + window.location.search;
+  const query = useUser();
 
   const subnavHandler = (route) => {
     if (route.subnav) {
@@ -85,9 +87,9 @@ const Navbar = ({ UserStore }) => {
   return (
     <nav className="navbar">
       <div className="mb-4 h-full">
-        {UserStore.user.uuid ? (
+        {query.isSuccess && query.data.user ? (
           <div className="relative h-full">
-            <UserWidget />
+            <UserWidget user={query.data.user} />
 
             <AuthenticatedRoutes />
           </div>
@@ -99,4 +101,4 @@ const Navbar = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(Navbar));
+export default Navbar;
