@@ -3,14 +3,16 @@ import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./Snippets.css";
 import { H1, H2Subtitle } from "../../components/Headings/Headings";
 import { MinimalButton } from "../../components/Buttons/Buttons";
-import { inject, observer } from "mobx-react";
 import { getAxios } from "../../api";
 import SnippetItem from "../../components/SnippetItem/SnippetItem";
 import { Link } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
 
-const Snippets = ({ UserStore }) => {
+const Snippets = () => {
   const [snippets, setSnippets] = useState([]);
   const [pullingGists, setPullingGists] = useState(false);
+  const userQuery = useUser();
+
   useEffect(() => {
     const fn = async () => {
       await getAxios({
@@ -22,6 +24,8 @@ const Snippets = ({ UserStore }) => {
 
     fn();
   }, []);
+
+  if (!userQuery.data) return null;
 
   const getGists = async () => {
     setPullingGists(true);
@@ -53,7 +57,7 @@ const Snippets = ({ UserStore }) => {
             code.
           </H2Subtitle>
           <div className="snippet-actions mt-4">
-            {UserStore.user.githubAccessToken &&
+            {userQuery.data.user.githubAccessToken &&
               (pullingGists ? (
                 <MinimalButton
                   classes="text-yellow-400 mr-4 font-bold"
@@ -92,4 +96,4 @@ const Snippets = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(Snippets));
+export default Snippets;

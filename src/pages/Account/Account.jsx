@@ -7,12 +7,16 @@ import {
   H3Subtitle,
 } from "../../components/Headings/Headings";
 import AccountPasswordForm from "../../forms/AccountPasswordForm";
-import { inject, observer } from "mobx-react";
 import { MainButton } from "../../components/Buttons/Buttons";
 import { getAxios } from "../../api";
 import AccountEnvVarForm from "../../forms/AccountEnvVarForm";
+import { useUser } from "../../hooks/useUser";
 
-const Account = ({ UserStore }) => {
+const Account = () => {
+  const userQuery = useUser();
+
+  if (!userQuery.data) return null;
+
   const deleteAccount = async () => {
     const confirm = window.confirm("Was this a mistake or shall we continue?");
     if (confirm) {
@@ -41,13 +45,13 @@ const Account = ({ UserStore }) => {
       <H2Subtitle>Edit your private information</H2Subtitle>
 
       <div className="mt-6 container max-w-screen-sm">
-        <AccountPasswordForm user={UserStore.user} />
+        <AccountPasswordForm user={userQuery.data.user} />
         <hr />
         <p className="mt-4 mb-4 text-xl">
           Enter a password to encrypt your environment variables.
         </p>
 
-        {!UserStore.user.envVariablePassword ? (
+        {!userQuery.data.user.envVariablePassword ? (
           <AccountEnvVarForm />
         ) : (
           <p className="p-4 bg-gray-800 rounded-md ">Password already set</p>
@@ -70,4 +74,4 @@ const Account = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(Account));
+export default Account;

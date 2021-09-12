@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import { getAxios } from "../../api";
 import FeedPost from "../../components/FeedPost/FeedPost";
 import { H1 } from "../../components/Headings/Headings";
+import { useUser } from "../../hooks/useUser";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
-const LikedPosts = ({ UserStore, ModalStore }) => {
+const LikedPosts = ({ ModalStore }) => {
   const [posts, setPosts] = useState([]);
+  const userQuery = useUser();
 
   useEffect(() => {
     const fn = async () => {
@@ -18,9 +20,11 @@ const LikedPosts = ({ UserStore, ModalStore }) => {
     fn();
   }, []);
 
+  if (!userQuery.data) return null;
+
   const clickhandler = (post) => {
     ModalStore.setRender(
-      <FeedPost user={UserStore.user} post={post} isModal={true} />
+      <FeedPost user={userQuery.data.user} post={post} isModal={true} />
     );
     ModalStore.setIsOpen(true);
   };
@@ -35,7 +39,7 @@ const LikedPosts = ({ UserStore, ModalStore }) => {
           .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
           .map((post) => (
             <FeedPost
-              user={UserStore.user}
+              user={userQuery.data.user}
               key={post.id}
               post={post}
               clickHandler={() => clickhandler(post)}
@@ -45,4 +49,4 @@ const LikedPosts = ({ UserStore, ModalStore }) => {
   );
 };
 
-export default inject("UserStore", "ModalStore")(observer(LikedPosts));
+export default inject("ModalStore")(observer(LikedPosts));

@@ -13,7 +13,8 @@ import UserSocials from "../../layouts/UserSocials/UserSocials";
 import UserSubNav from "../../layouts/UserSubNav/UserSubNav";
 import UserBadge from "../../components/UserBadge/UserBadge";
 import SnippetItem from "../../components/SnippetItem/SnippetItem";
-const UserShowPage = ({ UserStore }) => {
+import { useUser } from "../../hooks/useUser";
+const UserShowPage = () => {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -21,6 +22,7 @@ const UserShowPage = ({ UserStore }) => {
   const [tab, setTab] = useState("feed");
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
+  const userQuery = useUser();
 
   useEffect(() => {
     setTab("feed");
@@ -59,18 +61,18 @@ const UserShowPage = ({ UserStore }) => {
   }, [tab, user_id]);
 
   useEffect(() => {
-    if (UserStore.user && user) {
+    if (userQuery.data.user && user) {
       const alreadyFollowing = user.followers.filter(
-        (f) => f.uuid === UserStore.user.uuid
+        (f) => f.uuid === userQuery.data.user.uuid
       );
 
       alreadyFollowing.length === 0
         ? setIsFollowing(false)
         : setIsFollowing(true);
     }
-  }, [UserStore.user, user]);
+  }, [userQuery.data.user, user]);
 
-  if (!user) return null;
+  if (!user || !userQuery.data) return null;
 
   const followHandler = async () => {
     await getAxios({
@@ -81,7 +83,7 @@ const UserShowPage = ({ UserStore }) => {
       },
     });
     socket.emit("notification user follow", {
-      from: UserStore.user.uuid,
+      from: userQuery.data.user.uuid,
       to: user_id,
       type: "follow",
     });
@@ -146,7 +148,7 @@ const UserShowPage = ({ UserStore }) => {
             </div>
           </div>
 
-          {UserStore.user.uuid && UserStore.user.uuid !== user.uuid && (
+          {userQuery.data.user.uuid && userQuery.data.user.uuid !== user.uuid && (
             <div className="max-w-2xl">
               <FollowButton
                 isFollowing={isFollowing}
@@ -167,7 +169,11 @@ const UserShowPage = ({ UserStore }) => {
               user.posts
                 .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
                 .map((post) => (
-                  <FeedPost key={post.uuid} post={post} user={UserStore.user} />
+                  <FeedPost
+                    key={post.uuid}
+                    post={post}
+                    user={userQuery.data.user}
+                  />
                 ))}
 
             {tab === "followers" &&
@@ -192,4 +198,4 @@ const UserShowPage = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(UserShowPage));
+export default UserShowPage;

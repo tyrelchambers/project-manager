@@ -5,10 +5,15 @@ import Avatar from "../../components/Avatar/Avatar";
 import { MainButton } from "../../components/Buttons/Buttons";
 import { H1, H2Subtitle } from "../../components/Headings/Headings";
 import ProfileForm from "../../forms/ProfileForm";
+import { useUser } from "../../hooks/useUser";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./Profile.css";
 
-const Profile = ({ UserStore }) => {
+const Profile = () => {
+  const userQuery = useUser();
+  console.log(userQuery);
+  if (!userQuery.data) return null;
+
   const removeProfilePhoto = async () => {
     await getAxios({
       url: "/user/update",
@@ -24,7 +29,7 @@ const Profile = ({ UserStore }) => {
       url: "/upload/delete",
       method: "delete",
       params: {
-        url: UserStore.user.avatar,
+        url: userQuery.data.user.avatar,
       },
     });
   };
@@ -35,12 +40,12 @@ const Profile = ({ UserStore }) => {
       <H2Subtitle>This is your public facing information</H2Subtitle>
 
       <div className="flex mt-10 mb-10 profile-header">
-        <Avatar url={UserStore.user.avatar} size="medium" />
+        <Avatar url={userQuery.data.user.avatar} size="medium" />
         <div className="flex flex-col ml-4 profile-username">
-          <p className=" font-bold text-3xl">{UserStore.user.name}</p>
-          <p className=" font-bold text-xl">@{UserStore.user.username}</p>
+          <p className=" font-bold text-3xl">{userQuery.data.user.name}</p>
+          <p className=" font-bold text-xl">@{userQuery.data.user.username}</p>
 
-          {UserStore.user.avatar && (
+          {userQuery.data.user.avatar && (
             <div className="mt-2 max-w-xs">
               <MainButton muted onClick={removeProfilePhoto}>
                 Remove profile picture
@@ -50,10 +55,10 @@ const Profile = ({ UserStore }) => {
         </div>
       </div>
       <div className="mt-6 mb-10">
-        <ProfileForm user={UserStore.user} />
+        <ProfileForm user={userQuery.data.user} />
       </div>
     </DisplayWrapper>
   );
 };
 
-export default inject("UserStore")(observer(Profile));
+export default Profile;

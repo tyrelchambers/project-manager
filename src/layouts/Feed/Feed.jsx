@@ -3,9 +3,12 @@ import React, { useEffect, useState } from "react";
 import { getAxios } from "../../api";
 import FeedPost from "../../components/FeedPost/FeedPost";
 import { docWidth } from "../../constants/constants";
+import { useUser } from "../../hooks/useUser";
 
-const Feed = ({ UserStore }) => {
+const Feed = () => {
   const [feed, setFeed] = useState([]);
+  const userQuery = useUser();
+
   useEffect(() => {
     const fn = async () => {
       await getAxios({
@@ -20,6 +23,8 @@ const Feed = ({ UserStore }) => {
     fn();
   }, []);
 
+  if (!userQuery.data) return null;
+
   return (
     <div className="container max-w-screen-lg">
       {feed.length === 0 && (
@@ -30,7 +35,7 @@ const Feed = ({ UserStore }) => {
         .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
         .map((post) => (
           <FeedPost
-            user={UserStore.user}
+            user={userQuery.data.user}
             key={post.uuid}
             post={post}
             stacked={docWidth}
@@ -40,4 +45,4 @@ const Feed = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(Feed));
+export default Feed;

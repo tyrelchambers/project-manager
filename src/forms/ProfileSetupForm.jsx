@@ -6,18 +6,24 @@ import { MainButton } from "../components/Buttons/Buttons";
 import FormErrors from "../components/FormErrors/FormErrors";
 import FormLabel from "../components/FormLabel/FormLabel";
 import { removeSpecialChar } from "../helpers/removeSpecialChar";
+import { useUser } from "../hooks/useUser";
 
-const ProfileSetupForm = ({ UserStore }) => {
+const ProfileSetupForm = () => {
   const [state, setstate] = useState({
     username: "",
     email: "",
     name: "",
   });
   const { handleSubmit, errors, setError, register } = useForm();
+  const userQuery = useUser();
 
   useEffect(() => {
-    setstate({ email: UserStore.user.email });
-  }, [UserStore.user]);
+    if (userQuery.data) {
+      setstate({ email: userQuery.data.user.email });
+    }
+  }, [userQuery.data]);
+
+  if (!userQuery.data) return null;
 
   const inputHandler = (e) => {
     setstate({ ...state, [e.target.name]: e.target.value });
@@ -93,7 +99,7 @@ const ProfileSetupForm = ({ UserStore }) => {
         <FormErrors error={errors.name} />
       </div>
 
-      {!UserStore.user.email && (
+      {!userQuery.data.user.email && (
         <div className="field-group">
           <FormLabel text="Email" name="email" />
           <input
@@ -119,4 +125,4 @@ const ProfileSetupForm = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(ProfileSetupForm));
+export default ProfileSetupForm;

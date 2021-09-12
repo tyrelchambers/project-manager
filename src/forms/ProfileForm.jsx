@@ -10,7 +10,6 @@ import InputWrapper from "../components/InputWrapper/InputWrapper";
 import Upload from "../components/Upload/Upload";
 import isEmpty from "../helpers/isEmpty";
 import { removeSpecialChar } from "../helpers/removeSpecialChar";
-import UserStore from "../stores/UserStore";
 
 const ProfileForm = ({ user }) => {
   const [state, setState] = useState({
@@ -43,7 +42,7 @@ const ProfileForm = ({ user }) => {
   }, [user]);
 
   const submitHandler = async () => {
-    let fileEndpoint = UserStore.user.avatar || "";
+    let fileEndpoint = user.avatar || "";
     if (pond.current && pond.current.getFiles().length > 0) {
       const files = await pond.current.processFiles().then((res) => res[0]);
       fileEndpoint = files.serverId;

@@ -5,12 +5,14 @@ import { getAxios } from "../../api";
 import FeedPost from "../../components/FeedPost/FeedPost";
 import { docWidth } from "../../constants/constants";
 import isEmpty from "../../helpers/isEmpty";
+import { useUser } from "../../hooks/useUser";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./Post.css";
 
-const Post = ({ UserStore }) => {
+const Post = () => {
   const { post_id } = useParams();
   const [post, setPost] = useState({});
+  const userQuery = useUser();
 
   useEffect(() => {
     const fn = async () => {
@@ -22,14 +24,14 @@ const Post = ({ UserStore }) => {
     fn();
   }, [post_id]);
 
-  if (isEmpty(post)) return null;
+  if (isEmpty(post) || !userQuery.data) return null;
 
   return (
     <DisplayWrapper>
       <div className="post-wrapper">
         <FeedPost
           post={post}
-          user={UserStore.user}
+          user={userQuery.data.user}
           hideOnMobile={false}
           stacked={docWidth}
         />
@@ -38,4 +40,4 @@ const Post = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(Post));
+export default Post;

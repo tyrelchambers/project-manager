@@ -6,7 +6,7 @@ import { getAxios } from "../api/index";
 import Code from "../components/Code/Code";
 import isEmpty from "../helpers/isEmpty";
 import "./forms.css";
-const NewFeedPostForm = ({ UserStore, SearchStore }) => {
+const NewFeedPostForm = ({ user, SearchStore }) => {
   const [state, setState] = useState({
     post: "",
   });
@@ -22,7 +22,7 @@ const NewFeedPostForm = ({ UserStore, SearchStore }) => {
       method: "post",
       data: {
         post: state.post,
-        user: UserStore.user,
+        user: user,
         attached: {
           snippet: SearchStore.postSnippet.uuid,
         },
@@ -69,4 +69,4 @@ const NewFeedPostForm = ({ UserStore, SearchStore }) => {
   );
 };
 
-export default inject("UserStore", "SearchStore")(observer(NewFeedPostForm));
+export default inject("SearchStore")(observer(NewFeedPostForm));

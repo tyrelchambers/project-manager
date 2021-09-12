@@ -3,7 +3,6 @@ import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 import { navRoutes, unauthenticatedRoutes } from "../../routes/nav.routes";
 import UserWidget from "../../components/UserWidget/UserWidget";
-import { inject, observer } from "mobx-react";
 import { useUser } from "../../hooks/useUser";
 const Navbar = () => {
   const [openSubnav, setOpenSubnav] = useState("");

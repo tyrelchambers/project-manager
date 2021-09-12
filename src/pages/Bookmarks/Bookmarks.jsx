@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import { getAxios } from "../../api";
 import FeedPost from "../../components/FeedPost/FeedPost";
 import { H1 } from "../../components/Headings/Headings";
+import { useUser } from "../../hooks/useUser";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 
-const Bookmarks = ({ UserStore }) => {
+const Bookmarks = () => {
   const [bookmarks, setBookmarks] = useState([]);
+  const userQuery = useUser();
 
   useEffect(() => {
     const fn = async () => {
@@ -16,6 +18,8 @@ const Bookmarks = ({ UserStore }) => {
     };
     fn();
   }, []);
+
+  if (!userQuery.data) return null;
 
   return (
     <DisplayWrapper>
@@ -30,7 +34,7 @@ const Bookmarks = ({ UserStore }) => {
           .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
           .map((bk) => (
             <FeedPost
-              user={UserStore.user}
+              user={userQuery.data.user}
               key={bk.id}
               post={bk.FeedPost}
               isBookmarked
@@ -40,4 +44,4 @@ const Bookmarks = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(Bookmarks));
+export default Bookmarks;

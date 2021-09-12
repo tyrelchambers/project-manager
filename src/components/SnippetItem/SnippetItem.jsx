@@ -1,10 +1,12 @@
 import { format, parseISO } from "date-fns";
-import { inject, observer } from "mobx-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { getAxios } from "../../api";
+import { useUser } from "../../hooks/useUser";
 import "./SnippetItem.css";
-const SnippetItem = ({ snippet, UserStore, clickHandler }) => {
+const SnippetItem = ({ snippet, clickHandler }) => {
+  const query = useUser();
+
   const deleteHandler = async () => {
     await getAxios({
       url: `/snippets/${snippet.uuid}/delete`,
@@ -42,6 +44,9 @@ const SnippetItem = ({ snippet, UserStore, clickHandler }) => {
       {snippet.name}
     </p>
   );
+
+  if (!query.data.user) return null;
+
   return (
     <div className="snippet-item rounded-md">
       <div className="flex snippet-item-header relative ">
@@ -67,7 +72,7 @@ const SnippetItem = ({ snippet, UserStore, clickHandler }) => {
           </div>
         </div>
 
-        {snippet.userId === UserStore.user.uuid && !snippet.deleteDate && (
+        {snippet.userId === query.data.uuid && !snippet.deleteDate && (
           <i
             className="fas fa-trash text-gray-500 ml-6"
             onClick={deleteHandler}
@@ -94,4 +99,4 @@ const SnippetItem = ({ snippet, UserStore, clickHandler }) => {
   );
 };
 
-export default inject("UserStore")(observer(SnippetItem));
+export default SnippetItem;

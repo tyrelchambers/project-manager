@@ -3,14 +3,15 @@ import { H1, H2Subtitle, H3 } from "../../components/Headings/Headings";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import "./PackagesPage.css";
 import { Link } from "react-router-dom";
-import { inject, observer } from "mobx-react";
 import { getAxios } from "../../api";
+import { useUser } from "../../hooks/useUser";
 
-const PackagesPage = ({ UserStore }) => {
+const PackagesPage = () => {
   const [defaultPackages, setDefaultPackage] = useState([]);
+  const userQuery = useUser();
 
   useEffect(() => {
-    if (UserStore.user) {
+    if (userQuery.data.user) {
       getAxios({
         url: "/packages/me",
       }).then(({ success }) => {
@@ -61,4 +62,4 @@ const PackagesPage = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(PackagesPage));
+export default PackagesPage;

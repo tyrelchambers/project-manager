@@ -13,12 +13,14 @@ import Code from "../../components/Code/Code";
 import Status from "../../components/Status/Status";
 import "./SnippetShow.css";
 import { config } from "../../config/config";
+import { useUser } from "../../hooks/useUser";
 
-const SnippetShow = ({ UserStore, ModalStore }) => {
+const SnippetShow = ({ ModalStore }) => {
   const { snippet_uuid } = useParams();
   const [snippet, setSnippet] = useState({});
   const history = useHistory();
   const [liked, setLiked] = useState(false);
+  const userQuery = useUser();
 
   useEffect(() => {
     const fn = async () => {
@@ -35,14 +37,14 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
   useEffect(() => {
     if (!isEmpty(snippet)) {
       for (let i = 0; i < snippet.likers.length; i++) {
-        snippet.likers[i].uuid === UserStore.user.uuid
+        snippet.likers[i].uuid === userQuery.data.user.uuid
           ? setLiked(true)
           : setLiked(false);
       }
     }
   }, [snippet]);
 
-  if (isEmpty(snippet)) return null;
+  if (isEmpty(snippet) || !userQuery.data) return null;
 
   const deleteHandler = async () => {
     await getAxios({
@@ -84,7 +86,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
           ) : (
             <i className="far fa-heart text-gray-500" onClick={likeHandler}></i>
           )}
-          {UserStore.user.uuid === snippet.userId && (
+          {userQuery.data.user.uuid === snippet.userId && (
             <i
               className="fas fa-trash text-red-500 ml-6"
               onClick={deleteHandler}
@@ -154,7 +156,7 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
             )}
           </div>
 
-          {UserStore.user.uuid === snippet.userId && (
+          {userQuery.data.user.uuid === snippet.userId && (
             <MainButton
               default
               classes="mt-2"
@@ -171,4 +173,4 @@ const SnippetShow = ({ UserStore, ModalStore }) => {
   );
 };
 
-export default inject("UserStore", "ModalStore")(observer(SnippetShow));
+export default inject("ModalStore")(observer(SnippetShow));

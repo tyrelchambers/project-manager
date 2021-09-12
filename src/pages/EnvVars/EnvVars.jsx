@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 import { getAxios } from "../../api/index";
 import "./EnvVars.css";
 import { MainButton } from "../../components/Buttons/Buttons";
-import { inject, observer } from "mobx-react";
+import { useUser } from "../../hooks/useUser";
 
-const EnvVars = ({ UserStore }) => {
+const EnvVars = () => {
   const [vars, setVars] = useState([]);
   const [locked, setLocked] = useState(true);
   const [password, setPassword] = useState("");
   const [unlocking, setUnlocking] = useState(false);
+  const userQuery = useUser();
 
   useEffect(() => {
     const isLocked = window.sessionStorage.getItem("env_var_unlocked");
@@ -21,7 +22,7 @@ const EnvVars = ({ UserStore }) => {
       setLocked(false);
     }
     const fn = async () => {
-      if (!locked && UserStore.user.envVariablePassword) {
+      if (!locked && userQuery.data.user.envVariablePassword) {
         await getAxios({
           url: "/env/me",
         }).then(({ success }) => {
@@ -31,7 +32,9 @@ const EnvVars = ({ UserStore }) => {
     };
 
     fn();
-  }, [UserStore.user, locked]);
+  }, [userQuery.data, locked]);
+
+  if (!userQuery.data) return null;
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -71,7 +74,7 @@ const EnvVars = ({ UserStore }) => {
             <i className="fas fa-lock text-white text-sm mr-2"></i>
             <p className="font-bold">Encrypted</p>
           </div>
-          {UserStore.user.envVariablePassword && (
+          {userQuery.data.user.envVariablePassword && (
             <div className="w-fit mt-4">
               <Link
                 className="text-yellow-500 underline font-bold"
@@ -84,7 +87,7 @@ const EnvVars = ({ UserStore }) => {
           )}
         </div>
       </div>
-      {!UserStore.user.envVariablePassword && (
+      {!userQuery.data.user.envVariablePassword && (
         <div className=" mt-10">
           <p className="text-xl">
             No password set.{" "}
@@ -96,7 +99,7 @@ const EnvVars = ({ UserStore }) => {
         </div>
       )}
 
-      {locked && UserStore.user.envVariablePassword && (
+      {locked && userQuery.data.user.envVariablePassword && (
         <div className="flex justify-center w-full mt-20">
           <div className="max-w-xl flex flex-col items-center bg-gray-900 p-10 rounded-lg">
             <i className="fas fa-lock text-6xl mb-10 text-yellow-500"></i>
@@ -145,4 +148,4 @@ const EnvVars = ({ UserStore }) => {
   );
 };
 
-export default inject("UserStore")(observer(EnvVars));
+export default EnvVars;

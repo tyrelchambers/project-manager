@@ -15,7 +15,8 @@ import SelectField from "../components/SelectField/SelectField";
 import { frameworks } from "../constants/frameworks";
 import { packageTemplate } from "../lib/newPackage.js";
 import { getAxios } from "../api";
-const NewPackageForm = ({ ModalStore, UserStore }) => {
+import { useUser } from "../hooks/useUser";
+const NewPackageForm = ({ ModalStore }) => {
   const [state, setState] = useState({
     packagesToInstall: [],
     defaultName: "",
@@ -23,6 +24,8 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
     framework: {},
     bundler: {},
   });
+
+  const userQuery = useUser();
 
   const [query, setQuery] = useState("");
   const [queryResults, setQueryResults] = useState([]);
@@ -59,6 +62,8 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
     }
   }, [query]);
 
+  if (!userQuery.data.user) return null;
+
   const installHandler = (p) => {
     if (state.packagesToInstall.find((x) => x.name === p.name)) {
       return;
@@ -89,7 +94,7 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
       method: "post",
       url: "/packages/save",
       data: {
-        userId: UserStore.user.uuid,
+        userId: userQuery.data.uuid,
         packageName: state.packageName,
         folderName: state.defaultName,
         body: JSON.stringify(
@@ -246,4 +251,4 @@ const NewPackageForm = ({ ModalStore, UserStore }) => {
   );
 };
 
-export default inject("ModalStore", "UserStore")(observer(NewPackageForm));
+export default inject("ModalStore")(observer(NewPackageForm));
