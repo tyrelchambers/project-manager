@@ -10,6 +10,7 @@ import InputWrapper from "../components/InputWrapper/InputWrapper";
 import Upload from "../components/Upload/Upload";
 import isEmpty from "../helpers/isEmpty";
 import { removeSpecialChar } from "../helpers/removeSpecialChar";
+import { useUpdateUser } from "../hooks/useUpdateUser";
 
 const ProfileForm = ({ user }) => {
   const [state, setState] = useState({
@@ -34,6 +35,7 @@ const ProfileForm = ({ user }) => {
   const { handleSubmit, errors, register } = useForm({
     reValidateMode: "onSubmit",
   });
+  const mutation = useUpdateUser();
 
   useEffect(() => {
     setState({
@@ -56,19 +58,9 @@ const ProfileForm = ({ user }) => {
       return toast.error("Username cannot be blank");
     }
 
-    await getAxios({
-      url: "/user/update",
-      method: "post",
-      data: {
-        state: {
-          ...state,
-          avatar: fileEndpoint,
-        },
-      },
-    }).then(({ success }) => {
-      if (success) {
-        window.location.reload();
-      }
+    mutation.mutate({
+      ...state,
+      avatar: fileEndpoint,
     });
   };
 

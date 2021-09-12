@@ -1,27 +1,22 @@
-import { inject, observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormErrors from "../components/FormErrors/FormErrors";
 import FormLabel from "../components/FormLabel/FormLabel";
 import { removeSpecialChar } from "../helpers/removeSpecialChar";
 import { useUser } from "../hooks/useUser";
-
+import { useUpdateUser } from "../hooks/useUpdateUser";
 const ProfileSetupForm = () => {
-  const [state, setstate] = useState({
-    username: "",
-    email: "",
-    name: "",
-  });
+  const [state, setstate] = useState({});
   const { handleSubmit, errors, setError, register } = useForm();
   const userQuery = useUser();
+  const mutation = useUpdateUser();
 
   useEffect(() => {
-    if (userQuery.data) {
+    if (userQuery.data?.user) {
       setstate({ email: userQuery.data.user.email });
     }
-  }, [userQuery.data]);
+  }, []);
 
   if (!userQuery.data) return null;
 
@@ -44,17 +39,8 @@ const ProfileSetupForm = () => {
       });
     }
 
-    await getAxios({
-      url: "/user/update",
-      method: "post",
-      data: {
-        state,
-      },
-    }).then(({ success }) => {
-      if (success) {
-        window.location.pathname = "/";
-      }
-    });
+    mutation.mutate(state);
+    window.location.pathname = "/";
   };
 
   return (
@@ -66,7 +52,6 @@ const ProfileSetupForm = () => {
           className="form-input"
           name="username"
           placeholder="@username"
-          value={state.username}
           onChange={(e) =>
             setstate({ ...state, username: removeSpecialChar(e.target.value) })
           }
@@ -87,7 +72,6 @@ const ProfileSetupForm = () => {
           className="form-input"
           name="name"
           placeholder="Your name"
-          value={state.name}
           onChange={(e) => inputHandler(e)}
           ref={register({
             required: {
@@ -107,7 +91,6 @@ const ProfileSetupForm = () => {
             className="form-input"
             name="email"
             placeholder="user@example.com"
-            value={state.email}
             onChange={(e) => inputHandler(e)}
             ref={register({
               required: {

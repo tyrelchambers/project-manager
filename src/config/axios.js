@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { config } from "./config";
 
 const instance = axios.create({
@@ -23,6 +24,7 @@ instance.interceptors.response.use(
     return res.data;
   },
   (err) => {
+    toast.error(err.response.data.error);
     return Promise.reject(err);
   }
 );

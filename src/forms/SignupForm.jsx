@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import FormErrors from "../components/FormErrors/FormErrors";
 import { config } from "../config/config";
+import { useSignup } from "../hooks/useSignup";
 
 const SignupForm = () => {
   const [credentials, setCredentials] = useState({
@@ -20,6 +21,7 @@ const SignupForm = () => {
   const { register, handleSubmit, errors, setError, getValues } = useForm({
     reValidateMode: "onSubmit",
   });
+  const signup = useSignup();
 
   const submitHandler = async () => {
     const { email, password, confirmPassword } = credentials;
@@ -36,18 +38,9 @@ const SignupForm = () => {
     }
     setPending(true);
 
-    await getAxios({
-      url: "/auth/signup",
-      method: "post",
-      data: {
-        email: credentials.email,
-        password: credentials.password,
-      },
-    }).then(({ success }) => {
-      if (success.token !== undefined) {
-        setToken({ value: success.token });
-        window.location.pathname = "/";
-      }
+    signup.mutate({
+      email: credentials.email,
+      password: credentials.password,
     });
   };
 

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import { getAxios } from "../api";
 import {
   followToast,
   heartToast,
@@ -9,11 +8,14 @@ import activeRoutes from "../routes/routes";
 import { socket } from "../index";
 import { useUser } from "../hooks/useUser";
 
-const AuthProvider = ({ stores }) => {
+const AuthProvider = () => {
   const history = useHistory();
   const query = useUser();
 
   useEffect(() => {
+    if (query.data && (!query.data?.user.username || !query.data?.user.name)) {
+      history.push("/profile_setup");
+    }
     socket.on("notification", (data) => {
       if (data.type === "post_like") {
         heartToast(data.notification);
@@ -24,10 +26,6 @@ const AuthProvider = ({ stores }) => {
       }
     });
   }, []);
-
-  if (query.isSuccess && (!query.data.user.username || !query.data.user.name)) {
-    history.push("/profile_setup");
-  }
 
   return (
     <Switch>

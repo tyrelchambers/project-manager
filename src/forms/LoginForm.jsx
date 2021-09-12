@@ -7,38 +7,25 @@ import useStorage from "../hooks/useStorage";
 import { useForm } from "react-hook-form";
 import FormErrors from "../components/FormErrors/FormErrors";
 import { config } from "../config/config";
+import { useLogin } from "../hooks/useLogin";
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
-  const [_, setToken] = useStorage("token");
   const { register, handleSubmit, errors } = useForm({
     reValidateMode: "onSubmit",
   });
   const [pending, setPending] = useState(false);
-
+  const login = useLogin();
   const submitHandler = () => {
     setPending(true);
-    getAxios({
-      url: "/auth/login",
-      method: "post",
-      data: {
-        email: credentials.email,
-        password: credentials.password,
-      },
-    }).then(({ success }) => {
-      if (success.token) {
-        setToken({ value: success.token });
-      }
-
-      if (success.user) {
-        window.location.pathname = "/";
-      }
-
-      setPending(false);
+    login.mutate({
+      email: credentials.email,
+      password: credentials.password,
     });
+    setPending(false);
   };
 
   const inputHandler = (e) => {
