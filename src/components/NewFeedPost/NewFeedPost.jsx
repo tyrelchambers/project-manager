@@ -53,14 +53,14 @@ const NewFeedPost = ({ SearchStore, ModalStore }) => {
     <div className="new-feed-post rounded-lg  container max-w-screen-lg mb-16">
       <div className="flex items-center justify-between new-feed-header">
         <div className="flex items-center">
-          <Avatar url={userQuery.data.avatar} size="small" />
+          <Avatar url={userQuery.data.user.avatar} size="small" />
           <div className="flex flex-col ml-4">
             <p className="text-sm">Posting as:</p>
-            <p className="font-bold text-lg">{userQuery.data.name}</p>
+            <p className="font-bold text-lg">{userQuery.data.user.name}</p>
           </div>
         </div>
       </div>
-      <NewFeedPostForm user={userQuery.data} />
+      <NewFeedPostForm user={userQuery.data.user} />
       <div className="feed-post-actions flex flex-col mt-6 flex-1 ">
         <div className="flex items-center">
           <div
