@@ -11,24 +11,18 @@ import { MainButton } from "../../components/Buttons/Buttons";
 import { getAxios } from "../../api";
 import AccountEnvVarForm from "../../forms/AccountEnvVarForm";
 import { useUser } from "../../hooks/useUser";
+import { useDeleteUser } from "../../hooks/useDeleteUser";
 
 const Account = () => {
   const userQuery = useUser();
+  const deleteUser = useDeleteUser();
 
   if (!userQuery.data) return null;
 
   const deleteAccount = async () => {
     const confirm = window.confirm("Was this a mistake or shall we continue?");
     if (confirm) {
-      await getAxios({
-        url: "/user/me",
-        method: "delete",
-      }).then(({ success }) => {
-        if (success) {
-          window.localStorage.clear();
-          window.location.pathname = "/";
-        }
-      });
+      deleteUser.mutate();
     }
   };
 
