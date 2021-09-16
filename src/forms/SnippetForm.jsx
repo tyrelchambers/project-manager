@@ -10,6 +10,8 @@ import { H3 } from "../components/Headings/Headings";
 import { syntax } from "../constants/syntax";
 import InputWrapper from "../components/InputWrapper/InputWrapper";
 import { useHistory } from "react-router-dom";
+import { useSnippets } from "../hooks/useSnippets";
+import { useCreateSnippet } from "../hooks/useCreateSnippet";
 
 const SnippetForm = () => {
   const [snippet, setSnippet] = useState({
@@ -21,7 +23,7 @@ const SnippetForm = () => {
   const history = useHistory();
 
   const [qSyntax, setQSyntax] = useState("");
-
+  const createSnippet = useCreateSnippet();
   const { handleSubmit, errors, register, setError } = useForm({
     reValidateMode: "onSubmit",
   });
@@ -37,16 +39,8 @@ const SnippetForm = () => {
         message: "Still need a name",
       });
     }
-    await getAxios({
-      url: "/snippets/save",
-      method: "post",
-      data: {
-        ...snippet,
-      },
-    }).then(({ success }) => {
-      if (success) {
-        history.push("/snippets");
-      }
+    createSnippet.mutate({
+      ...snippet,
     });
   };
 

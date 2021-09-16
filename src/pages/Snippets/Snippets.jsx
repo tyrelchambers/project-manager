@@ -7,23 +7,13 @@ import { getAxios } from "../../api";
 import SnippetItem from "../../components/SnippetItem/SnippetItem";
 import { Link } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
+import { useSnippets } from "../../hooks/useSnippets";
 
 const Snippets = () => {
   const [snippets, setSnippets] = useState([]);
   const [pullingGists, setPullingGists] = useState(false);
   const userQuery = useUser();
-
-  useEffect(() => {
-    const fn = async () => {
-      await getAxios({
-        url: "/snippets/me",
-      }).then(({ success }) => {
-        setSnippets(success.snippets);
-      });
-    };
-
-    fn();
-  }, []);
+  const snippetQuery = useSnippets();
 
   if (!userQuery.data) return null;
 
@@ -87,8 +77,8 @@ const Snippets = () => {
       </div>
 
       <div className="snippet-list grid grid-cols-3 mt-5 gap-4">
-        {snippets.length > 0 &&
-          snippets.map((snippet, id) => (
+        {snippetQuery.data &&
+          snippetQuery.data.snippets.map((snippet, id) => (
             <SnippetItem key={id} snippet={snippet} />
           ))}
       </div>

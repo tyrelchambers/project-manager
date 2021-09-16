@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { getAxios } from "../../api";
 import { MainButton } from "../../components/Buttons/Buttons";
 import { H1, H3 } from "../../components/Headings/Headings";
 import { copyToClipboard } from "../../helpers/copyToClipboard";
-import isEmpty from "../../helpers/isEmpty";
 import DisplayWrapper from "../../layouts/DisplayWrapper/DisplayWrapper";
 import SnippetStats from "../../components/SnippetStats/SnippetStats";
 import { inject, observer } from "mobx-react";
@@ -14,68 +12,50 @@ import Status from "../../components/Status/Status";
 import "./SnippetShow.css";
 import { config } from "../../config/config";
 import { useUser } from "../../hooks/useUser";
+import { useSnippet } from "../../hooks/useSnippet";
+import { deleteSnippet } from "../../api/deleteSnippet";
+import { likeSnippet } from "../../api/likeSnippet";
+import { dislikeSnippet } from "../../api/dislikeSnippet";
 
 const SnippetShow = ({ ModalStore }) => {
   const { snippet_uuid } = useParams();
-  const [snippet, setSnippet] = useState({});
   const history = useHistory();
   const [liked, setLiked] = useState(false);
   const userQuery = useUser();
+  const snippet = useSnippet(snippet_uuid);
 
   useEffect(() => {
-    const fn = async () => {
-      await getAxios({
-        url: `/snippets/${snippet_uuid}`,
-      }).then(({ success }) => {
-        setSnippet(success.snippet);
-      });
-    };
-
-    fn();
-  }, []);
-
-  useEffect(() => {
-    if (!isEmpty(snippet)) {
-      for (let i = 0; i < snippet.likers.length; i++) {
-        snippet.likers[i].uuid === userQuery.data.user.uuid
+    if (snippet.data?.snippet) {
+      for (let i = 0; i < snippet.data.snippet.likers.length; i++) {
+        snippet.data.snippet.likers[i].uuid === userQuery.data.user.uuid
           ? setLiked(true)
           : setLiked(false);
       }
     }
   }, [snippet]);
 
-  if (isEmpty(snippet) || !userQuery.data) return null;
+  if (!snippet.data || !userQuery.data) return null;
 
   const deleteHandler = async () => {
-    await getAxios({
-      url: `/snippets/${snippet_uuid}/delete`,
-      method: "delete",
-    }).then(({ success }) => {
-      history.push("/snippets");
-    });
+    deleteSnippet(snippet_uuid);
+    history.push("/snippets");
   };
 
   const likeHandler = async () => {
-    await getAxios({
-      url: `/snippets/${snippet_uuid}/like`,
-      method: "post",
-    });
+    likeSnippet(snippet_uuid);
 
     setLiked(true);
   };
 
   const dislikeHandler = async () => {
-    await getAxios({
-      url: `/snippets/${snippet_uuid}/dislike`,
-      method: "post",
-    });
+    dislikeSnippet(snippet_uuid);
     setLiked(false);
   };
 
   return (
     <DisplayWrapper>
       <div className="flex flex-col">
-        <H1 className="mr-4">{snippet.name}</H1>
+        <H1 className="mr-4">{snippet.data.snippet.name}</H1>
 
         <div className="mt-6 mb-6 flex">
           {liked ? (
@@ -86,7 +66,7 @@ const SnippetShow = ({ ModalStore }) => {
           ) : (
             <i className="far fa-heart text-gray-500" onClick={likeHandler}></i>
           )}
-          {userQuery.data.user.uuid === snippet.userId && (
+          {userQuery.data.user.uuid === snippet.data.snippet.userId && (
             <i
               className="fas fa-trash text-red-500 ml-6"
               onClick={deleteHandler}
@@ -102,21 +82,24 @@ const SnippetShow = ({ ModalStore }) => {
         >
           <H3>Description</H3>
           <pre className="whitespace-pre-wrap pre text-gray-500 mt-2 max-w-screen-sm">
-            {snippet.description}
+            {snippet.data.snippet.description}
           </pre>
 
           <H3 className="mt-6">Snippet</H3>
 
-          <Code language={snippet.syntax} code={snippet.snippet} />
+          <Code
+            language={snippet.data.snippet.syntax}
+            code={snippet.data.snippet.snippet}
+          />
         </div>
         <div className="w-2/5">
           <H3 className="mb-4">Options</H3>
 
-          {!snippet.visibility && (
+          {!snippet.data.snippet.visibility && (
             <Status text="Hidden from others" wrapperClass="bg-red-700" />
           )}
 
-          {snippet.visibility && (
+          {snippet.data.snippet.visibility && (
             <Status text="Can be seen by others" wrapperClass="bg-green-500" />
           )}
 
@@ -131,7 +114,7 @@ const SnippetShow = ({ ModalStore }) => {
               Copy to Clipboard
             </MainButton>
 
-            {snippet.visibility ? (
+            {snippet.data.snippet.visibility ? (
               <MainButton
                 muted
                 classes="m-2"
@@ -156,7 +139,7 @@ const SnippetShow = ({ ModalStore }) => {
             )}
           </div>
 
-          {userQuery.data.user.uuid === snippet.userId && (
+          {userQuery.data.user.uuid === snippet.data.snippet.userId && (
             <MainButton
               default
               classes="mt-2"
@@ -166,7 +149,7 @@ const SnippetShow = ({ ModalStore }) => {
             </MainButton>
           )}
 
-          <SnippetStats stats={snippet} />
+          <SnippetStats stats={snippet.data.snippet} />
         </div>
       </div>
     </DisplayWrapper>

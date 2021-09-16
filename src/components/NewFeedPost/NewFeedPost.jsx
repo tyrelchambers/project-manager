@@ -7,18 +7,12 @@ import Avatar from "../Avatar/Avatar";
 import SnippetItem from "../SnippetItem/SnippetItem";
 import "./NewFeedPost.css";
 import { useUser } from "../../hooks/useUser";
+import { useSnippets } from "../../hooks/useSnippets";
 
 const NewFeedPost = ({ SearchStore, ModalStore }) => {
   const [toggleCode, setToggleSearch] = useState(false);
-  const [results, setResults] = useState([]);
   const userQuery = useUser();
-  useEffect(() => {
-    if (results.length === 0) {
-      getAxios({
-        url: "/snippets/me",
-      }).then(({ success }) => setResults(success.snippets));
-    }
-  }, []);
+  const { snippetQuery } = useSnippets();
 
   const addSnippet = (snippet) => {
     SearchStore.setPostSnippet(snippet);
@@ -29,14 +23,15 @@ const NewFeedPost = ({ SearchStore, ModalStore }) => {
   const SnippetModal = () => {
     return (
       <div className="snippet-list grid grid-cols-2 p-4 gap-4">
-        {results.map((i, id) => (
-          <SnippetItem
-            key={id}
-            snippet={i}
-            clickHandler={() => addSnippet(i)}
-          />
-        ))}
-        {results.length === 0 && (
+        {snippetQuery.data &&
+          snippetQuery.data.snippets.map((i, id) => (
+            <SnippetItem
+              key={id}
+              snippet={i}
+              clickHandler={() => addSnippet(i)}
+            />
+          ))}
+        {snippetQuery.data && snippetQuery.data.snippets.length === 0 && (
           <p>Looks like you haven't created any snippets</p>
         )}
       </div>
@@ -81,16 +76,17 @@ const NewFeedPost = ({ SearchStore, ModalStore }) => {
         </div>
         {toggleCode && (
           <div className="flex flex-wrap">
-            {results.map((i, id) => (
-              <div
-                className="flex items-center bg-gray-900 p-4 rounded-md  m-2"
-                onClick={() => addSnippet(i)}
-                key={id}
-              >
-                <i className="fas fa-code mr-4 text-pink-500"></i>
-                <p>{i.name}</p>
-              </div>
-            ))}
+            {snippetQuery.data &&
+              snippetQuery.data.snippets.map((i, id) => (
+                <div
+                  className="flex items-center bg-gray-900 p-4 rounded-md  m-2"
+                  onClick={() => addSnippet(i)}
+                  key={id}
+                >
+                  <i className="fas fa-code mr-4 text-pink-500"></i>
+                  <p>{i.name}</p>
+                </div>
+              ))}
           </div>
         )}
       </div>

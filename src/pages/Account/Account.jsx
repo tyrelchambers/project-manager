@@ -8,29 +8,25 @@ import {
 } from "../../components/Headings/Headings";
 import AccountPasswordForm from "../../forms/AccountPasswordForm";
 import { MainButton } from "../../components/Buttons/Buttons";
-import { getAxios } from "../../api";
 import AccountEnvVarForm from "../../forms/AccountEnvVarForm";
 import { useUser } from "../../hooks/useUser";
-import { useDeleteUser } from "../../hooks/useDeleteUser";
+import { forgotEnvPassword } from "../../api/forgotEnvPassword";
+import { deleteUser } from "../../api/deleteUser";
 
 const Account = () => {
   const userQuery = useUser();
-  const deleteUser = useDeleteUser();
 
   if (!userQuery.data) return null;
 
   const deleteAccount = async () => {
     const confirm = window.confirm("Was this a mistake or shall we continue?");
     if (confirm) {
-      deleteUser.mutate();
+      deleteUser();
     }
   };
 
   const sendResetPassword = () => {
-    getAxios({
-      url: "/auth/forgot_environment_password",
-      method: "post",
-    });
+    forgotEnvPassword();
   };
 
   return (
