@@ -4,12 +4,14 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import Avatar from "../Avatar/Avatar";
 import Code from "../Code/Code";
 import { Link } from "react-router-dom";
-import { getAxios } from "../../api";
-import { socket } from "../..";
 import Status from "../Status/Status";
 import { inject, observer } from "mobx-react";
 import { docWidth } from "../../constants/constants";
-
+import { useSaveBookmark } from "../../hooks/useSaveBookmark";
+import { useDeleteBookmark } from "../../hooks/useDeleteBookmark";
+import { useLikePost } from "../../hooks/useLikePost";
+import { useDislikePost } from "../../hooks/useDislikePost";
+import { useDeletePost } from "../../hooks/useDeletePost";
 const FeedPost = ({
   ModalStore,
   post,
@@ -19,6 +21,11 @@ const FeedPost = ({
   isBookmarked,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
+  const bookmark = useSaveBookmark();
+  const deleteBookmark = useDeleteBookmark();
+  const likePost = useLikePost({ post, user });
+  const dislikePost = useDislikePost();
+  const deletePost = useDeletePost();
 
   useEffect(() => {
     if (user) {
@@ -32,50 +39,24 @@ const FeedPost = ({
 
   const bookmarkHandler = async () => {
     if (isBookmarked) {
-      await getAxios({
-        url: "/bookmarks/remove",
-        method: "delete",
-        data: {
-          postId: post.uuid,
-        },
-      }).then(({ success }) => {
-        if (success) {
-          window.location.reload();
-        }
+      deleteBookmark.mutate({
+        postId: post.uuid,
       });
     } else {
-      await getAxios({
-        url: "/bookmarks/save",
-        method: "post",
-        data: {
-          postId: post.uuid,
-        },
+      bookmark.mutate({
+        postId: post.uuid,
       });
     }
   };
 
   const likeHandler = async () => {
-    await getAxios({
-      url: `/feed/${post.uuid}/like`,
-      method: "post",
-    }).then(({ success }) => {
-      if (success) {
-        setIsLiked(true);
-        socket.emit("notification post like", {
-          from: user.uuid,
-          to: post.User.uuid,
-          type: "post_like",
-          post: post.uuid,
-        });
-      }
-    });
+    likePost.mutate(post.uuid);
+    setIsLiked(true);
   };
 
   const dislikeHandler = async () => {
-    await getAxios({
-      url: `/feed/${post.uuid}/dislike`,
-      method: "delete",
-    }).then(({ success }) => setIsLiked(false));
+    dislikePost.mutate(post.uuid);
+    setIsLiked(false);
   };
 
   const likeIcon = isLiked ? (
@@ -94,12 +75,8 @@ const FeedPost = ({
     ModalStore.setIsOpen(true);
   };
 
-  const deletePost = () => {
-    getAxios({
-      url: `/feed/${post.uuid}`,
-      method: "delete",
-    });
-    window.location.reload();
+  const deletePostHandler = () => {
+    deletePost.mutate(post.uuid);
   };
 
   return (
@@ -111,7 +88,7 @@ const FeedPost = ({
               <Avatar url={post.User.avatar} size="small" />
               <i
                 className="fas fa-trash text-red-500 mt-6"
-                onClick={deletePost}
+                onClick={deletePostHandler}
               ></i>
             </div>
           )}

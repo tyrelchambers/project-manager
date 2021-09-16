@@ -183,22 +183,12 @@ export default [
     slug: "/",
     component: Home,
   },
-  {
-    slug: "/packages",
-    component: PackagesPage,
-  },
-  {
-    slug: "/packages/new",
-    component: NewPackage,
-  },
+
   {
     slug: "/projects",
     component: Projects,
   },
-  {
-    slug: "/package/:package_id",
-    component: PackageShow,
-  },
+
   {
     slug: "/snippets",
     component: Snippets,

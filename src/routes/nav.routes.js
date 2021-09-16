@@ -20,15 +20,11 @@ export const navRoutes = [
     icon: <i className="fas fa-home"></i>,
   },
   {
-    label: "Projects",
+    label: "CLI",
     url: "/projects",
     icon: <i className="fas fa-folder"></i>,
   },
-  {
-    label: "Packages",
-    url: "/packages",
-    icon: <i className="fab fa-buffer"></i>,
-  },
+
   {
     label: "Code Snippets",
     url: "/snippets",

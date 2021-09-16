@@ -7,7 +7,6 @@ import { useGetPosts } from "../../hooks/useGetPosts";
 import { useUser } from "../../hooks/useUser";
 
 const Feed = () => {
-  const [feed, setFeed] = useState([]);
   const userQuery = useUser();
   const postQuery = useGetPosts();
 
