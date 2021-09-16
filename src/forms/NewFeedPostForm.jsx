@@ -6,10 +6,12 @@ import { getAxios } from "../api/index";
 import Code from "../components/Code/Code";
 import isEmpty from "../helpers/isEmpty";
 import "./forms.css";
+import { useCreatePost } from "../hooks/useCreatePost";
 const NewFeedPostForm = ({ user, SearchStore }) => {
   const [state, setState] = useState({
     post: "",
   });
+  const post = useCreatePost();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -17,19 +19,13 @@ const NewFeedPostForm = ({ user, SearchStore }) => {
       return;
     }
 
-    await getAxios({
-      url: "/feed/post",
-      method: "post",
-      data: {
-        post: state.post,
-        user: user,
-        attached: {
-          snippet: SearchStore.postSnippet.uuid,
-        },
+    post.mutate({
+      post: state.post,
+      user: user,
+      attached: {
+        snippet: SearchStore.postSnippet.uuid,
       },
     });
-
-    window.location.reload();
   };
   const buttonState = state.post ? (
     <MainButton default onClick={(e) => submitHandler(e)}>
