@@ -11,7 +11,7 @@ import "./Profile.css";
 
 const Profile = () => {
   const userQuery = useUser();
-  console.log(userQuery);
+
   if (!userQuery.data) return null;
 
   const removeProfilePhoto = async () => {

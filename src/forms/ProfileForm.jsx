@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { getAxios } from "../api";
+import { checkUsername } from "../api/checkUsername";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormErrors from "../components/FormErrors/FormErrors";
 import FormLabel from "../components/FormLabel/FormLabel";
@@ -11,6 +12,7 @@ import Upload from "../components/Upload/Upload";
 import isEmpty from "../helpers/isEmpty";
 import { removeSpecialChar } from "../helpers/removeSpecialChar";
 import { useUpdateUser } from "../hooks/useUpdateUser";
+import { useUser } from "../hooks/useUser";
 
 const ProfileForm = ({ user }) => {
   const [state, setState] = useState({
@@ -31,7 +33,7 @@ const ProfileForm = ({ user }) => {
   });
   const [files, setFiles] = useState([]);
   const pond = React.createRef(null);
-  const [username, setUsername] = useState(false);
+  const [usernameExists, setUsernameExists] = useState(false);
   const { handleSubmit, errors, register } = useForm({
     reValidateMode: "onSubmit",
   });
@@ -45,6 +47,7 @@ const ProfileForm = ({ user }) => {
 
   const submitHandler = async () => {
     let fileEndpoint = user.avatar || "";
+    console.log(state);
     if (pond.current && pond.current.getFiles().length > 0) {
       const files = await pond.current.processFiles().then((res) => res[0]);
       fileEndpoint = files.serverId;
@@ -70,23 +73,17 @@ const ProfileForm = ({ user }) => {
 
   if (isEmpty(state)) return null;
 
-  const checkUsername = (e) => {
+  const checkUsernameHandler = (e) => {
     const username = removeSpecialChar(e.target.value);
-    getAxios({
-      url: "/user/username",
-      params: {
-        username: e.target.value,
-      },
-    }).then(({ success }) => {
-      if (
-        success.response?.status === 401 &&
-        success.response?.data.custom === "USERNAME_EXISTS"
-      ) {
-        setUsername(true);
-      } else {
-        setUsername(false);
-      }
-    });
+    if (e.target.value !== user.username) {
+      checkUsername({ username }).then((res) => {
+        if (res?.custom === "USERNAME_EXISTS") {
+          setUsernameExists(true);
+        } else {
+          setUsernameExists(false);
+        }
+      });
+    }
     setState({ ...state, username });
   };
 
@@ -118,14 +115,14 @@ const ProfileForm = ({ user }) => {
         <InputWrapper icon={<i className="fas fa-at"></i>}>
           <input
             type="text"
-            name="nausernameme"
+            name="username"
             className="form-input"
             placeholder="John Smith"
             value={state.username}
-            onChange={(e) => checkUsername(e)}
+            onChange={(e) => checkUsernameHandler(e)}
           />
         </InputWrapper>
-        {username && (
+        {usernameExists && (
           <p className="text-red-400 text-right mt-2">Username exists</p>
         )}
       </div>

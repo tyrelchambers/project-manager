@@ -44,10 +44,10 @@ const EnvVars = () => {
       params: {
         password,
       },
-    }).then(({ success }) => {
-      if (success.variables) {
+    }).then((res) => {
+      if (res.variables) {
         window.sessionStorage.setItem("env_var_unlocked", true);
-        setVars(success.variables);
+        setVars(res.variables);
 
         setLocked(false);
       }
@@ -74,7 +74,7 @@ const EnvVars = () => {
             <i className="fas fa-lock text-white text-sm mr-2"></i>
             <p className="font-bold">Encrypted</p>
           </div>
-          {userQuery.data.user.envVariablePassword && (
+          {userQuery.data.user.envVariablePassword && !locked && (
             <div className="w-fit mt-4">
               <Link
                 className="text-yellow-500 underline font-bold"
