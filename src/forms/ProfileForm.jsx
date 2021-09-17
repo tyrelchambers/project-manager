@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { getAxios } from "../api";
 import { checkUsername } from "../api/checkUsername";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormErrors from "../components/FormErrors/FormErrors";
@@ -12,7 +11,6 @@ import Upload from "../components/Upload/Upload";
 import isEmpty from "../helpers/isEmpty";
 import { removeSpecialChar } from "../helpers/removeSpecialChar";
 import { useUpdateUser } from "../hooks/useUpdateUser";
-import { useUser } from "../hooks/useUser";
 
 const ProfileForm = ({ user }) => {
   const [state, setState] = useState({
@@ -45,9 +43,11 @@ const ProfileForm = ({ user }) => {
     });
   }, [user]);
 
+  if (isEmpty(state)) return null;
+
   const submitHandler = async () => {
     let fileEndpoint = user.avatar || "";
-    console.log(state);
+
     if (pond.current && pond.current.getFiles().length > 0) {
       const files = await pond.current.processFiles().then((res) => res[0]);
       fileEndpoint = files.serverId;
@@ -70,8 +70,6 @@ const ProfileForm = ({ user }) => {
   const inputHandler = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
-
-  if (isEmpty(state)) return null;
 
   const checkUsernameHandler = (e) => {
     const username = removeSpecialChar(e.target.value);

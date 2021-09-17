@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { getAxios } from "../api";
 import { MainButton } from "../components/Buttons/Buttons";
 import FormLabel from "../components/FormLabel/FormLabel";
 import { useForm } from "react-hook-form";
 import FormErrors from "../components/FormErrors/FormErrors";
 import { useHistory } from "react-router-dom";
 import InputWrapper from "../components/InputWrapper/InputWrapper";
+import { useEnvVars } from "../hooks/useEnvVars";
 
 const EnvVarForm = () => {
   const [state, setState] = useState({
@@ -16,6 +16,7 @@ const EnvVarForm = () => {
     reValidateMode: "onSubmit",
   });
   const history = useHistory();
+  const { createEnv } = useEnvVars();
 
   const submitHandler = async () => {
     if (!state.name.trim()) {
@@ -25,11 +26,7 @@ const EnvVarForm = () => {
       });
     }
 
-    await getAxios({
-      url: "/env/new",
-      method: "post",
-      data: state,
-    });
+    createEnv.mutate(state);
 
     history.push("/env");
   };

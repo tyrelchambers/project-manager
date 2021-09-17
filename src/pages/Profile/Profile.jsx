@@ -1,4 +1,3 @@
-import { inject, observer } from "mobx-react";
 import React from "react";
 import { getAxios } from "../../api";
 import Avatar from "../../components/Avatar/Avatar";

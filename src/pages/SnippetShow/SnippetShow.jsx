@@ -143,7 +143,9 @@ const SnippetShow = ({ ModalStore }) => {
             <MainButton
               default
               classes="mt-2"
-              onClick={() => history.push(`/snippets/${snippet.uuid}/edit`)}
+              onClick={() =>
+                history.push(`/snippets/${snippet.data.snippet.uuid}/edit`)
+              }
             >
               Edit
             </MainButton>

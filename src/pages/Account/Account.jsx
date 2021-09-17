@@ -48,9 +48,16 @@ const Account = () => {
         )}
 
         <div className="mt-4">
-          <MainButton muted onClick={() => sendResetPassword()}>
-            Send link to reset environment password
-          </MainButton>
+          {!userQuery.data.user.email && (
+            <p className="text-red-500">
+              Please add an email to your profile to receive a recovery link
+            </p>
+          )}
+          {userQuery.data.user.email && (
+            <MainButton muted onClick={() => sendResetPassword()}>
+              Send link to reset environment password
+            </MainButton>
+          )}
         </div>
         <hr />
 
